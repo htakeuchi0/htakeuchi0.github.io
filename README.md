@@ -1,2 +1,5 @@
 # htakeuchi0.github.io
-My a Github page.
+
+Github Pages のためのリポジトリ．    
+URL: https://htakeuchi0.github.io/ 
+
