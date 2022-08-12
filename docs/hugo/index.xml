@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/hugo/</link><description>Recent content in Hugo on htakeuchi0 のノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>空のサイトの生成 # 概要 # 本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． 具体的には，ローカルに空のサイトが生成できるところまで説明します．
+インストール # Hugo の Quick Start に従い，Hugo をインストールします．
+作者の作成環境は Linux OS 64bit (Ubuntu 18.04.6 LTS) なので，Hugo のインストールページ を参考に，以下のコマンドを実行します．
+$ snap install hugo --channel=extended デスクトップ環境なので，認証のためのダイアログが表示され，パスワードを入力して認証をクリックしました．
+以下のコマンドでインストールが成功したかを確認できます．
+$ hugo version hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate=2022-06-28T10:02:18Z VendorInfo=snap サイトの生成 # 以下のコマンドを実行します．
+$ hugo new site htakeuchi0-notebook テーマの追加 # 本サイトでは，Book テーマを利用しています． 当該テーマの README にしたがって，以下のコマンドを実行します．
+$ cd htakeuchi0-notebook $ git init $ git branch -M main $ git submodule add https://github.</description></item><item><title>ページの追加とサイトの設定</title><link>https://htakeuchi0.github.io/docs/hugo/set_config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/set_config/</guid><description>ページの追加とサイトの設定 # 概要 # 本ページでは，Hugo による Web サイト作成における，ページの追加とサイトの設定に関する部分を説明します．
+ホームページの作成 # まずは，サイト全体のホームページ（トップページ）を作成します． 以下のコマンドを実行すると，ホームページが作成されます．
+$ hugo new _index.md content/_index.md が生成されているので，それを以下のように書き換えます． タイトルと適当な小見出しを作成しており，メニューからリンクを張るため，免責事項とプライバシーポリシーは，別名でアンカーを作成しています．
+--- title: &amp;#34;ホームページ&amp;#34; date: 2022-08-11T12:18:39+09:00 draft: true --- # htakeuchi0 のノート ## 概要 ## 免責事項 {#disclaimer} ## プライバシーポリシー {#privacy_policy} ## 作者について ## お問い合わせ 次に，設定ファイル confing.toml を以下のようにします．
+baseURL = &amp;#39;https://htakeuchi0.github.io/&amp;#39; languageCode = &amp;#39;ja-jp&amp;#39; title = &amp;#39;htakeuchi0 のノート&amp;#39; theme = &amp;#39;hugo-book&amp;#39; enableGitInfo = true [params] BookTheme = &amp;#39;auto&amp;#39; BookRepo = &amp;#39;https://github.com/htakeuchi0/htakeuchi0.github.io-sources&amp;#39; BookSearch = false [menu] [[menu.</description></item><item><title>公開用ファイルの生成</title><link>https://htakeuchi0.github.io/docs/hugo/genpages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/genpages/</guid><description>公開用ファイルの生成 # 概要 # 本ページでは，Hugo で作成した markdown ファイルを公開用の html ファイルにビルドして，公開する方法について説明します．
+htmlファイルの生成 # 以下のコマンドを実行すると，public ディレクトリ以下に公開用ファイル一式が生成されます．
+$ hugo --minify -D ページの公開 # 本サイトは，Github Pages [1] を利用してページを公開しています． 作者は，作成用ファイルと公開ファイルを 別リポジトリで管理しています．
+htakeuchi0.github.io リポジトリ：公開用 htakeuchi0.github.io-sources リポジトリ：作成用 Hugo では [2] のように，同一リポジトリで別ブランチで管理する方法が説明されています．
+本サイトの管理方法の場合，htakeuchi0.github.io-sources リポジトリ側で public 以下に生成されたファイルすべてを，htakeuchi0.github.io リポジトリに配置します．
+あとは，[1] のとおりに設定すれば，数分でブラウザからアクセスできるようになります．
+Google Search Console の設定 # Hugo では（少なくとも Book テーマでは），サイトマップ用の sitemap.xml とRSS用の index.xml が生成されているので，それぞれを Google Search Console [3] に登録するだけです．
+まとめ # 本ページでは，公開ファイルを生成して，公開する方法について説明しました．
+参考文献 # [1] Github, &amp;ldquo;About GitHub Pages - GitHub Docs&amp;rdquo;, https://docs.</description></item></channel></rss>
