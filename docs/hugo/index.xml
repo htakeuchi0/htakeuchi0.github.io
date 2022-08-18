@@ -17,4 +17,10 @@ htakeuchi0.github.io リポジトリ：公開用 htakeuchi0.github.io-sources �
 あとは，[1] のとおりに設定すれば，数分でブラウザからアクセスできるようになります．
 Google Search Console の設定 # Hugo では（少なくとも Book テーマでは），サイトマップ用の sitemap.xml とRSS用の index.xml が生成されているので，それぞれを Google Search Console [3] に登録するだけです．
 まとめ # 本ページでは，公開ファイルを生成して，公開する方法について説明しました．
-参考文献 # [1] Github, &amp;ldquo;About GitHub Pages - GitHub Docs&amp;rdquo;, https://docs.</description></item></channel></rss>
+参考文献 # [1] Github, &amp;ldquo;About GitHub Pages - GitHub Docs&amp;rdquo;, https://docs.</description></item><item><title>独自ショートコードの定義</title><link>https://htakeuchi0.github.io/docs/hugo/shortcode/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/shortcode/</guid><description>独自ショートコードの定義 # 概要 # Hugo には，ショートコードと呼ばれるスニペットを定義・利用できる機能があります [1]．本ページでは，ショートコードの一例として，theorem-label という， \(\LaTeX\) でいう定理環境のラベル部分を生成する独自ショートコードを定義する方法について説明します．なお一般に，スニペットとは，再利用可能なソースコード断片を指す言葉です．
+theorem-label ショートコード # Hugo は markdown で記事を作成できますが，markdown の簡潔に記述できる利点を損なわないよう，ショートコードと呼ばれるスニペットを定義し，利用できる機能があります．
+ここでは，定理環境のラベルを生成する簡単なショートコードを作成します．ここで，定理環境とは， \(\LaTeX\) でいう定理環境のような，定理や定義を示すための文章ブロックを指すものとし，そのラベルとは &amp;ldquo;Theorem 2.3&amp;rdquo; のような文章ブロックの冒頭に書かれるラベルを指すものとします．
+theorem-label ショートコードは以下の要件を満たすものとします．
+&amp;ldquo;Theorem 1.&amp;rdquo; のように，定理種類名称と定理番号を太字で表示できて，ピリオドで終わること 定理種類名称はユーザが指定できること 定理番号はページごとに，定理種類名称によらず，1からはじまる連番で自動生成されること 定理番号の前に節番号などの接頭辞を任意でつけられること 定理番号の後に括弧付きコメントを任意でつけられること そこで，theorem-label ショートコードは以下のように呼び出せるものとします．
+項番 呼び出し方 結果 1 {{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}} Theorem 1. 2 {{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}} Theorem 5.2.2. 3 {{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}} Theorem 3.3 (補足). 実装例は以下のとおりです．下記ファイルを layout/shortcodes/theorem-label.html として保存します．
+&amp;lt;!-- カウンタの初期化--&amp;gt; {{- if not (.</description></item></channel></rss>

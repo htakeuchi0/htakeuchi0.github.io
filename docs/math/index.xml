@@ -4,8 +4,8 @@
 Definition 1. 相補誤差関数 \(\mathrm{erfc}:\mathbb{R}\to\mathbb{R}\) を以下のように定める．
 \[\mathrm{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^{\infty}\exp(-t^2)dt.\] 定積分1 # まず， \(\int_{\alpha}^{\beta}\exp(x)dx\) を計算します． これは， \(\exp&amp;#39;(x)=\exp(x)\) なので， \[\int_{\alpha}^{\beta}\exp(x)dx=\exp(\beta)-\exp(\alpha)\] です．
 定積分2 # 次に， \(\int_{\alpha}^{\beta}\exp(ax&amp;#43;b)dx\ (a\not=0)\) を計算します． これには，[1, 定理5.6] を利用します．
-Theorem 2 (変数変換公式 [1, 定理5.6]). 関数 \(f,\phi\) が次の 1&amp;ndash;4 を満たすと仮定する．
-\(f(x)\) は区間 \(I=[a,b]\) で連続， \(\phi(t)\) は区間 \(J=[\alpha,\beta]\) で微分可能， \(\phi'(t)\) は \(J\) で有界可積分（例えば連続）， \(\phi(J)\subset I\), \(\phi(\alpha)=a\), \(\phi(\beta)=b\).</description></item><item><title>指数関数の定積分：正規分布の累積分布関数の計算への応用</title><link>https://htakeuchi0.github.io/docs/math/exp_normal/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/exp_normal/</guid><description>指数関数の定積分：正規分布の累積分布関数の計算への応用 # 概要 # 指数関数の定積分 のページでは，指数関数に関するいくつかの定積分の表示について説明しました．本ページでは，その応用として，正規分布の累積分布関数の計算への応用について説明します．
+Theorem 2. 関数 \(f,\phi\) が次の 1&amp;ndash;4 を満たすと仮定する．
+\(f(x)\) は区間 \(I=[a,b]\) で連続， \(\phi(t)\) は区間 \(J=[\alpha,\beta]\) で微分可能， \(\phi'(t)\) は \(J\) で有界可積分（例えば連続）， \(\phi(J)\subset I\), \(\phi(\alpha)=a\), \(\phi(\beta)=b\). このとき，次の等式が成り立つ．</description></item><item><title>指数関数の定積分：正規分布の累積分布関数の計算への応用</title><link>https://htakeuchi0.github.io/docs/math/exp_normal/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/exp_normal/</guid><description>指数関数の定積分：正規分布の累積分布関数の計算への応用 # 概要 # 指数関数の定積分 のページでは，指数関数に関するいくつかの定積分の表示について説明しました．本ページでは，その応用として，正規分布の累積分布関数の計算への応用について説明します．
 例えば，C++17 では，標準ライブラリに std::erfc 関数（相補誤差関数）がありますが，正規分布の累積分布関数を直接計算する関数は提供されていません．
 しかし，相補誤差関数と正規分布の累積分布関数はスケールが異なるだけなので，std::erfc 関数があれば，正規分布の累積分布関数は計算できます．
 そこで，本ページでは，指数関数の定積分 の結果を用いて，相補誤差関数と正規分布の累積分布関数の具体的な関係式を導出します．

@@ -11,8 +11,8 @@ PMBOK ガイドはプロジェクトマネジメント標準に基づきまた�
 Definition 1. 相補誤差関数 \(\mathrm{erfc}:\mathbb{R}\to\mathbb{R}\) を以下のように定める．
 \[\mathrm{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^{\infty}\exp(-t^2)dt.\] 定積分1 # まず， \(\int_{\alpha}^{\beta}\exp(x)dx\) を計算します． これは， \(\exp&amp;#39;(x)=\exp(x)\) なので， \[\int_{\alpha}^{\beta}\exp(x)dx=\exp(\beta)-\exp(\alpha)\] です．
 定積分2 # 次に， \(\int_{\alpha}^{\beta}\exp(ax&amp;#43;b)dx\ (a\not=0)\) を計算します． これには，[1, 定理5.6] を利用します．
-Theorem 2 (変数変換公式 [1, 定理5.6]). 関数 \(f,\phi\) が次の 1&amp;ndash;4 を満たすと仮定する．
-\(f(x)\) は区間 \(I=[a,b]\) で連続， \(\phi(t)\) は区間 \(J=[\alpha,\beta]\) で微分可能， \(\phi'(t)\) は \(J\) で有界可積分（例えば連続）， \(\phi(J)\subset I\), \(\phi(\alpha)=a\), \(\phi(\beta)=b\).</description></item><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>空のサイトの生成 # 概要 # 本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． 具体的には，ローカルに空のサイトが生成できるところまで説明します．
+Theorem 2. 関数 \(f,\phi\) が次の 1&amp;ndash;4 を満たすと仮定する．
+\(f(x)\) は区間 \(I=[a,b]\) で連続， \(\phi(t)\) は区間 \(J=[\alpha,\beta]\) で微分可能， \(\phi'(t)\) は \(J\) で有界可積分（例えば連続）， \(\phi(J)\subset I\), \(\phi(\alpha)=a\), \(\phi(\beta)=b\). このとき，次の等式が成り立つ．</description></item><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>空のサイトの生成 # 概要 # 本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． 具体的には，ローカルに空のサイトが生成できるところまで説明します．
 インストール # Hugo の Quick Start に従い，Hugo をインストールします．
 作者の作成環境は Linux OS 64bit (Ubuntu 18.04.6 LTS) なので，Hugo のインストールページ を参考に，以下のコマンドを実行します．
 $ snap install hugo --channel=extended デスクトップ環境なので，認証のためのダイアログが表示され，パスワードを入力して認証をクリックしました．
@@ -50,7 +50,13 @@ htakeuchi0.github.io リポジトリ：公開用 htakeuchi0.github.io-sources �
 あとは，[1] のとおりに設定すれば，数分でブラウザからアクセスできるようになります．
 Google Search Console の設定 # Hugo では（少なくとも Book テーマでは），サイトマップ用の sitemap.xml とRSS用の index.xml が生成されているので，それぞれを Google Search Console [3] に登録するだけです．
 まとめ # 本ページでは，公開ファイルを生成して，公開する方法について説明しました．
-参考文献 # [1] Github, &amp;ldquo;About GitHub Pages - GitHub Docs&amp;rdquo;, https://docs.</description></item><item><title>関数への参照</title><link>https://htakeuchi0.github.io/docs/cpp/fp/fref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/fref/</guid><description>関数への参照 # 概要 # 前節までで，関数ポインタとその周辺事項について説明しました． 本ページでは，関数への参照型について説明します．
+参考文献 # [1] Github, &amp;ldquo;About GitHub Pages - GitHub Docs&amp;rdquo;, https://docs.</description></item><item><title>独自ショートコードの定義</title><link>https://htakeuchi0.github.io/docs/hugo/shortcode/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/shortcode/</guid><description>独自ショートコードの定義 # 概要 # Hugo には，ショートコードと呼ばれるスニペットを定義・利用できる機能があります [1]．本ページでは，ショートコードの一例として，theorem-label という， \(\LaTeX\) でいう定理環境のラベル部分を生成する独自ショートコードを定義する方法について説明します．なお一般に，スニペットとは，再利用可能なソースコード断片を指す言葉です．
+theorem-label ショートコード # Hugo は markdown で記事を作成できますが，markdown の簡潔に記述できる利点を損なわないよう，ショートコードと呼ばれるスニペットを定義し，利用できる機能があります．
+ここでは，定理環境のラベルを生成する簡単なショートコードを作成します．ここで，定理環境とは， \(\LaTeX\) でいう定理環境のような，定理や定義を示すための文章ブロックを指すものとし，そのラベルとは &amp;ldquo;Theorem 2.3&amp;rdquo; のような文章ブロックの冒頭に書かれるラベルを指すものとします．
+theorem-label ショートコードは以下の要件を満たすものとします．
+&amp;ldquo;Theorem 1.&amp;rdquo; のように，定理種類名称と定理番号を太字で表示できて，ピリオドで終わること 定理種類名称はユーザが指定できること 定理番号はページごとに，定理種類名称によらず，1からはじまる連番で自動生成されること 定理番号の前に節番号などの接頭辞を任意でつけられること 定理番号の後に括弧付きコメントを任意でつけられること そこで，theorem-label ショートコードは以下のように呼び出せるものとします．
+項番 呼び出し方 結果 1 {{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}} Theorem 1. 2 {{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}} Theorem 5.2.2. 3 {{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}} Theorem 3.3 (補足). 実装例は以下のとおりです．下記ファイルを layout/shortcodes/theorem-label.html として保存します．
+&amp;lt;!-- カウンタの初期化--&amp;gt; {{- if not (.</description></item><item><title>関数への参照</title><link>https://htakeuchi0.github.io/docs/cpp/fp/fref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/fref/</guid><description>関数への参照 # 概要 # 前節までで，関数ポインタとその周辺事項について説明しました． 本ページでは，関数への参照型について説明します．
 関数ポインタ # 戻り値の型が T, 第 \(k\) 番目の引数の型が Sk である関数への関数ポインタ型は，
 using fp_t = T (*)(S1, S2,..., Sn); または，
 using f_t = T(S1, S2,..., Sn); using fp_t = f_t*; として定義できるのでした．
