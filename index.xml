@@ -64,4 +64,12 @@ using f_t = T(S1, S2,..., Sn); using fp_t = f_t*; として定義できるので
 using fref_t = T (&amp;amp;)(S1, S2,..., Sn); または，
 using f_t = T(S1, S2,..., Sn); using fref_t = f_t&amp;amp;; とすると，関数への参照型 をつくることができます．
 つまり，下記のコードをコンパイルして実行することができます．
-#include &amp;lt;cmath&amp;gt; #include &amp;lt;exception&amp;gt; #include &amp;lt;iostream&amp;gt; using fref_t = double (&amp;amp;)(double); double Newton(fref_t f, fref_t df, double x0, double eps=1.</description></item></channel></rss>
+#include &amp;lt;cmath&amp;gt; #include &amp;lt;exception&amp;gt; #include &amp;lt;iostream&amp;gt; using fref_t = double (&amp;amp;)(double); double Newton(fref_t f, fref_t df, double x0, double eps=1.</description></item><item><title>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</title><link>https://htakeuchi0.github.io/docs/hugo/book_katex/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/book_katex/</guid><description>Book テーマの hint ショートコードブロック内に数式を表示する際の注意 # 概要 # Book テーマ [1] では， \(\KaTeX\) を使うための katex ショートコードが用意されています [2]． また，目立たせたい情報を文書ブロックとして表示できる，hint ショートコードが用意されています [3]．
+しかし，hint ショートコードブロックの中で katex ショートコードを使う場合，うまく数式が表示できないことがあります． 本ページでは，hint ショートコードブロック内で数式を表示する場合の注意について説明します．
+hint ショートコードの使いかた # 公式の説明 [3] をもとに，markdown での記述例と，出力結果を説明します．hint ショートコードは第1引数によって，背景色を変えることができます．
+第1引数：なし # markdown の記述例は以下のとおりです．
+{{&amp;lt; hint &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．
+ヒント． 第1引数：info # markdown の記述例は以下のとおりです．
+{{&amp;lt; hint info &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．
+ヒント． 第1引数：warning # markdown の記述例は以下のとおりです．
+{{&amp;lt; hint warning &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．</description></item></channel></rss>
