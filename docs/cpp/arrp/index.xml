@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>配列へのポインタ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/</link><description>Recent content in 配列へのポインタ on htakeuchi0 のノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/cpp/arrp/index.xml" rel="self" type="application/rss+xml"/><item><title>配列へのポインタとその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/arrp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/arrp/</guid><description>配列へのポインタとその周辺 # 概要 # 配列とは，同じ型の複数の変数をまとめて扱うためのデータ構造です．
+ポインタ (pointer) とは，メモリアドレスを格納するためのオブジェクトのことです． C++ では，変数のメモリアドレスはもちろん，関数のエントリーポイントとなるメモリアドレスを格納することができます．
+関数ポインタ の節では，関数へのポインタについて説明しました．本ページでは，C++における配列とポインタの関係を説明した後，配列型へのポインタ型について説明します．ここで，配列型へのポインタ型とは，そのポインタ型の変数に対して * 演算子で値を得ると，要素ではなく，配列そのものが得られるようなポインタ型を指すものとします．
+配列とポインタ # 配列とは，同じ型の複数の変数をまとめて扱うためのデータ構造です．例えば，int 型の変数を10個まとめて扱うための配列は以下のように宣言できます．
+int arr[10]; 使いかたは以下のとおりです．
+#include &amp;lt;iostream&amp;gt; int main() { int arr[10]; for (int i = 0; i &amp;lt; 10; i++) { arr[i] = i * 2; } std::cout &amp;lt;&amp;lt; arr[0] &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 0 std::cout &amp;lt;&amp;lt; arr[1] &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 2 std::cout &amp;lt;&amp;lt; arr[2] &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 4 return 0; } 配列変数は，変数からその要素数を取得する方法は，言語仕様としては提供されていません．ただし，C言語の時代から，配列変数の要素数を取得する方法として，以下の方法が広く知られています．</description></item><item><title>配列への参照</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/arr_ref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/arr_ref/</guid><description>配列への参照 # 概要 # 前ページまでで，配列へのポインタ，特に配列型へのポインタ型について説明しました．ここで，配列型へのポインタ型とは，そのポインタ型の変数に対して * 演算子で値を得ると，要素ではなく，配列そのものが得られるようなポインタ型を指すものとします．本ページでは，配列型への参照型について説明します．
+配列型への参照型 # クラス T の要素数 N の配列型へのポインタ変数 p_arr の宣言は，
+using p_arr_t = T (*)[N]; または，
+using arr_t = T[N]; using p_arr_t = arr_t *; として定義できるのでした．
+ここで，
+using arr_ref_t = T (&amp;amp;)[N]; または，
+using arr_t = T[N]; using arr_ref_t = arr_t&amp;amp;; とすると，配列型への参照型 をつくることができます．
+これを利用すると，前ページで説明した ArraySize 関数テンプレートを参照型で定義できるため，呼び出し側で &amp;amp; をつけずに利用できるようになります．
+具体的には，以下のようにできます．
+#include &amp;lt;cstddef&amp;gt; #include &amp;lt;iostream&amp;gt; template &amp;lt;class T, std::size_t N&amp;gt; std::size_t ArraySize(T (&amp;amp;)[N]) { return N; } int main() { int arr[100]; std::cout &amp;lt;&amp;lt; ArraySize(arr) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 100 double arr2[1024]; std::cout &amp;lt;&amp;lt; ArraySize(arr2) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 1024 return 0; } まとめ # 本ページでは，配列型への参照型が定義できることを説明しました．配列型へのポインタ型でなく，配列型への参照型を利用すると，前ページの ArraySize 関数テンプレートの呼び出し方を，少しだけ簡単にできます．</description></item><item><title>std::array について</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/stdarray/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/stdarray/</guid><description>std::array について # 概要 # 前ページまでで，配列型へのポインタ型や参照型について説明しました．一方で，標準ライブラリには std::array 構造体テンプレートがあり，通常の配列のパフォーマンスを保ったまま，サイズの取得などの付随的な機能を利用できます．
+std::array について # array ヘッダを include すると，std::array が利用できます． std::array の定義は以下のとおりです [1]．
+namespace std { template &amp;lt;class T, std::size_t N&amp;gt; struct array; } // namespace std std::array は通常の配列と同等のパフォーマンスで利用できるとされています．通常の配列と異なり，以下のように，変数から配列のサイズが取得できます．よって，std::array を使う限り，前ページで定義した ArraySize は不要です．
+#include &amp;lt;array&amp;gt; #include &amp;lt;iostream&amp;gt; int main() { std::array&amp;lt;int, 3&amp;gt; a; std::cout &amp;lt;&amp;lt; a.size() &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 3 return 0; } まとめ # 本ページでは，std::array について説明しました．std::array を使えば，配列から要素数を取得できます．よって，std::array を使う限り，前ページで定義した ArraySize 関数テンプレートは不要になります．
+参考文献 # [1] cppreference.</description></item></channel></rss>
