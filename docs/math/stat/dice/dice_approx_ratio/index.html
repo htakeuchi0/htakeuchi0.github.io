@@ -1,0 +1,175 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認 # 概要 # サイコロを繰り返し投げると，およそ6回に1回程度の割合で1の目が出ることを確認したいと思いますが，ちょうど6回に1回の割合で出るわけではないことがわかりました．
+そこで，本ページでは，およそ6回に1回程度の割合で出ることを確認する方法を考えます．
+いま， \(p(N,k)=\binom{N}{k}5^{N-k}/6^N\) とします．
+このとき，以下の方針が考えられます．
+\(p(N,k)\) が最大となる \(k\) が，およそ \(N/6\) であることを確認する． サイコロを繰り返し投げると，平均的に \(N/6\) 程度の回数だけ1の目が出ることを確認する． 1は， \(N\) を固定したとき，1の目が出る回数として最もあり得るのがおよそ \(N/6\) のときであることを確認する方針です．
+2は，サイコロを \(N\) 投げる試行自体を繰り返すと，試行ごとにばらつきがあるが，平均的には \(N/6\) 回程度1の目が出ることを確認する方針です．
+確率が最大となる1の目の出る回数がN/6程度であることの確認 # まず， \(p(N,k)\) を数値的に計算してみます． \(N=10,100,1000\) の場合を計算しますが，値が小さくなりすぎるので， \(\log_{10}p(N,k)\) を計算することにします．
+縦軸・横軸のスケールが各グラフで異なる点に注意してください．
+Figure 1. N=10の場合 Figure 2. N=100の場合 Figure 3. N=1000の場合 Figs. 1&ndash;3 より， \(k=k_0\) で \(p(N,k)\) が最大になるとき， \(k<k_0\) の範囲では \(p(N,k)\) は大きくなり， \(k>k_0\) の範囲では， \(p(N,k)\) は小さくなるようです．よって，この頂点となる \(k=k_0\) が \(N/6\) 程度だとわかればよさそうです．
+\(p(N,k)>0\) なので， \(p(N,k+1)/p(N,k)\) を計算すると，"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認"><meta property="og:description" content="サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認 # 概要 # サイコロを繰り返し投げると，およそ6回に1回程度の割合で1の目が出ることを確認したいと思いますが，ちょうど6回に1回の割合で出るわけではないことがわかりました．
+そこで，本ページでは，およそ6回に1回程度の割合で出ることを確認する方法を考えます．
+いま， \(p(N,k)=\binom{N}{k}5^{N-k}/6^N\) とします．
+このとき，以下の方針が考えられます．
+\(p(N,k)\) が最大となる \(k\) が，およそ \(N/6\) であることを確認する． サイコロを繰り返し投げると，平均的に \(N/6\) 程度の回数だけ1の目が出ることを確認する． 1は， \(N\) を固定したとき，1の目が出る回数として最もあり得るのがおよそ \(N/6\) のときであることを確認する方針です．
+2は，サイコロを \(N\) 投げる試行自体を繰り返すと，試行ごとにばらつきがあるが，平均的には \(N/6\) 回程度1の目が出ることを確認する方針です．
+確率が最大となる1の目の出る回数がN/6程度であることの確認 # まず， \(p(N,k)\) を数値的に計算してみます． \(N=10,100,1000\) の場合を計算しますが，値が小さくなりすぎるので， \(\log_{10}p(N,k)\) を計算することにします．
+縦軸・横軸のスケールが各グラフで異なる点に注意してください．
+Figure 1. N=10の場合 Figure 2. N=100の場合 Figure 3. N=1000の場合 Figs. 1&ndash;3 より， \(k=k_0\) で \(p(N,k)\) が最大になるとき， \(k<k_0\) の範囲では \(p(N,k)\) は大きくなり， \(k>k_0\) の範囲では， \(p(N,k)\) は小さくなるようです．よって，この頂点となる \(k=k_0\) が \(N/6\) 程度だとわかればよさそうです．
+\(p(N,k)>0\) なので， \(p(N,k+1)/p(N,k)\) を計算すると，"><meta property="og:type" content="article"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/stat/dice/dice_approx_ratio/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-09-03T23:37:48+09:00"><title>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認 | htakeuchi0 のノート</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX",{anonymize_ip:!1})}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/ class=active>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li></ul></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#確率が最大となる1の目の出る回数がn6程度であることの確認>確率が最大となる1の目の出る回数がN/6程度であることの確認</a></li><li><a href=#平均的にn6回程度1の目が出ることの確認>平均的にN/6回程度1の目が出ることの確認</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside></header><article class=markdown><h1 id=サイコロをn回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認
+<a class=anchor href=#%e3%82%b5%e3%82%a4%e3%82%b3%e3%83%ad%e3%82%92n%e5%9b%9e%e6%8a%95%e3%81%92%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%8a%e3%82%88%e3%81%9d6%e5%9b%9e%e3%81%ab1%e5%9b%9e%e7%a8%8b%e5%ba%a6%e3%81%ae%e5%89%b2%e5%90%88%e3%81%a71%e3%81%ae%e7%9b%ae%e3%81%8c%e5%87%ba%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ae%e7%a2%ba%e8%aa%8d>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>サイコロを繰り返し投げると，およそ6回に1回程度の割合で1の目が出ることを確認したいと思いますが，<strong>ちょうど</strong>6回に1回の割合で出るわけではないことがわかりました．</p><p>そこで，本ページでは，<strong>およそ</strong>6回に1回<strong>程度</strong>の割合で出ることを確認する方法を考えます．</p><p>いま，
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script>
+<script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>
+\(p(N,k)=\binom{N}{k}5^{N-k}/6^N\)</span>
+とします．</p><p>このとき，以下の方針が考えられます．</p><ol><li><span>\(p(N,k)\)</span>
+が最大となる<span>
+\(k\)</span>
+が，およそ<span>
+\(N/6\)</span>
+であることを確認する．</li><li>サイコロを繰り返し投げると，平均的に<span>
+\(N/6\)</span>
+程度の回数だけ1の目が出ることを確認する．</li></ol><p>1は，<span>
+\(N\)</span>
+を固定したとき，1の目が出る回数として最もあり得るのがおよそ<span>
+\(N/6\)</span>
+のときであることを確認する方針です．</p><p>2は，サイコロを <span>\(N\)</span>
+投げる試行自体を繰り返すと，試行ごとにばらつきがあるが，平均的には <span>\(N/6\)</span>
+回程度1の目が出ることを確認する方針です．</p><h2 id=確率が最大となる1の目の出る回数がn6程度であることの確認>確率が最大となる1の目の出る回数がN/6程度であることの確認
+<a class=anchor href=#%e7%a2%ba%e7%8e%87%e3%81%8c%e6%9c%80%e5%a4%a7%e3%81%a8%e3%81%aa%e3%82%8b1%e3%81%ae%e7%9b%ae%e3%81%ae%e5%87%ba%e3%82%8b%e5%9b%9e%e6%95%b0%e3%81%8cn6%e7%a8%8b%e5%ba%a6%e3%81%a7%e3%81%82%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ae%e7%a2%ba%e8%aa%8d>#</a></h2><p>まず，<span>
+\(p(N,k)\)</span>
+を数値的に計算してみます．<span>
+\(N=10,100,1000\)</span>
+の場合を計算しますが，値が小さくなりすぎるので，<span>
+\(\log_{10}p(N,k)\)</span>
+を計算することにします．</p><p>縦軸・横軸のスケールが各グラフで異なる点に注意してください．</p><p><figure class=text-center><img src=/images/docs/math/stat/dice/dice_plot-1.png><figcaption><h4>Figure 1. N=10の場合</h4></figcaption></figure><figure class=text-center><img src=/images/docs/math/stat/dice/dice_plot-2.png><figcaption><h4>Figure 2. N=100の場合</h4></figcaption></figure><figure class=text-center><img src=/images/docs/math/stat/dice/dice_plot-3.png><figcaption><h4>Figure 3. N=1000の場合</h4></figcaption></figure></p><p>Figs. 1&ndash;3 より，<span>
+\(k=k_0\)</span>
+で <span>\(p(N,k)\)</span>
+が最大になるとき，<span>
+\(k&lt;k_0\)</span>
+の範囲では <span>\(p(N,k)\)</span>
+は大きくなり，<span>
+\(k>k_0\)</span>
+の範囲では，<span>
+\(p(N,k)\)</span>
+は小さくなるようです．よって，この頂点となる <span>\(k=k_0\)</span>
+が <span>\(N/6\)</span>
+程度だとわかればよさそうです．</p><p><span>\(p(N,k)>0\)</span>
+なので，<span>
+\(p(N,k+1)/p(N,k)\)</span>
+を計算すると，</p><ul><li><span>\(p(N,k+1)/p(N,k)>1\)</span>
+ならば <span>\(p(N,k+1)>p(N,k)\)</span>
+，</li><li><span>\(p(N,k+1)/p(N,k)=1\)</span>
+ならば <span>\(p(N,k+1)=p(N,k)\)</span>
+，</li><li><span>\(p(N,k+1)/p(N,k)&lt;1\)</span>
+ならば <span>\(p(N,k+1)&lt;p(N,k)\)</span></li></ul><p>となるので，<strong>隣り合う項の比を計算することで，頂点がわかるだろうと考えられます</strong>．</p><p><span>\[ \begin{aligned}
+&\frac{p(N,k+1)}{p(N,k)}\\
+&=\frac{\binom{N}{k+1}5^{N-(k+1)}/6^N}{\binom{N}{k}5^{N-k}/6^N}\\
+&=\frac{\binom{N}{k+1}}{\binom{N}{k}}\frac{5^{N-(k+1)}/6^N}{5^{N-k}/6^N}\\
+&=\frac{N!/((k+1)!(N-k-1)!)}{N!/(k!(N-k)!)}\frac{5^{N-(k+1)}}{5^{N-k}}\\
+&=\frac{k!}{(k+1)!}\frac{(N-k)!}{(N-k-1)!}\frac{5^{N-(k+1)}}{5^{N-k}}\\
+&=\frac{1}{k+1}\cdot(N-k)\cdot\frac{1}{5}\\
+&=\frac{1}{5}\left(-1+\frac{N+1}{k+1}\right)
+\end{aligned}\]</span>
+が成り立ちます．よって，
+<span>\[ \frac{p(N,k+1)}{p(N,k)}\begin{cases}
+>1&\mathrm{if}\ k&lt;(N+1)/6-1,\\
+=1&\mathrm{if}\ k=(N+1)/6-1,\\
+&lt;1&\mathrm{if}\ k>(N+1)/6-1
+\end{cases}\]</span>
+となります．つまり，およそ <span>\((N+1)/6-1\approx N/6\)</span>
+に確率のピークがあることがわかりました．</p><h2 id=平均的にn6回程度1の目が出ることの確認>平均的にN/6回程度1の目が出ることの確認
+<a class=anchor href=#%e5%b9%b3%e5%9d%87%e7%9a%84%e3%81%abn6%e5%9b%9e%e7%a8%8b%e5%ba%a61%e3%81%ae%e7%9b%ae%e3%81%8c%e5%87%ba%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ae%e7%a2%ba%e8%aa%8d>#</a></h2><p><span>\(A_k\)</span>
+を前に定めたとおりとします．このとき，<span>
+\(A_k\)</span>
+は，サイコロを <span>\(N\)</span>
+回投げて1の目が <span>\(k\)</span>
+回出る事象を表し，<span>
+\(\sum_{k=0}^NA_k=\Omega\)</span>
+すなわち <span>\(\sum_{k=0}^NP(A_k)=P(\sum_{k=0}^NA_k)=P(\Omega)=1 \)</span>
+なので，
+<span>\[ \mu_N=\sum_{k=0}^NkP(A_k)=\sum_{k=0}^Nk\binom{N}{k}\frac{5^{N-k}}{6^N}\]</span>
+を計算することで，平均的に何回程度1の目が出るかを計算できそうです．</p><p>試しに，<span>
+\(N=1,2,3\)</span>
+のときを計算します．</p><span>\[\begin{aligned}
+\mu_1&=\sum_{k=0}^1k\binom{1}{k}\frac{5^{1-k}}{6^1}=\frac{1}{6},\\
+\mu_2&=\sum_{k=0}^2k\binom{2}{k}\frac{5^{2-k}}{6^2}\\
+&=0+1\cdot2\cdot\frac{5}{6^2}+2\cdot1\cdot\frac{1}{6^2}\\
+&=\frac{1}{3},\\
+\mu_3&=\sum_{k=0}^3k\binom{3}{k}\frac{5^{3-k}}{6^3}\\
+&=0+1\cdot3\cdot\frac{5^2}{6^3}+2\cdot3\cdot\frac{5}{6^3}+3\cdot1\cdot\frac{1}{6^3}\\
+&=\frac{1}{2}.
+\end{aligned}\]</span><p><span>\(N=1,2,3\)</span>
+ではすべて <span>\(\mu_N=N/6\)</span>
+が成り立っています．
+したがって，すべての <span>\(N\)</span>
+で <span>\(\mu_N=N/6\)</span>
+が成り立つことを示せばよさそうです．</p><p><span>\(N=1\)</span>
+のときは既に示した通り，成り立ちます．いま，<span>
+\(N\ge1\)</span>
+について，<span>
+\(\mu_N=N/6\)</span>
+であると仮定し，<span>
+\(\mu_{N+1}=(N+1)/6\)</span>
+であることを示します．</p><p>以下，<span>
+\(\binom{N+1}{k}=\binom{N}{k}+\binom{N}{k-1}\)</span>
+であることを使います．また，<span>
+\(\binom{N}{N+1}=\binom{N}{-1}=0\)</span>
+と解釈することとします．</p><p>まず，
+<span>\[\begin{aligned}
+\mu_{N+1}&=\sum_{k=0}^{N+1}k\binom{N+1}{k}\frac{5^{(N+1)-k}}{6^{N+1}}\\
+&=\sum_{k=0}^{N+1}k\left(\binom{N}{k}+\binom{N}{k-1}\right)\frac{5^{(N+1)-k}}{6^{N+1}}\\
+&=\sum_{k=0}^{N+1}k\binom{N}{k}\frac{5^{(N+1)-k}}{6^{N+1}}\\
+&\qquad{}+\sum_{k=0}^{N+1}k\binom{N}{k-1}\frac{5^{(N+1)-k}}{6^{N+1}}\\
+\end{aligned}\]</span>
+となります．</p><p>第1項は，
+<span>\[\begin{aligned}
+&\sum_{k=0}^{N+1}k\binom{N}{k}\frac{5^{(N+1)-k}}{6^{N+1}}\\
+&=\frac{5}{6}\sum_{k=0}^Nk\binom{N}{k}\frac{5^{N-k}}{6^N}\\
+&=\frac{5}{6}\cdot\frac{N}{6}
+\end{aligned}\]</span>
+です．</p><p>第2項は，
+<span>\[\begin{aligned}
+&\sum_{k=0}^{N+1}k\binom{N}{k-1}\frac{5^{(N+1)-k}}{6^{N+1}}\\
+&=\sum_{k=1}^{N+1}k\binom{N}{k-1}\frac{5^{(N+1)-k}}{6^{N+1}}\\
+&=\sum_{k=0}^N(k+1)\binom{N}{k}\frac{5^{N-k}}{6^{N+1}}\\
+&=\sum_{k=0}^Nk\binom{N}{k}\frac{5^{N-k}}{6^{N+1}}+\sum_{k=0}^N\binom{N}{k}\frac{5^{N-k}}{6^{N+1}}\\
+\end{aligned}\]</span>
+です．</p><p>この第1項は，
+<span>\[\begin{aligned}
+&\sum_{k=0}^Nk\binom{N}{k}\frac{5^{N-k}}{6^{N+1}}\\
+&=\frac{1}{6}\sum_{k=0}^Nk\binom{N}{k}\frac{5^{N-k}}{6^N}\\
+&=\frac{1}{6}\cdot\frac{N}{6}
+\end{aligned}\]</span>
+で，第2項は，
+<span>\[\begin{aligned}
+&\sum_{k=0}^N\binom{N}{k}\frac{5^{N-k}}{6^{N+1}}\\
+&=\frac{5^N}{6^{N+1}}\sum_{k=0}^N\binom{N}{k}5^{-k}\\
+&=\frac{5^N}{6^{N+1}}\sum_{k=0}^N\binom{N}{k}\left(\frac{1}{5}\right)^k1^{N-k}\\
+&=\frac{5^N}{6^{N+1}}\left(\frac{1}{5}+1\right)^N\\
+&=\frac{5^N}{6^{N+1}}\left(\frac{6}{5}\right)^N\\
+&=\frac{1}{6}
+\end{aligned}\]</span>
+なので，あわせて <span>\(N/6^2+1/6\)</span>
+となります．</p><p>したがって，
+<span>\[\begin{aligned}
+\mu_{N+1}&=\sum_{k=0}^{N+1}k\binom{N+1}{k}\frac{5^{(N+1)-k}}{6^{N+1}}\\
+&=\frac{5N}{6^2}+\left(\frac{N}{6^2}+\frac{1}{6}\right)\\
+&=\frac{N}{6}+\frac{1}{6}\\
+&=\frac{N+1}{6}
+\end{aligned}\]</span>
+が成り立ちます．</p><p>以上より，数学的帰納法によって，すべての <span>\(N\)</span>
+で <span>\(\mu_N=N/6\)</span>
+が成り立ちます．</p><p>したがって，偏りのないサイコロを <span>\(N\)</span>
+回投げたとき，平均的に <span>\(N/6\)</span>
+回，1の目が出ることがわかりました．</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，サイコロを繰り返し投げると，およそ6回に1回程度の割合で1の目が出ることを確認しました．具体的には，サイコロを <span>\(N\)</span>
+回投げるとき，次が成り立つことがわかりました．</p><ul><li>確率が最大となる1の目の出る回数は <span>\(N/6\)</span>
+程度である</li><li>平均的に<span>
+\(N/6\)</span>
+回程度，1の目が出る</li></ul></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/e6a14c2c5f860ede52bd7266af41d6e7ec656d4f title='Last modified by htakeuchi0 | September 3, 2022' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
+<span>September 3, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#確率が最大となる1の目の出る回数がn6程度であることの確認>確率が最大となる1の目の出る回数がN/6程度であることの確認</a></li><li><a href=#平均的にn6回程度1の目が出ることの確認>平均的にN/6回程度1の目が出ることの確認</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></div></aside></main></body></html>

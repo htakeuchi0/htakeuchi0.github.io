@@ -1,0 +1,144 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理 # 概要 # 前ページまでで，サイコロを \(N\) 回投げるとき，次が成り立つことがわかりました．
+確率が最大となる1の目の出る回数は \(N/6\) 程度である 平均的に \(N/6\) 回程度，1の目が出る しかし，もとの“およそ6回に1回程度の割合で1の目が出る”という主張に対して，平均といった概念をもちだしているなど，直接的な結果に感じません．
+そこで本ページでは，確率変数を導入することで，この問題をより取り扱いやすくして，およそ6回に1回程度の割合で1の目が出ることを，より直接的に示せないかを検討します．
+確率変数 # まずは，確率変数の定義について述べます．
+Definition 1.
+\(A\) を集合，\(\mathfrak{F}\) をその完全加法族とする．一般に，\((A,\mathfrak{F})\) を 可測空間 という．また，\((A,\mathfrak{F}),(B,\mathfrak{G})\) を可測空間とするとき，関数 \(F:A\to B\) を \(F:(A,\mathfrak{F})\to(B,\mathfrak{B})\) と表す． \((A,\mathfrak{F}),(B,\mathfrak{G})\) を可測空間とする．関数 \(F:(A,\mathfrak{F})\to (B,\mathfrak{F})\) が，任意の \(b\in B\) について \(F^{-1}(b)=\{a\in A\mid F(a)=b\}\in\mathfrak{F}\) であるとき，関数 \(F\) を可測関数と呼ぶ． \(\mathbb{R}\) の開集合全体の集合を \(\mathfrak{O}(\mathbb{R})\) と表す．\(\mathfrak{O}(\mathbb{R})\) を含む最小の完全加法族を \(\mathfrak{B}(\mathbb{R})\) と表す． \(\Omega,\mathfrak{F}\) を標本空間とする，\(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}(\mathbb{R}))\) が可測関数のとき，\(X\) を確率変数という． なお，可測空間も標本空間も集合とその完全加法族の組なので，実質的には同じものですが，数理統計の文脈では，可測空間のことを標本空間と呼ぶ，という理解でよいです．また，本来は \(\mathfrak{B}(\mathbb{R})\) の存在を示す必要がありますが，ここでは認めるものとします．
+\(X\) の像 \(X(\Omega)=\{x\in\mathbb{R}\mid \exists \omega\in\Omega\,(X(\omega)=x)\}\) が高々可算のとき， \(X\) は離散型確率変数と呼ばれます．
+ここで， \([X=x]=\{\omega\in\Omega_N\mid X(\omega)=x\}\) とし， \(P([X=x])\) を \(P(X=x)\) と略記することにします． \([X<x],[X\le x],P(X<x),P(X\le x)\) なども同様です．"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理"><meta property="og:description" content="サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理 # 概要 # 前ページまでで，サイコロを \(N\) 回投げるとき，次が成り立つことがわかりました．
+確率が最大となる1の目の出る回数は \(N/6\) 程度である 平均的に \(N/6\) 回程度，1の目が出る しかし，もとの“およそ6回に1回程度の割合で1の目が出る”という主張に対して，平均といった概念をもちだしているなど，直接的な結果に感じません．
+そこで本ページでは，確率変数を導入することで，この問題をより取り扱いやすくして，およそ6回に1回程度の割合で1の目が出ることを，より直接的に示せないかを検討します．
+確率変数 # まずは，確率変数の定義について述べます．
+Definition 1.
+\(A\) を集合，\(\mathfrak{F}\) をその完全加法族とする．一般に，\((A,\mathfrak{F})\) を 可測空間 という．また，\((A,\mathfrak{F}),(B,\mathfrak{G})\) を可測空間とするとき，関数 \(F:A\to B\) を \(F:(A,\mathfrak{F})\to(B,\mathfrak{B})\) と表す． \((A,\mathfrak{F}),(B,\mathfrak{G})\) を可測空間とする．関数 \(F:(A,\mathfrak{F})\to (B,\mathfrak{F})\) が，任意の \(b\in B\) について \(F^{-1}(b)=\{a\in A\mid F(a)=b\}\in\mathfrak{F}\) であるとき，関数 \(F\) を可測関数と呼ぶ． \(\mathbb{R}\) の開集合全体の集合を \(\mathfrak{O}(\mathbb{R})\) と表す．\(\mathfrak{O}(\mathbb{R})\) を含む最小の完全加法族を \(\mathfrak{B}(\mathbb{R})\) と表す． \(\Omega,\mathfrak{F}\) を標本空間とする，\(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}(\mathbb{R}))\) が可測関数のとき，\(X\) を確率変数という． なお，可測空間も標本空間も集合とその完全加法族の組なので，実質的には同じものですが，数理統計の文脈では，可測空間のことを標本空間と呼ぶ，という理解でよいです．また，本来は \(\mathfrak{B}(\mathbb{R})\) の存在を示す必要がありますが，ここでは認めるものとします．
+\(X\) の像 \(X(\Omega)=\{x\in\mathbb{R}\mid \exists \omega\in\Omega\,(X(\omega)=x)\}\) が高々可算のとき， \(X\) は離散型確率変数と呼ばれます．
+ここで， \([X=x]=\{\omega\in\Omega_N\mid X(\omega)=x\}\) とし， \(P([X=x])\) を \(P(X=x)\) と略記することにします． \([X<x],[X\le x],P(X<x),P(X\le x)\) なども同様です．"><meta property="og:type" content="article"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/stat/dice/dice_randval/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-09-03T23:37:48+09:00"><title>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理 | htakeuchi0 のノート</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX",{anonymize_ip:!1})}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/ class=active>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li></ul></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#確率変数>確率変数</a></li><li><a href=#確率変数の導入>確率変数の導入</a></li><li><a href=#二項分布の導入>二項分布の導入</a></li><li><a href=#サイコロをn回投げたときおよそ6回に1回程度の割合で1の目が出ることの新たな説明>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの新たな説明</a></li><li><a href=#大数の法則を用いた説明>大数の法則を用いた説明</a></li><li><a href=#コンピュータでのシミュレーション>コンピュータでのシミュレーション</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside></header><article class=markdown><h1 id=サイコロをn回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理
+<a class=anchor href=#%e3%82%b5%e3%82%a4%e3%82%b3%e3%83%ad%e3%82%92n%e5%9b%9e%e6%8a%95%e3%81%92%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%8a%e3%82%88%e3%81%9d6%e5%9b%9e%e3%81%ab1%e5%9b%9e%e7%a8%8b%e5%ba%a6%e3%81%ae%e5%89%b2%e5%90%88%e3%81%a71%e3%81%ae%e7%9b%ae%e3%81%8c%e5%87%ba%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ae%e7%a2%ba%e7%8e%87%e5%a4%89%e6%95%b0%e3%81%ae%e5%b0%8e%e5%85%a5%e3%81%ab%e3%82%88%e3%82%8b%e6%95%b4%e7%90%86>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>前ページまでで，サイコロを
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script>
+<script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>
+\(N\)</span>
+回投げるとき，次が成り立つことがわかりました．</p><ul><li>確率が最大となる1の目の出る回数は <span>\(N/6\)</span>
+程度である</li><li>平均的に<span>
+\(N/6\)</span>
+回程度，1の目が出る</li></ul><p>しかし，もとの“およそ6回に1回程度の割合で1の目が出る”という主張に対して，平均といった概念をもちだしているなど，直接的な結果に感じません．</p><p>そこで本ページでは，<strong>確率変数</strong>を導入することで，この問題をより取り扱いやすくして，<strong>およそ6回に1回程度の割合で1の目が出ることを，より直接的に示せないかを検討します．</strong></p><h2 id=確率変数>確率変数
+<a class=anchor href=#%e7%a2%ba%e7%8e%87%e5%a4%89%e6%95%b0>#</a></h2><p>まずは，確率変数の定義について述べます．</p><blockquote class="book-hint info"><p><b>Definition 1</b>.</p><ol><li>\(A\) を集合，\(\mathfrak{F}\) をその完全加法族とする．一般に，\((A,\mathfrak{F})\) を <strong>可測空間</strong> という．また，\((A,\mathfrak{F}),(B,\mathfrak{G})\) を可測空間とするとき，関数 \(F:A\to B\) を \(F:(A,\mathfrak{F})\to(B,\mathfrak{B})\) と表す．</li><li>\((A,\mathfrak{F}),(B,\mathfrak{G})\) を可測空間とする．関数 \(F:(A,\mathfrak{F})\to (B,\mathfrak{F})\) が，任意の \(b\in B\) について \(F^{-1}(b)=\{a\in A\mid F(a)=b\}\in\mathfrak{F}\) であるとき，関数 \(F\) を<strong>可測関数</strong>と呼ぶ．</li><li>\(\mathbb{R}\) の開集合全体の集合を \(\mathfrak{O}(\mathbb{R})\) と表す．\(\mathfrak{O}(\mathbb{R})\) を含む最小の完全加法族を \(\mathfrak{B}(\mathbb{R})\) と表す．</li><li>\(\Omega,\mathfrak{F}\) を標本空間とする，\(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}(\mathbb{R}))\) が可測関数のとき，\(X\) を<strong>確率変数</strong>という．</li></ol></blockquote><p>なお，可測空間も標本空間も集合とその完全加法族の組なので，実質的には同じものですが，数理統計の文脈では，可測空間のことを標本空間と呼ぶ，という理解でよいです．また，本来は <span>\(\mathfrak{B}(\mathbb{R})\)</span>
+の存在を示す必要がありますが，ここでは認めるものとします．</p><p><span>\(X\)</span>
+の像 <span>\(X(\Omega)=\{x\in\mathbb{R}\mid \exists \omega\in\Omega\,(X(\omega)=x)\}\)</span>
+が高々可算のとき，<span>
+\(X\)</span>
+は<strong>離散型確率変数</strong>と呼ばれます．</p><p>ここで，<span>
+\([X=x]=\{\omega\in\Omega_N\mid X(\omega)=x\}\)</span>
+とし，<span>
+\(P([X=x])\)</span>
+を <span>\(P(X=x)\)</span>
+と略記することにします．<span>
+\([X&lt;x],[X\le x],P(X&lt;x),P(X\le x)\)</span>
+なども同様です．</p><p>確率変数 <span>\(X\)</span>
+に対し，<span>
+\(f_X:\mathbb{R}\to\mathbb{R}\)</span>
+を <span>\(f_X(x)=P(X\le x)\)</span>
+と定め，<strong>確率関数</strong>, または<strong>確率質量関数</strong>と呼びます．</p><p>確率変数 <span>\(X\)</span>
+に対し，<span>
+\(\mathbb{E}[X]=\sum_{x=0}^{\infty}xf_X(x)\)</span>
+, <span>\(\mathbb{V}[X]=\mathbb{E}[(X-\mathbb{E}[X])^2]\)</span>
+を<strong>期待値</strong>, <strong>分散</strong>といい，それぞれ平均と散らばりを表すと解釈されます．</p><p>このとき，以下の式が成り立つことが知られています．</p><blockquote class="book-hint info"><p><b>Theorem 2</b> (Chebyshev の不等式).
+任意の \(\epsilon>0\) について，次の式が成り立つ．</p><span>\[P(|X-\mathbb{E}[X]|\ge\epsilon)\le\frac{\mathbb{V}[X]}{\epsilon^2}\]</span></blockquote><h2 id=確率変数の導入>確率変数の導入
+<a class=anchor href=#%e7%a2%ba%e7%8e%87%e5%a4%89%e6%95%b0%e3%81%ae%e5%b0%8e%e5%85%a5>#</a></h2><p>前ページの確率空間 <span>\((\Omega_N,\mathfrak{F}_N,P_N)\)</span>
+を考えます．本ページでは，<span>
+\(N\)</span>
+を省略し，<span>
+\((\Omega,\mathfrak{F},P)\)</span>
+と表すことにします．1の目が出た回数だけが問題のため，以下のような可測関数 <span>\(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}(\mathbb{R}))\)</span>
+を考えます．
+<span>\[X(\omega^1,\omega^2,\dots,\omega^N)=|\{i\mid \omega^i=\omega_1\}|.\]</span>
+このとき，<span>
+\(x\notin\{0,1,\dots,N\}\)</span>
+ならば <span>\(X^{-1}(x)=\emptyset\in\mathfrak{F}\)</span>
+であり，<span>
+\(k\in\{0,1,\dots,N\}\)</span>
+ならば <span>\(X^{-1}(k)=\{(\omega^i)\in\Omega\mid |\{i\mid \omega^i=\omega_1\}|=k\}\in 2^{\Omega}=\mathfrak{F}\)</span>
+なので <span>\(X\)</span>
+は確率変数です．</p><p>ここまで定めた記号で以下が成り立ちます．</p><blockquote class="book-hint info"><p><b>Proposition 3</b>.
+以下が成り立つ．</p><span>\[f_X(x)=\begin{cases}
+\displaystyle\binom{N}{x}\frac{5^{N-x}}{6^N},&x=0,1,\dots,N,\\
+0,&\mathrm{otherwise}.
+\end{cases}\]</span></blockquote><h2 id=二項分布の導入>二項分布の導入
+<a class=anchor href=#%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%ae%e5%b0%8e%e5%85%a5>#</a></h2><p>一般に，確率変数 <span>\(X\)</span>
+の確率質量関数が
+<span>\[f_X(x)=\begin{cases}
+\displaystyle\binom{N}{x}p^x(1-p)^{N-x},&x=0,1,\dots,N,\\
+0,&\mathrm{otherwise}
+\end{cases}\]</span>
+となるとき，確率変数 <span>\(X\)</span>
+は，<strong>パラメータ <span>\((N,p)\)</span>
+の二項分布に従う</strong>といいます．</p><p>二項分布の確率関数は，独立な試行を <span>\(N\)</span>
+回繰り返したとき，確率 <span>\(p\)</span>
+で生起する事象が <span>\(x\)</span>
+回発生する確率を表します．</p><p>二項分布については以下が成り立つことが知られています．</p><blockquote class="book-hint info"><p><b>Theorem 4</b>.
+以下が成り立つ．</p><ol><li>\(\mathbb{E}[X]=Np\).</li><li>\(\mathbb{V}[X]=Np^2\).</li><li>\(f_X(x)\) が最大になる \(x\) は，\((N+1)p\) が整数のとき \((N+1)p-1,(N+1)p\), そうでないとき \(\lfloor(N+1)p\rfloor\) である．</li></ol></blockquote><p>確率関数が Prop. 2 となる確率変数は，パラメータ <span>\(p\)</span>
+が <span>\(1/6\)</span>
+である二項分布に従うといえます．</p><p>よって，Thm. 4.1 より，<span>
+\(\mathbb{E}[X]=N/6\)</span>
+, Thm.4.2 より <span>\(f_X(x)\)</span>
+が最大になる <span>\(x\)</span>
+はおよそ<span>
+\(N/6\)</span>
+程度となりますが，これは前ページの結論に一致します．</p><h2 id=サイコロをn回投げたときおよそ6回に1回程度の割合で1の目が出ることの新たな説明>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの新たな説明
+<a class=anchor href=#%e3%82%b5%e3%82%a4%e3%82%b3%e3%83%ad%e3%82%92n%e5%9b%9e%e6%8a%95%e3%81%92%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%8a%e3%82%88%e3%81%9d6%e5%9b%9e%e3%81%ab1%e5%9b%9e%e7%a8%8b%e5%ba%a6%e3%81%ae%e5%89%b2%e5%90%88%e3%81%a71%e3%81%ae%e7%9b%ae%e3%81%8c%e5%87%ba%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ae%e6%96%b0%e3%81%9f%e3%81%aa%e8%aa%ac%e6%98%8e>#</a></h2><p>さらに，Thm. 2 より，以下を示すことができます．ただし，パラメータ<span>
+\((N,1/6)\)</span>
+に従う確率変数を<span>
+\(X_N\)</span>
+と表します．</p><blockquote class="book-hint info"><p><b>Theorem 5</b>.
+任意の \(\epsilon>0\) について，以下が成り立つ．</p><span>\[\lim_{N\to\infty}P\left(\left|\frac{X_N}{N}-\frac{1}{6}\right|\ge\epsilon\right)=0\]</span></blockquote><p>これは，例えば <span>\(\epsilon=10^{-10}\)</span>
+のような小さな値をとったとしても，<span>
+\(N\)</span>
+を十分大きくとると，サイコロを <span>\(N\)</span>
+回投げて1の目が出た割合 <span>\(X_N/N\)</span>
+と <span>\(1/6\)</span>
+が <span>\(\epsilon=10^{-10}\)</span>
+以上になる確率（<span>
+\(1/6\)</span>
+からほんの少しでもずれる確率）は0に近づく（ほとんど起こらなくなる）ということなので，サイコロを投げる回数 <span>\(N\)</span>
+を十分大きくとると，<strong>サイコロを <span>\(N\)</span>
+回投げたときおよそ6回に1回程度の割合で1の目が出る</strong> ことを示しています．</p><h2 id=大数の法則を用いた説明>大数の法則を用いた説明
+<a class=anchor href=#%e5%a4%a7%e6%95%b0%e3%81%ae%e6%b3%95%e5%89%87%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e8%aa%ac%e6%98%8e>#</a></h2><p>Thm. 5 が，サイコロを <span>\(N\)</span>
+回投げたときおよそ6回に1回程度の割合で1の目が出ることの，かなり直接的な説明を与えており，本節の目的は達成したといえます．</p><p>ただし，Thm. 5 は<strong>確率収束</strong>と呼ばれる収束性を用いて説明されますが，さらに強く，<strong>概収束</strong>と呼ばれる収束性を用いて説明できることが知られています．</p><blockquote class="book-hint info"><p><b>Theorem 6</b>.
+以下が成り立つ．</p><span>\[P\left(\lim_{n\to\infty}\frac{X_N}{N}=\frac{1}{6}\right)=1\]</span></blockquote><p>これは，サイコロを <span>\(N\)</span>
+回投げて1の目が出た割合 <span>\(X_N/N\)</span>
+の <span>\(N\)</span>
+を大きくすると，ほとんど確実に <span>\(1/6\)</span>
+に収束することを表しています．これもかなり直接的に，<strong>サイコロを <span>\(N\)</span>
+回投げたときおよそ6回に1回程度の割合で1の目が出る</strong> ことを示しています．</p><p>Thm. 5 の結果は<strong>大数の弱法則</strong>，Thm. 6 の結果は<strong>大数の強法則</strong> と呼ばれる法則の特殊ケースです．どちらも，二項分布でなく，ベルヌーイ分布と呼ばれる分布を考えて，それぞれの法則をあてはめることで得られます．</p><h2 id=コンピュータでのシミュレーション>コンピュータでのシミュレーション
+<a class=anchor href=#%e3%82%b3%e3%83%b3%e3%83%94%e3%83%a5%e3%83%bc%e3%82%bf%e3%81%a7%e3%81%ae%e3%82%b7%e3%83%9f%e3%83%a5%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a></h2><p>最後に，コンピュータによるシミュレーション結果について説明します．</p><p>大数の弱法則では，<span>
+\(N\)</span>
+を十分大きくすると，<span>
+\(X_N/N\)</span>
+が<span>
+\(1/6\)</span>
+から外れることはほとんどないことを主張しています．大数の強法則では，<span>
+\(N\)</span>
+を十分大きくすると，<span>
+\(X_N/N\)</span>
+はほとんど確実に <span>\(1/6\)</span>
+に近づくことを主張しています．</p><p>そこで，サイコロを1000回投げることをコンピュータ上でシミュレートし，サイコロを <span>\(N\,(0\le N\le 1000)\)</span>
+回投げたとき1の目が出た回数の割合を求めてプロットします．これを数回繰り返し，各 <span>\(N\)</span>
+でどれくらいのばらつきがあるか，<span>
+\(1/6\)</span>
+に近づくかを確認します．</p><p>区間 <span>\([0,1)\)</span>
+上の値を一様ランダムに返してくれる関数があるとします．
+ランダムに得られた <span>\(y\in[0,1)\)</span>
+に対し，<span>
+\(x=\lfloor 6y\rfloor+1\)</span>
+とすると，一様ランダムに <span>\(\{1,2,\dots,6\}\)</span>
+を返す関数をつくることができます．</p><p>これを利用して，サイコロを1000回投げることコンピュータでシミュレートし，それを4回繰り返した結果を図示したものは以下のとおりです．この4回の試行は4つの色で区別します．</p><figure class=text-center><img src=/images/docs/math/stat/dice/dice.png><figcaption><h4>Figure 1. シミュレーション結果</h4></figcaption></figure><p>Fig. 1 を見ると，100回までは結果にばらつきがありますが，<span>
+\(N\)</span>
+を大きくすると，ばらつきは小さくなり，<span>
+\(1/6\)</span>
+に近づいていることが確認できました．</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，確率変数を導入し，大数の弱法則，大数の強法則を用いることで，<strong>およそ6回に1回程度の割合で1の目が出ることを，より直接的に示せる</strong>ことを説明しました．</p><p>これは，公理的確率論が頻度主義的確率論と矛盾しないことの一例を確認したことになります．</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/e6a14c2c5f860ede52bd7266af41d6e7ec656d4f title='Last modified by htakeuchi0 | September 3, 2022' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
+<span>September 3, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#確率変数>確率変数</a></li><li><a href=#確率変数の導入>確率変数の導入</a></li><li><a href=#二項分布の導入>二項分布の導入</a></li><li><a href=#サイコロをn回投げたときおよそ6回に1回程度の割合で1の目が出ることの新たな説明>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの新たな説明</a></li><li><a href=#大数の法則を用いた説明>大数の法則を用いた説明</a></li><li><a href=#コンピュータでのシミュレーション>コンピュータでのシミュレーション</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></div></aside></main></body></html>
