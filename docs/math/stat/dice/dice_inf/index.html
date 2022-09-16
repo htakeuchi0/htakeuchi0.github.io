@@ -1,0 +1,310 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="サイコロを無限回投げる場合の確率モデル # 概要 # 前ページまでで，サイコロを繰り返し投げる試行の確率モデルを定義しました．しかし，投げる回数 \(N\) を固定した場合でしか説明していません．
+本ページでは，サイコロを無限回投げる場合の確率モデルについて説明します．有限の場合ほど明らかではないので，ひとつずつ確認しながら構成します．
+確率の定義 # 既に述べたとおり， \(\Omega\) を集合， \(\mathfrak{F}\) を \(\Omega\) の完全加法族としたとき，以下を満たす関数 \(P:\mathfrak{F}\to\mathbb{R}\) を確率と呼ぶのでした．
+\(A\in\mathfrak{F}\) ならば \(P(A)\ge0\), \(P(\Omega)=1\), \(A_1,A_2,\dots\in\mathfrak{F}\) が互いに素ならば，\(P(\sum_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}P(A_i)\). また， \((\Omega,\mathfrak{F},P)\) を確率空間と呼ぶのでした．
+サイコロを無限回投げる場合を表す確率空間の具体的構成 # 以降では，サイコロを無限回投げる場合を表す確率空間 \((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\) を具体的に構成します．
+\(\Omega_\infty\) の構成 # \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\) とし， \(\Omega_{\infty}\) を，
+\[\Omega_{\infty}=\{(\omega^i)_{i\in\mathbb{N}}\mid\forall i\in\mathbb{N}\,(\omega^i\in\Omega_1)\}\] つまり， \(\Omega_{\infty}=\Omega^{\mathbb{N}}\) とします1, 2．
+\(\mathfrak{F}_{\infty},P_{\infty}\) の構成 # \(\mathfrak{F}_{\infty},P_{\infty}\) を定めるには準備が必要です． まず， \(1\le k\in\mathbb{N}\) について， \[N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1<\dots<n_k\}\] とし， \(N^{(0)}=\{\emptyset\}\) とします．
+次に， \(1\le k\in\mathbb{N}\) に対し， \(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\) に対して， \[F_{k,\Omega,n}=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega\}\] とし， \(F_{0,\Omega,n}=\Omega_{\infty}\) とします．"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="サイコロを無限回投げる場合の確率モデル"><meta property="og:description" content="サイコロを無限回投げる場合の確率モデル # 概要 # 前ページまでで，サイコロを繰り返し投げる試行の確率モデルを定義しました．しかし，投げる回数 \(N\) を固定した場合でしか説明していません．
+本ページでは，サイコロを無限回投げる場合の確率モデルについて説明します．有限の場合ほど明らかではないので，ひとつずつ確認しながら構成します．
+確率の定義 # 既に述べたとおり， \(\Omega\) を集合， \(\mathfrak{F}\) を \(\Omega\) の完全加法族としたとき，以下を満たす関数 \(P:\mathfrak{F}\to\mathbb{R}\) を確率と呼ぶのでした．
+\(A\in\mathfrak{F}\) ならば \(P(A)\ge0\), \(P(\Omega)=1\), \(A_1,A_2,\dots\in\mathfrak{F}\) が互いに素ならば，\(P(\sum_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}P(A_i)\). また， \((\Omega,\mathfrak{F},P)\) を確率空間と呼ぶのでした．
+サイコロを無限回投げる場合を表す確率空間の具体的構成 # 以降では，サイコロを無限回投げる場合を表す確率空間 \((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\) を具体的に構成します．
+\(\Omega_\infty\) の構成 # \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\) とし， \(\Omega_{\infty}\) を，
+\[\Omega_{\infty}=\{(\omega^i)_{i\in\mathbb{N}}\mid\forall i\in\mathbb{N}\,(\omega^i\in\Omega_1)\}\] つまり， \(\Omega_{\infty}=\Omega^{\mathbb{N}}\) とします1, 2．
+\(\mathfrak{F}_{\infty},P_{\infty}\) の構成 # \(\mathfrak{F}_{\infty},P_{\infty}\) を定めるには準備が必要です． まず， \(1\le k\in\mathbb{N}\) について， \[N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1<\dots<n_k\}\] とし， \(N^{(0)}=\{\emptyset\}\) とします．
+次に， \(1\le k\in\mathbb{N}\) に対し， \(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\) に対して， \[F_{k,\Omega,n}=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega\}\] とし， \(F_{0,\Omega,n}=\Omega_{\infty}\) とします．"><meta property="og:type" content="article"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/stat/dice/dice_inf/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-09-16T23:00:34+09:00"><title>サイコロを無限回投げる場合の確率モデル | htakeuchi0 のノート</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX",{anonymize_ip:!1})}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/ class=active>サイコロを無限回投げる場合の確率モデル</a></li></ul></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>サイコロを無限回投げる場合の確率モデル</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#確率の定義>確率の定義</a></li><li><a href=#サイコロを無限回投げる場合を表す確率空間の具体的構成>サイコロを無限回投げる場合を表す確率空間の具体的構成</a><ul><li><a href=#omega_infty-の構成>\(\Omega_\infty\) の構成</a></li><li><a href=#mathfrakf_inftyp_infty-の構成>\(\mathfrak{F}_{\infty},P_{\infty}\) の構成</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class=markdown><h1 id=サイコロを無限回投げる場合の確率モデル>サイコロを無限回投げる場合の確率モデル
+<a class=anchor href=#%e3%82%b5%e3%82%a4%e3%82%b3%e3%83%ad%e3%82%92%e7%84%a1%e9%99%90%e5%9b%9e%e6%8a%95%e3%81%92%e3%82%8b%e5%a0%b4%e5%90%88%e3%81%ae%e7%a2%ba%e7%8e%87%e3%83%a2%e3%83%87%e3%83%ab>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>前ページまでで，サイコロを繰り返し投げる試行の確率モデルを定義しました．しかし，投げる回数
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script>
+<script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>
+\(N\)</span>
+を固定した場合でしか説明していません．</p><p>本ページでは，サイコロを無限回投げる場合の確率モデルについて説明します．有限の場合ほど明らかではないので，ひとつずつ確認しながら構成します．</p><h2 id=確率の定義>確率の定義
+<a class=anchor href=#%e7%a2%ba%e7%8e%87%e3%81%ae%e5%ae%9a%e7%be%a9>#</a></h2><p><a href=https://htakeuchi0.github.io/docs/math/stat/dice/dice_basic/#%e7%a2%ba%e7%8e%87%e3%81%ae%e5%ae%9a%e7%be%a9>既に述べたとおり</a>，<span>
+\(\Omega\)</span>
+を集合，<span>
+\(\mathfrak{F}\)</span>
+を <span>\(\Omega\)</span>
+の完全加法族としたとき，以下を満たす関数 <span>\(P:\mathfrak{F}\to\mathbb{R}\)</span>
+を確率と呼ぶのでした．</p><ol><li>\(A\in\mathfrak{F}\) ならば \(P(A)\ge0\),</li><li>\(P(\Omega)=1\),</li><li>\(A_1,A_2,\dots\in\mathfrak{F}\) が互いに素ならば，\(P(\sum_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}P(A_i)\).</li></ol><p>また，<span>
+\((\Omega,\mathfrak{F},P)\)</span>
+を確率空間と呼ぶのでした．</p><h2 id=サイコロを無限回投げる場合を表す確率空間の具体的構成>サイコロを無限回投げる場合を表す確率空間の具体的構成
+<a class=anchor href=#%e3%82%b5%e3%82%a4%e3%82%b3%e3%83%ad%e3%82%92%e7%84%a1%e9%99%90%e5%9b%9e%e6%8a%95%e3%81%92%e3%82%8b%e5%a0%b4%e5%90%88%e3%82%92%e8%a1%a8%e3%81%99%e7%a2%ba%e7%8e%87%e7%a9%ba%e9%96%93%e3%81%ae%e5%85%b7%e4%bd%93%e7%9a%84%e6%a7%8b%e6%88%90>#</a></h2><p>以降では，サイコロを無限回投げる場合を表す確率空間 <span>\((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\)</span>
+を具体的に構成します．</p><h3 id=omega_infty-の構成>\(\Omega_\infty\) の構成
+<a class=anchor href=#omega_infty-%e3%81%ae%e6%a7%8b%e6%88%90>#</a></h3><p><span>\(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\)</span>
+とし，<span>
+\(\Omega_{\infty}\)</span>
+を，</p><span>\[\Omega_{\infty}=\{(\omega^i)_{i\in\mathbb{N}}\mid\forall i\in\mathbb{N}\,(\omega^i\in\Omega_1)\}\]</span><p>つまり，<span>
+\(\Omega_{\infty}=\Omega^{\mathbb{N}}\)</span>
+とします<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup><sup>, </sup><sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>．</p><h3 id=mathfrakf_inftyp_infty-の構成>\(\mathfrak{F}_{\infty},P_{\infty}\) の構成
+<a class=anchor href=#mathfrakf_inftyp_infty-%e3%81%ae%e6%a7%8b%e6%88%90>#</a></h3><p><span>\(\mathfrak{F}_{\infty},P_{\infty}\)</span>
+を定めるには準備が必要です．
+まず，<span>
+\(1\le k\in\mathbb{N}\)</span>
+について，
+<span>\[N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1&lt;\dots&lt;n_k\}\]</span></p><p>とし，<span>
+\(N^{(0)}=\{\emptyset\}\)</span>
+とします．</p><p>次に，<span>
+\(1\le k\in\mathbb{N}\)</span>
+に対し，<span>
+\(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\)</span>
+に対して，
+<span>\[F_{k,\Omega,n}=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega\}\]</span>
+とし，<span>
+\(F_{0,\Omega,n}=\Omega_{\infty}\)</span>
+とします．</p><p>ここで，<span>
+\(\mathfrak{F}_{\infty}^0\subset2^{\Omega_{\infty}}\)</span>
+を，
+<span>\[\mathfrak{F}_{\infty}^0=\{F_{k,\Omega,n}\mid\Omega\in2^{\Omega_1^k},n\in N^{(k)},k\in\mathbb{N}\}\]</span>
+とします．</p><p><span>\(\mathfrak{F}_{\infty}^0\)</span>
+は以下の性質を満たします．</p><blockquote class="book-hint info"><p><b>Lemma 1</b>.
+\(\mathfrak{F}_{\infty}^0\) は以下の性質を満たす．</p><ol><li>\(\emptyset\in\mathfrak{F}_{\infty}^0\),</li><li>\(A\in\mathfrak{F}_{\infty}^0\) ならば \(A^c\in\mathfrak{F}_{\infty}^0\),</li><li>\(A,B\in\mathfrak{F}_{\infty}^0\) ならば \(A\cup B\in\mathfrak{F}_{\infty}^0\),</li></ol></blockquote><p>Lem.1 を示します．まず，1 を示します．<span>
+\(k=1\)</span>
+とし，<span>
+\(\emptyset\in2^{\Omega_1^1}\)</span>
+, <span>\(n=(1)\in N^{(1)}\)</span>
+とします．このとき，<span>
+\(\omega\in F_{1,\emptyset,(1)}\)</span>
+が存在するとすると，<span>
+\((\omega_1)\in\emptyset\)</span>
+となり矛盾します．よって，背理法によって，<span>
+\(F_{1,\emptyset,(1)}=\emptyset\)</span>
+となります．したがって，<span>
+\(\emptyset=F_{1,\emptyset,(1)}\in\mathfrak{F}_{\infty}^0\)</span>
+です．</p><p>2 を示します．<span>
+\(A\in\mathfrak{F}_{\infty}^0\)</span>
+ならば，<span>
+\(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\)</span>
+が存在し，<span>
+\(A=F_{k,\Omega,n}\)</span>
+となります．このとき，
+<span>\[A^c=F_{k,\Omega,n}^c=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega^c\}\]</span>
+ですが，<span>
+\(\Omega^c\in2^{\Omega_1^k}\)</span>
+なので，<span>
+\(A^c=F_{k,\Omega,n}^c=F_{k,\Omega^c,n}\in\mathfrak{F}_{\infty}^0\)</span>
+が成り立ちます．</p><p>3 を示します．<span>
+\(A,B\in\mathfrak{F}_{\infty}^0\)</span>
+ならば，<span>
+\(\Omega^{(1)}\in2^{\Omega_1^{k_1}},\Omega^{(2)}\in2^{\Omega_2^{k_2}},n^{(1)}\in N^{(k_1)},n^{(2)}\in N^{(k_2)}\)</span>
+が存在し，<span>
+\(A=F_{k_1,\Omega^{(1)},n^{(1)}},B=F_{k_2,\Omega^{(2)},n^{(2)}}\)</span>
+が成り立ちます．</p><p>ここで，<span>
+\(n^{(1)},n^{(2)}\)</span>
+の要素を重複を除いて小さい順に並べたものを <span>\(n'_1,n'_2,\dots,n'_{k_3}\)</span>
+と表し，<span>
+\(n^{(3)}=(n'_1,n'_2,\dots,n'_{k_3})\in N^{(k_3)}\)</span>
+とします．</p><p>いま，<span>
+\(n^{(1)}=(n_1,n_2,\dots,n_{k_1})\)</span>
+とし，単射 <span>\(I:\{1,2,\dots,k_1\}\to\{1,2,\dots,k_3\}\)</span>
+を，<span>
+\(n_k=n'_{I(k)}\,(k=1,2,\dots,k_1)\)</span>
+が成り立つように定めます．</p><p>さらに，<span>
+\(\omega=(\omega^1,\omega^2,\dots,\omega^{k_1})\in\Omega^{(1)}\)</span>
+に対し，<span>
+\(\bar{\omega}\in 2^{\Omega_1^{k_3}}\)</span>
+を以下のように定めます．
+<span>\[\begin{aligned}
+&\bar{\omega}=\prod_{k=1}^{k_3}\Omega^{[k]},\\
+&\Omega^{[k]}=\begin{cases}
+\{\omega^{I^{-1}(k)}\},&k\in I(\{1,2,\dots,k_1\}),\\
+\Omega_1,&k\notin I(\{1,2,\dots,k_1\}).
+\end{cases}
+\end{aligned}\]</span></p><p>ここで，<span>
+\(\bar{\Omega}^{(1)}=\bigcup_{\omega\in\Omega^{(1)}}\bar{\omega}\)</span>
+とし，同様に <span>\(\bar{\Omega}^{(2)}\)</span>
+も定めます．
+<span>\(\Omega^{(3)}=\bar{\Omega}^{(1)}\cup\bar{\Omega}^{(2)}\)</span>
+とすると，<span>
+\(\Omega^{(3)}\in2^{\Omega_1^{k_3}}\)</span>
+が成り立ちます．</p><p>このとき，
+<span>\[A\cup B=\{\omega\in\Omega_{\infty}\mid(\omega^{n'_1},\omega^{n'_2},\dots,\omega^{n'_{k_3}})\in\Omega^{(3)}\}\]</span>
+が成り立ちますので，<span>
+\(A\cup B=F_{k_3,\Omega^{(3)},n^{(3)}}\,(\Omega^{(3)}\in2^{\Omega_1^{k_3}},n^{(3)}\in N^{(k_3)})\)</span>
+と表せます．したがって，<span>
+\(A\cup B\in\mathfrak{F}_{\infty}^0\)</span>
+が成り立ちます．</p><p>以上より，Lem. 1 が示せました．</p><p>Lem. 1 により，<strong><span>
+\(\mathfrak{F}_{\infty}^0\)</span>
+は <span>\(\Omega_{\infty}\)</span>
+の有限加法族である</strong> とわかりました <sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup>．</p><p>次に，<span>
+\(P_{\infty}^0:\mathfrak{F}_{\infty}^0\to\mathbb{R}\)</span>
+を，
+<span>\[P_{\infty}^0(F_{k,\Omega,n})=\frac{|\Omega|}{6^k}\]</span>
+で定めます．</p><p><span>\(P_{\infty}^0\)</span>
+は以下の性質を満たします．</p><blockquote class="book-hint info"><p><b>Lemma 2</b>.
+\(P_{\infty}^0\) は以下の性質を満たす．</p><ol><li>\(P_{\infty}^0(\emptyset)=0\),</li><li>\(A\in\mathfrak{F}_{\infty}^0\) ならば \(0\le P_{\infty}^0(A)\le\infty\),</li><li>\(n\ge2\) に対し，\(A_1,A_2,\dots,A_n\in\mathfrak{F}_{\infty}^0\) が互いに素なら，以下が成り立つ．</li></ol><span>\[P_{\infty}^0\left(\sum_{i=1}^nA_i\right)=\sum_{i=1}^nP_{\infty}^0(A_i)\]</span></blockquote><p>Lem.2 を示します．1 は <span>\(\emptyset=F_{1,\emptyset,(1)}\)</span>
+より，<span>
+\(P_{\infty}^0(\emptyset)=P_{\infty}^0(F_{1,\emptyset,(1)})=|\emptyset|/6^1=0\)</span>
+から成り立ちます <sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>．</p><p>2 は定義より負にならないことから成り立ちます．</p><p>3 を示します．まず，<span>
+\(A,B\in\mathfrak{F}_{\infty}^0\)</span>
+が <span>\(A\cap B=\emptyset\)</span>
+を満たすとき，<span>
+\(P_{\infty}^0(A+B)=P_{\infty}^0(A)+P_{\infty}^0(B)\)</span>
+であることを示します．</p><p><span>\(A,B\in\mathfrak{F}_{\infty}^0\)</span>
+なので，<span>
+\(\Omega^{(1)}\in2^{\Omega_1^{k_1}},\Omega^{(2)}\in2^{\Omega_2^{k_2}},n^{(1)}\in N^{(k_1)},n^{(2)}\in N^{(k_2)}\)</span>
+が存在し，<span>
+\(A=F_{k_1,\Omega^{(1)},n^{(1)}},B=F_{k_2,\Omega^{(2)},n^{(2)}}\)</span>
+が成り立ちます．</p><p>Lem.1 の証明と同様に，<span>
+\(\bar{\Omega}^{(1)},\bar{\Omega}^{(2)}\)</span>
+をつくると，<span>
+\(A\cap B=\emptyset\)</span>
+ならば <span>\(\bar{\Omega}^{(1)}\cap\bar{\Omega}^{(2)}=\emptyset\)</span>
+であることがわかります．</p><p><span>\(A\cap B=\emptyset\)</span>
+ならば，<span>
+\(A+B=F_{k_3,\bar{\Omega}^{(1)}+\bar{\Omega}^{(2)},n^{(3)}}\)</span>
+と表せるため，
+<span>\[\begin{aligned}
+P_{\infty}^0(A+B)&=\frac{|\bar{\Omega}^{(1)}+\bar{\Omega}^{(2)}|}{6^{k_3}}\\
+&=\frac{|\bar{\Omega}^{(1)}|+|\bar{\Omega^{(2)}}|}{6^{k_3}}\\
+&=\frac{6^{k_3-k_1}|\Omega^{(1)}|+6^{k_3-k_2}|\Omega^{(2)}|}{6^{k_3}}\\
+&=\frac{|\Omega^{(1)}|}{6^{k_1}}+\frac{|\Omega^{(2)}|}{6^{k_2}}\\
+&=P_{\infty}^0(A)+P_{\infty}^0(B).
+\end{aligned}\]</span>
+が成り立ちます．つまり，<span>
+\(n=2\)</span>
+のとき主張が示せました．</p><p>ある <span>\(n\,(\ge2)\)</span>
+について主張を満たすとき，<span>
+\(n+1\)</span>
+のときも満たすことは，同じ議論から示せます．したがって，数学的帰納法によって，任意の <span>\(n\in\mathbb{N}\)</span>
+について主張が成り立ちます．</p><p>以上より，Lem. 2 が示せました．</p><p>Lem. 2 より，<span>
+\(P_{\infty}^0\)</span>
+は <strong>測度空間 <span>\((\Omega_{\infty},\mathfrak{F}_{\infty}^0)\)</span>
+の有限加法的測度</strong> であるとわかりました<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>．</p><p>さて一般に，コンパクト空間のその閉集合族 <span>\(\mathcal{F}\)</span>
+について，任意の <span>\(k\)</span>
+と任意の <span>\(F_1,F_2,\dots,F_k\in\mathcal{F}\)</span>
+について <span>\(\bigcap_{i=1}^kF_i\neq\emptyset\)</span>
+が成り立つ（有限交叉性をもつ）ならば，<span>
+\(\bigcap_{F\in\mathcal{F}}F\neq\emptyset\)</span>
+であることが知られています <a href=#cite:1>[1]</a>．</p><p>この事実を利用して，<span>
+\(\mathfrak{F}_{\infty}^0\)</span>
+の性質を一つ述べます．</p><p>まず，有限集合 <span>\(\Omega_1\)</span>
+に離散位相をいれた位相空間 <span>\((\Omega_1,2^{\Omega_1})\)</span>
+を考えます．</p><p><span>\(\mathcal{F}\subset2^{\Omega_1}\)</span>
+が <span>\(\Omega_1=\bigcup_{F\in\mathcal{F}}F\)</span>
+を満たすならば，<span>
+\(i=1,2,\dots,6\)</span>
+について <span>\(\omega_i\in F_i\)</span>
+である <span>\(F_i\in\mathcal{F}\)</span>
+が存在します．よって，<span>
+\(\Omega_1=\bigcup_{i=1}^6F_i\)</span>
+と書けますので，この位相空間はコンパクト空間とわかります．</p><p>次に，<span>
+\(\Omega_{\infty}\)</span>
+は <span>\(\Omega_1\)</span>
+の無限個の直積なので，直積位相をいれた位相空間を考えることができます．この空間もまたコンパクト空間になることが知られています（Tychonoff の定理）．また，この位相空間の各開集合は，<span>
+\(\prod_{i=1}^{\infty}U_i\,(U_i\in2^{\Omega_1})\)</span>
+であって有限個を除いて <span>\(U_i=\Omega_1\)</span>
+であるような集合の（必ずしも有限個ではない）和集合となります <a href=#cite:1>[1]</a>．</p><p>いま，<span>
+\(X_n\in\mathfrak{F}_{\infty}^0\,(n=1,2,\dots)\)</span>
+が <span>\(X_n\supset X_{n+1}\)</span>
+かつ <span>\(\bigcap_{n=1}^{\infty}X_n=\emptyset\)</span>
+を満たすとします．</p><p>この <span>\(X_n\)</span>
+は，その直積位相においてすべて閉集合です．もし，どの有限個の <span>\(X_1,X_2,\dots,X_k\in\mathfrak{F}_{\infty}^0\)</span>
+をとっても <span>\(\bigcap_{i=1}^kX_i\neq\emptyset\)</span>
+（つまり，有限交叉性をもつ）ならば，<span>
+\(\bigcap_{n=1}^{\infty}F_n=\emptyset\)</span>
+となり矛盾します．<span>
+\(\bigcap_{i=1}^nX_i=X_n\)</span>
+であることに注意すると，背理法によって，ある <span>\(N\)</span>
+が存在し，<span>
+\(n\ge N\)</span>
+ならば <span>\(X_n=\emptyset\)</span>
+であることがわかります．</p><p>したがって，以下が成り立ちます．</p><blockquote class="book-hint info"><b>Lemma 3</b>.
+\(X_n\in\mathfrak{F}_{\infty}^0,(n=1,2,\dots)\) が \(X_n\supset X_{n+1}\) かつ \(\bigcap_{n=1}^{\infty}X_n=\emptyset\) を満たすとする．このとき，\(\lim_{n\to\infty}P_{\infty}^0(X_n)=0\) である．</blockquote><p>これは既に述べたことから，ある <span>\(N\)</span>
+が存在し，<span>
+\(n\ge N\)</span>
+ならば <span>\(X_n=\emptyset\)</span>
+なので，<span>
+\(n\ge N\)</span>
+ならば <span>\(P_{\infty}^0(X_n)=0\)</span>
+であることから従います．</p><p>この事実を使うと，以下が示せます．</p><blockquote class="book-hint info"><p><b>Lemma 4</b>.
+\((\Omega_{\infty},\mathfrak{F}_{\infty}^0,P_{\infty}^0)\) は以下を満たす．</p><ul><li>\(A_k\in\mathfrak{F}_{\infty}^0,(k=1,2,\dots)\) が互いに素ならば，\(P_{\infty}^0(\sum_{k=1}^{\infty}A_k)=\sum_{k=1}^{\infty}P_{\infty}^0(A_k)\) である．</li></ul></blockquote><p>これは，Lem. 3 と同値であることが知られています <a href=#cite:2>[2]</a>．</p><p>また，以下も満たします．</p><blockquote class="book-hint info"><p><b>Lemma 5</b>.
+\((\Omega_{\infty},\mathfrak{F}_{\infty}^0,P_{\infty}^0)\) は以下を満たす．</p><ul><li>\(\Omega=\bigcup_{k=1}^{\infty}A_k,A_k\in\mathfrak{F}_{\infty}^0,P_{\infty}^0(A_k)&lt;\infty\) を満たす \(A_k\ (k=1,2,\dots)\) が存在する．</li></ul></blockquote><p>たとえば，<span>
+\(A=F_{1,\{\omega_1\},(1)},B=F_{1,\Omega_1-\{\omega_1\},(1)}\)</span>
+とすれば，<span>
+\(P_{\infty}^0(A)=1/6&lt;\infty,P_{\infty}^0(B)=5/6&lt;\infty,A\cup B=\Omega_{\infty}\)</span>
+です．</p><p>Lem. 4, 5 より <strong><span>\(P_{\infty}^0\)</span>
+は <span>\(\mathfrak{F}_{\infty}^0\)</span>
+上で完全加法的かつ<span>
+\(\sigma\)</span>
+-有限であることがわかります <sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup><sup>, </sup><sup id=fnref:7><a href=#fn:7 class=footnote-ref role=doc-noteref>7</a></sup>．</strong></p><p>次に，<span>
+\(\mathfrak{F}_{\infty}\)</span>
+を以下のように定めます．</p><p><span>\(\mathfrak{F}_{\infty}^0\)</span>
+を含む完全加法族全体の集合を <span>\(\mathcal{B}\)</span>
+とします．<span>
+\(2^{\Omega_{\infty}}\in\mathcal{B}\)</span>
+であるため，<span>
+\(\mathcal{B}\neq\emptyset\)</span>
+であることに注意し，
+<span>\(\mathfrak{F}_{\infty}=\bigcap_{\mathfrak{B}\in\mathcal{B}}\mathfrak{B}\)</span>
+とします．このようにすると，<span>
+\(\mathfrak{F}_{\infty}\)</span>
+は <span>\(\mathfrak{F}_{\infty}^0\)</span>
+を含む最小の完全加法族であることが確認できます（例えば，<a href=#cite:2>[2]</a>）．</p><p>以上より，次の定理が成り立ちます．</p><blockquote class="book-hint info"><b>Theorem 6</b>.
+\((\Omega_{\infty},\mathfrak{F}_{\infty}^0)\) 上の有限加法的測度 \(P_{\infty}^0\) は，\((\Omega_{\infty},\mathfrak{F}_{\infty})\) 上の完全加法的測度 \(P_{\infty}\) に一意に拡張できる．</blockquote><p>これは，Lem. 4, 5 から，E. Hopf の拡張定理 （例えば，<a href=#cite:2>[2]</a>） が適用できるため，成り立ちます．</p><p>Thm. 6 によって，サイコロを無限回投げる場合を表す確率空間 <span>\((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\)</span>
+が具体的に構成できました．</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，サイコロを無限回投げる場合を表す確率空間を具体的に構成しました．有限回の場合は簡単に構成できますが，無限回の場合はそれほど明らかでないことがわかります．</p><p>なお，本ページでは，ひとつずつ確認しながら確率モデルを構成しましたが，一般にはコルモゴロフの拡張定理によって，無限回試行の確率モデルが構成できることが示せます．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>
+[1] 彌永 昌吉，小平 邦彦，現代数学概説I，岩波書店，東京，1961.<br><a id=cite:2></a>
+[2] 伊藤 清三，数学選書4 ルベーグ積分入門，裳華房，東京，1963.</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>一般に，集合 <span>\(A,B\)</span>
+について，<span>
+\(A^B\)</span>
+で <span>\(B\)</span>
+から <span>\(A\)</span>
+への写像全体を表します．&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p><span>\(\omega^i\)</span>
+は <span>\(\omega\)</span>
+の <span>\(i\)</span>
+乗ではありません．&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>集合 <span>\(X\)</span>
+の部分集合の族 <span>\(\mathfrak{F}\)</span>
+が，(1) <span>\(\emptyset\in\mathfrak{F}\)</span>
+, (2) <span>\(A\in\mathfrak{F}\)</span>
+ならば <span>\(A^c\in\mathfrak{F}\)</span>
+, (3) <span>\(A,B\in\mathfrak{F}\)</span>
+ならば <span>\(A\cup B\in\mathfrak{F}\)</span>
+, を満たすとき，<span>
+\(\mathfrak{F}\)</span>
+は有限加法族であるといいます．&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4><p><span>\(k=1\)</span>
+の場合で述べましたが，<span>
+\(k\)</span>
+のとり方によりません．任意の <span>\(k\)</span>
+について，<span>
+\(\emptyset\in2^{\Omega_1^k}\)</span>
+であるためです．&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:5><p>集合 <span>\(X\)</span>
+とその部分集合の有限加法族 <span>\(\mathfrak{F}\)</span>
+があって，<span>
+\(\mathfrak{F}\)</span>
+上の集合関数 <span>\(m\)</span>
+が，(1) すべての <span>\(A\in\mathfrak{F}\)</span>
+に対して <span>\(0\le m(A)\le\infty\)</span>
+，(2) <span>\(m(\emptyset)=0\)</span>
+, (3) <span>\(A_1,A_2,\dots,A_n\)</span>
+が互いに素なら <span>\(m(\sum_{i=1}^nA_i)=\sum_{i=1}^nm(A_i)\)</span>
+, を満たすとき，<span>
+\(m\)</span>
+を <span>\(\mathfrak{F}\)</span>
+上の有限加法的測度といいます．&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:6><p>有限加法族<span>
+\(\mathfrak{F}\)</span>
+上の有限加法的測度 <span>\(m\)</span>
+が，<span>
+\(A_1,A_2,\dots\in\mathfrak{F}\)</span>
+が互いに素で <span>\(\sum_{n=1}^{\infty}A_n\in\mathfrak{F}\)</span>
+ならば <span>\(m(\sum_{n=1}^{\infty}A_i)=\sum_{n=1}^{\infty}m(A_n)\)</span>
+であるとき，<span>
+\(m\)</span>
+は <span>\(\mathfrak{F}\)</span>
+の上で完全加法的な測度といいます．&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:7><p><span>\(\mathfrak{F}\)</span>
+上の有限加法的測度 <span>\(m\)</span>
+について，<span>
+\(m(X_k)&lt;\infty\)</span>
+なる <span>\(X_1,X_2,\dots\in\mathfrak{F}\)</span>
+が存在して <span>\(X=\bigcup_{k=1}^{\infty}X_k\)</span>
+と書けるとき，<span>
+\(m\)</span>
+は <span>\(\sigma\)</span>
+-有限であるといいます．&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/40602f6180229a9112c8204392f0dba7f24e9091 title='Last modified by htakeuchi0 | September 16, 2022' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
+<span>September 16, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#確率の定義>確率の定義</a></li><li><a href=#サイコロを無限回投げる場合を表す確率空間の具体的構成>サイコロを無限回投げる場合を表す確率空間の具体的構成</a><ul><li><a href=#omega_infty-の構成>\(\Omega_\infty\) の構成</a></li><li><a href=#mathfrakf_inftyp_infty-の構成>\(\mathfrak{F}_{\infty},P_{\infty}\) の構成</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>

@@ -119,4 +119,12 @@ hint ショートコードの使いかた # 公式の説明 [3] をもとに，m
 ヒント． 第1引数：info # markdown の記述例は以下のとおりです．
 {{&amp;lt; hint info &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．
 ヒント． 第1引数：warning # markdown の記述例は以下のとおりです．
-{{&amp;lt; hint warning &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．</description></item></channel></rss>
+{{&amp;lt; hint warning &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．</description></item><item><title>サイコロを無限回投げる場合の確率モデル</title><link>https://htakeuchi0.github.io/docs/math/stat/dice/dice_inf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/dice/dice_inf/</guid><description>サイコロを無限回投げる場合の確率モデル # 概要 # 前ページまでで，サイコロを繰り返し投げる試行の確率モデルを定義しました．しかし，投げる回数 \(N\) を固定した場合でしか説明していません．
+本ページでは，サイコロを無限回投げる場合の確率モデルについて説明します．有限の場合ほど明らかではないので，ひとつずつ確認しながら構成します．
+確率の定義 # 既に述べたとおり， \(\Omega\) を集合， \(\mathfrak{F}\) を \(\Omega\) の完全加法族としたとき，以下を満たす関数 \(P:\mathfrak{F}\to\mathbb{R}\) を確率と呼ぶのでした．
+\(A\in\mathfrak{F}\) ならば \(P(A)\ge0\), \(P(\Omega)=1\), \(A_1,A_2,\dots\in\mathfrak{F}\) が互いに素ならば，\(P(\sum_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}P(A_i)\). また， \((\Omega,\mathfrak{F},P)\) を確率空間と呼ぶのでした．
+サイコロを無限回投げる場合を表す確率空間の具体的構成 # 以降では，サイコロを無限回投げる場合を表す確率空間 \((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\) を具体的に構成します．
+\(\Omega_\infty\) の構成 # \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\) とし， \(\Omega_{\infty}\) を，
+\[\Omega_{\infty}=\{(\omega^i)_{i\in\mathbb{N}}\mid\forall i\in\mathbb{N}\,(\omega^i\in\Omega_1)\}\] つまり， \(\Omega_{\infty}=\Omega^{\mathbb{N}}\) とします1, 2．
+\(\mathfrak{F}_{\infty},P_{\infty}\) の構成 # \(\mathfrak{F}_{\infty},P_{\infty}\) を定めるには準備が必要です． まず， \(1\le k\in\mathbb{N}\) について， \[N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1&amp;lt;\dots&amp;lt;n_k\}\] とし， \(N^{(0)}=\{\emptyset\}\) とします．
+次に， \(1\le k\in\mathbb{N}\) に対し， \(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\) に対して， \[F_{k,\Omega,n}=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega\}\] とし， \(F_{0,\Omega,n}=\Omega_{\infty}\) とします．</description></item></channel></rss>
