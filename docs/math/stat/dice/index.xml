@@ -35,4 +35,4 @@ Definition 1.
 \(\Omega_\infty\) の構成 # \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\) とし， \(\Omega_{\infty}\) を，
 \[\Omega_{\infty}=\{(\omega^i)_{i\in\mathbb{N}}\mid\forall i\in\mathbb{N}\,(\omega^i\in\Omega_1)\}\] つまり， \(\Omega_{\infty}=\Omega^{\mathbb{N}}\) とします1, 2．
 \(\mathfrak{F}_{\infty},P_{\infty}\) の構成 # \(\mathfrak{F}_{\infty},P_{\infty}\) を定めるには準備が必要です． まず， \(1\le k\in\mathbb{N}\) について， \[N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1&amp;lt;\dots&amp;lt;n_k\}\] とし， \(N^{(0)}=\{\emptyset\}\) とします．
-次に， \(1\le k\in\mathbb{N}\) に対し， \(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\) に対して， \[F_{k,\Omega,n}=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega\}\] とし， \(F_{0,\Omega,n}=\Omega_{\infty}\) とします．</description></item></channel></rss>
+次に， \(1\le k\in\mathbb{N}\) に対し， \(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\) に対して， \[F_{k,\Omega,n}=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega\}\] とし， \(F_{0,\{\emptyset\},n}=\Omega_{\infty},F_{0,\emptyset,n}=\emptyset\) とします．</description></item></channel></rss>
