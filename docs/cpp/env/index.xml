@@ -2,9 +2,10 @@
 cpp_env_sample ディレクトリ以下にソースコードなどを配置することとします．
 Github リポジトリ # 本ページで説明するディレクトリ構成のプロジェクトは，以下の Github リポジトリ [1] として公開しています．
 https://github.com/htakeuchi0/cpp_env_sample
+本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
 動作環境 # 本ページで説明するものは，以下の環境で動作するものです．
 OS: Linux (Ubuntu 18.04.5 LTS)
 コンパイラ: g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0 OS: Linux (Ubuntu 20.04.1 LTS)
 コンパイラ: g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 単体試験，カバレッジ計測，ドキュメント生成に，それぞれ以下を利用するものとします．
 Google Test [2] LCOV [3] Doxygen [4] ディレクトリ構成 # ディレクトリ構成の例は以下の通りです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - 本ファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.</description></item></channel></rss>
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.</description></item></channel></rss>
