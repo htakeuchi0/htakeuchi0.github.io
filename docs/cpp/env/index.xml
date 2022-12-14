@@ -8,4 +8,7 @@ OS: Linux (Ubuntu 18.04.5 LTS)
 コンパイラ: g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0 OS: Linux (Ubuntu 20.04.1 LTS)
 コンパイラ: g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 単体試験，カバレッジ計測，ドキュメント生成に，それぞれ以下を利用するものとします．
 Google Test [2] LCOV [3] Doxygen [4] ディレクトリ構成 # ディレクトリ構成の例は以下の通りです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.</description></item></channel></rss>
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.</description></item><item><title>autoconf プロジェクト (1)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</guid><description>autoconf プロジェクト (1) # 概要 # 前ページでは，Makefile プロジェクトの例について説明しました． 本ページでは，autoconf を使った Makefile の自動生成について説明します．
+本ページでは，やや不自然な箇所がありますが，できるだけ最小構成で autoconf による Makefile 生成と，make の実行を試みます．
+準備 # Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.cc | |- scripts/ - 環境構築用スクリプト | |- install_doxygen.sh | |- install_gtest.</description></item></channel></rss>
