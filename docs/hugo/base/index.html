@@ -1,70 +1,335 @@
-<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="空のサイトの生成 # 概要 # 本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． 具体的には，ローカルに空のサイトが生成できるところまで説明します．
-インストール # Hugo の Quick Start に従い，Hugo をインストールします．
+<!doctype html><html lang=ja-jp dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="空のサイトの生成 #  概要 #  本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． 具体的には，ローカルに空のサイトが生成できるところまで説明します．
+インストール #  Hugo の Quick Start に従い，Hugo をインストールします．
 作者の作成環境は Linux OS 64bit (Ubuntu 18.04.6 LTS) なので，Hugo のインストールページ を参考に，以下のコマンドを実行します．
 $ snap install hugo --channel=extended デスクトップ環境なので，認証のためのダイアログが表示され，パスワードを入力して認証をクリックしました．
 以下のコマンドでインストールが成功したかを確認できます．
-$ hugo version hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate=2022-06-28T10:02:18Z VendorInfo=snap サイトの生成 # 以下のコマンドを実行します．
-$ hugo new site htakeuchi0-notebook テーマの追加 # 本サイトでは，Book テーマを利用しています． 当該テーマの README にしたがって，以下のコマンドを実行します．
-$ cd htakeuchi0-notebook $ git init $ git branch -M main $ git submodule add https://github."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="空のサイトの生成"><meta property="og:description" content="空のサイトの生成 # 概要 # 本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． 具体的には，ローカルに空のサイトが生成できるところまで説明します．
-インストール # Hugo の Quick Start に従い，Hugo をインストールします．
+$ hugo version hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate=2022-06-28T10:02:18Z VendorInfo=snap サイトの生成 #  以下のコマンドを実行します．
+$ hugo new site htakeuchi0-notebook テーマの追加 #  本サイトでは，Book テーマを利用しています． 当該テーマの README にしたがって，以下のコマンドを実行します．
+$ cd htakeuchi0-notebook $ git init $ git branch -M main $ git submodule add https://github.">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="空のサイトの生成">
+<meta property="og:description" content="空のサイトの生成 #  概要 #  本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． 具体的には，ローカルに空のサイトが生成できるところまで説明します．
+インストール #  Hugo の Quick Start に従い，Hugo をインストールします．
 作者の作成環境は Linux OS 64bit (Ubuntu 18.04.6 LTS) なので，Hugo のインストールページ を参考に，以下のコマンドを実行します．
 $ snap install hugo --channel=extended デスクトップ環境なので，認証のためのダイアログが表示され，パスワードを入力して認証をクリックしました．
 以下のコマンドでインストールが成功したかを確認できます．
-$ hugo version hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate=2022-06-28T10:02:18Z VendorInfo=snap サイトの生成 # 以下のコマンドを実行します．
-$ hugo new site htakeuchi0-notebook テーマの追加 # 本サイトでは，Book テーマを利用しています． 当該テーマの README にしたがって，以下のコマンドを実行します．
-$ cd htakeuchi0-notebook $ git init $ git branch -M main $ git submodule add https://github."><meta property="og:type" content="article"><meta property="og:url" content="https://htakeuchi0.github.io/docs/hugo/base/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-08-12T15:53:25+09:00"><title>空のサイトの生成 | htakeuchi0 のノート</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX",{anonymize_ip:!1})}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/ class=active>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+$ hugo version hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate=2022-06-28T10:02:18Z VendorInfo=snap サイトの生成 #  以下のコマンドを実行します．
+$ hugo new site htakeuchi0-notebook テーマの追加 #  本サイトでは，Book テーマを利用しています． 当該テーマの README にしたがって，以下のコマンドを実行します．
+$ cd htakeuchi0-notebook $ git init $ git branch -M main $ git submodule add https://github.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://htakeuchi0.github.io/docs/hugo/base/"><meta property="article:section" content="docs">
+<meta property="article:modified_time" content="2022-08-12T15:53:25+09:00">
+<title>空のサイトの生成 | htakeuchi0 のノート</title>
+<link rel=manifest href=/manifest.json>
+<link rel=icon href=/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-RXNBZFC7LX',{anonymize_ip:!1})}</script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a class="flex align-center" href=/><span>htakeuchi0 のノート</span>
+</a>
+</h2>
+<ul>
+<li>
+<a href=/docs/cpp/>C++</a>
+<ul>
+<li>
+<a href=/docs/cpp/env/>開発環境</a>
+<ul>
+<li>
+<a href=/docs/cpp/env/make/>Makefile プロジェクト</a>
+</li>
+<li>
+<a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a>
+</li>
+<li>
+<a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a>
+</li>
+<li>
+<a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a>
+</li>
+<li>
+<a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=/docs/cpp/fp/>関数ポインタ</a>
+<ul>
+<li>
+<a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a>
+</li>
+<li>
+<a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a>
+</li>
+<li>
+<a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a>
+</li>
+<li>
+<a href=/docs/cpp/fp/fref/>関数への参照</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=/docs/cpp/arrp/>配列へのポインタ</a>
+<ul>
+<li>
+<a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a>
+</li>
+<li>
+<a href=/docs/cpp/arrp/arr_ref/>配列への参照</a>
+</li>
+<li>
+<a href=/docs/cpp/arrp/stdarray/>std::array について</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href=/docs/math/>数学一般</a>
+<ul>
+<li>
+<a href=/docs/math/exp/>指数関数の定積分</a>
+</li>
+<li>
+<a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a>
+</li>
+<li>
+<a href=/docs/math/stat/>数理統計</a>
+<ul>
+<li>
+<a href=/docs/math/stat/dice/>サイコロの出目の確率</a>
+<ul>
+<li>
+<a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a>
+</li>
+<li>
+<a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a>
+</li>
+<li>
+<a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a>
+</li>
+<li>
+<a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a>
+</li>
+<li>
+<a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href=/docs/hugo/>Hugo</a>
+<ul>
+<li>
+<a href=/docs/hugo/base/ class=active>空のサイトの生成</a>
+</li>
+<li>
+<a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a>
+</li>
+<li>
+<a href=/docs/hugo/genpages/>公開用ファイルの生成</a>
+</li>
+<li>
+<a href=/docs/hugo/shortcode/>独自ショートコードの定義</a>
+</li>
+<li>
+<a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=/docs/others/>その他</a>
+<ul>
+<li>
+<a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<a href=/#disclaimer target=_blank rel=noopener>
+免責事項
+</a>
+</li>
+<li>
+<a href=/#privacy_policy target=_blank rel=noopener>
+プライバシーポリシー
+</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/svg/menu.svg class=book-icon alt=Menu>
+</label>
 <strong>空のサイトの生成</strong>
-<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#インストール>インストール</a></li><li><a href=#サイトの生成>サイトの生成</a></li><li><a href=#テーマの追加>テーマの追加</a></li><li><a href=#ソース管理用-github-リポジトリへ追加>ソース管理用 Github リポジトリへ追加</a></li><li><a href=#動作確認>動作確認</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside></header><article class=markdown><h1 id=空のサイトの生成>空のサイトの生成
-<a class=anchor href=#%e7%a9%ba%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e7%94%9f%e6%88%90>#</a></h1><h2 id=概要>概要
-<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>本ページでは，Hugo による Web サイト作成の最初のステップについて説明します．<br>具体的には，ローカルに空のサイトが生成できるところまで説明します．</p><h2 id=インストール>インストール
-<a class=anchor href=#%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab>#</a></h2><p><a href=https://gohugo.io/getting-started/quick-start/>Hugo の Quick Start</a> に従い，Hugo をインストールします．</p><p>作者の作成環境は Linux OS 64bit (Ubuntu 18.04.6 LTS) なので，<a href=https://gohugo.io/getting-started/installing>Hugo のインストールページ</a> を参考に，以下のコマンドを実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ snap install hugo --channel<span style=color:#f92672>=</span>extended
-</span></span></code></pre></div><p>デスクトップ環境なので，認証のためのダイアログが表示され，パスワードを入力して認証をクリックしました．</p><p>以下のコマンドでインストールが成功したかを確認できます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ hugo version
-</span></span><span style=display:flex><span>hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate<span style=color:#f92672>=</span>2022-06-28T10:02:18Z VendorInfo<span style=color:#f92672>=</span>snap
-</span></span></code></pre></div><h2 id=サイトの生成>サイトの生成
-<a class=anchor href=#%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e7%94%9f%e6%88%90>#</a></h2><p>以下のコマンドを実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ hugo new site htakeuchi0-notebook
-</span></span></code></pre></div><h2 id=テーマの追加>テーマの追加
-<a class=anchor href=#%e3%83%86%e3%83%bc%e3%83%9e%e3%81%ae%e8%bf%bd%e5%8a%a0>#</a></h2><p>本サイトでは，<a href=https://themes.gohugo.io/themes/hugo-book/>Book</a> テーマを利用しています．
-当該テーマの README にしたがって，以下のコマンドを実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ cd htakeuchi0-notebook
-</span></span><span style=display:flex><span>$ git init
-</span></span><span style=display:flex><span>$ git branch -M main
-</span></span><span style=display:flex><span>$ git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book
-</span></span></code></pre></div><p>つまり，テーマはサブモジュールとして取り込むこととして，ついでにブランチ名を <code>main</code> に変更しておきます．</p><p>次に，設定ファイル (<code>config.toml</code>) にテーマ設定を追加します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ echo theme <span style=color:#f92672>=</span> <span style=color:#ae81ff>\&#34;</span>hugo-book<span style=color:#ae81ff>\&#34;</span> &gt;&gt; config.toml
-</span></span></code></pre></div><h2 id=ソース管理用-github-リポジトリへ追加>ソース管理用 Github リポジトリへ追加
-<a class=anchor href=#%e3%82%bd%e3%83%bc%e3%82%b9%e7%ae%a1%e7%90%86%e7%94%a8-github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa%e3%81%b8%e8%bf%bd%e5%8a%a0>#</a></h2><p>本サイトでは，コンテンツファイルを <code>htakeuchi0.github.io-sources</code> リポジトリで管理します．
-空の当該リポジトリを作成しておき，以下のコマンドを実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ mv ../README.md .
-</span></span><span style=display:flex><span>$ git add README.md
-</span></span><span style=display:flex><span>$ touch content/.gitkeep data/.gitkeep layouts/.gitkeep public/.gitkeep static/.gitkeep
-</span></span><span style=display:flex><span>$ git add *
-</span></span><span style=display:flex><span>$ git commit -a -m <span style=color:#e6db74>&#34;first commit&#34;</span>
-</span></span><span style=display:flex><span>$ git remote add origin git@github.com:htakeuchi0/htakeuchi0.github.io-sources.git
-</span></span><span style=display:flex><span>$ git push -u origin main
-</span></span></code></pre></div><h2 id=動作確認>動作確認
-<a class=anchor href=#%e5%8b%95%e4%bd%9c%e7%a2%ba%e8%aa%8d>#</a></h2><p>Webサーバモードで <code>hugo</code> コマンドを実行し，空のサイトが生成できることを確認します．
-今回の場合は，表示されているとおり <code>http://localhost:1313/</code> にアクセスすれば確認できます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ hugo server --minify -D
-</span></span><span style=display:flex><span>Start building sites … 
-</span></span><span style=display:flex><span>hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate<span style=color:#f92672>=</span>2022-06-28T10:02:18Z VendorInfo<span style=color:#f92672>=</span>snap
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                   | EN  
-</span></span><span style=display:flex><span>-------------------+-----
-</span></span><span style=display:flex><span>  Pages            |  <span style=color:#ae81ff>7</span>  
-</span></span><span style=display:flex><span>  Paginator pages  |  <span style=color:#ae81ff>0</span>  
-</span></span><span style=display:flex><span>  Non-page files   |  <span style=color:#ae81ff>0</span>  
-</span></span><span style=display:flex><span>  Static files     | <span style=color:#ae81ff>79</span>  
-</span></span><span style=display:flex><span>  Processed images |  <span style=color:#ae81ff>0</span>  
-</span></span><span style=display:flex><span>  Aliases          |  <span style=color:#ae81ff>2</span>  
-</span></span><span style=display:flex><span>  Sitemaps         |  <span style=color:#ae81ff>1</span>  
-</span></span><span style=display:flex><span>  Cleaned          |  <span style=color:#ae81ff>0</span>  
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>Built in <span style=color:#ae81ff>138</span> ms
-</span></span><span style=display:flex><span>Watching <span style=color:#66d9ef>for</span> changes in /home/hiroshi/Documents/hugo/htakeuchi0-notebook/<span style=color:#f92672>{</span>archetypes,content,data,layouts,static,themes<span style=color:#f92672>}</span>
-</span></span><span style=display:flex><span>Watching <span style=color:#66d9ef>for</span> config changes in /home/hiroshi/Documents/hugo/htakeuchi0-notebook/config.toml
-</span></span><span style=display:flex><span>Environment: <span style=color:#e6db74>&#34;development&#34;</span>
-</span></span><span style=display:flex><span>Serving pages from memory
-</span></span><span style=display:flex><span>Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
-</span></span><span style=display:flex><span>Web Server is available at http://localhost:1313/ <span style=color:#f92672>(</span>bind address 127.0.0.1<span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>Press Ctrl+C to stop
-</span></span></code></pre></div><p>別端末からも確認できるようにするには，<code>--bind xxx.yyy.zzz.www</code> オプションをつける必要があります．</p><p>これで空のサイトが生成できることが確認できました．<br>実際にページを公開する場合は，後述するように，html ファイルにビルドする必要があります．</p><h2 id=まとめ>まとめ
-<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，Hugo を用いて，ローカルに空のサイトが生成できるところまで説明しました．</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/5c40ab1a631c2ae4bc4e36747e78891bad514bae title='Last modified by htakeuchi0 | August 12, 2022' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
-<span>August 12, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#インストール>インストール</a></li><li><a href=#サイトの生成>サイトの生成</a></li><li><a href=#テーマの追加>テーマの追加</a></li><li><a href=#ソース管理用-github-リポジトリへ追加>ソース管理用 Github リポジトリへ追加</a></li><li><a href=#動作確認>動作確認</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></div></aside></main></body></html>
+<label for=toc-control>
+<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#概要>概要</a></li>
+<li><a href=#インストール>インストール</a></li>
+<li><a href=#サイトの生成>サイトの生成</a></li>
+<li><a href=#テーマの追加>テーマの追加</a></li>
+<li><a href=#ソース管理用-github-リポジトリへ追加>ソース管理用 Github リポジトリへ追加</a></li>
+<li><a href=#動作確認>動作確認</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=空のサイトの生成>
+空のサイトの生成
+<a class=anchor href=#%e7%a9%ba%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e7%94%9f%e6%88%90>#</a>
+</h1>
+<h2 id=概要>
+概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
+</h2>
+<p>本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． <br>
+具体的には，ローカルに空のサイトが生成できるところまで説明します．</p>
+<h2 id=インストール>
+インストール
+<a class=anchor href=#%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab>#</a>
+</h2>
+<p><a href=https://gohugo.io/getting-started/quick-start/>Hugo の Quick Start</a> に従い，Hugo をインストールします．</p>
+<p>作者の作成環境は Linux OS 64bit (Ubuntu 18.04.6 LTS) なので，<a href=https://gohugo.io/getting-started/installing>Hugo のインストールページ</a> を参考に，以下のコマンドを実行します．</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ snap install hugo --channel<span style=color:#f92672>=</span>extended
+</code></pre></div><p>デスクトップ環境なので，認証のためのダイアログが表示され，パスワードを入力して認証をクリックしました．</p>
+<p>以下のコマンドでインストールが成功したかを確認できます．</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ hugo version
+hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate<span style=color:#f92672>=</span>2022-06-28T10:02:18Z VendorInfo<span style=color:#f92672>=</span>snap
+</code></pre></div><h2 id=サイトの生成>
+サイトの生成
+<a class=anchor href=#%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e7%94%9f%e6%88%90>#</a>
+</h2>
+<p>以下のコマンドを実行します．</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ hugo new site htakeuchi0-notebook
+</code></pre></div><h2 id=テーマの追加>
+テーマの追加
+<a class=anchor href=#%e3%83%86%e3%83%bc%e3%83%9e%e3%81%ae%e8%bf%bd%e5%8a%a0>#</a>
+</h2>
+<p>本サイトでは，<a href=https://themes.gohugo.io/themes/hugo-book/>Book</a> テーマを利用しています．
+当該テーマの README にしたがって，以下のコマンドを実行します．</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ cd htakeuchi0-notebook
+$ git init
+$ git branch -M main
+$ git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book
+</code></pre></div><p>つまり，テーマはサブモジュールとして取り込むこととして，ついでにブランチ名を <code>main</code> に変更しておきます．</p>
+<p>次に，設定ファイル (<code>config.toml</code>) にテーマ設定を追加します．</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ echo theme <span style=color:#f92672>=</span> <span style=color:#ae81ff>\&#34;</span>hugo-book<span style=color:#ae81ff>\&#34;</span> &gt;&gt; config.toml
+</code></pre></div><h2 id=ソース管理用-github-リポジトリへ追加>
+ソース管理用 Github リポジトリへ追加
+<a class=anchor href=#%e3%82%bd%e3%83%bc%e3%82%b9%e7%ae%a1%e7%90%86%e7%94%a8-github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa%e3%81%b8%e8%bf%bd%e5%8a%a0>#</a>
+</h2>
+<p>本サイトでは，コンテンツファイルを <code>htakeuchi0.github.io-sources</code> リポジトリで管理します．
+空の当該リポジトリを作成しておき，以下のコマンドを実行します．</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ mv ../README.md .
+$ git add README.md
+$ touch content/.gitkeep data/.gitkeep layouts/.gitkeep public/.gitkeep static/.gitkeep
+$ git add *
+$ git commit -a -m <span style=color:#e6db74>&#34;first commit&#34;</span>
+$ git remote add origin git@github.com:htakeuchi0/htakeuchi0.github.io-sources.git
+$ git push -u origin main
+</code></pre></div><h2 id=動作確認>
+動作確認
+<a class=anchor href=#%e5%8b%95%e4%bd%9c%e7%a2%ba%e8%aa%8d>#</a>
+</h2>
+<p>Webサーバモードで <code>hugo</code> コマンドを実行し，空のサイトが生成できることを確認します．
+今回の場合は，表示されているとおり <code>http://localhost:1313/</code> にアクセスすれば確認できます．</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ hugo server --minify -D
+Start building sites … 
+hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate<span style=color:#f92672>=</span>2022-06-28T10:02:18Z VendorInfo<span style=color:#f92672>=</span>snap
+
+                   | EN  
+-------------------+-----
+  Pages            |  <span style=color:#ae81ff>7</span>  
+  Paginator pages  |  <span style=color:#ae81ff>0</span>  
+  Non-page files   |  <span style=color:#ae81ff>0</span>  
+  Static files     | <span style=color:#ae81ff>79</span>  
+  Processed images |  <span style=color:#ae81ff>0</span>  
+  Aliases          |  <span style=color:#ae81ff>2</span>  
+  Sitemaps         |  <span style=color:#ae81ff>1</span>  
+  Cleaned          |  <span style=color:#ae81ff>0</span>  
+
+Built in <span style=color:#ae81ff>138</span> ms
+Watching <span style=color:#66d9ef>for</span> changes in /home/hiroshi/Documents/hugo/htakeuchi0-notebook/<span style=color:#f92672>{</span>archetypes,content,data,layouts,static,themes<span style=color:#f92672>}</span>
+Watching <span style=color:#66d9ef>for</span> config changes in /home/hiroshi/Documents/hugo/htakeuchi0-notebook/config.toml
+Environment: <span style=color:#e6db74>&#34;development&#34;</span>
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ <span style=color:#f92672>(</span>bind address 127.0.0.1<span style=color:#f92672>)</span>
+Press Ctrl+C to stop
+</code></pre></div><p>別端末からも確認できるようにするには，<code>--bind xxx.yyy.zzz.www</code> オプションをつける必要があります．</p>
+<p>これで空のサイトが生成できることが確認できました． <br>
+実際にページを公開する場合は，後述するように，html ファイルにビルドする必要があります．</p>
+<h2 id=まとめ>
+まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a>
+</h2>
+<p>本ページでは，Hugo を用いて，ローカルに空のサイトが生成できるところまで説明しました．</p>
+</article>
+<hr>
+<p>
+<small>
+<a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。
+</small>
+</p>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/5c40ab1a631c2ae4bc4e36747e78891bad514bae title="Last modified by htakeuchi0 | August 12, 2022" target=_blank rel=noopener>
+<img src=/svg/calendar.svg class=book-icon alt=Calendar>
+<span>August 12, 2022</span>
+</a>
+</div>
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){if(window.getSelection().toString())return;a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#概要>概要</a></li>
+<li><a href=#インストール>インストール</a></li>
+<li><a href=#サイトの生成>サイトの生成</a></li>
+<li><a href=#テーマの追加>テーマの追加</a></li>
+<li><a href=#ソース管理用-github-リポジトリへ追加>ソース管理用 Github リポジトリへ追加</a></li>
+<li><a href=#動作確認>動作確認</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

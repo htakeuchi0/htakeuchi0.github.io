@@ -2,26 +2,26 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="autoconf プロジェクト (2) #  概要 #  前ページでは，autoconf を使った Makefile の自動生成について説明しましたが，Makefile.am は main と test ディレクトリだけに配置し，subdir-objects オプションを使いました．
-autoconf では，各ディレクトリに Makefile.am を配置するのが通常と思いますので，その方針で設定をし直します．
-ただし，ディレクトリをまたいだソースコードをまとめてビルドできないので， srcディレクトリ以下はライブラリとしてビルドし，main, test ではそのライブラリをリンクしてビルドします．
-その場合は，Libtool を利用したライブラリ生成が必要になるので，順を追って説明するために，前ページではそのようにしませんでした．
-本ページでは，Libtool を利用して，各ディレクトリに Makefile.am を配置して Makefile を生成する方法を説明します．
-準備 #  今回も Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.">
+<meta name=description content="autoconf プロジェクト (4) #  概要 #  前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
+本ページでは，これまでの説明の総括として，autoconf プロジェクト(1) や autoconf プロジェクト (2) と同じ節構成で，Makefile プロジェクト をもとにした autoconf プロジェクトの作成手順を説明します．
+Github リポジトリ #  本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ [1] として公開しています．
+https://github.com/htakeuchi0/autoconf_sample
+本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
+準備 #  Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.">
 <meta name=theme-color content="#FFFFFF">
-<meta name=color-scheme content="light dark"><meta property="og:title" content="autoconf プロジェクト (2)">
-<meta property="og:description" content="autoconf プロジェクト (2) #  概要 #  前ページでは，autoconf を使った Makefile の自動生成について説明しましたが，Makefile.am は main と test ディレクトリだけに配置し，subdir-objects オプションを使いました．
-autoconf では，各ディレクトリに Makefile.am を配置するのが通常と思いますので，その方針で設定をし直します．
-ただし，ディレクトリをまたいだソースコードをまとめてビルドできないので， srcディレクトリ以下はライブラリとしてビルドし，main, test ではそのライブラリをリンクしてビルドします．
-その場合は，Libtool を利用したライブラリ生成が必要になるので，順を追って説明するために，前ページではそのようにしませんでした．
-本ページでは，Libtool を利用して，各ディレクトリに Makefile.am を配置して Makefile を生成する方法を説明します．
-準備 #  今回も Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="autoconf プロジェクト (4)">
+<meta property="og:description" content="autoconf プロジェクト (4) #  概要 #  前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
+本ページでは，これまでの説明の総括として，autoconf プロジェクト(1) や autoconf プロジェクト (2) と同じ節構成で，Makefile プロジェクト をもとにした autoconf プロジェクトの作成手順を説明します．
+Github リポジトリ #  本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ [1] として公開しています．
+https://github.com/htakeuchi0/autoconf_sample
+本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
+準備 #  Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://htakeuchi0.github.io/docs/cpp/env/autoconf2/"><meta property="article:section" content="docs">
+<meta property="og:url" content="https://htakeuchi0.github.io/docs/cpp/env/autoconf4/"><meta property="article:section" content="docs">
 <meta property="article:modified_time" content="2023-01-08T17:53:44+09:00">
-<title>autoconf プロジェクト (2) | htakeuchi0 のノート</title>
+<title>autoconf プロジェクト (4) | htakeuchi0 のノート</title>
 <link rel=manifest href=/manifest.json>
 <link rel=icon href=/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous>
@@ -53,13 +53,13 @@ autoconf では，各ディレクトリに Makefile.am を配置するのが通�
 <a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a>
 </li>
 <li>
-<a href=/docs/cpp/env/autoconf2/ class=active>autoconf プロジェクト (2)</a>
+<a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a>
 </li>
 <li>
 <a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a>
 </li>
 <li>
-<a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a>
+<a href=/docs/cpp/env/autoconf4/ class=active>autoconf プロジェクト (4)</a>
 </li>
 </ul>
 </li>
@@ -183,7 +183,7 @@ autoconf では，各ディレクトリに Makefile.am を配置するのが通�
 <label for=menu-control>
 <img src=/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>autoconf プロジェクト (2)</strong>
+<strong>autoconf プロジェクト (4)</strong>
 <label for=toc-control>
 <img src=/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
@@ -192,6 +192,7 @@ autoconf では，各ディレクトリに Makefile.am を配置するのが通�
 <nav id=TableOfContents>
 <ul>
 <li><a href=#概要>概要</a></li>
+<li><a href=#github-リポジトリ>Github リポジトリ</a></li>
 <li><a href=#準備>準備</a></li>
 <li><a href=#autoconf-の実行と種々の設定>autoconf の実行と種々の設定</a>
 <ul>
@@ -209,28 +210,33 @@ autoconf では，各ディレクトリに Makefile.am を配置するのが通�
 </ul>
 </li>
 <li><a href=#まとめ>まとめ</a></li>
+<li><a href=#参考文献>参考文献</a></li>
 </ul>
 </nav>
 </aside>
 </header>
-<article class=markdown><h1 id=autoconf-プロジェクト-2>
-autoconf プロジェクト (2)
-<a class=anchor href=#autoconf-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-2>#</a>
+<article class=markdown><h1 id=autoconf-プロジェクト-4>
+autoconf プロジェクト (4)
+<a class=anchor href=#autoconf-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-4>#</a>
 </h1>
 <h2 id=概要>
 概要
 <a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
 </h2>
-<p>前ページでは，autoconf を使った Makefile の自動生成について説明しましたが，Makefile.am は main と test ディレクトリだけに配置し，subdir-objects オプションを使いました．</p>
-<p>autoconf では，各ディレクトリに Makefile.am を配置するのが通常と思いますので，その方針で設定をし直します．</p>
-<p>ただし，ディレクトリをまたいだソースコードをまとめてビルドできないので， <strong>srcディレクトリ以下はライブラリとしてビルドし，main, test ではそのライブラリをリンクしてビルドします．</strong></p>
-<p>その場合は，Libtool を利用したライブラリ生成が必要になるので，順を追って説明するために，前ページではそのようにしませんでした．</p>
-<p>本ページでは，Libtool を利用して，各ディレクトリに Makefile.am を配置して Makefile を生成する方法を説明します．</p>
+<p><a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf3/>前ページ</a>までで，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．</p>
+<p>本ページでは，これまでの説明の総括として，<a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf/>autoconf プロジェクト(1)</a> や <a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a> と同じ節構成で，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> をもとにした autoconf プロジェクトの作成手順を説明します．</p>
+<h2 id=github-リポジトリ>
+Github リポジトリ
+<a class=anchor href=#github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa>#</a>
+</h2>
+<p>本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ <a href=#cite:1>[1]</a> として公開しています．</p>
+<p><a href=https://github.com/htakeuchi0/autoconf_sample>https://github.com/htakeuchi0/autoconf_sample</a></p>
+<p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．</p>
 <h2 id=準備>
 準備
 <a class=anchor href=#%e6%ba%96%e5%82%99>#</a>
 </h2>
-<p>今回も <a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> のリポジトリからスタートします． <br>
+<p><a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> のリポジトリからスタートします． <br>
 初期状態のディレクトリ構成は以下のとおりです．</p>
 <pre tabindex=0><code>|- cpp_env_sample/
    |- Doxyfile               - doxygen設定ファイル
@@ -287,8 +293,7 @@ autoconf の実行と種々の設定
 configure.ac の作成
 <a class=anchor href=#configureac-%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
 </h3>
-<p>まず，準備として，Makefileの雛形の雛形に相当する <code>Makefile.am</code> の空ファイルを配置しておきます． <br>
-<strong>前ページの設定に対して，<code>include/Makefile.am</code>, <code>src/Makefile.am</code> を追加しました．</strong></p>
+<p>まず，準備として，Makefileの雛形の雛形に相当する <code>Makefile.am</code> の空ファイルを配置しておきます．</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ touch Makefile.am include/Makefile.am main/Makefile.am src/Makefile.am test/Makefile.am
 </code></pre></div><p><code>autoscan</code> コマンドでファイルの雛形を生成します．</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ autoscan
@@ -323,7 +328,6 @@ AC_CONFIG_FILES<span style=color:#f92672>([</span>Makefile
                  test/Makefile<span style=color:#f92672>])</span>
 
 AC_OUTPUT
-
 </code></pre></div><p><code>configure.scan</code> を <code>configure.ac</code> に変更します．</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ mv configure.scan configure.ac
 </code></pre></div><p><code>configure.ac</code> を以下のように変更します．</p>
@@ -331,7 +335,7 @@ AC_OUTPUT
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([autoconf_sample], [0.0.2], [htakeuchi0gh@gmail.com])
+AC_INIT([autoconf_sample], [0.0.3], [htakeuchi0gh@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])
@@ -358,9 +362,7 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  test/Makefile])
 AC_OUTPUT
-</code></pre><p><code>AM_INIT_AUTOMAKE([foreign])</code> は，GNU 準拠でないため (foreign) 設定しています．今回の構成では， <strong>subdir-objects は不要です．</strong></p>
-<p>ライブラリを生成するため，<code>AC_CONFIG_MACRO_DIRS([m4])</code>, <code>LT_INIT</code> を追加しています．</p>
-<p><code>AC_CONFIG_SRCDIR</code>, <code>AC_CONFIG_HEADERS</code> は前ページの通り，下記の通りである必要はないのですが，確実に存在するファイルとしてこれにしています．</p>
+</code></pre><p><code>AM_INIT_AUTOMAKE([foreign])</code> は，GNU 準拠でないため (foreign) 設定しています．また，ライブラリを生成するため，<code>AC_CONFIG_MACRO_DIRS([m4])</code>, <code>LT_INIT</code> を追加しています．</p>
 <h3 id=makefileam-の作成>
 Makefile.am の作成
 <a class=anchor href=#makefileam-%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
@@ -369,12 +371,47 @@ Makefile.am の作成
 <ul>
 <li><code>./Makefile.am</code>
 <ul>
-<li>サブディレクトリと，ライブラリの作成のためのフラグを指定します．</li>
+<li>サブディレクトリと，ライブラリの作成のためのフラグ，その他必要な定義を設定します．</li>
 </ul>
 </li>
 </ul>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>SUBDIRS <span style=color:#f92672>=</span> include src main test
 ACLOCAL_AMFLAGS <span style=color:#f92672>=</span> -I m4
+
+DOCDIR <span style=color:#f92672>=</span> doxygen
+LCOVDIR <span style=color:#f92672>=</span> lcov
+
+<span style=color:#a6e22e>clean-local</span><span style=color:#f92672>:</span>
+	@rm -f src/*.gcno
+	@rm -f test/*.gcno
+	@rm -f test/*.gcda
+	@rm -rf <span style=color:#66d9ef>$(</span>DOCDIR<span style=color:#66d9ef>)</span>
+	@rm -rf <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>
+
+<span style=color:#a6e22e>check-local</span><span style=color:#f92672>:</span>
+	test/test_acsample
+
+<span style=color:#a6e22e>.PHONY</span><span style=color:#f92672>:</span> docs lcov
+INDEXPATH <span style=color:#f92672>=</span> <span style=color:#66d9ef>$(</span>DOCDIR<span style=color:#66d9ef>)</span>/html/index.html
+<span style=color:#a6e22e>docs</span><span style=color:#f92672>:</span>
+	doxygen
+	@echo <span style=color:#66d9ef>$(</span>INDEXPATH<span style=color:#66d9ef>)</span>
+
+COVERAGE <span style=color:#f92672>=</span> coverage.info
+<span style=color:#a6e22e>lcov</span><span style=color:#f92672>:</span> check
+	lcov --capture --directory . --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **include/c++/** --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **bits** --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **gtest*.h --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **gtest*.cc --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+	genhtml <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> --output-directory <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>
+	@rm -f *.gcno
+	@rm -f *.gcda
+	@rm -f <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+	@echo -n -e <span style=color:#e6db74>&#34;&#34;</span>
+	@echo <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>/index.html
+
+EXTRA_DIST <span style=color:#f92672>=</span> Doxyfile LICENSE scripts/*
 </code></pre></div><ul>
 <li><code>include/Makefile.am</code>
 <ul>
@@ -382,7 +419,7 @@ ACLOCAL_AMFLAGS <span style=color:#f92672>=</span> -I m4
 </ul>
 </li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>noinst_HEADERS <span style=color:#f92672>=</span> cpp_env_sample/example.h
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>nobase_include_HEADERS <span style=color:#f92672>=</span> cpp_env_sample/example.h
 </code></pre></div><ul>
 <li><code>main/Makefile.am</code>
 <ul>
@@ -394,6 +431,7 @@ ACLOCAL_AMFLAGS <span style=color:#f92672>=</span> -I m4
 acsample_SOURCES <span style=color:#f92672>=</span> main.cc
 acsample_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
 acsample_LDADD <span style=color:#f92672>=</span> ../src/libacsample.la
+acsample_LDFLAGS <span style=color:#f92672>=</span> -Wl,-rpath<span style=color:#f92672>=</span>/usr/local/lib
 </code></pre></div><ul>
 <li><code>src/Makefile.am</code>
 <ul>
@@ -401,9 +439,11 @@ acsample_LDADD <span style=color:#f92672>=</span> ../src/libacsample.la
 </ul>
 </li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>noinst_LTLIBRARIES <span style=color:#f92672>=</span> libacsample.la libacsampled.la
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>lib_LTLIBRARIES <span style=color:#f92672>=</span> libacsample.la
+noinst_LTLIBRARIES <span style=color:#f92672>=</span> libacsampled.la
 libacsample_la_SOURCES <span style=color:#f92672>=</span> example.cc
 libacsample_la_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
+libacsample_la_LDFLAGS <span style=color:#f92672>=</span> -version-info 0:3:0
 libacsampled_la_SOURCES <span style=color:#f92672>=</span> example.cc
 libacsampled_la_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -fprofile-arcs -ftest-coverage -fno-inline -fno-inline-small-functions -fno-default-inline -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
 </code></pre></div><ul>
@@ -532,7 +572,7 @@ make の実行
    |- libacsampled_la-example.o
 </code></pre><p>生成されたバイナリファイルを実行します．</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ main/acsample
-Usage: main/acsample &lt;name&gt; &lt;value&gt; &lt;value2&gt;
+Usage: ... <span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span> ... /main/.libs/acsample &lt;name&gt; &lt;value&gt; &lt;value2&gt;
 $ main/acsample a <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span>
 name : a
 value: <span style=color:#ae81ff>3</span>
@@ -545,22 +585,30 @@ make check の実行
 make check では，test/Makefile.am に TESTS で指定した実行可能ファイルが実行されます． <br>
 さらに，Google Test によるテストコードもビルドするようにしています．</p>
 <p>そこで，make check でテストコードがビルドされ，実行できることを確認してみます．</p>
-<p>make check を実行します．</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ make check
-</code></pre></div><p>以下のファイルが生成されます．</p>
-<pre tabindex=0><code>|- src/
-|  |- libacsampled_la-example.gcno
-|
-|- test/
-   |- test-suite.log
-   |- test_acsample
-   |- test_acsample-gtest_example.gcda
-   |- test_acsample-gtest_example.gcno
-   |- test_acsample-gtest_example.o
-   |- test_acsample.log
-   |- test_acsample.trs
-</code></pre><p>生成されたバイナリファイルを実行します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ test/test_acsample
+
+...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
+
+PASS: test_acsample
+<span style=color:#f92672>============================================================================</span>
+Testsuite summary <span style=color:#66d9ef>for</span> autoconf_sample 0.0.2
+<span style=color:#f92672>============================================================================</span>
+<span style=color:#75715e># TOTAL: 1</span>
+<span style=color:#75715e># PASS:  1</span>
+<span style=color:#75715e># SKIP:  0</span>
+<span style=color:#75715e># XFAIL: 0</span>
+<span style=color:#75715e># FAIL:  0</span>
+<span style=color:#75715e># XPASS: 0</span>
+<span style=color:#75715e># ERROR: 0</span>
+<span style=color:#f92672>============================================================================</span>
+
+...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
+
+make  check-local
+
+...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
+
+test/test_acsample
 Running main<span style=color:#f92672>()</span> from /home/hiroshi/Documents/cpp/cppbf/googletest/googletest/src/gtest_main.cc
 <span style=color:#f92672>[==========]</span> Running <span style=color:#ae81ff>4</span> tests from <span style=color:#ae81ff>1</span> test suite.
 <span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> Global test environment set-up.
@@ -593,7 +641,13 @@ $ acsample a <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</spa
 name : a
 value: <span style=color:#ae81ff>3</span>
 </code></pre></div><p>実行できました．</p>
-<p>アンインストールしておきます．</p>
+<p>また，ライブラリやヘッダファイルがインストールされています．</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ ls /usr/local/include/cpp_env_sample
+example.h
+$ ls /usr/local/lib/libacsample*
+/usr/local/lib/libacsample.a   /usr/local/lib/libacsample.so    /usr/local/lib/libacsample.so.0.0.3
+/usr/local/lib/libacsample.la  /usr/local/lib/libacsample.so.0
+</code></pre></div><p>アンインストールしておきます．</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ sudo make uninstall
 </code></pre></div><h3 id=その他>
 その他
@@ -604,9 +658,13 @@ value: <span style=color:#ae81ff>3</span>
 まとめ
 <a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a>
 </h2>
-<p>本ページでは，Libtool を利用して，各ディレクトリに Makefile.am を配置して Makefile を生成する方法を説明しました．</p>
-<p>実行可能ファイルの生成という意味では問題ありませんが，いくつかの改善点があります．
-次ページで細かいところも調整し，よりよい autoconf プロジェクトにします．</p>
+<p>本ページでは，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．</p>
+<h2 id=参考文献>
+参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a>
+</h2>
+<p><a id=cite:1></a>
+[1] htakeuchi0, &ldquo;htakeuchi0/autoconf_sample: A C++ autoconf sample project&rdquo;, <a href=https://github.com/htakeuchi0/autoconf_sample>https://github.com/htakeuchi0/autoconf_sample</a>, 2023/1/8 最終アクセス．</p>
 </article>
 <hr>
 <p>
@@ -633,6 +691,7 @@ value: <span style=color:#ae81ff>3</span>
 <nav id=TableOfContents>
 <ul>
 <li><a href=#概要>概要</a></li>
+<li><a href=#github-リポジトリ>Github リポジトリ</a></li>
 <li><a href=#準備>準備</a></li>
 <li><a href=#autoconf-の実行と種々の設定>autoconf の実行と種々の設定</a>
 <ul>
@@ -650,6 +709,7 @@ value: <span style=color:#ae81ff>3</span>
 </ul>
 </li>
 <li><a href=#まとめ>まとめ</a></li>
+<li><a href=#参考文献>参考文献</a></li>
 </ul>
 </nav>
 </div>
