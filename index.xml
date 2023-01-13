@@ -98,7 +98,12 @@ htakeuchi0.github.io リポジトリ：公開用 htakeuchi0.github.io-sources �
 本サイトの管理方法の場合，htakeuchi0.github.io-sources リポジトリ側で public 以下に生成されたファイルすべてを，htakeuchi0.github.io リポジトリに配置します．
 あとは，[1] のとおりに設定すれば，数分でブラウザからアクセスできるようになります．
 Google Search Console の設定 # Hugo では（少なくとも Book テーマでは），サイトマップ用の sitemap.xml とRSS用の index.xml が生成されているので，それぞれを Google Search Console [3] に登録するだけです．
-まとめ # 本ページでは，公開ファイルを生成して，公開する方法について説明しました．</description></item><item><title>autoconf プロジェクト (3)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf3/</guid><description>autoconf プロジェクト (3) # 概要 # 前ページでは，Libtool を利用して，より自然な autoconf を使った Makefile の自動生成について説明しました．
+まとめ # 本ページでは，公開ファイルを生成して，公開する方法について説明しました．</description></item><item><title>2023</title><link>https://htakeuchi0.github.io/docs/math/year2023/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/</guid><description>2023 # 概要 # 今年は西暦2023年です．Twitter で知ったのですが1，2023という数について，以下の式が成り立つのだそうです．
+\[2023=(2&amp;#43;0&amp;#43;2&amp;#43;3)(2^2&amp;#43;0^2&amp;#43;2^2&amp;#43;3^2)^2.\] 指数まで対応しておりとてもきれいですね．
+このような整数はレアケースすぎるので，少しだけ一般化した以下の問題を考えます．
+Problem 1. 整数 \(x=\sum_{j=0}^{n-1}a_j10^j\) \((0\le a_j\le 9,j=0,1,\dots,n-1)\) に対して， \[ \prod_{k=1}^K\sum_{j=0}^{n-1}a_j^{i_k}=x \] を満たす整数 \(K\ge1\), \(1\le i_1\le\cdots\le i_K\) が存在するかを判定せよ．存在する場合はこの方程式を満たす \((i_1,i_2,\dots,i_K)\) をひとつ求めよ． たとえば， \(x=2023\) の場合， \((a_0,a_1,a_2,a_3)=(3,2,0,2)\) であり， \((i_1,i_2,i_3)=(1,2,2)\) です．
+本ページでは，この問題を解く方法を考え，具体的に解を求めてみます．
+解法 # 解がある場合は， \(i\ge1\) について \(\sum_{j=0}^{n-1}a_j^i\mid x\) となる最小の \(i\) を求めて， \(x&amp;#39;=x/\sum_{j=0}^{n-1}a_j^i\) に対して \(\sum_{j=0}^{n-1}a_j^{i&amp;#39;}\mid x&amp;#39;\) を満たす \(i&amp;#39;\ge i\) を求めることを再帰的に行えば求まります．</description></item><item><title>autoconf プロジェクト (3)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf3/</guid><description>autoconf プロジェクト (3) # 概要 # 前ページでは，Libtool を利用して，より自然な autoconf を使った Makefile の自動生成について説明しました．
 しかし，Makefile プロジェクト と比べると以下の点が不十分です．
 make clean をしても *.gcno, *.gcda のファイルが残る make check で Google Test の結果が表示されない make docs, make lcov が実行できない make lib で共有ライブラリのビルドができない 本ページでは，これらを組み込む方法を説明します．その後，&amp;ldquo;その他&amp;rdquo; として，さらに不足している設定も説明します．
 make clean をしたとき *.gcno, *.gcda のファイルを消すようにする # 本節では，make clean をしたときに削除されないファイルがあることへの対処法を説明します．
