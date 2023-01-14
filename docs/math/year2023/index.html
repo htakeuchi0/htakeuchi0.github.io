@@ -18,7 +18,7 @@ Problem 1. 整数 \(x=\sum_{j=0}^{n-1}a_j10^j\) \((0\le a_j\le 9,j=0,1,\dots,n-1
 解法 #  解がある場合は， \(i\ge1\)  について  \(\sum_{j=0}^{n-1}a_j^i\mid x\)  となる最小の  \(i\)  を求めて， \(x'=x/\sum_{j=0}^{n-1}a_j^i\)  に対して  \(\sum_{j=0}^{n-1}a_j^{i'}\mid x'\)  を満たす  \(i'\ge i\)  を求めることを再帰的に行えば求まります．">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://htakeuchi0.github.io/docs/math/year2023/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2023-01-14T08:20:19+09:00">
+<meta property="article:modified_time" content="2023-01-14T09:12:15+09:00">
 <title>2023 | htakeuchi0 のノート</title>
 <link rel=manifest href=/manifest.json>
 <link rel=icon href=/favicon.png type=image/x-icon>
@@ -295,6 +295,8 @@ Problem 1. 整数 \(x=\sum_{j=0}^{n-1}a_j10^j\) \((0\le a_j\le 9,j=0,1,\dots,n-1
 <li>end for</li>
 </ol>
 </blockquote>
+<p>Python 3.x による実装例は以下のとおりです．実行には NumPy が必要です．</p>
+<script type=application/javascript src=https://gist.github.com/htakeuchi0/2cb6b593569716d0e6b80824737e98db.js></script>
 <h2 id=0le-x100000-の場合>
 \(0\le x&lt;100000\) の場合
 <a class=anchor href=#0le-x100000-%e3%81%ae%e5%a0%b4%e5%90%88>#</a>
@@ -549,7 +551,7 @@ Problem 1. 整数 \(x=\sum_{j=0}^{n-1}a_j10^j\) \((0\le a_j\le 9,j=0,1,\dots,n-1
 </p>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/9fe66e3a291a37d5931f168d380a5eaff8259e56 title="Last modified by htakeuchi0 | January 14, 2023" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/dade87a2c40e3251005c8c202919f68fb3afe656 title="Last modified by htakeuchi0 | January 14, 2023" target=_blank rel=noopener>
 <img src=/svg/calendar.svg class=book-icon alt=Calendar>
 <span>January 14, 2023</span>
 </a>
