@@ -18,7 +18,7 @@ Algorithm 2. \(\mathtt{Solve}(a, x, i)\) の擬似コードを以下で定める
  Input: \(a\in\mathbb{N}^n,x\in\mathbb{N},i\in\mathbb{N}\) Output: \(\prod_{k=1}^K\sum_{j=0}^{n-1}a_j^{i_k}=x,i\le i_1\le\dots\le i_K\) を満たす \((i_1,i_2,\dots,i_K)\)   if \(\max(a)\le1\) then  if \(i>1\) then return \(\emptyset\)  if \(\sum_{j=0}^{n-1}a_j=x\) then return \((1)\)  else return \(\emptyset\) end if for \(i'=i,i+1,\dots\) do  \(y\leftarrow\sum_{j=0}^{n-1}a_j^{i'}\)  if \(y>x\) then return \(\emptyset\)  if \(y=x\) then return \((i')\)  if \(y\mid x\) then  \(L\leftarrow\mathtt{Solve}(a,x/y,i')\)  if \(L=\emptyset\) then return \(\emptyset\)  else return \(\mathtt{append}((i'),L)\)  end if end for   このアルゴリズムは，11行目によって再帰処理になっていますが， 再帰させずに，単に  \(x\)  を  \(x/y\)  に置き換えて処理を継続させることができます． この場合，再帰処理用に用意していた第3引数の  \(i\)  が不要になります．">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://htakeuchi0.github.io/docs/math/year2023/year2023_2/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2023-01-16T12:13:45+09:00">
+<meta property="article:modified_time" content="2023-01-17T08:38:40+09:00">
 <title>2023 - 実装改良編 | htakeuchi0 のノート</title>
 <link rel=manifest href=/manifest.json>
 <link rel=icon href=/favicon.png type=image/x-icon>
@@ -306,7 +306,7 @@ Algorithm 2. \(\mathtt{Solve}(a, x, i)\) の擬似コードを以下で定める
 実行時間の比較
 <a class=anchor href=#%e5%ae%9f%e8%a1%8c%e6%99%82%e9%96%93%e3%81%ae%e6%af%94%e8%bc%83>#</a>
 </h2>
-<p>改良前後で実行時間を比較した結果は，以下の Figure 1. のとおりです．</p>
+<p>改良前後で実行時間を比較した結果は，以下の Figure 1. のとおりです．計算機環境は Intel(R) Core(TM) i7-9700 CPU @ 3.00GHz x8, Linux OS (Ubuntu 22.04.1 LTS), メモリ 16.0GB, Python 3.10.6, NumPy 1.24.1 です．</p>
 <figure class=text-center><img src=/images/docs/math/year2023/elapsed.png><figcaption>
 <h4>Figure 1. 改良前（左）と改良後（右）の実行時間の比較</h4>
 </figcaption>
@@ -385,9 +385,9 @@ Algorithm 2. \(\mathtt{Solve}(a, x, i)\) の擬似コードを以下で定める
 </p>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/826647383a275119bee1680a4c34a3ef6fcfd5af title="Last modified by htakeuchi0 | January 16, 2023" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/c5e443bcf2acbcb52d3adbef404839e1d6321184 title="Last modified by htakeuchi0 | January 17, 2023" target=_blank rel=noopener>
 <img src=/svg/calendar.svg class=book-icon alt=Calendar>
-<span>January 16, 2023</span>
+<span>January 17, 2023</span>
 </a>
 </div>
 </div>
