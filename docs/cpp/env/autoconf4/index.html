@@ -1,252 +1,24 @@
-<!doctype html><html lang=ja-jp dir=ltr>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="autoconf プロジェクト (4) #  概要 #  前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="autoconf プロジェクト (4) # 概要 # 前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
 本ページでは，これまでの説明の総括として，autoconf プロジェクト(1) や autoconf プロジェクト (2) と同じ節構成で，Makefile プロジェクト をもとにした autoconf プロジェクトの作成手順を説明します．
-Github リポジトリ #  本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ [1] として公開しています．
+Github リポジトリ # 本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ [1] として公開しています．
 https://github.com/htakeuchi0/autoconf_sample
 本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
-準備 #  Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.">
-<meta name=theme-color content="#FFFFFF">
-<meta name=color-scheme content="light dark"><meta property="og:title" content="autoconf プロジェクト (4)">
-<meta property="og:description" content="autoconf プロジェクト (4) #  概要 #  前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
+準備 # Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="autoconf プロジェクト (4)"><meta property="og:description" content="autoconf プロジェクト (4) # 概要 # 前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
 本ページでは，これまでの説明の総括として，autoconf プロジェクト(1) や autoconf プロジェクト (2) と同じ節構成で，Makefile プロジェクト をもとにした autoconf プロジェクトの作成手順を説明します．
-Github リポジトリ #  本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ [1] として公開しています．
+Github リポジトリ # 本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ [1] として公開しています．
 https://github.com/htakeuchi0/autoconf_sample
 本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
-準備 #  Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://htakeuchi0.github.io/docs/cpp/env/autoconf4/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2023-01-08T18:04:42+09:00">
-<title>autoconf プロジェクト (4) | htakeuchi0 のノート</title>
-<link rel=manifest href=/manifest.json>
-<link rel=icon href=/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-RXNBZFC7LX',{anonymize_ip:!1})}</script>
-</head>
-<body dir=ltr>
-<input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control>
-<main class="container flex">
-<aside class=book-menu>
-<div class=book-menu-content>
-<nav>
-<h2 class=book-brand>
-<a class="flex align-center" href=/><span>htakeuchi0 のノート</span>
-</a>
-</h2>
-<ul>
-<li>
-<a href=/docs/cpp/>C++</a>
-<ul>
-<li>
-<a href=/docs/cpp/env/>開発環境</a>
-<ul>
-<li>
-<a href=/docs/cpp/env/make/>Makefile プロジェクト</a>
-</li>
-<li>
-<a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a>
-</li>
-<li>
-<a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a>
-</li>
-<li>
-<a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a>
-</li>
-<li>
-<a href=/docs/cpp/env/autoconf4/ class=active>autoconf プロジェクト (4)</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/cpp/fp/>関数ポインタ</a>
-<ul>
-<li>
-<a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a>
-</li>
-<li>
-<a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a>
-</li>
-<li>
-<a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a>
-</li>
-<li>
-<a href=/docs/cpp/fp/fref/>関数への参照</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/cpp/arrp/>配列へのポインタ</a>
-<ul>
-<li>
-<a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a>
-</li>
-<li>
-<a href=/docs/cpp/arrp/arr_ref/>配列への参照</a>
-</li>
-<li>
-<a href=/docs/cpp/arrp/stdarray/>std::array について</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/math/>数学一般</a>
-<ul>
-<li>
-<a href=/docs/math/exp/>指数関数の定積分</a>
-</li>
-<li>
-<a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a>
-</li>
-<li>
-<a href=/docs/math/stat/>数理統計</a>
-<ul>
-<li>
-<a href=/docs/math/stat/dice/>サイコロの出目の確率</a>
-<ul>
-<li>
-<a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a>
-</li>
-<li>
-<a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a>
-</li>
-<li>
-<a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a>
-</li>
-<li>
-<a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a>
-</li>
-<li>
-<a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/math/year2023/>2023</a>
-<ul>
-<li>
-<a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/hugo/>Hugo</a>
-<ul>
-<li>
-<a href=/docs/hugo/base/>空のサイトの生成</a>
-</li>
-<li>
-<a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a>
-</li>
-<li>
-<a href=/docs/hugo/genpages/>公開用ファイルの生成</a>
-</li>
-<li>
-<a href=/docs/hugo/shortcode/>独自ショートコードの定義</a>
-</li>
-<li>
-<a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/others/>その他</a>
-<ul>
-<li>
-<a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>
-<a href=/#disclaimer target=_blank rel=noopener>
-免責事項
-</a>
-</li>
-<li>
-<a href=/#privacy_policy target=_blank rel=noopener>
-プライバシーポリシー
-</a>
-</li>
-</ul>
-</nav>
-<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-</div>
-</aside>
-<div class=book-page>
-<header class=book-header>
-<div class="flex align-center justify-between">
-<label for=menu-control>
-<img src=/svg/menu.svg class=book-icon alt=Menu>
-</label>
+準備 # Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example."><meta property="og:type" content="article"><meta property="og:url" content="https://htakeuchi0.github.io/docs/cpp/env/autoconf4/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2023-01-08T18:04:42+09:00"><title>autoconf プロジェクト (4) | htakeuchi0 のノート</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX",{anonymize_ip:!1})}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/ class=active>autoconf プロジェクト (4)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>autoconf プロジェクト (4)</strong>
-<label for=toc-control>
-<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
-</label>
-</div>
-<aside class="hidden clearfix">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#概要>概要</a></li>
-<li><a href=#github-リポジトリ>Github リポジトリ</a></li>
-<li><a href=#準備>準備</a></li>
-<li><a href=#autoconf-の実行と種々の設定>autoconf の実行と種々の設定</a>
-<ul>
-<li><a href=#configureac-の作成>configure.ac の作成</a></li>
-<li><a href=#makefileam-の作成>Makefile.am の作成</a></li>
-<li><a href=#autoconf-コマンドの実行>autoconf コマンドの実行</a></li>
-</ul>
-</li>
-<li><a href=#動作確認>動作確認</a>
-<ul>
-<li><a href=#make-の実行>make の実行</a></li>
-<li><a href=#make-check-の実行>make check の実行</a></li>
-<li><a href=#make-install-の実行>make install の実行</a></li>
-<li><a href=#その他>その他</a></li>
-</ul>
-</li>
-<li><a href=#まとめ>まとめ</a></li>
-<li><a href=#参考文献>参考文献</a></li>
-</ul>
-</nav>
-</aside>
-</header>
-<article class=markdown><h1 id=autoconf-プロジェクト-4>
-autoconf プロジェクト (4)
-<a class=anchor href=#autoconf-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-4>#</a>
-</h1>
-<h2 id=概要>
-概要
-<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
-</h2>
-<p><a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf3/>前ページ</a>までで，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．</p>
-<p>本ページでは，これまでの説明の総括として，<a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf/>autoconf プロジェクト(1)</a> や <a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a> と同じ節構成で，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> をもとにした autoconf プロジェクトの作成手順を説明します．</p>
-<h2 id=github-リポジトリ>
-Github リポジトリ
-<a class=anchor href=#github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa>#</a>
-</h2>
-<p>本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ <a href=#cite:1>[1]</a> として公開しています．</p>
-<p><a href=https://github.com/htakeuchi0/autoconf_sample>https://github.com/htakeuchi0/autoconf_sample</a></p>
-<p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．</p>
-<h2 id=準備>
-準備
-<a class=anchor href=#%e6%ba%96%e5%82%99>#</a>
-</h2>
-<p><a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> のリポジトリからスタートします． <br>
-初期状態のディレクトリ構成は以下のとおりです．</p>
-<pre tabindex=0><code>|- cpp_env_sample/
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#github-リポジトリ>Github リポジトリ</a></li><li><a href=#準備>準備</a></li><li><a href=#autoconf-の実行と種々の設定>autoconf の実行と種々の設定</a><ul><li><a href=#configureac-の作成>configure.ac の作成</a></li><li><a href=#makefileam-の作成>Makefile.am の作成</a></li><li><a href=#autoconf-コマンドの実行>autoconf コマンドの実行</a></li></ul></li><li><a href=#動作確認>動作確認</a><ul><li><a href=#make-の実行>make の実行</a></li><li><a href=#make-check-の実行>make check の実行</a></li><li><a href=#make-install-の実行>make install の実行</a></li><li><a href=#その他>その他</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class=markdown><h1 id=autoconf-プロジェクト-4>autoconf プロジェクト (4)
+<a class=anchor href=#autoconf-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-4>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p><a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf3/>前ページ</a>までで，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．</p><p>本ページでは，これまでの説明の総括として，<a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf/>autoconf プロジェクト(1)</a> や <a href=https://htakeuchi0.github.io/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a> と同じ節構成で，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> をもとにした autoconf プロジェクトの作成手順を説明します．</p><h2 id=github-リポジトリ>Github リポジトリ
+<a class=anchor href=#github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa>#</a></h2><p>本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ <a href=#cite:1>[1]</a> として公開しています．</p><p><a href=https://github.com/htakeuchi0/autoconf_sample>https://github.com/htakeuchi0/autoconf_sample</a></p><p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．</p><h2 id=準備>準備
+<a class=anchor href=#%e6%ba%96%e5%82%99>#</a></h2><p><a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> のリポジトリからスタートします．<br>初期状態のディレクトリ構成は以下のとおりです．</p><pre tabindex=0><code>|- cpp_env_sample/
    |- Doxyfile               - doxygen設定ファイル
    |- LICENSE                - ライセンスファイル
    |- Makefile               - makeファイル
@@ -268,8 +40,7 @@ Github リポジトリ
    |
    |- test/                  - テストファイル
       |- gtest_example.cc
-</code></pre><p>まず，これから自動生成する Makefile を削除しておきます．</p>
-<pre tabindex=0><code>|- cpp_env_sample/
+</code></pre><p>まず，これから自動生成する Makefile を削除しておきます．</p><pre tabindex=0><code>|- cpp_env_sample/
    |- Doxyfile               - doxygen設定ファイル
    |- LICENSE                - ライセンスファイル
    |- README.md              - READMEファイル
@@ -290,56 +61,42 @@ Github リポジトリ
    |
    |- test/                  - テストファイル
       |- gtest_example.cc
-</code></pre><h2 id=autoconf-の実行と種々の設定>
-autoconf の実行と種々の設定
-<a class=anchor href=#autoconf-%e3%81%ae%e5%ae%9f%e8%a1%8c%e3%81%a8%e7%a8%ae%e3%80%85%e3%81%ae%e8%a8%ad%e5%ae%9a>#</a>
-</h2>
-<p>autoconf コマンドで，Makefile を生成する configure スクリプトを生成します．<br>
-ただし，そのためにいくつかファイルの準備やコマンド実行が必要です． <br>
-本節では，それら作業を順を追って説明します．</p>
-<h3 id=configureac-の作成>
-configure.ac の作成
-<a class=anchor href=#configureac-%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
-</h3>
-<p>まず，準備として，Makefileの雛形の雛形に相当する <code>Makefile.am</code> の空ファイルを配置しておきます．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ touch Makefile.am include/Makefile.am main/Makefile.am src/Makefile.am test/Makefile.am
-</code></pre></div><p><code>autoscan</code> コマンドでファイルの雛形を生成します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ autoscan
-</code></pre></div><p><code>configure.scan</code> の内容は以下のとおりです．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ cat configure.scan 
-<span style=color:#75715e>#                                               -*- Autoconf -*-</span>
-<span style=color:#75715e># Process this file with autoconf to produce a configure script.</span>
-
-AC_PREREQ<span style=color:#f92672>([</span>2.69<span style=color:#f92672>])</span>
-AC_INIT<span style=color:#f92672>([</span>FULL-PACKAGE-NAME<span style=color:#f92672>]</span>, <span style=color:#f92672>[</span>VERSION<span style=color:#f92672>]</span>, <span style=color:#f92672>[</span>BUG-REPORT-ADDRESS<span style=color:#f92672>])</span>
-AC_CONFIG_SRCDIR<span style=color:#f92672>([</span>test/gtest_example.cc<span style=color:#f92672>])</span>
-AC_CONFIG_HEADERS<span style=color:#f92672>([</span>config.h<span style=color:#f92672>])</span>
-
-<span style=color:#75715e># Checks for programs.</span>
-AC_PROG_CXX
-AC_PROG_CC
-AC_PROG_INSTALL
-AC_PROG_MAKE_SET
-
-<span style=color:#75715e># Checks for libraries.</span>
-
-<span style=color:#75715e># Checks for header files.</span>
-
-<span style=color:#75715e># Checks for typedefs, structures, and compiler characteristics.</span>
-
-<span style=color:#75715e># Checks for library functions.</span>
-
-AC_CONFIG_FILES<span style=color:#f92672>([</span>Makefile
-                 include/Makefile
-                 main/Makefile
-                 src/Makefile
-                 test/Makefile<span style=color:#f92672>])</span>
-
-AC_OUTPUT
-</code></pre></div><p><code>configure.scan</code> を <code>configure.ac</code> に変更します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ mv configure.scan configure.ac
-</code></pre></div><p><code>configure.ac</code> を以下のように変更します．</p>
-<pre tabindex=0><code>#                                               -*- Autoconf -*-
+</code></pre><h2 id=autoconf-の実行と種々の設定>autoconf の実行と種々の設定
+<a class=anchor href=#autoconf-%e3%81%ae%e5%ae%9f%e8%a1%8c%e3%81%a8%e7%a8%ae%e3%80%85%e3%81%ae%e8%a8%ad%e5%ae%9a>#</a></h2><p>autoconf コマンドで，Makefile を生成する configure スクリプトを生成します．<br>ただし，そのためにいくつかファイルの準備やコマンド実行が必要です．<br>本節では，それら作業を順を追って説明します．</p><h3 id=configureac-の作成>configure.ac の作成
+<a class=anchor href=#configureac-%e3%81%ae%e4%bd%9c%e6%88%90>#</a></h3><p>まず，準備として，Makefileの雛形の雛形に相当する <code>Makefile.am</code> の空ファイルを配置しておきます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ touch Makefile.am include/Makefile.am main/Makefile.am src/Makefile.am test/Makefile.am
+</span></span></code></pre></div><p><code>autoscan</code> コマンドでファイルの雛形を生成します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ autoscan
+</span></span></code></pre></div><p><code>configure.scan</code> の内容は以下のとおりです．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ cat configure.scan 
+</span></span><span style=display:flex><span><span style=color:#75715e>#                                               -*- Autoconf -*-</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Process this file with autoconf to produce a configure script.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>AC_PREREQ<span style=color:#f92672>([</span>2.69<span style=color:#f92672>])</span>
+</span></span><span style=display:flex><span>AC_INIT<span style=color:#f92672>([</span>FULL-PACKAGE-NAME<span style=color:#f92672>]</span>, <span style=color:#f92672>[</span>VERSION<span style=color:#f92672>]</span>, <span style=color:#f92672>[</span>BUG-REPORT-ADDRESS<span style=color:#f92672>])</span>
+</span></span><span style=display:flex><span>AC_CONFIG_SRCDIR<span style=color:#f92672>([</span>test/gtest_example.cc<span style=color:#f92672>])</span>
+</span></span><span style=display:flex><span>AC_CONFIG_HEADERS<span style=color:#f92672>([</span>config.h<span style=color:#f92672>])</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Checks for programs.</span>
+</span></span><span style=display:flex><span>AC_PROG_CXX
+</span></span><span style=display:flex><span>AC_PROG_CC
+</span></span><span style=display:flex><span>AC_PROG_INSTALL
+</span></span><span style=display:flex><span>AC_PROG_MAKE_SET
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Checks for libraries.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Checks for header files.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Checks for typedefs, structures, and compiler characteristics.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Checks for library functions.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>AC_CONFIG_FILES<span style=color:#f92672>([</span>Makefile
+</span></span><span style=display:flex><span>                 include/Makefile
+</span></span><span style=display:flex><span>                 main/Makefile
+</span></span><span style=display:flex><span>                 src/Makefile
+</span></span><span style=display:flex><span>                 test/Makefile<span style=color:#f92672>])</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>AC_OUTPUT
+</span></span></code></pre></div><p><code>configure.scan</code> を <code>configure.ac</code> に変更します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ mv configure.scan configure.ac
+</span></span></code></pre></div><p><code>configure.ac</code> を以下のように変更します．</p><pre tabindex=0><code>#                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
@@ -370,104 +127,63 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  test/Makefile])
 AC_OUTPUT
-</code></pre><p><code>AM_INIT_AUTOMAKE([foreign])</code> は，GNU 準拠でないため (foreign) 設定しています．また，ライブラリを生成するため，<code>AC_CONFIG_MACRO_DIRS([m4])</code>, <code>LT_INIT</code> を追加しています．</p>
-<h3 id=makefileam-の作成>
-Makefile.am の作成
-<a class=anchor href=#makefileam-%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
-</h3>
-<p>各 <code>Makefile.am</code> を作成します．</p>
-<ul>
-<li><code>./Makefile.am</code>
-<ul>
-<li>サブディレクトリと，ライブラリの作成のためのフラグ，その他必要な定義を設定します．</li>
-</ul>
-</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>SUBDIRS <span style=color:#f92672>=</span> include src main test
-ACLOCAL_AMFLAGS <span style=color:#f92672>=</span> -I m4
-
-DOCDIR <span style=color:#f92672>=</span> doxygen
-LCOVDIR <span style=color:#f92672>=</span> lcov
-
-<span style=color:#a6e22e>clean-local</span><span style=color:#f92672>:</span>
-	@rm -f src/*.gcno
-	@rm -f test/*.gcno
-	@rm -f test/*.gcda
-	@rm -rf <span style=color:#66d9ef>$(</span>DOCDIR<span style=color:#66d9ef>)</span>
-	@rm -rf <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>
-
-<span style=color:#a6e22e>check-local</span><span style=color:#f92672>:</span>
-	test/test_acsample
-
-<span style=color:#a6e22e>.PHONY</span><span style=color:#f92672>:</span> docs lcov
-INDEXPATH <span style=color:#f92672>=</span> <span style=color:#66d9ef>$(</span>DOCDIR<span style=color:#66d9ef>)</span>/html/index.html
-<span style=color:#a6e22e>docs</span><span style=color:#f92672>:</span>
-	doxygen
-	@echo <span style=color:#66d9ef>$(</span>INDEXPATH<span style=color:#66d9ef>)</span>
-
-COVERAGE <span style=color:#f92672>=</span> coverage.info
-<span style=color:#a6e22e>lcov</span><span style=color:#f92672>:</span> check
-	lcov --capture --directory . --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
-	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **include/c++/** --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
-	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **bits** --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
-	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **gtest*.h --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
-	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **gtest*.cc --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
-	genhtml <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> --output-directory <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>
-	@rm -f *.gcno
-	@rm -f *.gcda
-	@rm -f <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
-	@echo -n -e <span style=color:#e6db74>&#34;&#34;</span>
-	@echo <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>/index.html
-
-EXTRA_DIST <span style=color:#f92672>=</span> Doxyfile LICENSE scripts/*
-</code></pre></div><ul>
-<li><code>include/Makefile.am</code>
-<ul>
-<li>インストールしないヘッダであることを明示します．</li>
-</ul>
-</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>nobase_include_HEADERS <span style=color:#f92672>=</span> cpp_env_sample/example.h
-</code></pre></div><ul>
-<li><code>main/Makefile.am</code>
-<ul>
-<li>ソースコードとコンパイラへのフラグを指定します</li>
-</ul>
-</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>bin_PROGRAMS <span style=color:#f92672>=</span> acsample
-acsample_SOURCES <span style=color:#f92672>=</span> main.cc
-acsample_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
-acsample_LDADD <span style=color:#f92672>=</span> ../src/libacsample.la
-acsample_LDFLAGS <span style=color:#f92672>=</span> -Wl,-rpath<span style=color:#f92672>=</span>/usr/local/lib
-</code></pre></div><ul>
-<li><code>src/Makefile.am</code>
-<ul>
-<li>ライブラリ (<code>libacsample.la</code>) とテスト用ライブラリ (<code>libacsampled.la</code>) を生成します</li>
-</ul>
-</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>lib_LTLIBRARIES <span style=color:#f92672>=</span> libacsample.la
-noinst_LTLIBRARIES <span style=color:#f92672>=</span> libacsampled.la
-libacsample_la_SOURCES <span style=color:#f92672>=</span> example.cc
-libacsample_la_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
-libacsample_la_LDFLAGS <span style=color:#f92672>=</span> -version-info 0:3:0
-libacsampled_la_SOURCES <span style=color:#f92672>=</span> example.cc
-libacsampled_la_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -fprofile-arcs -ftest-coverage -fno-inline -fno-inline-small-functions -fno-default-inline -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
-</code></pre></div><ul>
-<li><code>test/Makefile.am</code>
-<ul>
-<li>テスト実行ファイルの指定 (TESTS), テスト用ソースコードとコンパイラへのフラグを指定します</li>
-</ul>
-</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile>TESTS <span style=color:#f92672>=</span> test_acsample
-check_PROGRAMS <span style=color:#f92672>=</span> test_acsample
-test_acsample_SOURCES <span style=color:#f92672>=</span> gtest_example.cc
-test_acsample_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -fprofile-arcs -ftest-coverage -fno-inline -fno-inline-small-functions -fno-default-inline -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
-test_acsample_LDADD <span style=color:#f92672>=</span> ../src/libacsampled.la -lgtest -lgtest_main -lpthread
-</code></pre></div><p>ここまでで以下のファイル構成となっているはずです．</p>
-<pre tabindex=0><code>|- Doxyfile
+</code></pre><p><code>AM_INIT_AUTOMAKE([foreign])</code> は，GNU 準拠でないため (foreign) 設定しています．また，ライブラリを生成するため，<code>AC_CONFIG_MACRO_DIRS([m4])</code>, <code>LT_INIT</code> を追加しています．</p><h3 id=makefileam-の作成>Makefile.am の作成
+<a class=anchor href=#makefileam-%e3%81%ae%e4%bd%9c%e6%88%90>#</a></h3><p>各 <code>Makefile.am</code> を作成します．</p><ul><li><code>./Makefile.am</code><ul><li>サブディレクトリと，ライブラリの作成のためのフラグ，その他必要な定義を設定します．</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile><span style=display:flex><span>SUBDIRS <span style=color:#f92672>=</span> include src main test
+</span></span><span style=display:flex><span>ACLOCAL_AMFLAGS <span style=color:#f92672>=</span> -I m4
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>DOCDIR <span style=color:#f92672>=</span> doxygen
+</span></span><span style=display:flex><span>LCOVDIR <span style=color:#f92672>=</span> lcov
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>clean-local</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>	@rm -f src/*.gcno
+</span></span><span style=display:flex><span>	@rm -f test/*.gcno
+</span></span><span style=display:flex><span>	@rm -f test/*.gcda
+</span></span><span style=display:flex><span>	@rm -rf <span style=color:#66d9ef>$(</span>DOCDIR<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>	@rm -rf <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>check-local</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>	test/test_acsample
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>.PHONY</span><span style=color:#f92672>:</span> docs lcov
+</span></span><span style=display:flex><span>INDEXPATH <span style=color:#f92672>=</span> <span style=color:#66d9ef>$(</span>DOCDIR<span style=color:#66d9ef>)</span>/html/index.html
+</span></span><span style=display:flex><span><span style=color:#a6e22e>docs</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>	doxygen
+</span></span><span style=display:flex><span>	@echo <span style=color:#66d9ef>$(</span>INDEXPATH<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>COVERAGE <span style=color:#f92672>=</span> coverage.info
+</span></span><span style=display:flex><span><span style=color:#a6e22e>lcov</span><span style=color:#f92672>:</span> check
+</span></span><span style=display:flex><span>	lcov --capture --directory . --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **include/c++/** --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **bits** --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **gtest*.h --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>	lcov --remove <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> **gtest*.cc --output-file <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>	genhtml <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span> --output-directory <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>	@rm -f *.gcno
+</span></span><span style=display:flex><span>	@rm -f *.gcda
+</span></span><span style=display:flex><span>	@rm -f <span style=color:#66d9ef>$(</span>COVERAGE<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>	@echo -n -e <span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span>	@echo <span style=color:#66d9ef>$(</span>LCOVDIR<span style=color:#66d9ef>)</span>/index.html
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>EXTRA_DIST <span style=color:#f92672>=</span> Doxyfile LICENSE scripts/*
+</span></span></code></pre></div><ul><li><code>include/Makefile.am</code><ul><li>インストールしないヘッダであることを明示します．</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile><span style=display:flex><span>nobase_include_HEADERS <span style=color:#f92672>=</span> cpp_env_sample/example.h
+</span></span></code></pre></div><ul><li><code>main/Makefile.am</code><ul><li>ソースコードとコンパイラへのフラグを指定します</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile><span style=display:flex><span>bin_PROGRAMS <span style=color:#f92672>=</span> acsample
+</span></span><span style=display:flex><span>acsample_SOURCES <span style=color:#f92672>=</span> main.cc
+</span></span><span style=display:flex><span>acsample_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
+</span></span><span style=display:flex><span>acsample_LDADD <span style=color:#f92672>=</span> ../src/libacsample.la
+</span></span><span style=display:flex><span>acsample_LDFLAGS <span style=color:#f92672>=</span> -Wl,-rpath<span style=color:#f92672>=</span>/usr/local/lib
+</span></span></code></pre></div><ul><li><code>src/Makefile.am</code><ul><li>ライブラリ (<code>libacsample.la</code>) とテスト用ライブラリ (<code>libacsampled.la</code>) を生成します</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile><span style=display:flex><span>lib_LTLIBRARIES <span style=color:#f92672>=</span> libacsample.la
+</span></span><span style=display:flex><span>noinst_LTLIBRARIES <span style=color:#f92672>=</span> libacsampled.la
+</span></span><span style=display:flex><span>libacsample_la_SOURCES <span style=color:#f92672>=</span> example.cc
+</span></span><span style=display:flex><span>libacsample_la_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
+</span></span><span style=display:flex><span>libacsample_la_LDFLAGS <span style=color:#f92672>=</span> -version-info 0:3:0
+</span></span><span style=display:flex><span>libacsampled_la_SOURCES <span style=color:#f92672>=</span> example.cc
+</span></span><span style=display:flex><span>libacsampled_la_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -fprofile-arcs -ftest-coverage -fno-inline -fno-inline-small-functions -fno-default-inline -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
+</span></span></code></pre></div><ul><li><code>test/Makefile.am</code><ul><li>テスト実行ファイルの指定 (TESTS), テスト用ソースコードとコンパイラへのフラグを指定します</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Makefile data-lang=Makefile><span style=display:flex><span>TESTS <span style=color:#f92672>=</span> test_acsample
+</span></span><span style=display:flex><span>check_PROGRAMS <span style=color:#f92672>=</span> test_acsample
+</span></span><span style=display:flex><span>test_acsample_SOURCES <span style=color:#f92672>=</span> gtest_example.cc
+</span></span><span style=display:flex><span>test_acsample_CXXFLAGS <span style=color:#f92672>=</span> -std<span style=color:#f92672>=</span>c++17 -s -Wall -fprofile-arcs -ftest-coverage -fno-inline -fno-inline-small-functions -fno-default-inline -I<span style=color:#66d9ef>$(</span>top_builddir<span style=color:#66d9ef>)</span>/include -I/usr/local/include
+</span></span><span style=display:flex><span>test_acsample_LDADD <span style=color:#f92672>=</span> ../src/libacsampled.la -lgtest -lgtest_main -lpthread
+</span></span></code></pre></div><p>ここまでで以下のファイル構成となっているはずです．</p><pre tabindex=0><code>|- Doxyfile
 |- LICENSE
 |- Makefile.am
 |- README.md
@@ -494,59 +210,39 @@ test_acsample_LDADD <span style=color:#f92672>=</span> ../src/libacsampled.la -l
 |- test/
    |- Makefile.am
    |- gtest_example.cc
-</code></pre><h3 id=autoconf-コマンドの実行>
-autoconf コマンドの実行
-<a class=anchor href=#autoconf-%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%81%ae%e5%ae%9f%e8%a1%8c>#</a>
-</h3>
-<p>libtoolize を実行します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ libtoolize -c
-libtoolize: putting auxiliary files in <span style=color:#e6db74>&#39;.&#39;</span>.
-libtoolize: copying file <span style=color:#e6db74>&#39;./ltmain.sh&#39;</span>
-libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, <span style=color:#e6db74>&#39;m4&#39;</span>.
-libtoolize: copying file <span style=color:#e6db74>&#39;m4/libtool.m4&#39;</span>
-libtoolize: copying file <span style=color:#e6db74>&#39;m4/ltoptions.m4&#39;</span>
-libtoolize: copying file <span style=color:#e6db74>&#39;m4/ltsugar.m4&#39;</span>
-libtoolize: copying file <span style=color:#e6db74>&#39;m4/ltversion.m4&#39;</span>
-libtoolize: copying file <span style=color:#e6db74>&#39;m4/lt~obsolete.m4&#39;</span>
-</code></pre></div><p>以下のファイルが追加されます．</p>
-<pre tabindex=0><code>|- ltmain.sh
+</code></pre><h3 id=autoconf-コマンドの実行>autoconf コマンドの実行
+<a class=anchor href=#autoconf-%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%81%ae%e5%ae%9f%e8%a1%8c>#</a></h3><p>libtoolize を実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ libtoolize -c
+</span></span><span style=display:flex><span>libtoolize: putting auxiliary files in <span style=color:#e6db74>&#39;.&#39;</span>.
+</span></span><span style=display:flex><span>libtoolize: copying file <span style=color:#e6db74>&#39;./ltmain.sh&#39;</span>
+</span></span><span style=display:flex><span>libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, <span style=color:#e6db74>&#39;m4&#39;</span>.
+</span></span><span style=display:flex><span>libtoolize: copying file <span style=color:#e6db74>&#39;m4/libtool.m4&#39;</span>
+</span></span><span style=display:flex><span>libtoolize: copying file <span style=color:#e6db74>&#39;m4/ltoptions.m4&#39;</span>
+</span></span><span style=display:flex><span>libtoolize: copying file <span style=color:#e6db74>&#39;m4/ltsugar.m4&#39;</span>
+</span></span><span style=display:flex><span>libtoolize: copying file <span style=color:#e6db74>&#39;m4/ltversion.m4&#39;</span>
+</span></span><span style=display:flex><span>libtoolize: copying file <span style=color:#e6db74>&#39;m4/lt~obsolete.m4&#39;</span>
+</span></span></code></pre></div><p>以下のファイルが追加されます．</p><pre tabindex=0><code>|- ltmain.sh
 |- m4/
    |- libtool.m4
    |- ltoptions.m4
    |- ltsugar.m4
    |- ltversion.m4
    |- lt~obsolete.m4
-</code></pre><p>aclocal, autoheader, automake を実行します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ aclocal
-$ autoheader
-$ automake --add-missing
-configure.ac:10: installing <span style=color:#e6db74>&#39;./compile&#39;</span>
-configure.ac:10: installing <span style=color:#e6db74>&#39;./config.guess&#39;</span>
-configure.ac:10: installing <span style=color:#e6db74>&#39;./config.sub&#39;</span>
-configure.ac:6: installing <span style=color:#e6db74>&#39;./install-sh&#39;</span>
-configure.ac:6: installing <span style=color:#e6db74>&#39;./missing&#39;</span>
-main/Makefile.am: installing <span style=color:#e6db74>&#39;./depcomp&#39;</span>
-parallel-tests: installing <span style=color:#e6db74>&#39;./test-driver&#39;</span>
-
-</code></pre></div><p>autoconf を実行します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ autoconf
-</code></pre></div><p>以下のファイルが追加されます． <br>
-この configure というファイルは Makefile を生成するためのスクリプトです．</p>
-<pre tabindex=0><code>|- configure
-</code></pre><h2 id=動作確認>
-動作確認
-<a class=anchor href=#%e5%8b%95%e4%bd%9c%e7%a2%ba%e8%aa%8d>#</a>
-</h2>
-<h3 id=make-の実行>
-make の実行
-<a class=anchor href=#make-%e3%81%ae%e5%ae%9f%e8%a1%8c>#</a>
-</h3>
-<p>Makefile の生成と，make の実行を試してみます．</p>
-<p>configure を実行します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ ./configure
-</code></pre></div><p>以下のファイルが追加されます． <br>
-特に Makefile が欲しいファイルでした．</p>
-<pre tabindex=0><code>|- Makefile
+</code></pre><p>aclocal, autoheader, automake を実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ aclocal
+</span></span><span style=display:flex><span>$ autoheader
+</span></span><span style=display:flex><span>$ automake --add-missing
+</span></span><span style=display:flex><span>configure.ac:10: installing <span style=color:#e6db74>&#39;./compile&#39;</span>
+</span></span><span style=display:flex><span>configure.ac:10: installing <span style=color:#e6db74>&#39;./config.guess&#39;</span>
+</span></span><span style=display:flex><span>configure.ac:10: installing <span style=color:#e6db74>&#39;./config.sub&#39;</span>
+</span></span><span style=display:flex><span>configure.ac:6: installing <span style=color:#e6db74>&#39;./install-sh&#39;</span>
+</span></span><span style=display:flex><span>configure.ac:6: installing <span style=color:#e6db74>&#39;./missing&#39;</span>
+</span></span><span style=display:flex><span>main/Makefile.am: installing <span style=color:#e6db74>&#39;./depcomp&#39;</span>
+</span></span><span style=display:flex><span>parallel-tests: installing <span style=color:#e6db74>&#39;./test-driver&#39;</span>
+</span></span></code></pre></div><p>autoconf を実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ autoconf
+</span></span></code></pre></div><p>以下のファイルが追加されます．<br>この configure というファイルは Makefile を生成するためのスクリプトです．</p><pre tabindex=0><code>|- configure
+</code></pre><h2 id=動作確認>動作確認
+<a class=anchor href=#%e5%8b%95%e4%bd%9c%e7%a2%ba%e8%aa%8d>#</a></h2><h3 id=make-の実行>make の実行
+<a class=anchor href=#make-%e3%81%ae%e5%ae%9f%e8%a1%8c>#</a></h3><p>Makefile の生成と，make の実行を試してみます．</p><p>configure を実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ ./configure
+</span></span></code></pre></div><p>以下のファイルが追加されます．<br>特に Makefile が欲しいファイルでした．</p><pre tabindex=0><code>|- Makefile
 |- config.h
 |- config.log
 |- config.status
@@ -562,11 +258,8 @@ make の実行
 |
 |- test/
    |- Makefile
-</code></pre><p>Makefile ができたので make を実行します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ make
-</code></pre></div><p>以下のファイルが追加されます． <br>
-ライブラリ libacsample.la, libacsamled.la と実行可能なバイナリファイル acsample がビルドされました．</p>
-<pre tabindex=0><code>|- main/
+</code></pre><p>Makefile ができたので make を実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ make
+</span></span></code></pre></div><p>以下のファイルが追加されます．<br>ライブラリ libacsample.la, libacsamled.la と実行可能なバイナリファイル acsample がビルドされました．</p><pre tabindex=0><code>|- main/
 |  |- acsample
 |  |- acsample-main.o
 |
@@ -578,150 +271,69 @@ make の実行
    |- libacsampled_la-example.gcno
    |- libacsampled_la-example.lo
    |- libacsampled_la-example.o
-</code></pre><p>生成されたバイナリファイルを実行します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ main/acsample
-Usage: ... <span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span> ... /main/.libs/acsample &lt;name&gt; &lt;value&gt; &lt;value2&gt;
-$ main/acsample a <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span>
-name : a
-value: <span style=color:#ae81ff>3</span>
-</code></pre></div><p>実行できました．</p>
-<h3 id=make-check-の実行>
-make check の実行
-<a class=anchor href=#make-check-%e3%81%ae%e5%ae%9f%e8%a1%8c>#</a>
-</h3>
-<p>make check によってテストが実行できます． <br>
-make check では，test/Makefile.am に TESTS で指定した実行可能ファイルが実行されます． <br>
-さらに，Google Test によるテストコードもビルドするようにしています．</p>
-<p>そこで，make check でテストコードがビルドされ，実行できることを確認してみます．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ make check
-
-...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
-
-PASS: test_acsample
-<span style=color:#f92672>============================================================================</span>
-Testsuite summary <span style=color:#66d9ef>for</span> autoconf_sample 0.0.2
-<span style=color:#f92672>============================================================================</span>
-<span style=color:#75715e># TOTAL: 1</span>
-<span style=color:#75715e># PASS:  1</span>
-<span style=color:#75715e># SKIP:  0</span>
-<span style=color:#75715e># XFAIL: 0</span>
-<span style=color:#75715e># FAIL:  0</span>
-<span style=color:#75715e># XPASS: 0</span>
-<span style=color:#75715e># ERROR: 0</span>
-<span style=color:#f92672>============================================================================</span>
-
-...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
-
-make  check-local
-
-...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
-
-test/test_acsample
-Running main<span style=color:#f92672>()</span> from ... <span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span> ... /gtest_main.cc
-<span style=color:#f92672>[==========]</span> Running <span style=color:#ae81ff>4</span> tests from <span style=color:#ae81ff>1</span> test suite.
-<span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> Global test environment set-up.
-<span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> <span style=color:#ae81ff>4</span> tests from ExampleTest
-<span style=color:#f92672>[</span> RUN      <span style=color:#f92672>]</span> ExampleTest.SetValue
-<span style=color:#f92672>[</span>       OK <span style=color:#f92672>]</span> ExampleTest.SetValue <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms<span style=color:#f92672>)</span>
-<span style=color:#f92672>[</span> RUN      <span style=color:#f92672>]</span> ExampleTest.AddValue
-<span style=color:#f92672>[</span>       OK <span style=color:#f92672>]</span> ExampleTest.AddValue <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms<span style=color:#f92672>)</span>
-<span style=color:#f92672>[</span> RUN      <span style=color:#f92672>]</span> ExampleTest.SetName
-<span style=color:#f92672>[</span>       OK <span style=color:#f92672>]</span> ExampleTest.SetName <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms<span style=color:#f92672>)</span>
-<span style=color:#f92672>[</span> RUN      <span style=color:#f92672>]</span> ExampleTest.Show
-<span style=color:#f92672>[</span>       OK <span style=color:#f92672>]</span> ExampleTest.Show <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms<span style=color:#f92672>)</span>
-<span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> <span style=color:#ae81ff>4</span> tests from ExampleTest <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms total<span style=color:#f92672>)</span>
-
-<span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> Global test environment tear-down
-<span style=color:#f92672>[==========]</span> <span style=color:#ae81ff>4</span> tests from <span style=color:#ae81ff>1</span> test suite ran. <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms total<span style=color:#f92672>)</span>
-<span style=color:#f92672>[</span>  PASSED  <span style=color:#f92672>]</span> <span style=color:#ae81ff>4</span> tests.
-</code></pre></div><p>実行できました．</p>
-<h3 id=make-install-の実行>
-make install の実行
-<a class=anchor href=#make-install-%e3%81%ae%e5%ae%9f%e8%a1%8c>#</a>
-</h3>
-<p>make install/uninstall によって，バイナリファイルのインストール，アンインストールができるので，試してみます．</p>
-<p>make install を実行します．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ sudo make install
-</code></pre></div><p>パスを指定せずに acsample が実行できるようになります．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ acsample
-Usage: acsample &lt;name&gt; &lt;value&gt; &lt;value2&gt;
-$ acsample a <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span>
-name : a
-value: <span style=color:#ae81ff>3</span>
-</code></pre></div><p>実行できました．</p>
-<p>また，ライブラリやヘッダファイルがインストールされています．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ ls /usr/local/include/cpp_env_sample
-example.h
-$ ls /usr/local/lib/libacsample*
-/usr/local/lib/libacsample.a   /usr/local/lib/libacsample.so    /usr/local/lib/libacsample.so.0.0.3
-/usr/local/lib/libacsample.la  /usr/local/lib/libacsample.so.0
-</code></pre></div><p>アンインストールしておきます．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ sudo make uninstall
-</code></pre></div><h3 id=その他>
-その他
-<a class=anchor href=#%e3%81%9d%e3%81%ae%e4%bb%96>#</a>
-</h3>
-<p>make clean, make dist, make distclean などが使えますが省略します．</p>
-<h2 id=まとめ>
-まとめ
-<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a>
-</h2>
-<p>本ページでは，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．</p>
-<h2 id=参考文献>
-参考文献
-<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a>
-</h2>
-<p><a id=cite:1></a>
-[1] htakeuchi0, &ldquo;htakeuchi0/autoconf_sample: A C++ autoconf sample project&rdquo;, <a href=https://github.com/htakeuchi0/autoconf_sample>https://github.com/htakeuchi0/autoconf_sample</a>, 2023/1/8 最終アクセス．</p>
-</article>
-<hr>
-<p>
-<small>
-<a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。
-</small>
-</p>
-<footer class=book-footer>
-<div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/af97caecd0dd31991c50c48ea0c9d4814bb8a82b title="Last modified by htakeuchi0 | January 8, 2023" target=_blank rel=noopener>
-<img src=/svg/calendar.svg class=book-icon alt=Calendar>
-<span>January 8, 2023</span>
-</a>
-</div>
-</div>
-<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){if(window.getSelection().toString())return;a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
-</footer>
-<div class=book-comments>
-</div>
-<label for=menu-control class="hidden book-menu-overlay"></label>
-</div>
-<aside class=book-toc>
-<div class=book-toc-content>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#概要>概要</a></li>
-<li><a href=#github-リポジトリ>Github リポジトリ</a></li>
-<li><a href=#準備>準備</a></li>
-<li><a href=#autoconf-の実行と種々の設定>autoconf の実行と種々の設定</a>
-<ul>
-<li><a href=#configureac-の作成>configure.ac の作成</a></li>
-<li><a href=#makefileam-の作成>Makefile.am の作成</a></li>
-<li><a href=#autoconf-コマンドの実行>autoconf コマンドの実行</a></li>
-</ul>
-</li>
-<li><a href=#動作確認>動作確認</a>
-<ul>
-<li><a href=#make-の実行>make の実行</a></li>
-<li><a href=#make-check-の実行>make check の実行</a></li>
-<li><a href=#make-install-の実行>make install の実行</a></li>
-<li><a href=#その他>その他</a></li>
-</ul>
-</li>
-<li><a href=#まとめ>まとめ</a></li>
-<li><a href=#参考文献>参考文献</a></li>
-</ul>
-</nav>
-</div>
-</aside>
-</main>
-</body>
-</html>
+</code></pre><p>生成されたバイナリファイルを実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ main/acsample
+</span></span><span style=display:flex><span>Usage: ... <span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span> ... /main/.libs/acsample &lt;name&gt; &lt;value&gt; &lt;value2&gt;
+</span></span><span style=display:flex><span>$ main/acsample a <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>name : a
+</span></span><span style=display:flex><span>value: <span style=color:#ae81ff>3</span>
+</span></span></code></pre></div><p>実行できました．</p><h3 id=make-check-の実行>make check の実行
+<a class=anchor href=#make-check-%e3%81%ae%e5%ae%9f%e8%a1%8c>#</a></h3><p>make check によってテストが実行できます．<br>make check では，test/Makefile.am に TESTS で指定した実行可能ファイルが実行されます．<br>さらに，Google Test によるテストコードもビルドするようにしています．</p><p>そこで，make check でテストコードがビルドされ，実行できることを確認してみます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ make check
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>PASS: test_acsample
+</span></span><span style=display:flex><span><span style=color:#f92672>============================================================================</span>
+</span></span><span style=display:flex><span>Testsuite summary <span style=color:#66d9ef>for</span> autoconf_sample 0.0.2
+</span></span><span style=display:flex><span><span style=color:#f92672>============================================================================</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># TOTAL: 1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># PASS:  1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># SKIP:  0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># XFAIL: 0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># FAIL:  0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># XPASS: 0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ERROR: 0</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>============================================================================</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>make  check-local
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>...<span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span>...
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>test/test_acsample
+</span></span><span style=display:flex><span>Running main<span style=color:#f92672>()</span> from ... <span style=color:#f92672>(</span>省略<span style=color:#f92672>)</span> ... /gtest_main.cc
+</span></span><span style=display:flex><span><span style=color:#f92672>[==========]</span> Running <span style=color:#ae81ff>4</span> tests from <span style=color:#ae81ff>1</span> test suite.
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> Global test environment set-up.
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> <span style=color:#ae81ff>4</span> tests from ExampleTest
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span> RUN      <span style=color:#f92672>]</span> ExampleTest.SetValue
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>       OK <span style=color:#f92672>]</span> ExampleTest.SetValue <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span> RUN      <span style=color:#f92672>]</span> ExampleTest.AddValue
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>       OK <span style=color:#f92672>]</span> ExampleTest.AddValue <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span> RUN      <span style=color:#f92672>]</span> ExampleTest.SetName
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>       OK <span style=color:#f92672>]</span> ExampleTest.SetName <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span> RUN      <span style=color:#f92672>]</span> ExampleTest.Show
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>       OK <span style=color:#f92672>]</span> ExampleTest.Show <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> <span style=color:#ae81ff>4</span> tests from ExampleTest <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms total<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>----------<span style=color:#f92672>]</span> Global test environment tear-down
+</span></span><span style=display:flex><span><span style=color:#f92672>[==========]</span> <span style=color:#ae81ff>4</span> tests from <span style=color:#ae81ff>1</span> test suite ran. <span style=color:#f92672>(</span><span style=color:#ae81ff>0</span> ms total<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>  PASSED  <span style=color:#f92672>]</span> <span style=color:#ae81ff>4</span> tests.
+</span></span></code></pre></div><p>実行できました．</p><h3 id=make-install-の実行>make install の実行
+<a class=anchor href=#make-install-%e3%81%ae%e5%ae%9f%e8%a1%8c>#</a></h3><p>make install/uninstall によって，バイナリファイルのインストール，アンインストールができるので，試してみます．</p><p>make install を実行します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ sudo make install
+</span></span></code></pre></div><p>パスを指定せずに acsample が実行できるようになります．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ acsample
+</span></span><span style=display:flex><span>Usage: acsample &lt;name&gt; &lt;value&gt; &lt;value2&gt;
+</span></span><span style=display:flex><span>$ acsample a <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>name : a
+</span></span><span style=display:flex><span>value: <span style=color:#ae81ff>3</span>
+</span></span></code></pre></div><p>実行できました．</p><p>また，ライブラリやヘッダファイルがインストールされています．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ ls /usr/local/include/cpp_env_sample
+</span></span><span style=display:flex><span>example.h
+</span></span><span style=display:flex><span>$ ls /usr/local/lib/libacsample*
+</span></span><span style=display:flex><span>/usr/local/lib/libacsample.a   /usr/local/lib/libacsample.so    /usr/local/lib/libacsample.so.0.0.3
+</span></span><span style=display:flex><span>/usr/local/lib/libacsample.la  /usr/local/lib/libacsample.so.0
+</span></span></code></pre></div><p>アンインストールしておきます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ sudo make uninstall
+</span></span></code></pre></div><h3 id=その他>その他
+<a class=anchor href=#%e3%81%9d%e3%81%ae%e4%bb%96>#</a></h3><p>make clean, make dist, make distclean などが使えますが省略します．</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，<a href=https://htakeuchi0.github.io/docs/cpp/env/make/>Makefile プロジェクト</a> とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>
+[1] htakeuchi0, &ldquo;htakeuchi0/autoconf_sample: A C++ autoconf sample project&rdquo;, <a href=https://github.com/htakeuchi0/autoconf_sample>https://github.com/htakeuchi0/autoconf_sample</a>, 2023/1/8 最終アクセス．</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/af97caecd0dd31991c50c48ea0c9d4814bb8a82b title='Last modified by htakeuchi0 | January 8, 2023' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
+<span>January 8, 2023</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#github-リポジトリ>Github リポジトリ</a></li><li><a href=#準備>準備</a></li><li><a href=#autoconf-の実行と種々の設定>autoconf の実行と種々の設定</a><ul><li><a href=#configureac-の作成>configure.ac の作成</a></li><li><a href=#makefileam-の作成>Makefile.am の作成</a></li><li><a href=#autoconf-コマンドの実行>autoconf コマンドの実行</a></li></ul></li><li><a href=#動作確認>動作確認</a><ul><li><a href=#make-の実行>make の実行</a></li><li><a href=#make-check-の実行>make check の実行</a></li><li><a href=#make-install-の実行>make install の実行</a></li><li><a href=#その他>その他</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>

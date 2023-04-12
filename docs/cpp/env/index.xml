@@ -7,7 +7,8 @@ https://github.com/htakeuchi0/cpp_env_sample
 OS: Linux (Ubuntu 18.04.5 LTS)
 コンパイラ: g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0 OS: Linux (Ubuntu 20.04.1 LTS)
 コンパイラ: g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 単体試験，カバレッジ計測，ドキュメント生成に，それぞれ以下を利用するものとします．
-Google Test [2] LCOV [3] Doxygen [4] ディレクトリ構成 # ディレクトリ構成の例は以下の通りです．</description></item><item><title>autoconf プロジェクト (1)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</guid><description>autoconf プロジェクト (1) # 概要 # 前ページでは，Makefile プロジェクトの例について説明しました．本ページでは，autoconf を使った Makefile の自動生成について説明します．
+Google Test [2] LCOV [3] Doxygen [4] ディレクトリ構成 # ディレクトリ構成の例は以下の通りです．
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.</description></item><item><title>autoconf プロジェクト (1)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</guid><description>autoconf プロジェクト (1) # 概要 # 前ページでは，Makefile プロジェクトの例について説明しました．本ページでは，autoconf を使った Makefile の自動生成について説明します．
 本ページでは，わかりやすさを優先し，やや不自然な箇所がありますが，できるだけ簡単な準備で autoconf による Makefile 生成と，make の実行を試みます．
 準備 # Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
 |- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.cc | |- scripts/ - 環境構築用スクリプト | |- install_doxygen.sh | |- install_gtest.</description></item><item><title>autoconf プロジェクト (2)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf2/</guid><description>autoconf プロジェクト (2) # 概要 # 前ページでは，autoconf を使った Makefile の自動生成について説明しましたが，Makefile.am は main と test ディレクトリだけに配置し，subdir-objects オプションを使いました．
@@ -22,7 +23,8 @@ make clean をしても *.gcno, *.gcda のファイルが残る make check で G
 make clean をしたとき *.gcno, *.gcda のファイルを消すようにする # 本節では，make clean をしたときに削除されないファイルがあることへの対処法を説明します．
 本プロジェクトの場合，削除されないファイルは src/*.gcno, test/*.gcno, test/*.gcda ですが，これらファイルは make check で使っている gcov のカバレッジ計測用ファイルです．
 このように &amp;ldquo;ローカルルール&amp;rdquo; で生成されたファイルを消すには，clean のローカルルールのようなものを定義してあげる必要があります．
-前ページ で，プロジェクトのルートディレクトリに以下のような Makefile.am を用意しました．</description></item><item><title>autoconf プロジェクト (4)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf4/</guid><description>autoconf プロジェクト (4) # 概要 # 前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
+前ページ で，プロジェクトのルートディレクトリに以下のような Makefile.am を用意しました．
+SUBDIRS = include src main test ACLOCAL_AMFLAGS = -I m4 ここに以下のルールを追加します．</description></item><item><title>autoconf プロジェクト (4)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf4/</guid><description>autoconf プロジェクト (4) # 概要 # 前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
 本ページでは，これまでの説明の総括として，autoconf プロジェクト(1) や autoconf プロジェクト (2) と同じ節構成で，Makefile プロジェクト をもとにした autoconf プロジェクトの作成手順を説明します．
 Github リポジトリ # 本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ [1] として公開しています．
 https://github.com/htakeuchi0/autoconf_sample

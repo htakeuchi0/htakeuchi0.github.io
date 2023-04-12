@@ -1,579 +1,306 @@
-<!doctype html><html lang=ja-jp dir=ltr>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="std::function とその周辺 #  概要 #  前ページまでは，関数ポインタやメンバ関数ポインタについて説明しました．本ページでは，標準ライブラリ std::function を利用する方法について説明します．
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="std::function とその周辺 # 概要 # 前ページまでは，関数ポインタやメンバ関数ポインタについて説明しました．本ページでは，標準ライブラリ std::function を利用する方法について説明します．
 実用上は std::function を使う方法で十分と思います．
-std::function について #  functional ヘッダを include すると，std::function が利用できます． std::function の定義は以下のとおりです [1]． テンプレートクラスですが，テンプレートの特殊化によって，関数型のみが受け付けられるようになっています．
+std::function について # functional ヘッダを include すると，std::function が利用できます． std::function の定義は以下のとおりです [1]． テンプレートクラスですが，テンプレートの特殊化によって，関数型のみが受け付けられるようになっています．
 template <class> class function; /* undefined */ template <class R, class... Args> class function<R(Args...)>; まず，Args... は可変テンプレート引数の型を表します． よって，R(Args...) は 戻り値の型が R で，引数の型が Args... である関数の型です． したがって，Newton 関数を以下のように定義しておけば，f, df は関数を渡せます．
-#include <cmath>#include <functional> using func_t = std::function<double(double)>; double Newton(func_t f, func_t df, double x0, double eps=1.0e-10, std::size_t loop_max=1024) { double x = x0; for (std::size_t i = 0; i < loop_max; i++) { x -= f(x) / df(x); if (std::abs(f(x)) < eps) { return x; } } throw std::runtime_error(&#34;Convergence error: This method did not converge.">
-<meta name=theme-color content="#FFFFFF">
-<meta name=color-scheme content="light dark"><meta property="og:title" content="std::function とその周辺">
-<meta property="og:description" content="std::function とその周辺 #  概要 #  前ページまでは，関数ポインタやメンバ関数ポインタについて説明しました．本ページでは，標準ライブラリ std::function を利用する方法について説明します．
+#include <cmath> #include <functional> using func_t = std::function<double(double)>; double Newton(func_t f, func_t df, double x0, double eps=1.0e-10, std::size_t loop_max=1024) { double x = x0; for (std::size_t i = 0; i < loop_max; i++) { x -= f(x) / df(x); if (std::abs(f(x)) < eps) { return x; } } throw std::runtime_error(&#34;Convergence error: This method did not converge."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="std::function とその周辺"><meta property="og:description" content="std::function とその周辺 # 概要 # 前ページまでは，関数ポインタやメンバ関数ポインタについて説明しました．本ページでは，標準ライブラリ std::function を利用する方法について説明します．
 実用上は std::function を使う方法で十分と思います．
-std::function について #  functional ヘッダを include すると，std::function が利用できます． std::function の定義は以下のとおりです [1]． テンプレートクラスですが，テンプレートの特殊化によって，関数型のみが受け付けられるようになっています．
+std::function について # functional ヘッダを include すると，std::function が利用できます． std::function の定義は以下のとおりです [1]． テンプレートクラスですが，テンプレートの特殊化によって，関数型のみが受け付けられるようになっています．
 template <class> class function; /* undefined */ template <class R, class... Args> class function<R(Args...)>; まず，Args... は可変テンプレート引数の型を表します． よって，R(Args...) は 戻り値の型が R で，引数の型が Args... である関数の型です． したがって，Newton 関数を以下のように定義しておけば，f, df は関数を渡せます．
-#include <cmath>#include <functional> using func_t = std::function<double(double)>; double Newton(func_t f, func_t df, double x0, double eps=1.0e-10, std::size_t loop_max=1024) { double x = x0; for (std::size_t i = 0; i < loop_max; i++) { x -= f(x) / df(x); if (std::abs(f(x)) < eps) { return x; } } throw std::runtime_error(&#34;Convergence error: This method did not converge.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://htakeuchi0.github.io/docs/cpp/fp/stdfunc/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-09-17T17:08:09+09:00">
-<title>std::function とその周辺 | htakeuchi0 のノート</title>
-<link rel=manifest href=/manifest.json>
-<link rel=icon href=/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-RXNBZFC7LX',{anonymize_ip:!1})}</script>
-</head>
-<body dir=ltr>
-<input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control>
-<main class="container flex">
-<aside class=book-menu>
-<div class=book-menu-content>
-<nav>
-<h2 class=book-brand>
-<a class="flex align-center" href=/><span>htakeuchi0 のノート</span>
-</a>
-</h2>
-<ul>
-<li>
-<a href=/docs/cpp/>C++</a>
-<ul>
-<li>
-<a href=/docs/cpp/env/>開発環境</a>
-<ul>
-<li>
-<a href=/docs/cpp/env/make/>Makefile プロジェクト</a>
-</li>
-<li>
-<a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a>
-</li>
-<li>
-<a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a>
-</li>
-<li>
-<a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a>
-</li>
-<li>
-<a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/cpp/fp/>関数ポインタ</a>
-<ul>
-<li>
-<a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a>
-</li>
-<li>
-<a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a>
-</li>
-<li>
-<a href=/docs/cpp/fp/stdfunc/ class=active>std::function とその周辺</a>
-</li>
-<li>
-<a href=/docs/cpp/fp/fref/>関数への参照</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/cpp/arrp/>配列へのポインタ</a>
-<ul>
-<li>
-<a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a>
-</li>
-<li>
-<a href=/docs/cpp/arrp/arr_ref/>配列への参照</a>
-</li>
-<li>
-<a href=/docs/cpp/arrp/stdarray/>std::array について</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/math/>数学一般</a>
-<ul>
-<li>
-<a href=/docs/math/exp/>指数関数の定積分</a>
-</li>
-<li>
-<a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a>
-</li>
-<li>
-<a href=/docs/math/stat/>数理統計</a>
-<ul>
-<li>
-<a href=/docs/math/stat/dice/>サイコロの出目の確率</a>
-<ul>
-<li>
-<a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a>
-</li>
-<li>
-<a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a>
-</li>
-<li>
-<a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a>
-</li>
-<li>
-<a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a>
-</li>
-<li>
-<a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/math/year2023/>2023</a>
-<ul>
-<li>
-<a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/hugo/>Hugo</a>
-<ul>
-<li>
-<a href=/docs/hugo/base/>空のサイトの生成</a>
-</li>
-<li>
-<a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a>
-</li>
-<li>
-<a href=/docs/hugo/genpages/>公開用ファイルの生成</a>
-</li>
-<li>
-<a href=/docs/hugo/shortcode/>独自ショートコードの定義</a>
-</li>
-<li>
-<a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=/docs/others/>その他</a>
-<ul>
-<li>
-<a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>
-<a href=/#disclaimer target=_blank rel=noopener>
-免責事項
-</a>
-</li>
-<li>
-<a href=/#privacy_policy target=_blank rel=noopener>
-プライバシーポリシー
-</a>
-</li>
-</ul>
-</nav>
-<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-</div>
-</aside>
-<div class=book-page>
-<header class=book-header>
-<div class="flex align-center justify-between">
-<label for=menu-control>
-<img src=/svg/menu.svg class=book-icon alt=Menu>
-</label>
+#include <cmath> #include <functional> using func_t = std::function<double(double)>; double Newton(func_t f, func_t df, double x0, double eps=1.0e-10, std::size_t loop_max=1024) { double x = x0; for (std::size_t i = 0; i < loop_max; i++) { x -= f(x) / df(x); if (std::abs(f(x)) < eps) { return x; } } throw std::runtime_error(&#34;Convergence error: This method did not converge."><meta property="og:type" content="article"><meta property="og:url" content="https://htakeuchi0.github.io/docs/cpp/fp/stdfunc/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-09-17T17:08:09+09:00"><title>std::function とその周辺 | htakeuchi0 のノート</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX",{anonymize_ip:!1})}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/ class=active>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>std::function とその周辺</strong>
-<label for=toc-control>
-<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
-</label>
-</div>
-<aside class="hidden clearfix">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#概要>概要</a></li>
-<li><a href=#stdfunction-について>std::function について</a></li>
-<li><a href=#ラムダ式>ラムダ式</a></li>
-<li><a href=#メンバ関数の場合>メンバ関数の場合</a></li>
-<li><a href=#まとめ>まとめ</a></li>
-<li><a href=#参考文献>参考文献</a></li>
-</ul>
-</nav>
-</aside>
-</header>
-<article class=markdown><h1 id=stdfunction-とその周辺>
-std::function とその周辺
-<a class=anchor href=#stdfunction-%e3%81%a8%e3%81%9d%e3%81%ae%e5%91%a8%e8%be%ba>#</a>
-</h1>
-<h2 id=概要>
-概要
-<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
-</h2>
-<p>前ページまでは，関数ポインタやメンバ関数ポインタについて説明しました．本ページでは，標準ライブラリ <code>std::function</code> を利用する方法について説明します．</p>
-<p>実用上は <code>std::function</code> を使う方法で十分と思います．</p>
-<h2 id=stdfunction-について>
-std::function について
-<a class=anchor href=#stdfunction-%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6>#</a>
-</h2>
-<p><code>functional</code> ヘッダを include すると，<code>std::function</code> が利用できます．
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#stdfunction-について>std::function について</a></li><li><a href=#ラムダ式>ラムダ式</a></li><li><a href=#メンバ関数の場合>メンバ関数の場合</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class=markdown><h1 id=stdfunction-とその周辺>std::function とその周辺
+<a class=anchor href=#stdfunction-%e3%81%a8%e3%81%9d%e3%81%ae%e5%91%a8%e8%be%ba>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>前ページまでは，関数ポインタやメンバ関数ポインタについて説明しました．本ページでは，標準ライブラリ <code>std::function</code> を利用する方法について説明します．</p><p>実用上は <code>std::function</code> を使う方法で十分と思います．</p><h2 id=stdfunction-について>std::function について
+<a class=anchor href=#stdfunction-%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6>#</a></h2><p><code>functional</code> ヘッダを include すると，<code>std::function</code> が利用できます．
 <code>std::function</code> の定義は以下のとおりです <a href=#cite:1>[1]</a>．
-テンプレートクラスですが，テンプレートの特殊化によって，関数型のみが受け付けられるようになっています．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span><span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>function</span>;     <span style=color:#75715e>/* undefined */</span>
-
-<span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>R</span>, <span style=color:#66d9ef>class</span><span style=color:#960050;background-color:#1e0010>... </span><span style=color:#a6e22e>Args</span><span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>function</span><span style=color:#f92672>&lt;</span>R(Args...)<span style=color:#f92672>&gt;</span>;
-</code></pre></div><p>まず，<code>Args...</code> は可変テンプレート引数の型を表します．
+テンプレートクラスですが，テンプレートの特殊化によって，関数型のみが受け付けられるようになっています．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>function</span>;     <span style=color:#75715e>/* undefined */</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>R</span>, <span style=color:#66d9ef>class</span><span style=color:#960050;background-color:#1e0010>... </span><span style=color:#a6e22e>Args</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>function</span><span style=color:#f92672>&lt;</span>R(Args...)<span style=color:#f92672>&gt;</span>;
+</span></span></code></pre></div><p>まず，<code>Args...</code> は可変テンプレート引数の型を表します．
 よって，<code>R(Args...)</code> は 戻り値の型が <code>R</code> で，引数の型が <code>Args...</code> である関数の型です．
-したがって，<code>Newton</code> 関数を以下のように定義しておけば，<code>f</code>, <code>df</code> は関数を渡せます．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e></span>
-<span style=color:#66d9ef>using</span> func_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
-
-<span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Newton</span>(func_t f, func_t df, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
-    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
-  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
-    x <span style=color:#f92672>-=</span> f(x) <span style=color:#f92672>/</span> df(x);
-    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(f(x)) <span style=color:#f92672>&lt;</span> eps) {
-      <span style=color:#66d9ef>return</span> x;
-    }
-  }
-  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
-}
-</code></pre></div><p>たとえば，</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e></span>
-<span style=color:#66d9ef>using</span> func_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
-
-<span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Newton</span>(func_t f, func_t df, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
-    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
-  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
-    x <span style=color:#f92672>-=</span> f(x) <span style=color:#f92672>/</span> df(x);
-    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(f(x)) <span style=color:#f92672>&lt;</span> eps) {
-      <span style=color:#66d9ef>return</span> x;
-    }
-  }
-  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
-}
-
-<span style=color:#66d9ef>double</span> <span style=color:#a6e22e>f</span>(<span style=color:#66d9ef>double</span> x) {
-  <span style=color:#66d9ef>return</span> x<span style=color:#f92672>*</span>x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>;
-}
-
-<span style=color:#66d9ef>double</span> <span style=color:#a6e22e>df</span>(<span style=color:#66d9ef>double</span> x) {
-  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x;
-}
-
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
-  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, x0);
-  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-}
-</code></pre></div><p>という形で呼べます．</p>
-<h2 id=ラムダ式>
-ラムダ式
-<a class=anchor href=#%e3%83%a9%e3%83%a0%e3%83%80%e5%bc%8f>#</a>
-</h2>
-<p>C++ は <strong>ラムダ式</strong> という機能をもっています．
+したがって，<code>Newton</code> 関数を以下のように定義しておけば，<code>f</code>, <code>df</code> は関数を渡せます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> func_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Newton</span>(func_t f, func_t df, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>-=</span> f(x) <span style=color:#f92672>/</span> df(x);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(f(x)) <span style=color:#f92672>&lt;</span> eps) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>たとえば，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> func_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Newton</span>(func_t f, func_t df, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>-=</span> f(x) <span style=color:#f92672>/</span> df(x);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(f(x)) <span style=color:#f92672>&lt;</span> eps) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> <span style=color:#a6e22e>f</span>(<span style=color:#66d9ef>double</span> x) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> x<span style=color:#f92672>*</span>x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> <span style=color:#a6e22e>df</span>(<span style=color:#66d9ef>double</span> x) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, x0);
+</span></span><span style=display:flex><span>  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>という形で呼べます．</p><h2 id=ラムダ式>ラムダ式
+<a class=anchor href=#%e3%83%a9%e3%83%a0%e3%83%80%e5%bc%8f>#</a></h2><p>C++ は <strong>ラムダ式</strong> という機能をもっています．
 ラムダ式というのは，簡易的な関数オブジェクトをその場で定義するための機能です．
-これまで定義していた関数 <code>f</code> に同等のラムダ式は <code>[](double x) { return x*x - 2.0; }</code> となります．</p>
-<p><code>std::function</code> で定義した <code>Newton</code> 関数ではラムダ式を引数に渡すことができます．
-実行例は以下のようになります．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>// 同上のため略
-</span><span style=color:#75715e></span>
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
-  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton([](<span style=color:#66d9ef>double</span> x) { <span style=color:#66d9ef>return</span> x<span style=color:#f92672>*</span>x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2.0</span>; }, [](<span style=color:#66d9ef>double</span> x){ <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>2.0</span><span style=color:#f92672>*</span>x; }, x0);
-  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-}
-</code></pre></div><p>ただし，ラムダ式は関数ポインタ型変数に代入できるため，<code>Newton</code> 関数の引数を関数ポインタとした場合でも，ラムダ式で指定することができます．</p>
-<h2 id=メンバ関数の場合>
-メンバ関数の場合
-<a class=anchor href=#%e3%83%a1%e3%83%b3%e3%83%90%e9%96%a2%e6%95%b0%e3%81%ae%e5%a0%b4%e5%90%88>#</a>
-</h2>
-<p>メンバ関数の場合は，<code>std::bind</code> を利用すると，<code>Newton</code> 関数を変更せずに呼べます．
-<code>std::bind(&Polynomial::Eval, f, _1)</code> は <code>f.Eval(_1)</code> に相当する関数オブジェクトを返します．
-<code>_1</code> はプレースホルダであり，あとから値を指定できます．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>// 同上のため略
-</span><span style=color:#75715e></span>
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
-  Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
-  Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
-
-  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-  <span style=color:#66d9ef>using</span> std<span style=color:#f92672>::</span>placeholders<span style=color:#f92672>::</span>_1;
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(std<span style=color:#f92672>::</span>bind(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval, f, _1),
-    std<span style=color:#f92672>::</span>bind(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval, df, _1), x0);
-  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-}
-</code></pre></div><p>メンバ関数を直接 <code>std::function</code> 型に代入するには，</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>const</span> Polynomial<span style=color:#f92672>&amp;</span>, <span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span> func <span style=color:#f92672>=</span> <span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval;
-</code></pre></div><p>とすれば可能です．
+これまで定義していた関数 <code>f</code> に同等のラムダ式は <code>[](double x) { return x*x - 2.0; }</code> となります．</p><p><code>std::function</code> で定義した <code>Newton</code> 関数ではラムダ式を引数に渡すことができます．
+実行例は以下のようになります．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>// 同上のため略
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton([](<span style=color:#66d9ef>double</span> x) { <span style=color:#66d9ef>return</span> x<span style=color:#f92672>*</span>x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2.0</span>; }, [](<span style=color:#66d9ef>double</span> x){ <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>2.0</span><span style=color:#f92672>*</span>x; }, x0);
+</span></span><span style=display:flex><span>  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>ただし，ラムダ式は関数ポインタ型変数に代入できるため，<code>Newton</code> 関数の引数を関数ポインタとした場合でも，ラムダ式で指定することができます．</p><h2 id=メンバ関数の場合>メンバ関数の場合
+<a class=anchor href=#%e3%83%a1%e3%83%b3%e3%83%90%e9%96%a2%e6%95%b0%e3%81%ae%e5%a0%b4%e5%90%88>#</a></h2><p>メンバ関数の場合は，<code>std::bind</code> を利用すると，<code>Newton</code> 関数を変更せずに呼べます．
+<code>std::bind(&amp;Polynomial::Eval, f, _1)</code> は <code>f.Eval(_1)</code> に相当する関数オブジェクトを返します．
+<code>_1</code> はプレースホルダであり，あとから値を指定できます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>// 同上のため略
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>  Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
+</span></span><span style=display:flex><span>  Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>using</span> std<span style=color:#f92672>::</span>placeholders<span style=color:#f92672>::</span>_1;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(std<span style=color:#f92672>::</span>bind(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval, f, _1),
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>bind(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval, df, _1), x0);
+</span></span><span style=display:flex><span>  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>メンバ関数を直接 <code>std::function</code> 型に代入するには，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span>std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>const</span> Polynomial<span style=color:#f92672>&amp;</span>, <span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span> func <span style=color:#f92672>=</span> <span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval;
+</span></span></code></pre></div><p>とすれば可能です．
 つまり，第1引数にオブジェクトを指定できるようにするということです．
-今回の場合は，オブジェクト自体を更新しないので，<code>const Polynomial&</code> としておきます．</p>
-<p>呼び出すときは，</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>1.0</span> };
-func(f, <span style=color:#ae81ff>1.0</span>); <span style=color:#75715e>// f.Eval(1.0) = -1.0
-</span></code></pre></div><p>または，コンストラクタに渡す値を指定して，</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>func({ <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>1.0</span> }, <span style=color:#ae81ff>1.0</span>); <span style=color:#75715e>// f.Eval(1.0) = -1.0
-</span></code></pre></div><p>で呼べます．</p>
-<p>これを利用して <code>Newton</code> 関数に直接メンバ関数ポインタを渡せるようにするには，メンバ関数ポインタを使ったときと同様，以下のように書けばよいです．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e></span>
-<span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>using</span> mfunc_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span>, <span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
-
-<span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>double</span> Newton(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> f, <span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> df, mfunc_t<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> eval, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
-    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
-  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
-    x <span style=color:#f92672>-=</span> eval(f, x) <span style=color:#f92672>/</span> eval(df, x);
-    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(eval(f, x)) <span style=color:#f92672>&lt;</span> eps) {
-      <span style=color:#66d9ef>return</span> x;
-    }
-  }
-  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
-}
-</code></pre></div><p>呼び出すときは以下のようになりますが，関数テンプレートとした関係で，明示的に <code>mfunc_t&lt;Polynomial></code> クラスのコンストラクタでオブジェクトを作って渡す必要があります．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;initializer_list&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e></span>
-<span style=color:#75715e>/**
-</span><span style=color:#75715e> * @brief 多項式関数を表すクラス．
-</span><span style=color:#75715e> *
-</span><span style=color:#75715e> * 例えば f(x) = x^2 - 2 の表現と f(1.0) の計算は以下のようにできる．
-</span><span style=color:#75715e> *
-</span><span style=color:#75715e> * Polynomial f = { -2, 0, 1 };      // x^2 - 2 = -2 + 0x + 1x^2
-</span><span style=color:#75715e> * std::cout &lt;&lt; f.Eval(1.0) &lt;&lt; &#34;\n&#34;; // -1.0 (=f(1.0))
-</span><span style=color:#75715e> */</span>
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Polynomial</span> {
-<span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-  Polynomial(std<span style=color:#f92672>::</span>initializer_list<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> init) <span style=color:#f92672>:</span> coeffs_(init.begin(), init.end()) {}
-
-  <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Eval</span>(<span style=color:#66d9ef>double</span> x) <span style=color:#66d9ef>const</span> {
-    <span style=color:#66d9ef>auto</span> iter <span style=color:#f92672>=</span> coeffs_.crbegin();
-    <span style=color:#66d9ef>double</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.0</span>;
-    <span style=color:#66d9ef>while</span> (iter <span style=color:#f92672>!=</span> coeffs_.crend()) {
-      y <span style=color:#f92672>=</span> y<span style=color:#f92672>*</span>x <span style=color:#f92672>+</span> (<span style=color:#f92672>*</span>iter<span style=color:#f92672>++</span>);
-    }
-    <span style=color:#66d9ef>return</span> y;
-  };
-
-<span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
-  std<span style=color:#f92672>::</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> coeffs_;
-};
-
-<span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>using</span> mfunc_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span>, <span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
-
-<span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>double</span> Newton(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> f, <span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> df, mfunc_t<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> eval, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
-    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
-  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
-    x <span style=color:#f92672>-=</span> eval(f, x) <span style=color:#f92672>/</span> eval(df, x);
-    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(eval(f, x)) <span style=color:#f92672>&lt;</span> eps) {
-      <span style=color:#66d9ef>return</span> x;
-    }
-  }
-  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
-}
-
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
-  Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
-  Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
-
-  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, mfunc_t<span style=color:#f92672>&lt;</span>Polynomial<span style=color:#f92672>&gt;</span>(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval), x0);
-  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-}
-</code></pre></div><p><code>std::mem_fn</code> を使って，メンバ関数を明示的に関数オブジェクトに変換しても可能です．
+今回の場合は，オブジェクト自体を更新しないので，<code>const Polynomial&</code> としておきます．</p><p>呼び出すときは，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span>Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>1.0</span> };
+</span></span><span style=display:flex><span>func(f, <span style=color:#ae81ff>1.0</span>); <span style=color:#75715e>// f.Eval(1.0) = -1.0
+</span></span></span></code></pre></div><p>または，コンストラクタに渡す値を指定して，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span>func({ <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>1.0</span> }, <span style=color:#ae81ff>1.0</span>); <span style=color:#75715e>// f.Eval(1.0) = -1.0
+</span></span></span></code></pre></div><p>で呼べます．</p><p>これを利用して <code>Newton</code> 関数に直接メンバ関数ポインタを渡せるようにするには，メンバ関数ポインタを使ったときと同様，以下のように書けばよいです．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> mfunc_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span>, <span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> Newton(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> f, <span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> df, mfunc_t<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> eval, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>-=</span> eval(f, x) <span style=color:#f92672>/</span> eval(df, x);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(eval(f, x)) <span style=color:#f92672>&lt;</span> eps) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>呼び出すときは以下のようになりますが，関数テンプレートとした関係で，明示的に <code>mfunc_t&lt;Polynomial></code> クラスのコンストラクタでオブジェクトを作って渡す必要があります．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;initializer_list&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @brief 多項式関数を表すクラス．
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 例えば f(x) = x^2 - 2 の表現と f(1.0) の計算は以下のようにできる．
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * Polynomial f = { -2, 0, 1 };      // x^2 - 2 = -2 + 0x + 1x^2
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * std::cout &lt;&lt; f.Eval(1.0) &lt;&lt; &#34;\n&#34;; // -1.0 (=f(1.0))
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Polynomial</span> {
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>  Polynomial(std<span style=color:#f92672>::</span>initializer_list<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> init) <span style=color:#f92672>:</span> coeffs_(init.begin(), init.end()) {}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Eval</span>(<span style=color:#66d9ef>double</span> x) <span style=color:#66d9ef>const</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>auto</span> iter <span style=color:#f92672>=</span> coeffs_.crbegin();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (iter <span style=color:#f92672>!=</span> coeffs_.crend()) {
+</span></span><span style=display:flex><span>      y <span style=color:#f92672>=</span> y<span style=color:#f92672>*</span>x <span style=color:#f92672>+</span> (<span style=color:#f92672>*</span>iter<span style=color:#f92672>++</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> y;
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>  std<span style=color:#f92672>::</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> coeffs_;
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> mfunc_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span>, <span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> Newton(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> f, <span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> df, mfunc_t<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> eval, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>-=</span> eval(f, x) <span style=color:#f92672>/</span> eval(df, x);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(eval(f, x)) <span style=color:#f92672>&lt;</span> eps) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>  Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
+</span></span><span style=display:flex><span>  Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, mfunc_t<span style=color:#f92672>&lt;</span>Polynomial<span style=color:#f92672>&gt;</span>(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval), x0);
+</span></span><span style=display:flex><span>  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><code>std::mem_fn</code> を使って，メンバ関数を明示的に関数オブジェクトに変換しても可能です．
 <code>mfunc_t&lt;Polynomial></code> クラスのコンストラクタを呼ぶ必要があるのは同様です．
-この場合は，あえて <code>std::mem_fn</code> を使うメリットがないかもしれません．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>// 同上のため略
-</span><span style=color:#75715e></span>
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
-  Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
-  Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
-
-  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, mfunc_t<span style=color:#f92672>&lt;</span>Polynomial<span style=color:#f92672>&gt;</span>(std<span style=color:#f92672>::</span>mem_fn(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval)), x0);
-  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-}
-</code></pre></div><p>以上をまとめると，以下のようになります．</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;initializer_list&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
-</span><span style=color:#75715e></span>
-<span style=color:#66d9ef>using</span> func_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
-
-<span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Newton</span>(func_t f, func_t df, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
-    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
-  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
-    x <span style=color:#f92672>-=</span> f(x) <span style=color:#f92672>/</span> df(x);
-    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(f(x)) <span style=color:#f92672>&lt;</span> eps) {
-      <span style=color:#66d9ef>return</span> x;
-    }
-  }
-  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
-}
-
-
-<span style=color:#75715e>/**
-</span><span style=color:#75715e> * @brief 多項式関数を表すクラス．
-</span><span style=color:#75715e> *
-</span><span style=color:#75715e> * 例えば f(x) = x^2 - 2 の表現と f(1.0) の計算は以下のようにできる．
-</span><span style=color:#75715e> *
-</span><span style=color:#75715e> * Polynomial f = { -2, 0, 1 };      // x^2 - 2 = -2 + 0x + 1x^2
-</span><span style=color:#75715e> * std::cout &lt;&lt; f.Eval(1.0) &lt;&lt; &#34;\n&#34;; // -1.0 (=f(1.0))
-</span><span style=color:#75715e> */</span>
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Polynomial</span> {
-<span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
-  Polynomial(std<span style=color:#f92672>::</span>initializer_list<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> init) <span style=color:#f92672>:</span> coeffs_(init.begin(), init.end()) {}
-
-  <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Eval</span>(<span style=color:#66d9ef>double</span> x) <span style=color:#66d9ef>const</span> {
-    <span style=color:#66d9ef>auto</span> iter <span style=color:#f92672>=</span> coeffs_.crbegin();
-    <span style=color:#66d9ef>double</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.0</span>;
-    <span style=color:#66d9ef>while</span> (iter <span style=color:#f92672>!=</span> coeffs_.crend()) {
-      y <span style=color:#f92672>=</span> y<span style=color:#f92672>*</span>x <span style=color:#f92672>+</span> (<span style=color:#f92672>*</span>iter<span style=color:#f92672>++</span>);
-    }
-    <span style=color:#66d9ef>return</span> y;
-  };
-
-<span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
-  std<span style=color:#f92672>::</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> coeffs_;
-};
-
-<span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>using</span> mfunc_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span>, <span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
-
-<span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>double</span> Newton(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> f, <span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> df, mfunc_t<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> eval, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
-    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
-  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
-  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
-    x <span style=color:#f92672>-=</span> eval(f, x) <span style=color:#f92672>/</span> eval(df, x);
-    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(eval(f, x)) <span style=color:#f92672>&lt;</span> eps) {
-      <span style=color:#66d9ef>return</span> x;
-    }
-  }
-  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
-}
-
-<span style=color:#66d9ef>double</span> <span style=color:#a6e22e>f</span>(<span style=color:#66d9ef>double</span> x) {
-  <span style=color:#66d9ef>return</span> x<span style=color:#f92672>*</span>x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>;
-}
-
-<span style=color:#66d9ef>double</span> <span style=color:#a6e22e>df</span>(<span style=color:#66d9ef>double</span> x) {
-  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x;
-}
-
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
-  {
-    <span style=color:#75715e>// 関数
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, x0);
-    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  }
-
-  {
-    <span style=color:#75715e>// ラムダ式
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton([](<span style=color:#66d9ef>double</span> x) { <span style=color:#66d9ef>return</span> x<span style=color:#f92672>*</span>x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2.0</span>; }, [](<span style=color:#66d9ef>double</span> x){ <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>2.0</span><span style=color:#f92672>*</span>x; }, x0);
-    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  }
-
-  {
-    <span style=color:#75715e>// メンバ関数 (1)
-</span><span style=color:#75715e></span>    Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
-    Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
-
-    <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, mfunc_t<span style=color:#f92672>&lt;</span>Polynomial<span style=color:#f92672>&gt;</span>(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval), x0);
-    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  }
-
-  {
-    <span style=color:#75715e>// メンバ関数 (2)
-</span><span style=color:#75715e></span>    Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
-    Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
-
-    <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
-    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, mfunc_t<span style=color:#f92672>&lt;</span>Polynomial<span style=color:#f92672>&gt;</span>(std<span style=color:#f92672>::</span>mem_fn(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval)), x0);
-    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
-</span><span style=color:#75715e></span>  }
-
-  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-}
-</code></pre></div><h2 id=まとめ>
-まとめ
-<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a>
-</h2>
-<p>本ページでは，<code>std::function</code> およびその周辺の標準機能について説明しました．
-関数ポインタやメンバ関数ポインタを利用する方法は，すべて標準ライブラリの機能で実現できます．</p>
-<h2 id=参考文献>
-参考文献
-<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a>
-</h2>
-<p><a id=cite:1></a>
-[1] cppreference.com, &ldquo;std::function - cppreference.com&rdquo;, <a href=https://en.cppreference.com/w/cpp/utility/functional/function>https://en.cppreference.com/w/cpp/utility/functional/function</a>, 2022/8/9 最終アクセス.</p>
-</article>
-<hr>
-<p>
-<small>
-<a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。
-</small>
-</p>
-<footer class=book-footer>
-<div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/d3720984ec317cdc7c53367833815c752d372331 title="Last modified by htakeuchi0 | September 17, 2022" target=_blank rel=noopener>
-<img src=/svg/calendar.svg class=book-icon alt=Calendar>
-<span>September 17, 2022</span>
-</a>
-</div>
-</div>
-<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){if(window.getSelection().toString())return;a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
-</footer>
-<div class=book-comments>
-</div>
-<label for=menu-control class="hidden book-menu-overlay"></label>
-</div>
-<aside class=book-toc>
-<div class=book-toc-content>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#概要>概要</a></li>
-<li><a href=#stdfunction-について>std::function について</a></li>
-<li><a href=#ラムダ式>ラムダ式</a></li>
-<li><a href=#メンバ関数の場合>メンバ関数の場合</a></li>
-<li><a href=#まとめ>まとめ</a></li>
-<li><a href=#参考文献>参考文献</a></li>
-</ul>
-</nav>
-</div>
-</aside>
-</main>
-</body>
-</html>
+この場合は，あえて <code>std::mem_fn</code> を使うメリットがないかもしれません．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>// 同上のため略
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>  Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
+</span></span><span style=display:flex><span>  Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, mfunc_t<span style=color:#f92672>&lt;</span>Polynomial<span style=color:#f92672>&gt;</span>(std<span style=color:#f92672>::</span>mem_fn(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval)), x0);
+</span></span><span style=display:flex><span>  std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>以上をまとめると，以下のようになります．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;functional&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;initializer_list&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> func_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Newton</span>(func_t f, func_t df, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>-=</span> f(x) <span style=color:#f92672>/</span> df(x);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(f(x)) <span style=color:#f92672>&lt;</span> eps) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @brief 多項式関数を表すクラス．
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 例えば f(x) = x^2 - 2 の表現と f(1.0) の計算は以下のようにできる．
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * Polynomial f = { -2, 0, 1 };      // x^2 - 2 = -2 + 0x + 1x^2
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * std::cout &lt;&lt; f.Eval(1.0) &lt;&lt; &#34;\n&#34;; // -1.0 (=f(1.0))
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Polynomial</span> {
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>  Polynomial(std<span style=color:#f92672>::</span>initializer_list<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> init) <span style=color:#f92672>:</span> coeffs_(init.begin(), init.end()) {}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Eval</span>(<span style=color:#66d9ef>double</span> x) <span style=color:#66d9ef>const</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>auto</span> iter <span style=color:#f92672>=</span> coeffs_.crbegin();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (iter <span style=color:#f92672>!=</span> coeffs_.crend()) {
+</span></span><span style=display:flex><span>      y <span style=color:#f92672>=</span> y<span style=color:#f92672>*</span>x <span style=color:#f92672>+</span> (<span style=color:#f92672>*</span>iter<span style=color:#f92672>++</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> y;
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>  std<span style=color:#f92672>::</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> coeffs_;
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> mfunc_t <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>function<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span>, <span style=color:#66d9ef>double</span>)<span style=color:#f92672>&gt;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> Newton(<span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> f, <span style=color:#66d9ef>const</span> T<span style=color:#f92672>&amp;</span> df, mfunc_t<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> eval, <span style=color:#66d9ef>double</span> x0, <span style=color:#66d9ef>double</span> eps<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0e-10</span>,
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>size_t loop_max<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> x0;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (std<span style=color:#f92672>::</span>size_t i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> loop_max; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>-=</span> eval(f, x) <span style=color:#f92672>/</span> eval(df, x);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (std<span style=color:#f92672>::</span>abs(eval(f, x)) <span style=color:#f92672>&lt;</span> eps) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>throw</span> std<span style=color:#f92672>::</span>runtime_error(<span style=color:#e6db74>&#34;Convergence error: This method did not converge.&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> <span style=color:#a6e22e>f</span>(<span style=color:#66d9ef>double</span> x) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> x<span style=color:#f92672>*</span>x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> <span style=color:#a6e22e>df</span>(<span style=color:#66d9ef>double</span> x) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 関数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, x0);
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ラムダ式
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton([](<span style=color:#66d9ef>double</span> x) { <span style=color:#66d9ef>return</span> x<span style=color:#f92672>*</span>x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2.0</span>; }, [](<span style=color:#66d9ef>double</span> x){ <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>2.0</span><span style=color:#f92672>*</span>x; }, x0);
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// メンバ関数 (1)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
+</span></span><span style=display:flex><span>    Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, mfunc_t<span style=color:#f92672>&lt;</span>Polynomial<span style=color:#f92672>&gt;</span>(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval), x0);
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// メンバ関数 (2)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    Polynomial f <span style=color:#f92672>=</span> { <span style=color:#f92672>-</span><span style=color:#ae81ff>2.0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.0</span> };
+</span></span><span style=display:flex><span>    Polynomial df <span style=color:#f92672>=</span> { <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span> };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> x0 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> Newton(f, df, mfunc_t<span style=color:#f92672>&lt;</span>Polynomial<span style=color:#f92672>&gt;</span>(std<span style=color:#f92672>::</span>mem_fn(<span style=color:#f92672>&amp;</span>Polynomial<span style=color:#f92672>::</span>Eval)), x0);
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> x <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;  <span style=color:#75715e>// 1.41421
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，<code>std::function</code> およびその周辺の標準機能について説明しました．
+関数ポインタやメンバ関数ポインタを利用する方法は，すべて標準ライブラリの機能で実現できます．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>
+[1] cppreference.com, &ldquo;std::function - cppreference.com&rdquo;, <a href=https://en.cppreference.com/w/cpp/utility/functional/function>https://en.cppreference.com/w/cpp/utility/functional/function</a>, 2022/8/9 最終アクセス.</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/d3720984ec317cdc7c53367833815c752d372331 title='Last modified by htakeuchi0 | September 17, 2022' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
+<span>September 17, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#stdfunction-について>std::function について</a></li><li><a href=#ラムダ式>ラムダ式</a></li><li><a href=#メンバ関数の場合>メンバ関数の場合</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>
