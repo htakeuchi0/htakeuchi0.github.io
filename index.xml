@@ -185,4 +185,15 @@ hint ショートコードの使いかた # 公式の説明 [3] をもとに，m
 \(\Omega_\infty\) の構成 # \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\) とし， \(\Omega_{\infty}\) を，
 \[\Omega_{\infty}=\{(\omega^i)_{i\in\mathbb{N}}\mid\forall i\in\mathbb{N}\,(\omega^i\in\Omega_1)\}\] つまり， \(\Omega_{\infty}=\Omega^{\mathbb{N}}\) とします1, 2．
 \(\mathfrak{F}_{\infty},P_{\infty}\) の構成 # \(\mathfrak{F}_{\infty},P_{\infty}\) を定めるには準備が必要です． まず， \(1\le k\in\mathbb{N}\) について， \[N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1&amp;lt;\dots&amp;lt;n_k\}\] とし， \(N^{(0)}=\{\emptyset\}\) とします．
-次に， \(1\le k\in\mathbb{N}\) に対し， \(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\) に対して， \[F_{k,\Omega,n}=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega\}\] とし， \(F_{0,\{\emptyset\},n}=\Omega_{\infty},F_{0,\emptyset,n}=\emptyset\) とします．</description></item></channel></rss>
+次に， \(1\le k\in\mathbb{N}\) に対し， \(\Omega\in2^{\Omega_1^k},n\in N^{(k)}\) に対して， \[F_{k,\Omega,n}=\{\omega\in\Omega_{\infty}\mid(\omega^{n_1},\omega^{n_2},\dots,\omega^{n_k})\in\Omega\}\] とし， \(F_{0,\{\emptyset\},n}=\Omega_{\infty},F_{0,\emptyset,n}=\emptyset\) とします．</description></item><item><title>CMake プロジェクト (1)</title><link>https://htakeuchi0.github.io/docs/cpp/env/cmake/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/cmake/</guid><description>CMake プロジェクト (1) # 概要 # 前ページまでで，autoconf プロジェクトの作成方法を説明しました．
+本ページでは，CMake プロジェクトの作成方法を説明します．
+まずは，実行可能ファイルのビルドと Google Test が可能なものを作成します．
+Github リポジトリ # 準備 # Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.cc | |- scripts/ - 環境構築用スクリプト | |- install_doxygen.sh | |- install_gtest.</description></item><item><title>CMake プロジェクト (2)</title><link>https://htakeuchi0.github.io/docs/cpp/env/cmake2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/cmake2/</guid><description>CMake プロジェクト (2) # 概要 # 前ページでは，CMake プロジェクトの基本的な作り方を説明しました．
+本ページでは，make docs で Doxygen ドキュメントが生成できたり，make lcov でカバレッジ計測のレポートが生成できたりするように拡張します．
+これらは，ADD_CUSTOM_TARGET. ADD_CUSTOM_COMMAND を使うと実現できます．
+Github リポジトリ # 本ページで説明するディレクトリ構成の CMake プロジェクトは，以下の Github リポジトリ [1] として公開しています．
+https://github.com/htakeuchi0/cmake_sample
+本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
+準備 # 今回も Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
+|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.</description></item></channel></rss>
