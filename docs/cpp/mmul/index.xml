@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>行列積の計算時間 on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/</link><description>Recent content in 行列積の計算時間 on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/cpp/mmul/index.xml" rel="self" type="application/rss+xml"/><item><title>行列を表現するデータ構造と行列積の計算時間</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/basic/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/basic/</guid><description>行列を表現するデータ構造と行列積の計算時間 # 概要 # \(A=(a_{ij})\) , \(B=(b_{ij})\) を \(n\) 次正方行列とします． 行列 \(A\) , \(B\) の積 \(AB\) は \[(AB)_{ij}=\sum_{k=0}^{n-1}a_{ik}b_{kj},\quad0\le i&amp;lt;n,\quad0\le j&amp;lt;n\] と定義されます1．ただし，行列 \(M\) に対して， \((M)_{ij}\) で \(M\) の第 \((i,j)\) 成分を表します．
 本ページでは，この行列積を，C++を用いていくつかの方針で実装し，実装方針による実行時間を比較します．
 以下， \(n=256\) とし， \(A\) , \(B\) の要素は倍精度浮動小数点数とします．
-はじめに，最も素朴な方法として， \(A\) , \(B\) を2次元配列で表現することを考えます． \(n\) を定数 kN で表すとき，変数の宣言方法として，以下が考えられます．
+行列を表現するデータ構造と手順 # はじめに，最も素朴な方法として， \(A\) , \(B\) を2次元配列で表現することを考えます． \(n\) を定数 kN で表すとき，変数の宣言方法として，以下が考えられます．
 double a[kN][kN]; std::array&amp;lt;std::array&amp;lt;double, kN&amp;gt;, kN&amp;gt; a; double **a = new double*[kN]; ... std::vector&amp;lt;std::vector&amp;lt;double&amp;gt;&amp;gt; a; これらはいずれも，a[i][j] が \(a_{ij}\) を表すため，直感的です． これらにそれぞれ，
-mdim_raw_array mdim_std_array mdim_new_array mdim_vector というラベルをつけておきます．</description></item></channel></rss>
+mdim_raw_array mdim_std_array mdim_new_array mdim_vector というラベルをつけておきます．</description></item><item><title>行列積の計算時間のOpenMPによる高速化</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</guid><description>行列積の計算時間のOpenMPによる高速化 # 概要 # OpenMP とは，並列計算機環境において，共有メモリ・マルチスレッド型の並列アプリケーションソフトウェア開発をサポートするために標準化されたAPIです．
+gcc コンパイラは OpenMP に対応しているため，ソースコード内に既定のキーワードを書けば，OpenMP による並列処理ができます．
+本ページでは，前ページ の結果に対し，OpenMP を用いることで，実行時間が短縮できることを確認します．
+OpenMP の利用 # 生の2次元配列で行列を表現する方式 (mdim_raw_array) は，以下の実装としています．
+for (unsigned int i = 0; i &amp;lt; const_val::kSize; i++) { for (unsigned int j = 0; j &amp;lt; const_val::kSize; j++) { double&amp;amp; cij = c_[i][j]; for (unsigned int k = 0; k &amp;lt; const_val::kSize; k++) { cij += a_[i][k] * b_[k][j]; } } } OpenMP を利用する場合，以下のようにします．
+unsigned int j = 0; unsigned int k = 0; double cij = 0.</description></item></channel></rss>
