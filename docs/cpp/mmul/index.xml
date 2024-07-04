@@ -5,7 +5,7 @@
 double a[kN][kN]; std::array&amp;lt;std::array&amp;lt;double, kN&amp;gt;, kN&amp;gt; a; double **a = new double*[kN]; ... std::vector&amp;lt;std::vector&amp;lt;double&amp;gt;&amp;gt; a; これらはいずれも，a[i][j] が \(a_{ij}\) を表すため，直感的です． これらにそれぞれ，
 mdim_raw_array mdim_std_array mdim_new_array mdim_vector というラベルをつけておきます．</description></item><item><title>行列積の計算時間のOpenMPによる高速化</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</guid><description>行列積の計算時間のOpenMPによる高速化 # 概要 # OpenMP とは，並列計算機環境において，共有メモリ・マルチスレッド型の並列アプリケーションソフトウェア開発をサポートするために標準化されたAPIです．
 gcc コンパイラは OpenMP に対応しているため，ソースコード内に既定のキーワードを書けば，OpenMP による並列処理ができます．
-本ページでは，前ページ の結果に対し，OpenMP を用いることで，実行時間が短縮できることを確認します．
+本ページでは，前ページ の結果に対し，OpenMP を用いることで，行列積演算の実行時間が短縮できることを確認します．
 OpenMP の利用 # 生の2次元配列で行列を表現する方式 (mdim_raw_array) は，以下の実装としています．
 for (unsigned int i = 0; i &amp;lt; const_val::kSize; i++) { for (unsigned int j = 0; j &amp;lt; const_val::kSize; j++) { double&amp;amp; cij = c_[i][j]; for (unsigned int k = 0; k &amp;lt; const_val::kSize; k++) { cij += a_[i][k] * b_[k][j]; } } } OpenMP を利用する場合，以下のようにします．
-unsigned int j = 0; unsigned int k = 0; double cij = 0.</description></item></channel></rss>
+unsigned int j = 0; unsigned int k = 0; double cij = 0.</description></item><item><title/><link>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</guid><description/></item></channel></rss>
