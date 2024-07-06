@@ -8,4 +8,11 @@ gcc コンパイラは OpenMP に対応しているため，ソースコード�
 本ページでは，前ページ の結果に対し，OpenMP を用いることで，行列積演算の実行時間が短縮できることを確認します．
 OpenMP の利用 # 生の2次元配列で行列を表現する方式 (mdim_raw_array) は，以下の実装としています．
 for (unsigned int i = 0; i &amp;lt; const_val::kSize; i++) { for (unsigned int j = 0; j &amp;lt; const_val::kSize; j++) { double&amp;amp; cij = c_[i][j]; for (unsigned int k = 0; k &amp;lt; const_val::kSize; k++) { cij += a_[i][k] * b_[k][j]; } } } OpenMP を利用する場合，以下のようにします．
-unsigned int j = 0; unsigned int k = 0; double cij = 0.</description></item><item><title/><link>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</guid><description/></item></channel></rss>
+unsigned int j = 0; unsigned int k = 0; double cij = 0.</description></item><item><title>行列の計算時間のCPU拡張命令による高速化</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</guid><description>行列の計算時間のCPU拡張命令による高速化 # 概要 # 前ページ では，OpenMP を用いることで，行列積演算の実行時間が短縮できることを確認しました．
+これは，直列に実行する処理を，並列に行うことで実行時間の短縮を図ったものですが，同様の効果を狙う別の方法として，SIMD (Single Instruction, Multiple Data) と呼ばれる方法があります． これは，一つの命令を複数のデータに同時に適用することをいいます．
+この方法は，CPUの拡張命令を用いて実現できます． Intel CPU では，Intel Intrinsics API という，CPUの命令セット拡張へのアクセスができるAPIを公開しています [1]．
+C++17 では，例えばヘッダファイル &amp;lt;immintrin.h&amp;gt; をインクルードすることで，AVX2 という拡張機能が使え，コンパイル時に -march=native -mavx2 というフラグを追加すると，AVX2 による命令を実行するプログラムが作成できます．
+本ページでは，Intel CPU の拡張命令を用いて，SIMD により行列積演算の実行時間が短縮できることを確認します．
+CPU拡張命令の利用 # まず，実験用PCで，AVX2の命令が実行できるかを確かめます． Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．
+$ grep -m 1 -e &amp;#34;^flags&amp;#34; /proc/cpuinfo -e avx2 flags : ...（略）... avx2 ...（略）... AVX2 は 256 ビットごとの演算ができます． 倍精度浮動小数点数は 64 ビットなので，1つの拡張命令を， \(256/64=4\) 個のデータに同時に適用できます．
+このようなCPUの拡張命令を利用する場合，演算対象の変数を格納するアドレスが，&amp;ldquo;キリのよい値&amp;rdquo; である必要があります． AVX2 の場合，そのアドレスは256ビット，つまり32バイトの倍数でなければなりません． このような，変数のアドレスに関する制約や，その制約に合わせて変数のメモリ上の格納位置を調整をすることを アライメント と呼びます．</description></item></channel></rss>
