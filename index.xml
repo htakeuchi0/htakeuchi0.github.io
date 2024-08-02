@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ホームページ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content in ホームページ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Wed, 31 Jul 2024 08:19:53 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>2023 - 実装改良編 # 概要 # 前ページでは，
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ホームページ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content in ホームページ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sat, 03 Aug 2024 00:50:06 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>2023 - 実装改良編 # 概要 # 前ページでは，
 \[2023=(2&amp;#43;0&amp;#43;2&amp;#43;3)(2^2&amp;#43;0^2&amp;#43;2^2&amp;#43;3^2)^2\] であることに着目して，以下の問題を解いたのでした．
 Problem 1. 整数 \(x=\sum_{j=0}^{n-1}a_j10^j\) \((0\le a_j\le 9,j=0,1,\dots,n-1)\) に対して， \[ \prod_{k=1}^K\sum_{j=0}^{n-1}a_j^{i_k}=x \] を満たす整数 \(K\ge1\), \(1\le i_1\le\cdots\le i_K\) が存在するかを判定せよ．存在する場合はこの方程式を満たす \((i_1,i_2,\dots,i_K)\) をひとつ求めよ． 本ページでは，そこで解説した解法を改良する方法を説明します． その後，改良前後で実行時間を比較します．ただし，結果はほとんど変わりませんでした．
 実装改良 # 前ページで解説した解法は以下のとおりでした1．
@@ -193,7 +193,16 @@ theorem-label ショートコード # Hugo は markdown で記事を作成でき
 theorem-label ショートコードは以下の要件を満たすものとします．
 &amp;ldquo;Theorem 1.&amp;rdquo; のように，定理種類名称と定理番号を太字で表示できて，ピリオドで終わること 定理種類名称はユーザが指定できること 定理番号はページごとに，定理種類名称によらず，1からはじまる連番で自動生成されること 定理番号の前に節番号などの接頭辞を任意でつけられること 定理番号の後に括弧付きコメントを任意でつけられること そこで，theorem-label ショートコードは以下のように呼び出せるものとします．
 項番 呼び出し方 結果 1 {{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}} Theorem 1. 2 {{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}} Theorem 5.2.2. 3 {{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}} Theorem 3.3 (補足). 実装例は以下のとおりです．下記ファイルを layout/shortcodes/theorem-label.html として保存します．
-&amp;lt;!-- カウンタの初期化--&amp;gt; {{- if not (.</description></item><item><title>関数への参照</title><link>https://htakeuchi0.github.io/docs/cpp/fp/fref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/fref/</guid><description>関数への参照 # 概要 # 前ページまでで，関数ポインタとその周辺事項について説明しました． 本ページでは，関数への参照型について説明します．
+&amp;lt;!-- カウンタの初期化--&amp;gt; {{- if not (.</description></item><item><title>配列への参照を返却する関数</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/retarrref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/retarrref/</guid><description>配列への参照を返却する関数 # 概要 # 関数ポインタを返却する関数 のページでは，C++の関数ポインタを返却する関数の宣言が特徴的であることを述べました．
+このページでは，配列への参照を返却する関数の宣言も同様となることをまとめます．
+結論からいうと，要素が5個の配列の const 参照を返す，const 修飾されたメンバ関数は，以下のような宣言になります．
+const double (&amp;amp;A() const)[5]; 配列への参照を返却する関数 # いま，クラス Array が生の配列 a_ をもっていて，その配列への const 参照を返す関数を定義したいとします．
+もちろん，生の配列の代わりに std::array を使ったり，インデックスに対応する要素を返すアクセサを用意したりすれば，その状況にはならないので，実用上は出会うことのないケースと思います．
+クラス Array を以下のようにします． 要素はデフォルトコンストラクタで指定しておきます．
+class Array { public: Array() : a_{0, 1, 2, 3, 4} {} private: double a_[5]; }; このとき，a_ の const 参照を返す関数 A を定義します．
+関数ポインタを返却する関数と同様に，
+const double[5]&amp;amp; A() const { return a_; } // NG という書き方はできず，以下のような書き方になります．
+const double (&amp;amp;A() const)[5] { return a_; } // OK これは以下のように分解されます．</description></item><item><title>関数への参照</title><link>https://htakeuchi0.github.io/docs/cpp/fp/fref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/fref/</guid><description>関数への参照 # 概要 # 前ページまでで，関数ポインタとその周辺事項について説明しました． 本ページでは，関数への参照型について説明します．
 関数への参照型 # 戻り値の型が T, 第 \(k\) 番目の引数の型が Sk である関数への関数ポインタ型は，
 using fp_t = T (*)(S1, S2,..., Sn); または，
 using f_t = T(S1, S2,..., Sn); using fp_t = f_t*; として定義できるのでした．

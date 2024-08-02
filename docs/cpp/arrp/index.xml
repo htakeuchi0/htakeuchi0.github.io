@@ -16,4 +16,13 @@ using arr_t = T[N]; using arr_ref_t = arr_t&amp;amp;; とすると，配列型�
 std::array について # array ヘッダを include すると，std::array が利用できます． std::array の定義は以下のとおりです [1]．
 namespace std { template &amp;lt;class T, std::size_t N&amp;gt; struct array; } // namespace std std::array は通常の配列と同等のパフォーマンスで利用できるとされています．通常の配列と異なり，以下のように，変数から配列のサイズが取得できます．よって，std::array を使う限り，前ページで定義した ArraySize は不要です．
 #include &amp;lt;array&amp;gt; #include &amp;lt;iostream&amp;gt; int main() { std::array&amp;lt;int, 3&amp;gt; a; std::cout &amp;lt;&amp;lt; a.size() &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 3 return 0; } まとめ # 本ページでは，std::array について説明しました．std::array を使えば，配列から要素数を取得できます．よって，std::array を使う限り，前ページで定義した ArraySize 関数テンプレートは不要になります．
-参考文献 # [1] cppreference.</description></item></channel></rss>
+参考文献 # [1] cppreference.</description></item><item><title>配列への参照を返却する関数</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/retarrref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/retarrref/</guid><description>配列への参照を返却する関数 # 概要 # 関数ポインタを返却する関数 のページでは，C++の関数ポインタを返却する関数の宣言が特徴的であることを述べました．
+このページでは，配列への参照を返却する関数の宣言も同様となることをまとめます．
+結論からいうと，要素が5個の配列の const 参照を返す，const 修飾されたメンバ関数は，以下のような宣言になります．
+const double (&amp;amp;A() const)[5]; 配列への参照を返却する関数 # いま，クラス Array が生の配列 a_ をもっていて，その配列への const 参照を返す関数を定義したいとします．
+もちろん，生の配列の代わりに std::array を使ったり，インデックスに対応する要素を返すアクセサを用意したりすれば，その状況にはならないので，実用上は出会うことのないケースと思います．
+クラス Array を以下のようにします． 要素はデフォルトコンストラクタで指定しておきます．
+class Array { public: Array() : a_{0, 1, 2, 3, 4} {} private: double a_[5]; }; このとき，a_ の const 参照を返す関数 A を定義します．
+関数ポインタを返却する関数と同様に，
+const double[5]&amp;amp; A() const { return a_; } // NG という書き方はできず，以下のような書き方になります．
+const double (&amp;amp;A() const)[5] { return a_; } // OK これは以下のように分解されます．</description></item></channel></rss>
