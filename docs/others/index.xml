@@ -1,8 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>その他 on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/others/</link><description>Recent content in その他 on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/others/index.xml" rel="self" type="application/rss+xml"/><item><title>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</title><link>https://htakeuchi0.github.io/docs/others/pmbok/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/others/pmbok/</guid><description>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート # 概要 # 本ページでは，プロジェクトマネジメント協会 (PMI) が発行するプロジェクトマネジメント知識体系 (PMBOK) ガイドの第6版日本語版 [1]，第7版日本語版 [2] の違いについてまとめます．
-はじめに # プロジェクトマネジメントに関する知識を体系化したものとして，プロジェクトマネジメント協会 (PMI) が発行する プロジェクトマネジメント知識体系 (PMBOK) ガイドが広く知られています．
-近年 (2022年11月)， PMI 日本支部より，PMBOK ガイド第7版の日本語版 [2] が刊行されました．
-本ページでは，PMBOK ガイド第6版日本語版 [1]，第7版日本語版 [2] の違いを中心に，それら概要をまとめます．
-第6版・第7版の違い # 本節では，第6版日本語版・第7版日本語版（以下，単に第6版，第7版と呼ぶ）の違いについて述べます． この違いを明確にする目的で，第6版，第7版の概要をまとめます．
-まず，第6版の概要は以下のとおりです．
-PMBOK ガイドはプロジェクトマネジメント標準に基づきまたこれを含む． PMBOK ガイドおよびプロジェクトマネジメント標準は規律的実務慣行でなく，模範的実務慣行に基づく． PMBOK ガイドが述べるのは知識体系であり方法論ではない． プロジェクトマネジメント標準は特定のプロセスまたは実務慣行の実施を要求するものではない． プロジェクト・ライフサイクルは，プロジェクトマネジメント・プロセス（以下，プロセス）を実施することでマネジメントされる． プロセスはインプットがあり，ツールや技法の適用を経てアウトプットを生成するものである (ITTO)． プロセスは5個のプロジェクトマネジメント・プロセス群（以下，プロセス群）に分類される． プロセスは10個の知識エリアにも分類される． 知識エリアとは，知識に対する要求事項によって定義されたものである． プロセスは次の事項を通して，一貫した予測可能な実務慣行を可能とする1． 文書化できる． プロセスに対するパフォーマンスを評価できる． 効率を最大化し，脅威を最小化するようにプロセスを改善できる． PMBOK ガイドの後にプロジェクトマネジメント標準を置く構成とした． 次に，第7版の（特に第6版との差分に着目した）概要は以下のとおりです．
-成果物でなく意図した成果をより重視するため，原理・原則ベースの標準に移行した． プロセスベースの標準は本質的に規範的である． 過去のプロセスベース指向では価値実現の全貌を示すための方法として維持できない． 過去の版のプロセスベース・アプローチとの整合を無効にする内容は存在しない． プロジェクトマネジメント標準の価値実現の全体観に始まり，その後 PMBOK ガイドの内容表現へと続く構成とした． 10個の知識エリアは8個のパフォーマンス領域へ変更した． PMBOK ガイドにテーラリング2 専用の章を設けた． PMBOK ガイドに「モデル，方法，作成物」という章を設けたが，これは ITTO とのリンクが維持され拡張されるものである． 以上より，価値実現・成果に重きがおかれるようになり，より実務的慣行に基づくようにするため，第6版までのプロセスベースでなく，原理・原則ベースの標準に移行した，という趣旨が読み取れます．</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>その他 on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/others/</link><description>Recent content in その他 on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/others/index.xml" rel="self" type="application/rss+xml"/><item><title>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</title><link>https://htakeuchi0.github.io/docs/others/pmbok/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/others/pmbok/</guid><description>&lt;h1 id="プロジェクトマネジメント知識体系-pmbok-ガイドに関するノート">
+ プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート
+ &lt;a class="anchor" href="#%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%83%9e%e3%83%8d%e3%82%b8%e3%83%a1%e3%83%b3%e3%83%88%e7%9f%a5%e8%ad%98%e4%bd%93%e7%b3%bb-pmbok-%e3%82%ac%e3%82%a4%e3%83%89%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e3%83%8e%e3%83%bc%e3%83%88">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，プロジェクトマネジメント協会 (PMI) が発行するプロジェクトマネジメント知識体系 (PMBOK) ガイドの第6版日本語版 &lt;a href="#cite:1">[1]&lt;/a>，第7版日本語版 &lt;a href="#cite:2">[2]&lt;/a> の違いについてまとめます．&lt;/p>
+&lt;h2 id="はじめに">
+ はじめに
+ &lt;a class="anchor" href="#%e3%81%af%e3%81%98%e3%82%81%e3%81%ab">#&lt;/a>
+&lt;/h2>
+&lt;p>プロジェクトマネジメントに関する知識を体系化したものとして，プロジェクトマネジメント協会 (PMI) が発行する プロジェクトマネジメント知識体系 (PMBOK) ガイドが広く知られています．&lt;/p>
+&lt;p>近年 (2022年11月)， PMI 日本支部より，PMBOK ガイド第7版の日本語版 &lt;a href="#cite:2">[2]&lt;/a> が刊行されました．&lt;/p>
+&lt;p>本ページでは，PMBOK ガイド第6版日本語版 &lt;a href="#cite:1">[1]&lt;/a>，第7版日本語版 &lt;a href="#cite:2">[2]&lt;/a> の違いを中心に，それら概要をまとめます．&lt;/p>
+&lt;h2 id="第6版第7版の違い">
+ 第6版・第7版の違い
+ &lt;a class="anchor" href="#%e7%ac%ac6%e7%89%88%e7%ac%ac7%e7%89%88%e3%81%ae%e9%81%95%e3%81%84">#&lt;/a>
+&lt;/h2>
+&lt;p>本節では，第6版日本語版・第7版日本語版（以下，単に第6版，第7版と呼ぶ）の違いについて述べます．
+この違いを明確にする目的で，第6版，第7版の概要をまとめます．&lt;/p>
+&lt;p>まず，第6版の概要は以下のとおりです．&lt;/p>
+&lt;ul>
+&lt;li>PMBOK ガイドはプロジェクトマネジメント標準に基づきまたこれを含む．&lt;/li>
+&lt;li>PMBOK ガイドおよびプロジェクトマネジメント標準は規律的実務慣行でなく，模範的実務慣行に基づく．&lt;/li>
+&lt;li>PMBOK ガイドが述べるのは知識体系であり方法論ではない．&lt;/li>
+&lt;li>プロジェクトマネジメント標準は特定のプロセスまたは実務慣行の実施を要求するものではない．&lt;/li>
+&lt;li>プロジェクト・ライフサイクルは，プロジェクトマネジメント・プロセス（以下，プロセス）を実施することでマネジメントされる．&lt;/li>
+&lt;li>プロセスはインプットがあり，ツールや技法の適用を経てアウトプットを生成するものである (ITTO)．&lt;/li>
+&lt;li>プロセスは5個のプロジェクトマネジメント・プロセス群（以下，プロセス群）に分類される．&lt;/li>
+&lt;li>プロセスは10個の知識エリアにも分類される．
+&lt;ul>
+&lt;li>知識エリアとは，知識に対する要求事項によって定義されたものである．&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>プロセスは次の事項を通して，一貫した予測可能な実務慣行を可能とする&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．
+&lt;ul>
+&lt;li>文書化できる．&lt;/li>
+&lt;li>プロセスに対するパフォーマンスを評価できる．&lt;/li>
+&lt;li>効率を最大化し，脅威を最小化するようにプロセスを改善できる．&lt;/li>
+&lt;li>PMBOK ガイドの後にプロジェクトマネジメント標準を置く構成とした．&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>次に，第7版の（特に第6版との差分に着目した）概要は以下のとおりです．&lt;/p>
+&lt;ul>
+&lt;li>成果物でなく意図した成果をより重視するため，原理・原則ベースの標準に移行した．
+&lt;ul>
+&lt;li>プロセスベースの標準は本質的に規範的である．&lt;/li>
+&lt;li>過去のプロセスベース指向では価値実現の全貌を示すための方法として維持できない．&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>過去の版のプロセスベース・アプローチとの整合を無効にする内容は存在しない．&lt;/li>
+&lt;li>プロジェクトマネジメント標準の価値実現の全体観に始まり，その後 PMBOK ガイドの内容表現へと続く構成とした．&lt;/li>
+&lt;li>10個の知識エリアは8個のパフォーマンス領域へ変更した．&lt;/li>
+&lt;li>PMBOK ガイドにテーラリング&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> 専用の章を設けた．&lt;/li>
+&lt;li>PMBOK ガイドに「モデル，方法，作成物」という章を設けたが，これは ITTO とのリンクが維持され拡張されるものである．&lt;/li>
+&lt;/ul>
+&lt;p>以上より，価値実現・成果に重きがおかれるようになり，より実務的慣行に基づくようにするため，第6版までのプロセスベースでなく，原理・原則ベースの標準に移行した，という趣旨が読み取れます．&lt;/p></description></item></channel></rss>

@@ -1,44 +1,316 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>開発環境 on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/cpp/env/</link><description>Recent content in 開発環境 on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/cpp/env/index.xml" rel="self" type="application/rss+xml"/><item><title>Makefile プロジェクト</title><link>https://htakeuchi0.github.io/docs/cpp/env/make/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/make/</guid><description>Makefile プロジェクト # 概要 # 本ページでは，Makefile を使ったプロジェクトのディレクトリ構成の例を説明します．
-cpp_env_sample ディレクトリ以下にソースコードなどを配置することとします．
-Github リポジトリ # 本ページで説明するディレクトリ構成のプロジェクトは，以下の Github リポジトリ [1] として公開しています．
-https://github.com/htakeuchi0/cpp_env_sample
-本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
-動作環境 # 本ページで説明するものは，以下の環境で動作するものです．
-OS: Linux (Ubuntu 18.04.5 LTS)
-コンパイラ: g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0 OS: Linux (Ubuntu 20.04.1 LTS)
-コンパイラ: g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 単体試験，カバレッジ計測，ドキュメント生成に，それぞれ以下を利用するものとします．
-Google Test [2] LCOV [3] Doxygen [4] ディレクトリ構成 # ディレクトリ構成の例は以下の通りです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.</description></item><item><title>autoconf プロジェクト (1)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</guid><description>autoconf プロジェクト (1) # 概要 # 前ページでは，Makefile プロジェクトの例について説明しました．本ページでは，autoconf を使った Makefile の自動生成について説明します．
-本ページでは，わかりやすさを優先し，やや不自然な箇所がありますが，できるだけ簡単な準備で autoconf による Makefile 生成と，make の実行を試みます．
-準備 # Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.cc | |- scripts/ - 環境構築用スクリプト | |- install_doxygen.sh | |- install_gtest.</description></item><item><title>autoconf プロジェクト (2)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf2/</guid><description>autoconf プロジェクト (2) # 概要 # 前ページでは，autoconf を使った Makefile の自動生成について説明しましたが，Makefile.am は main と test ディレクトリだけに配置し，subdir-objects オプションを使いました．
-autoconf では，各ディレクトリに Makefile.am を配置するのが通常と思いますので，その方針で設定をし直します．
-ただし，ディレクトリをまたいだソースコードをまとめてビルドできないので， srcディレクトリ以下はライブラリとしてビルドし，main, test ではそのライブラリをリンクしてビルドします．
-その場合は，Libtool を利用したライブラリ生成が必要になるので，順を追って説明するために，前ページではそのようにしませんでした．
-本ページでは，Libtool を利用して，各ディレクトリに Makefile.am を配置して Makefile を生成する方法を説明します．
-準備 # 今回も Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.</description></item><item><title>autoconf プロジェクト (3)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf3/</guid><description>autoconf プロジェクト (3) # 概要 # 前ページでは，Libtool を利用して，より自然な autoconf を使った Makefile の自動生成について説明しました．
-しかし，Makefile プロジェクト と比べると以下の点が不十分です．
-make clean をしても *.gcno, *.gcda のファイルが残る make check で Google Test の結果が表示されない make docs, make lcov が実行できない make lib で共有ライブラリのビルドができない 本ページでは，これらを組み込む方法を説明します．その後，&amp;ldquo;その他&amp;rdquo; として，さらに不足している設定も説明します．
-make clean をしたとき *.gcno, *.gcda のファイルを消すようにする # 本節では，make clean をしたときに削除されないファイルがあることへの対処法を説明します．
-本プロジェクトの場合，削除されないファイルは src/*.gcno, test/*.gcno, test/*.gcda ですが，これらファイルは make check で使っている gcov のカバレッジ計測用ファイルです．
-このように &amp;ldquo;ローカルルール&amp;rdquo; で生成されたファイルを消すには，clean のローカルルールのようなものを定義してあげる必要があります．
-前ページ で，プロジェクトのルートディレクトリに以下のような Makefile.am を用意しました．
-SUBDIRS = include src main test ACLOCAL_AMFLAGS = -I m4 ここに以下のルールを追加します．</description></item><item><title>autoconf プロジェクト (4)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf4/</guid><description>autoconf プロジェクト (4) # 概要 # 前ページまでで，Makefile プロジェクト とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．
-本ページでは，これまでの説明の総括として，autoconf プロジェクト(1) や autoconf プロジェクト (2) と同じ節構成で，Makefile プロジェクト をもとにした autoconf プロジェクトの作成手順を説明します．
-Github リポジトリ # 本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ [1] として公開しています．
-https://github.com/htakeuchi0/autoconf_sample
-本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
-準備 # Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.</description></item><item><title>CMake プロジェクト (1)</title><link>https://htakeuchi0.github.io/docs/cpp/env/cmake/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/cmake/</guid><description>CMake プロジェクト (1) # 概要 # 前ページまでで，autoconf プロジェクトの作成方法を説明しました．
-本ページでは，CMake プロジェクトの作成方法を説明します．
-まずは，実行可能ファイルのビルドと Google Test が可能なものを作成します．
-Github リポジトリ # 準備 # Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.cc | |- scripts/ - 環境構築用スクリプト | |- install_doxygen.sh | |- install_gtest.</description></item><item><title>CMake プロジェクト (2)</title><link>https://htakeuchi0.github.io/docs/cpp/env/cmake2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/cmake2/</guid><description>CMake プロジェクト (2) # 概要 # 前ページでは，CMake プロジェクトの基本的な作り方を説明しました．
-本ページでは，make docs で Doxygen ドキュメントが生成できたり，make lcov でカバレッジ計測のレポートが生成できたりするように拡張します．
-これらは，ADD_CUSTOM_TARGET. ADD_CUSTOM_COMMAND を使うと実現できます．
-Github リポジトリ # 本ページで説明するディレクトリ構成の CMake プロジェクトは，以下の Github リポジトリ [1] として公開しています．
-https://github.com/htakeuchi0/cmake_sample
-本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．
-準備 # 今回も Makefile プロジェクト のリポジトリからスタートします． 初期状態のディレクトリ構成は以下のとおりです．
-|- cpp_env_sample/ |- Doxyfile - doxygen設定ファイル |- LICENSE - ライセンスファイル |- Makefile - makeファイル |- README.md - READMEファイル |- include/ - ヘッダファイル | |- cpp_env_sample/ | |- example.h | |- main/ - メインファイル | |- main.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>開発環境 on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/cpp/env/</link><description>Recent content in 開発環境 on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/cpp/env/index.xml" rel="self" type="application/rss+xml"/><item><title>Makefile プロジェクト</title><link>https://htakeuchi0.github.io/docs/cpp/env/make/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/make/</guid><description>&lt;h1 id="makefile-プロジェクト">
+ Makefile プロジェクト
+ &lt;a class="anchor" href="#makefile-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，Makefile を使ったプロジェクトのディレクトリ構成の例を説明します．&lt;/p>
+&lt;p>&lt;code>cpp_env_sample&lt;/code> ディレクトリ以下にソースコードなどを配置することとします．&lt;/p>
+&lt;h2 id="github-リポジトリ">
+ Github リポジトリ
+ &lt;a class="anchor" href="#github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページで説明するディレクトリ構成のプロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
+&lt;p>&lt;a href="https://github.com/htakeuchi0/cpp_env_sample">https://github.com/htakeuchi0/cpp_env_sample&lt;/a>&lt;/p>
+&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;h2 id="動作環境">
+ 動作環境
+ &lt;a class="anchor" href="#%e5%8b%95%e4%bd%9c%e7%92%b0%e5%a2%83">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページで説明するものは，以下の環境で動作するものです．&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>OS: Linux (Ubuntu 18.04.5 LTS)&lt;/p>
+&lt;ul>
+&lt;li>コンパイラ: g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>OS: Linux (Ubuntu 20.04.1 LTS)&lt;/p>
+&lt;ul>
+&lt;li>コンパイラ: g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>単体試験，カバレッジ計測，ドキュメント生成に，それぞれ以下を利用するものとします．&lt;/p>
+&lt;ul>
+&lt;li>Google Test &lt;a href="#cite:2">[2]&lt;/a>&lt;/li>
+&lt;li>LCOV &lt;a href="#cite:3">[3]&lt;/a>&lt;/li>
+&lt;li>Doxygen &lt;a href="#cite:4">[4]&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="ディレクトリ構成">
+ ディレクトリ構成
+ &lt;a class="anchor" href="#%e3%83%87%e3%82%a3%e3%83%ac%e3%82%af%e3%83%88%e3%83%aa%e6%a7%8b%e6%88%90">#&lt;/a>
+&lt;/h2>
+&lt;p>ディレクトリ構成の例は以下の通りです．&lt;/p>
+&lt;pre tabindex="0">&lt;code>|- cpp_env_sample/
+ |- Doxyfile - doxygen設定ファイル
+ |- LICENSE - ライセンスファイル
+ |- Makefile - makeファイル
+ |- README.md - READMEファイル
+ |- include/ - ヘッダファイル
+ | |- cpp_env_sample/
+ | |- example.h
+ |
+ |- main/ - メインファイル
+ | |- main.cc
+ |
+ |- scripts/ - 環境構築用スクリプト
+ | |- install_doxygen.sh
+ | |- install_gtest.sh
+ | |- install_lcov.sh
+ |
+ |- src/ - ソースファイル
+ | |- example.cc
+ |
+ |- test/ - テストファイル
+ |- gtest_example.cc
+&lt;/code>&lt;/pre>&lt;h2 id="ソースコード関連のディレクトリ">
+ ソースコード関連のディレクトリ
+ &lt;a class="anchor" href="#%e3%82%bd%e3%83%bc%e3%82%b9%e3%82%b3%e3%83%bc%e3%83%89%e9%96%a2%e9%80%a3%e3%81%ae%e3%83%87%e3%82%a3%e3%83%ac%e3%82%af%e3%83%88%e3%83%aa">#&lt;/a>
+&lt;/h2>
+&lt;p>ソースコード関連のディレクトリを抜き出すと以下のとおりです．&lt;/p></description></item><item><title>autoconf プロジェクト (1)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf/</guid><description>&lt;h1 id="autoconf-プロジェクト-1">
+ autoconf プロジェクト (1)
+ &lt;a class="anchor" href="#autoconf-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-1">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページでは，Makefile プロジェクトの例について説明しました．本ページでは，autoconf を使った Makefile の自動生成について説明します．&lt;/p>
+&lt;p>本ページでは，わかりやすさを優先し，やや不自然な箇所がありますが，できるだけ簡単な準備で autoconf による Makefile 生成と，make の実行を試みます．&lt;/p>
+&lt;h2 id="準備">
+ 準備
+ &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/make/">Makefile プロジェクト&lt;/a> のリポジトリからスタートします． &lt;br>
+初期状態のディレクトリ構成は以下のとおりです．&lt;/p>
+&lt;pre tabindex="0">&lt;code>|- cpp_env_sample/
+ |- Doxyfile - doxygen設定ファイル
+ |- LICENSE - ライセンスファイル
+ |- Makefile - makeファイル
+ |- README.md - READMEファイル
+ |- include/ - ヘッダファイル
+ | |- cpp_env_sample/
+ | |- example.h
+ |
+ |- main/ - メインファイル
+ | |- main.cc
+ |
+ |- scripts/ - 環境構築用スクリプト
+ | |- install_doxygen.sh
+ | |- install_gtest.sh
+ | |- install_lcov.sh
+ |
+ |- src/ - ソースファイル
+ | |- example.cc
+ |
+ |- test/ - テストファイル
+ |- gtest_example.cc
+&lt;/code>&lt;/pre>&lt;p>まず，これから自動生成する Makefile を削除しておきます．&lt;/p></description></item><item><title>autoconf プロジェクト (2)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf2/</guid><description>&lt;h1 id="autoconf-プロジェクト-2">
+ autoconf プロジェクト (2)
+ &lt;a class="anchor" href="#autoconf-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-2">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページでは，autoconf を使った Makefile の自動生成について説明しましたが，Makefile.am は main と test ディレクトリだけに配置し，subdir-objects オプションを使いました．&lt;/p>
+&lt;p>autoconf では，各ディレクトリに Makefile.am を配置するのが通常と思いますので，その方針で設定をし直します．&lt;/p>
+&lt;p>ただし，ディレクトリをまたいだソースコードをまとめてビルドできないので， &lt;strong>srcディレクトリ以下はライブラリとしてビルドし，main, test ではそのライブラリをリンクしてビルドします．&lt;/strong>&lt;/p>
+&lt;p>その場合は，Libtool を利用したライブラリ生成が必要になるので，順を追って説明するために，前ページではそのようにしませんでした．&lt;/p>
+&lt;p>本ページでは，Libtool を利用して，各ディレクトリに Makefile.am を配置して Makefile を生成する方法を説明します．&lt;/p>
+&lt;h2 id="準備">
+ 準備
+ &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
+&lt;/h2>
+&lt;p>今回も &lt;a href="https://htakeuchi0.github.io/docs/cpp/env/make/">Makefile プロジェクト&lt;/a> のリポジトリからスタートします． &lt;br>
+初期状態のディレクトリ構成は以下のとおりです．&lt;/p>
+&lt;pre tabindex="0">&lt;code>|- cpp_env_sample/
+ |- Doxyfile - doxygen設定ファイル
+ |- LICENSE - ライセンスファイル
+ |- Makefile - makeファイル
+ |- README.md - READMEファイル
+ |- include/ - ヘッダファイル
+ | |- cpp_env_sample/
+ | |- example.h
+ |
+ |- main/ - メインファイル
+ | |- main.cc
+ |
+ |- scripts/ - 環境構築用スクリプト
+ | |- install_doxygen.sh
+ | |- install_gtest.sh
+ | |- install_lcov.sh
+ |
+ |- src/ - ソースファイル
+ | |- example.cc
+ |
+ |- test/ - テストファイル
+ |- gtest_example.cc
+&lt;/code>&lt;/pre>&lt;p>まず，これから自動生成する Makefile を削除しておきます．&lt;/p></description></item><item><title>autoconf プロジェクト (3)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf3/</guid><description>&lt;h1 id="autoconf-プロジェクト-3">
+ autoconf プロジェクト (3)
+ &lt;a class="anchor" href="#autoconf-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-3">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページでは，Libtool を利用して，より自然な autoconf を使った Makefile の自動生成について説明しました．&lt;/p>
+&lt;p>しかし，&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/make/">Makefile プロジェクト&lt;/a> と比べると以下の点が不十分です．&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>make clean&lt;/code> をしても &lt;code>*.gcno&lt;/code>, &lt;code>*.gcda&lt;/code> のファイルが残る&lt;/li>
+&lt;li>&lt;code>make check&lt;/code> で Google Test の結果が表示されない&lt;/li>
+&lt;li>&lt;code>make docs&lt;/code>, &lt;code>make lcov&lt;/code> が実行できない&lt;/li>
+&lt;li>&lt;code>make lib&lt;/code> で共有ライブラリのビルドができない&lt;/li>
+&lt;/ol>
+&lt;p>本ページでは，これらを組み込む方法を説明します．その後，&amp;ldquo;その他&amp;rdquo; として，さらに不足している設定も説明します．&lt;/p>
+&lt;h2 id="make-clean-をしたとき-gcno-gcda-のファイルを消すようにする">
+ &lt;code>make clean&lt;/code> をしたとき &lt;code>*.gcno&lt;/code>, &lt;code>*.gcda&lt;/code> のファイルを消すようにする
+ &lt;a class="anchor" href="#make-clean-%e3%82%92%e3%81%97%e3%81%9f%e3%81%a8%e3%81%8d-gcno-gcda-%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%82%92%e6%b6%88%e3%81%99%e3%82%88%e3%81%86%e3%81%ab%e3%81%99%e3%82%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>本節では，&lt;code>make clean&lt;/code> をしたときに削除されないファイルがあることへの対処法を説明します．&lt;/p>
+&lt;p>本プロジェクトの場合，削除されないファイルは &lt;code>src/*.gcno&lt;/code>, &lt;code>test/*.gcno&lt;/code>, &lt;code>test/*.gcda&lt;/code> ですが，これらファイルは &lt;code>make check&lt;/code> で使っている &lt;code>gcov&lt;/code> のカバレッジ計測用ファイルです．&lt;/p>
+&lt;p>このように &amp;ldquo;ローカルルール&amp;rdquo; で生成されたファイルを消すには，&lt;strong>clean のローカルルールのようなものを定義してあげる必要があります&lt;/strong>．&lt;/p>
+&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/autoconf2//#makefileam-%e3%81%ae%e4%bd%9c%e6%88%90">前ページ&lt;/a> で，プロジェクトのルートディレクトリに以下のような &lt;code>Makefile.am&lt;/code> を用意しました．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-Makefile" data-lang="Makefile">&lt;span style="display:flex;">&lt;span>SUBDIRS &lt;span style="color:#f92672">=&lt;/span> include src main test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ACLOCAL_AMFLAGS &lt;span style="color:#f92672">=&lt;/span> -I m4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ここに以下のルールを追加します．&lt;/p></description></item><item><title>autoconf プロジェクト (4)</title><link>https://htakeuchi0.github.io/docs/cpp/env/autoconf4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/autoconf4/</guid><description>&lt;h1 id="autoconf-プロジェクト-4">
+ autoconf プロジェクト (4)
+ &lt;a class="anchor" href="#autoconf-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-4">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/autoconf3/">前ページ&lt;/a>までで，&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/make/">Makefile プロジェクト&lt;/a> とほとんど同様の機能をもつ autoconf プロジェクトの作成方法を説明しました．&lt;/p>
+&lt;p>本ページでは，これまでの説明の総括として，&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/autoconf/">autoconf プロジェクト(1)&lt;/a> や &lt;a href="https://htakeuchi0.github.io/docs/cpp/env/autoconf2/">autoconf プロジェクト (2)&lt;/a> と同じ節構成で，&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/make/">Makefile プロジェクト&lt;/a> をもとにした autoconf プロジェクトの作成手順を説明します．&lt;/p>
+&lt;h2 id="github-リポジトリ">
+ Github リポジトリ
+ &lt;a class="anchor" href="#github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
+&lt;p>&lt;a href="https://github.com/htakeuchi0/autoconf_sample">https://github.com/htakeuchi0/autoconf_sample&lt;/a>&lt;/p>
+&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;h2 id="準備">
+ 準備
+ &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/make/">Makefile プロジェクト&lt;/a> のリポジトリからスタートします． &lt;br>
+初期状態のディレクトリ構成は以下のとおりです．&lt;/p>
+&lt;pre tabindex="0">&lt;code>|- cpp_env_sample/
+ |- Doxyfile - doxygen設定ファイル
+ |- LICENSE - ライセンスファイル
+ |- Makefile - makeファイル
+ |- README.md - READMEファイル
+ |- include/ - ヘッダファイル
+ | |- cpp_env_sample/
+ | |- example.h
+ |
+ |- main/ - メインファイル
+ | |- main.cc
+ |
+ |- scripts/ - 環境構築用スクリプト
+ | |- install_doxygen.sh
+ | |- install_gtest.sh
+ | |- install_lcov.sh
+ |
+ |- src/ - ソースファイル
+ | |- example.cc
+ |
+ |- test/ - テストファイル
+ |- gtest_example.cc
+&lt;/code>&lt;/pre>&lt;p>まず，これから自動生成する Makefile を削除しておきます．&lt;/p></description></item><item><title>CMake プロジェクト (1)</title><link>https://htakeuchi0.github.io/docs/cpp/env/cmake/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/cmake/</guid><description>&lt;h1 id="cmake-プロジェクト-1">
+ CMake プロジェクト (1)
+ &lt;a class="anchor" href="#cmake-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-1">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページまでで，autoconf プロジェクトの作成方法を説明しました．&lt;/p>
+&lt;p>本ページでは，CMake プロジェクトの作成方法を説明します．&lt;/p>
+&lt;p>まずは，実行可能ファイルのビルドと Google Test が可能なものを作成します．&lt;/p>
+&lt;h2 id="github-リポジトリ">
+ Github リポジトリ
+ &lt;a class="anchor" href="#github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa">#&lt;/a>
+&lt;/h2>
+&lt;h2 id="準備">
+ 準備
+ &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/cpp/env/make/">Makefile プロジェクト&lt;/a> のリポジトリからスタートします． &lt;br>
+初期状態のディレクトリ構成は以下のとおりです．&lt;/p>
+&lt;pre tabindex="0">&lt;code>|- cpp_env_sample/
+ |- Doxyfile - doxygen設定ファイル
+ |- LICENSE - ライセンスファイル
+ |- Makefile - makeファイル
+ |- README.md - READMEファイル
+ |- include/ - ヘッダファイル
+ | |- cpp_env_sample/
+ | |- example.h
+ |
+ |- main/ - メインファイル
+ | |- main.cc
+ |
+ |- scripts/ - 環境構築用スクリプト
+ | |- install_doxygen.sh
+ | |- install_gtest.sh
+ | |- install_lcov.sh
+ |
+ |- src/ - ソースファイル
+ | |- example.cc
+ |
+ |- test/ - テストファイル
+ |- gtest_example.cc
+&lt;/code>&lt;/pre>&lt;p>まず，これから自動生成する Makefile を削除しておきます． &lt;br>
+また，&lt;code>scripts/install_gtest.sh&lt;/code> は不要のため削除しておきます．&lt;/p></description></item><item><title>CMake プロジェクト (2)</title><link>https://htakeuchi0.github.io/docs/cpp/env/cmake2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/env/cmake2/</guid><description>&lt;h1 id="cmake-プロジェクト-2">
+ CMake プロジェクト (2)
+ &lt;a class="anchor" href="#cmake-%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88-2">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページでは，CMake プロジェクトの基本的な作り方を説明しました．&lt;/p>
+&lt;p>本ページでは，&lt;code>make docs&lt;/code> で Doxygen ドキュメントが生成できたり，&lt;code>make lcov&lt;/code> でカバレッジ計測のレポートが生成できたりするように拡張します．&lt;/p>
+&lt;p>これらは，&lt;code>ADD_CUSTOM_TARGET&lt;/code>. &lt;code>ADD_CUSTOM_COMMAND&lt;/code> を使うと実現できます．&lt;/p>
+&lt;h2 id="github-リポジトリ">
+ Github リポジトリ
+ &lt;a class="anchor" href="#github-%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページで説明するディレクトリ構成の CMake プロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
+&lt;p>&lt;a href="https://github.com/htakeuchi0/cmake_sample">https://github.com/htakeuchi0/cmake_sample&lt;/a>&lt;/p>
+&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;h2 id="準備">
+ 準備
+ &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
+&lt;/h2>
+&lt;p>今回も &lt;a href="https://htakeuchi0.github.io/docs/cpp/env/make/">Makefile プロジェクト&lt;/a> のリポジトリからスタートします． &lt;br>
+初期状態のディレクトリ構成は以下のとおりです．&lt;/p>
+&lt;pre tabindex="0">&lt;code>|- cpp_env_sample/
+ |- Doxyfile - doxygen設定ファイル
+ |- LICENSE - ライセンスファイル
+ |- Makefile - makeファイル
+ |- README.md - READMEファイル
+ |- include/ - ヘッダファイル
+ | |- cpp_env_sample/
+ | |- example.h
+ |
+ |- main/ - メインファイル
+ | |- main.cc
+ |
+ |- scripts/ - 環境構築用スクリプト
+ | |- install_doxygen.sh
+ | |- install_gtest.sh
+ | |- install_lcov.sh
+ |
+ |- src/ - ソースファイル
+ | |- example.cc
+ |
+ |- test/ - テストファイル
+ |- gtest_example.cc
+&lt;/code>&lt;/pre>&lt;p>まず，これから自動生成する Makefile を削除しておきます． &lt;br>
+また，&lt;code>scripts/install_gtest.sh&lt;/code> は不要のため削除しておきます．&lt;/p></description></item></channel></rss>

@@ -1,34 +1,263 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/hugo/</link><description>Recent content in Hugo on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>空のサイトの生成 # 概要 # 本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． 具体的には，ローカルに空のサイトが生成できるところまで説明します．
-インストール # Hugo の Quick Start に従い，Hugo をインストールします．
-作者の作成環境は Linux OS 64bit (Ubuntu 18.04.6 LTS) なので，Hugo のインストールページ を参考に，以下のコマンドを実行します．
-$ snap install hugo --channel=extended デスクトップ環境なので，認証のためのダイアログが表示され，パスワードを入力して認証をクリックしました．
-以下のコマンドでインストールが成功したかを確認できます．
-$ hugo version hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate=2022-06-28T10:02:18Z VendorInfo=snap サイトの生成 # 以下のコマンドを実行します．
-$ hugo new site htakeuchi0-notebook テーマの追加 # 本サイトでは，Book テーマを利用しています． 当該テーマの README にしたがって，以下のコマンドを実行します．
-$ cd htakeuchi0-notebook $ git init $ git branch -M main $ git submodule add https://github.</description></item><item><title>ページの追加とサイトの設定</title><link>https://htakeuchi0.github.io/docs/hugo/set_config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/set_config/</guid><description>ページの追加とサイトの設定 # 概要 # 本ページでは，Hugo による Web サイト作成における，ページの追加とサイトの設定に関する部分を説明します．
-ホームページの作成 # まずは，サイト全体のホームページ（トップページ）を作成します． 以下のコマンドを実行すると，ホームページが作成されます．
-$ hugo new _index.md content/_index.md が生成されているので，それを以下のように書き換えます． タイトルと適当な小見出しを作成しており，メニューからリンクを張るため，免責事項とプライバシーポリシーは，別名でアンカーを作成しています．
---- title: &amp;#34;ホームページ&amp;#34; date: 2022-08-11T12:18:39+09:00 draft: true --- # htakeuchi0 のノート ## 概要 ## 免責事項 {#disclaimer} ## プライバシーポリシー {#privacy_policy} ## 作者について ## お問い合わせ 次に，設定ファイル confing.toml を以下のようにします．
-baseURL = &amp;#39;https://htakeuchi0.github.io/&amp;#39; languageCode = &amp;#39;ja-jp&amp;#39; title = &amp;#39;htakeuchi0 のノート&amp;#39; theme = &amp;#39;hugo-book&amp;#39; enableGitInfo = true [params] BookTheme = &amp;#39;auto&amp;#39; BookRepo = &amp;#39;https://github.com/htakeuchi0/htakeuchi0.github.io-sources&amp;#39; BookSearch = false [menu] [[menu.</description></item><item><title>公開用ファイルの生成</title><link>https://htakeuchi0.github.io/docs/hugo/genpages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/genpages/</guid><description>公開用ファイルの生成 # 概要 # 本ページでは，Hugo で作成した markdown ファイルを公開用の html ファイルにビルドして，公開する方法について説明します．
-htmlファイルの生成 # 以下のコマンドを実行すると，public ディレクトリ以下に公開用ファイル一式が生成されます．
-$ hugo --minify -D ページの公開 # 本サイトは，Github Pages [1] を利用してページを公開しています． 作者は，作成用ファイルと公開ファイルを 別リポジトリで管理しています．
-htakeuchi0.github.io リポジトリ：公開用 htakeuchi0.github.io-sources リポジトリ：作成用 Hugo では [2] のように，同一リポジトリで別ブランチで管理する方法が説明されています．
-本サイトの管理方法の場合，htakeuchi0.github.io-sources リポジトリ側で public 以下に生成されたファイルすべてを，htakeuchi0.github.io リポジトリに配置します．
-あとは，[1] のとおりに設定すれば，数分でブラウザからアクセスできるようになります．
-Google Search Console の設定 # Hugo では（少なくとも Book テーマでは），サイトマップ用の sitemap.xml とRSS用の index.xml が生成されているので，それぞれを Google Search Console [3] に登録するだけです．
-まとめ # 本ページでは，公開ファイルを生成して，公開する方法について説明しました．
-参考文献 # [1] Github, &amp;ldquo;About GitHub Pages - GitHub Docs&amp;rdquo;, https://docs.</description></item><item><title>独自ショートコードの定義</title><link>https://htakeuchi0.github.io/docs/hugo/shortcode/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/shortcode/</guid><description>独自ショートコードの定義 # 概要 # Hugo には，ショートコードと呼ばれるスニペットを定義・利用できる機能があります [1]．本ページでは，ショートコードの一例として，theorem-label という， \(\LaTeX\) でいう定理環境のラベル部分を生成する独自ショートコードを定義する方法について説明します．なお一般に，スニペットとは，再利用可能なソースコード断片を指す言葉です．
-theorem-label ショートコード # Hugo は markdown で記事を作成できますが，markdown の簡潔に記述できる利点を損なわないよう，ショートコードと呼ばれるスニペットを定義し，利用できる機能があります．
-ここでは，定理環境のラベルを生成する簡単なショートコードを作成します．ここで，定理環境とは， \(\LaTeX\) でいう定理環境のような，定理や定義を示すための文章ブロックを指すものとし，そのラベルとは &amp;ldquo;Theorem 2.3&amp;rdquo; のような文章ブロックの冒頭に書かれるラベルを指すものとします．
-theorem-label ショートコードは以下の要件を満たすものとします．
-&amp;ldquo;Theorem 1.&amp;rdquo; のように，定理種類名称と定理番号を太字で表示できて，ピリオドで終わること 定理種類名称はユーザが指定できること 定理番号はページごとに，定理種類名称によらず，1からはじまる連番で自動生成されること 定理番号の前に節番号などの接頭辞を任意でつけられること 定理番号の後に括弧付きコメントを任意でつけられること そこで，theorem-label ショートコードは以下のように呼び出せるものとします．
-項番 呼び出し方 結果 1 {{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}} Theorem 1. 2 {{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}} Theorem 5.2.2. 3 {{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}} Theorem 3.3 (補足). 実装例は以下のとおりです．下記ファイルを layout/shortcodes/theorem-label.html として保存します．
-&amp;lt;!-- カウンタの初期化--&amp;gt; {{- if not (.</description></item><item><title>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</title><link>https://htakeuchi0.github.io/docs/hugo/book_katex/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/book_katex/</guid><description>Book テーマの hint ショートコードブロック内に数式を表示する際の注意 # 概要 # Book テーマ [1] では， \(\KaTeX\) を使うための katex ショートコードが用意されています [2]． また，目立たせたい情報を文書ブロックとして表示できる，hint ショートコードが用意されています [3]．
-しかし，hint ショートコードブロックの中で katex ショートコードを使う場合，うまく数式が表示できないことがあります． 本ページでは，hint ショートコードブロック内で数式を表示する場合の注意について説明します．
-hint ショートコードの使いかた # 公式の説明 [3] をもとに，markdown での記述例と，出力結果を説明します．hint ショートコードは第1引数によって，背景色を変えることができます．
-第1引数：なし # markdown の記述例は以下のとおりです．
-{{&amp;lt; hint &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．
-ヒント． 第1引数：info # markdown の記述例は以下のとおりです．
-{{&amp;lt; hint info &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．
-ヒント． 第1引数：warning # markdown の記述例は以下のとおりです．
-{{&amp;lt; hint warning &amp;gt;}} ヒント． {{&amp;lt; /hint &amp;gt;}} 出力結果は以下のとおりです．</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/hugo/</link><description>Recent content in Hugo on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>&lt;h1 id="空のサイトの生成">
+ 空のサイトの生成
+ &lt;a class="anchor" href="#%e7%a9%ba%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e7%94%9f%e6%88%90">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，Hugo による Web サイト作成の最初のステップについて説明します． &lt;br>
+具体的には，ローカルに空のサイトが生成できるところまで説明します．&lt;/p>
+&lt;h2 id="インストール">
+ インストール
+ &lt;a class="anchor" href="#%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://gohugo.io/getting-started/quick-start/">Hugo の Quick Start&lt;/a> に従い，Hugo をインストールします．&lt;/p>
+&lt;p>作者の作成環境は Linux OS 64bit (Ubuntu 18.04.6 LTS) なので，&lt;a href="https://gohugo.io/getting-started/installing">Hugo のインストールページ&lt;/a> を参考に，以下のコマンドを実行します．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ snap install hugo --channel&lt;span style="color:#f92672">=&lt;/span>extended
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>デスクトップ環境なので，認証のためのダイアログが表示され，パスワードを入力して認証をクリックしました．&lt;/p>
+&lt;p>以下のコマンドでインストールが成功したかを確認できます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ hugo version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo v0.101.0-9f74196ce611cdf6d355bfb99fd8eba5c68ef7f8+extended linux/amd64 BuildDate&lt;span style="color:#f92672">=&lt;/span>2022-06-28T10:02:18Z VendorInfo&lt;span style="color:#f92672">=&lt;/span>snap
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="サイトの生成">
+ サイトの生成
+ &lt;a class="anchor" href="#%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e7%94%9f%e6%88%90">#&lt;/a>
+&lt;/h2>
+&lt;p>以下のコマンドを実行します．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ hugo new site htakeuchi0-notebook
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="テーマの追加">
+ テーマの追加
+ &lt;a class="anchor" href="#%e3%83%86%e3%83%bc%e3%83%9e%e3%81%ae%e8%bf%bd%e5%8a%a0">#&lt;/a>
+&lt;/h2>
+&lt;p>本サイトでは，&lt;a href="https://themes.gohugo.io/themes/hugo-book/">Book&lt;/a> テーマを利用しています．
+当該テーマの README にしたがって，以下のコマンドを実行します．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cd htakeuchi0-notebook
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git init
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git branch -M main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>つまり，テーマはサブモジュールとして取り込むこととして，ついでにブランチ名を &lt;code>main&lt;/code> に変更しておきます．&lt;/p></description></item><item><title>ページの追加とサイトの設定</title><link>https://htakeuchi0.github.io/docs/hugo/set_config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/set_config/</guid><description>&lt;h1 id="ページの追加とサイトの設定">
+ ページの追加とサイトの設定
+ &lt;a class="anchor" href="#%e3%83%9a%e3%83%bc%e3%82%b8%e3%81%ae%e8%bf%bd%e5%8a%a0%e3%81%a8%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e8%a8%ad%e5%ae%9a">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，Hugo による Web サイト作成における，ページの追加とサイトの設定に関する部分を説明します．&lt;/p>
+&lt;h2 id="ホームページの作成">
+ ホームページの作成
+ &lt;a class="anchor" href="#%e3%83%9b%e3%83%bc%e3%83%a0%e3%83%9a%e3%83%bc%e3%82%b8%e3%81%ae%e4%bd%9c%e6%88%90">#&lt;/a>
+&lt;/h2>
+&lt;p>まずは，サイト全体のホームページ（トップページ）を作成します． &lt;br>
+以下のコマンドを実行すると，ホームページが作成されます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ hugo new _index.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>content/_index.md&lt;/code> が生成されているので，それを以下のように書き換えます． &lt;br>
+タイトルと適当な小見出しを作成しており，メニューからリンクを張るため，免責事項とプライバシーポリシーは，別名でアンカーを作成しています．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>title: &amp;#34;ホームページ&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>date: 2022-08-11T12:18:39+09:00
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>draft: true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># htakeuchi0 のノート
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 概要
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 免責事項 {#disclaimer}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## プライバシーポリシー {#privacy_policy}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 作者について
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## お問い合わせ
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>次に，設定ファイル &lt;code>confing.toml&lt;/code> を以下のようにします．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">baseURL&lt;/span> = &lt;span style="color:#e6db74">&amp;#39;https://htakeuchi0.github.io/&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">languageCode&lt;/span> = &lt;span style="color:#e6db74">&amp;#39;ja-jp&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">title&lt;/span> = &lt;span style="color:#e6db74">&amp;#39;htakeuchi0 のノート&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">theme&lt;/span> = &lt;span style="color:#e6db74">&amp;#39;hugo-book&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">enableGitInfo&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">params&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">BookTheme&lt;/span> = &lt;span style="color:#e6db74">&amp;#39;auto&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">BookRepo&lt;/span> = &lt;span style="color:#e6db74">&amp;#39;https://github.com/htakeuchi0/htakeuchi0.github.io-sources&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">BookSearch&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">menu&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [[&lt;span style="color:#a6e22e">menu&lt;/span>.&lt;span style="color:#a6e22e">after&lt;/span>]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">identifier&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;disclaimer&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;免責事項&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">title&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;免責事項&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">url&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;/#disclaimer&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">weight&lt;/span> = &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [[&lt;span style="color:#a6e22e">menu&lt;/span>.&lt;span style="color:#a6e22e">after&lt;/span>]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">identifier&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;privacy_policy&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;プライバシーポリシー&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">title&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;プライバシーポリシー&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">url&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;/#privacy_policy&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">weight&lt;/span> = &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>主に以下のような設定をしています． &lt;br>
+なお，これら設定は Book テーマの場合になります．&lt;/p></description></item><item><title>公開用ファイルの生成</title><link>https://htakeuchi0.github.io/docs/hugo/genpages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/genpages/</guid><description>&lt;h1 id="公開用ファイルの生成">
+ 公開用ファイルの生成
+ &lt;a class="anchor" href="#%e5%85%ac%e9%96%8b%e7%94%a8%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%ae%e7%94%9f%e6%88%90">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，Hugo で作成した markdown ファイルを公開用の html ファイルにビルドして，公開する方法について説明します．&lt;/p>
+&lt;h2 id="htmlファイルの生成">
+ htmlファイルの生成
+ &lt;a class="anchor" href="#html%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%ae%e7%94%9f%e6%88%90">#&lt;/a>
+&lt;/h2>
+&lt;p>以下のコマンドを実行すると，&lt;code>public&lt;/code> ディレクトリ以下に公開用ファイル一式が生成されます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ hugo --minify -D
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="ページの公開">
+ ページの公開
+ &lt;a class="anchor" href="#%e3%83%9a%e3%83%bc%e3%82%b8%e3%81%ae%e5%85%ac%e9%96%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>本サイトは，Github Pages &lt;a href="#cite:1">[1]&lt;/a> を利用してページを公開しています． &lt;br>
+作者は，作成用ファイルと公開ファイルを &lt;strong>別リポジトリで管理しています&lt;/strong>．&lt;/p>
+&lt;ul>
+&lt;li>htakeuchi0.github.io リポジトリ：公開用&lt;/li>
+&lt;li>htakeuchi0.github.io-sources リポジトリ：作成用&lt;/li>
+&lt;/ul>
+&lt;p>Hugo では &lt;a href="#cite:2">[2]&lt;/a> のように，同一リポジトリで別ブランチで管理する方法が説明されています．&lt;/p>
+&lt;p>本サイトの管理方法の場合，&lt;code>htakeuchi0.github.io-sources&lt;/code> リポジトリ側で &lt;code>public&lt;/code> 以下に生成されたファイルすべてを，&lt;code>htakeuchi0.github.io&lt;/code> リポジトリに配置します．&lt;/p>
+&lt;p>あとは，&lt;a href="#cite:1">[1]&lt;/a> のとおりに設定すれば，数分でブラウザからアクセスできるようになります．&lt;/p>
+&lt;h2 id="google-search-console-の設定">
+ Google Search Console の設定
+ &lt;a class="anchor" href="#google-search-console-%e3%81%ae%e8%a8%ad%e5%ae%9a">#&lt;/a>
+&lt;/h2>
+&lt;p>Hugo では（少なくとも Book テーマでは），サイトマップ用の &lt;code>sitemap.xml&lt;/code> とRSS用の &lt;code>index.xml&lt;/code> が生成されているので，それぞれを Google Search Console &lt;a href="#cite:3">[3]&lt;/a> に登録するだけです．&lt;/p>
+&lt;h2 id="まとめ">
+ まとめ
+ &lt;a class="anchor" href="#%e3%81%be%e3%81%a8%e3%82%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，公開ファイルを生成して，公開する方法について説明しました．&lt;/p>
+&lt;h2 id="参考文献">
+ 参考文献
+ &lt;a class="anchor" href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a id="cite:1">&lt;/a>
+[1] Github, &amp;ldquo;About GitHub Pages - GitHub Docs&amp;rdquo;, &lt;a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages">https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages&lt;/a>, 2022/8/12 最終アクセス． &lt;br>
+&lt;a id="cite:2">&lt;/a>
+[2] Hugo, &amp;ldquo;Host on GitHub | Hugo&amp;rdquo;, &lt;a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">https://gohugo.io/hosting-and-deployment/hosting-on-github/&lt;/a>, 2022/8/12 最終アクセス． &lt;br>
+&lt;a id="cite:3">&lt;/a>
+[3] Google, &amp;ldquo;Google Search Console へようこそ&amp;rdquo;, &lt;a href="https://search.google.com/search-console/welcome?hl=JA">https://search.google.com/search-console/welcome?hl=JA&lt;/a>, 2022/8/12最終アクセス．&lt;/p></description></item><item><title>独自ショートコードの定義</title><link>https://htakeuchi0.github.io/docs/hugo/shortcode/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/shortcode/</guid><description>&lt;h1 id="独自ショートコードの定義">
+ 独自ショートコードの定義
+ &lt;a class="anchor" href="#%e7%8b%ac%e8%87%aa%e3%82%b7%e3%83%a7%e3%83%bc%e3%83%88%e3%82%b3%e3%83%bc%e3%83%89%e3%81%ae%e5%ae%9a%e7%be%a9">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Hugo には，ショートコードと呼ばれるスニペットを定義・利用できる機能があります &lt;a href="#cite:1">[1]&lt;/a>．本ページでは，ショートコードの一例として，&lt;code>theorem-label&lt;/code> という，
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \(\LaTeX\)
+&lt;/span>
+でいう定理環境のラベル部分を生成する独自ショートコードを定義する方法について説明します．なお一般に，スニペットとは，再利用可能なソースコード断片を指す言葉です．&lt;/p>
+&lt;h2 id="theorem-label-ショートコード">
+ &lt;code>theorem-label&lt;/code> ショートコード
+ &lt;a class="anchor" href="#theorem-label-%e3%82%b7%e3%83%a7%e3%83%bc%e3%83%88%e3%82%b3%e3%83%bc%e3%83%89">#&lt;/a>
+&lt;/h2>
+&lt;p>Hugo は markdown で記事を作成できますが，markdown の簡潔に記述できる利点を損なわないよう，ショートコードと呼ばれるスニペットを定義し，利用できる機能があります．&lt;/p>
+&lt;p>ここでは，定理環境のラベルを生成する簡単なショートコードを作成します．ここで，定理環境とは，&lt;span>
+ \(\LaTeX\)
+&lt;/span>
+でいう定理環境のような，定理や定義を示すための文章ブロックを指すものとし，そのラベルとは &amp;ldquo;Theorem 2.3&amp;rdquo; のような文章ブロックの冒頭に書かれるラベルを指すものとします．&lt;/p>
+&lt;p>&lt;code>theorem-label&lt;/code> ショートコードは以下の要件を満たすものとします．&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;&lt;strong>Theorem 1&lt;/strong>.&amp;rdquo; のように，定理種類名称と定理番号を太字で表示できて，ピリオドで終わること&lt;/li>
+&lt;li>定理種類名称はユーザが指定できること&lt;/li>
+&lt;li>定理番号はページごとに，定理種類名称によらず，1からはじまる連番で自動生成されること&lt;/li>
+&lt;li>定理番号の前に節番号などの接頭辞を任意でつけられること&lt;/li>
+&lt;li>定理番号の後に括弧付きコメントを任意でつけられること&lt;/li>
+&lt;/ul>
+&lt;p>そこで，&lt;code>theorem-label&lt;/code> ショートコードは以下のように呼び出せるものとします．&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">項番&lt;/th>
+ &lt;th style="text-align: left">呼び出し方&lt;/th>
+ &lt;th style="text-align: left">結果&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">1&lt;/td>
+ &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;strong>Theorem 1&lt;/strong>.&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">2&lt;/td>
+ &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;strong>Theorem 5.2.2&lt;/strong>.&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">3&lt;/td>
+ &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;strong>Theorem 3.3&lt;/strong> (補足).&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>実装例は以下のとおりです．下記ファイルを &lt;code>layout/shortcodes/theorem-label.html&lt;/code> として保存します．&lt;/p></description></item><item><title>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</title><link>https://htakeuchi0.github.io/docs/hugo/book_katex/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/book_katex/</guid><description>&lt;h1 id="book-テーマの-hint-ショートコードブロック内に数式を表示する際の注意">
+ Book テーマの hint ショートコードブロック内に数式を表示する際の注意
+ &lt;a class="anchor" href="#book-%e3%83%86%e3%83%bc%e3%83%9e%e3%81%ae-hint-%e3%82%b7%e3%83%a7%e3%83%bc%e3%83%88%e3%82%b3%e3%83%bc%e3%83%89%e3%83%96%e3%83%ad%e3%83%83%e3%82%af%e5%86%85%e3%81%ab%e6%95%b0%e5%bc%8f%e3%82%92%e8%a1%a8%e7%a4%ba%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e6%b3%a8%e6%84%8f">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Book テーマ &lt;a href="#cite:1">[1]&lt;/a> では，
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \(\KaTeX\)
+&lt;/span>
+を使うための &lt;code>katex&lt;/code> ショートコードが用意されています &lt;a href="#cite:2">[2]&lt;/a>．
+また，目立たせたい情報を文書ブロックとして表示できる，&lt;code>hint&lt;/code> ショートコードが用意されています &lt;a href="#cite:3">[3]&lt;/a>．&lt;/p>
+&lt;p>しかし，&lt;code>hint&lt;/code> ショートコードブロックの中で &lt;code>katex&lt;/code> ショートコードを使う場合，うまく数式が表示できないことがあります．
+本ページでは，&lt;code>hint&lt;/code> ショートコードブロック内で数式を表示する場合の注意について説明します．&lt;/p>
+&lt;h2 id="hint-ショートコードの使いかた">
+ &lt;code>hint&lt;/code> ショートコードの使いかた
+ &lt;a class="anchor" href="#hint-%e3%82%b7%e3%83%a7%e3%83%bc%e3%83%88%e3%82%b3%e3%83%bc%e3%83%89%e3%81%ae%e4%bd%bf%e3%81%84%e3%81%8b%e3%81%9f">#&lt;/a>
+&lt;/h2>
+&lt;p>公式の説明 &lt;a href="#cite:3">[3]&lt;/a> をもとに，markdown での記述例と，出力結果を説明します．&lt;code>hint&lt;/code> ショートコードは第1引数によって，背景色を変えることができます．&lt;/p>
+&lt;h3 id="第1引数なし">
+ 第1引数：なし
+ &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0%e3%81%aa%e3%81%97">#&lt;/a>
+&lt;/h3>
+&lt;p>markdown の記述例は以下のとおりです．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p>
+&lt;blockquote class="book-hint ">
+ ヒント．
+&lt;/blockquote>
+
+&lt;h3 id="第1引数info">
+ 第1引数：info
+ &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0info">#&lt;/a>
+&lt;/h3>
+&lt;p>markdown の記述例は以下のとおりです．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &lt;span style="color:#a6e22e">info&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p>
+&lt;blockquote class="book-hint info">
+ ヒント．
+&lt;/blockquote>
+
+&lt;h3 id="第1引数warning">
+ 第1引数：warning
+ &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0warning">#&lt;/a>
+&lt;/h3>
+&lt;p>markdown の記述例は以下のとおりです．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &lt;span style="color:#a6e22e">warning&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p></description></item></channel></rss>

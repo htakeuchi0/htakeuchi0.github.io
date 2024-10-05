@@ -1,27 +1,283 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>関数ポインタ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/cpp/fp/</link><description>Recent content in 関数ポインタ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/cpp/fp/index.xml" rel="self" type="application/rss+xml"/><item><title>関数ポインタとその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/fp/fp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/fp/</guid><description>関数ポインタとその周辺 # 概要 # ポインタ (pointer) とは，メモリアドレスを格納するためのオブジェクトのことです． C++ では，変数のメモリアドレスはもちろん，関数のエントリーポイントとなるメモリアドレスを格納することができます．
-本ページでは，Newton 法という数値解法の実装を例とし，関数ポインタについて説明します．
-Newton 法とその素朴な実装 # Newton 法とは，導関数が既知である実数値関数の零点を求める数値解法のひとつです． 近似解を中心に関数を一次近似（接線で近似）し，その一次関数の零点（その接線と \(x\) 軸の交点）に近似解を更新する，という操作を繰り返すことで数値的解を求めます．
-具体的にいえば，初期値を \(x_0\) としたとき，近似解の更新式は，
-\[x_{k&amp;#43;1}=x_k-\frac{f(x_k)}{f&amp;#39;(x_k)},\quad k=0,1,\dots\] となります．
-関数 f, 導関数 df に対して，初期点 x0 に最も近い零点を求めるための関数 Newton の素朴な実装として，以下が考えられます． ここでは，収束判定条件を \(|f(x_k)|&amp;lt;\epsilon\) \((\epsilon&amp;gt;0)\) とし， 最大反復回数 loop_max を超えたら収束しなかった旨のエラーを返すようにしています．
-#include &amp;lt;cmath&amp;gt; #include &amp;lt;exception&amp;gt; #include &amp;lt;iostream&amp;gt; double f(double x) { return x*x - 2; } double df(double x) { return 2*x; } double Newton(double x0, double eps=1.0e-10, std::size_t loop_max=1024) { double x = x0; for (std::size_t i = 0; i &amp;lt; loop_max; i++) { x -= f(x) / df(x); if (std::abs(f(x)) &amp;lt; eps) { return x; } } throw std::runtime_error(&amp;#34;Convergence error: This method did not converge.</description></item><item><title>メンバ関数ポインタとその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/fp/mfp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/mfp/</guid><description>メンバ関数ポインタとその周辺 # 概要 # ポインタ (pointer) とは，メモリアドレスを格納するためのオブジェクトのことで，関数のエントリーポイントとなるメモリアドレスを格納できます（関数ポインタ）．
-前ページでは，関数ポインタを利用して，関数を引数にとる関数が実現できることを確認しました． 本ページでは，関数がクラスのメンバ関数の場合にどうなるかについて説明します．
-クラス定義とオブジェクト指向に基づく通常の対応 # 前節の関数を多項式関数に限定します． そのため，多項式関数を表すクラス Polynomial を以下のように用意したとします．
-#include &amp;lt;initializer_list&amp;gt; #include &amp;lt;vector&amp;gt; /** * @brief 多項式関数を表すクラス． * * 例えば f(x) = x^2 - 2 の表現と f(1.0) の計算は以下のようにできる． * * Polynomial f = { -2, 0, 1 }; // x^2 - 2 = -2 + 0x + 1x^2 * std::cout &amp;lt;&amp;lt; f.Eval(1.0) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // -1.0 (=f(1.0)) */ class Polynomial { public: Polynomial(std::initializer_list&amp;lt;double&amp;gt; init) : coeffs_(init.</description></item><item><title>std::function とその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/fp/stdfunc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/stdfunc/</guid><description>std::function とその周辺 # 概要 # 前ページまでは，関数ポインタやメンバ関数ポインタについて説明しました．本ページでは，標準ライブラリ std::function を利用する方法について説明します．
-実用上は std::function を使う方法で十分と思います．
-std::function について # functional ヘッダを include すると，std::function が利用できます． std::function の定義は以下のとおりです [1]． テンプレートクラスですが，テンプレートの特殊化によって，関数型のみが受け付けられるようになっています．
-template &amp;lt;class&amp;gt; class function; /* undefined */ template &amp;lt;class R, class... Args&amp;gt; class function&amp;lt;R(Args...)&amp;gt;; まず，Args... は可変テンプレート引数の型を表します． よって，R(Args...) は 戻り値の型が R で，引数の型が Args... である関数の型です． したがって，Newton 関数を以下のように定義しておけば，f, df は関数を渡せます．
-#include &amp;lt;cmath&amp;gt; #include &amp;lt;functional&amp;gt; using func_t = std::function&amp;lt;double(double)&amp;gt;; double Newton(func_t f, func_t df, double x0, double eps=1.0e-10, std::size_t loop_max=1024) { double x = x0; for (std::size_t i = 0; i &amp;lt; loop_max; i++) { x -= f(x) / df(x); if (std::abs(f(x)) &amp;lt; eps) { return x; } } throw std::runtime_error(&amp;#34;Convergence error: This method did not converge.</description></item><item><title>関数への参照</title><link>https://htakeuchi0.github.io/docs/cpp/fp/fref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/fref/</guid><description>関数への参照 # 概要 # 前ページまでで，関数ポインタとその周辺事項について説明しました． 本ページでは，関数への参照型について説明します．
-関数への参照型 # 戻り値の型が T, 第 \(k\) 番目の引数の型が Sk である関数への関数ポインタ型は，
-using fp_t = T (*)(S1, S2,..., Sn); または，
-using f_t = T(S1, S2,..., Sn); using fp_t = f_t*; として定義できるのでした．
-ここで，
-using fref_t = T (&amp;amp;)(S1, S2,..., Sn); または，
-using f_t = T(S1, S2,..., Sn); using fref_t = f_t&amp;amp;; とすると，関数への参照型 をつくることができます．
-つまり，下記のコードをコンパイルして実行することができます．
-#include &amp;lt;cmath&amp;gt; #include &amp;lt;exception&amp;gt; #include &amp;lt;iostream&amp;gt; using fref_t = double (&amp;amp;)(double); double Newton(fref_t f, fref_t df, double x0, double eps=1.</description></item><item><title>関数ポインタを返却する関数</title><link>https://htakeuchi0.github.io/docs/cpp/fp/retfp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/retfp/</guid><description>関数ポインタを返却する関数 # 概要 # 前ページまでで，関数ポインタを引数にとる関数を例示しました．
-本ページでは，逆に関数ポインタを返却する関数について述べます．
-結論からいうと，文字列を受け取って，(double, double) -&amp;gt; double の関数へのポインタを返す関数は，以下のような（奇妙な）宣言になります．
-double (*From(const std::string&amp;amp; label))(double, double); 文字列に対応する関数を返却する関数（オブジェクト指向） # いま，&amp;quot;ADD&amp;quot;, &amp;quot;SUB&amp;quot; という文字列を指定したら，その文字列に対応する関数を返却する関数を考えます．
-オブジェクト指向プログラミングでは，以下のような実装が考えられます．
-#include &amp;lt;iostream&amp;gt; #include &amp;lt;memory&amp;gt; class Operator { public: virtual ~Operator() {} virtual double Compute(double, double) const = 0; }; class Add : public Operator { public: double Compute(double a, double b) const override { return a + b; } }; class Sub : public Operator { public: double Compute(double a, double b) const override { return a - b; } }; std::unique_ptr&amp;lt;Operator&amp;gt; From(const std::string&amp;amp; label) { if (label == &amp;#34;ADD&amp;#34;) { return std::make_unique&amp;lt;Add&amp;gt;(); } if (label == &amp;#34;SUB&amp;#34;) { return std::make_unique&amp;lt;Sub&amp;gt;(); } throw std::invalid_argument(&amp;#34;Not implemented.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>関数ポインタ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/cpp/fp/</link><description>Recent content in 関数ポインタ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/cpp/fp/index.xml" rel="self" type="application/rss+xml"/><item><title>関数ポインタとその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/fp/fp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/fp/</guid><description>&lt;h1 id="関数ポインタとその周辺">
+ 関数ポインタとその周辺
+ &lt;a class="anchor" href="#%e9%96%a2%e6%95%b0%e3%83%9d%e3%82%a4%e3%83%b3%e3%82%bf%e3%81%a8%e3%81%9d%e3%81%ae%e5%91%a8%e8%be%ba">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ポインタ (pointer) とは，メモリアドレスを格納するためのオブジェクトのことです．
+C++ では，変数のメモリアドレスはもちろん，関数のエントリーポイントとなるメモリアドレスを格納することができます．&lt;/p>
+&lt;p>本ページでは，Newton 法という数値解法の実装を例とし，関数ポインタについて説明します．&lt;/p>
+&lt;h2 id="newton-法とその素朴な実装">
+ Newton 法とその素朴な実装
+ &lt;a class="anchor" href="#newton-%e6%b3%95%e3%81%a8%e3%81%9d%e3%81%ae%e7%b4%a0%e6%9c%b4%e3%81%aa%e5%ae%9f%e8%a3%85">#&lt;/a>
+&lt;/h2>
+&lt;p>Newton 法とは，導関数が既知である実数値関数の零点を求める数値解法のひとつです．
+近似解を中心に関数を一次近似（接線で近似）し，その一次関数の零点（その接線と
+
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \(x\)
+&lt;/span>
+
+軸の交点）に近似解を更新する，という操作を繰り返すことで数値的解を求めます．&lt;/p>
+&lt;p>具体的にいえば，初期値を &lt;span>
+ \(x_0\)
+&lt;/span>
+ としたとき，近似解の更新式は，&lt;/p>
+&lt;span>
+ \[x_{k&amp;#43;1}=x_k-\frac{f(x_k)}{f&amp;#39;(x_k)},\quad k=0,1,\dots\]
+&lt;/span>
+
+&lt;p>となります．&lt;/p>
+&lt;p>関数 &lt;code>f&lt;/code>, 導関数 &lt;code>df&lt;/code> に対して，初期点 &lt;code>x0&lt;/code> に最も近い零点を求めるための関数 &lt;code>Newton&lt;/code> の素朴な実装として，以下が考えられます．
+ここでは，収束判定条件を &lt;span>
+ \(|f(x_k)|&amp;lt;\epsilon\)
+&lt;/span>
+ &lt;span>
+ \((\epsilon&amp;gt;0)\)
+&lt;/span>
+ とし，
+最大反復回数 &lt;code>loop_max&lt;/code> を超えたら収束しなかった旨のエラーを返すようにしています．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;cmath&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;exception&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">f&lt;/span>(&lt;span style="color:#66d9ef">double&lt;/span> x) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> x&lt;span style="color:#f92672">*&lt;/span>x &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">df&lt;/span>(&lt;span style="color:#66d9ef">double&lt;/span> x) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#f92672">*&lt;/span>x;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">Newton&lt;/span>(&lt;span style="color:#66d9ef">double&lt;/span> x0, &lt;span style="color:#66d9ef">double&lt;/span> eps&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1.0e-10&lt;/span>, std&lt;span style="color:#f92672">::&lt;/span>size_t loop_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1024&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> x &lt;span style="color:#f92672">=&lt;/span> x0;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (std&lt;span style="color:#f92672">::&lt;/span>size_t i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> loop_max; i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> x &lt;span style="color:#f92672">-=&lt;/span> f(x) &lt;span style="color:#f92672">/&lt;/span> df(x);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (std&lt;span style="color:#f92672">::&lt;/span>abs(f(x)) &lt;span style="color:#f92672">&amp;lt;&lt;/span> eps) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> x;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>runtime_error(&lt;span style="color:#e6db74">&amp;#34;Convergence error: This method did not converge.&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> x0 &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1.0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> x &lt;span style="color:#f92672">=&lt;/span> Newton(x0);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> x &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>endl; &lt;span style="color:#75715e">// 1.41421
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>しかし，この実装方法では，対象となる関数 &lt;code>f&lt;/code> を変えるたびに，関数 &lt;code>f&lt;/code> の中身を書き換えるか，&lt;code>Newton&lt;/code> 内の &lt;code>f&lt;/code> を別の関数に置き換えるかが必要となり，不便です．
+特に，複数の関数の零点を求めたい場合，求めるたびにソースコードの書き換えが必要になります．&lt;/p></description></item><item><title>メンバ関数ポインタとその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/fp/mfp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/mfp/</guid><description>&lt;h1 id="メンバ関数ポインタとその周辺">
+ メンバ関数ポインタとその周辺
+ &lt;a class="anchor" href="#%e3%83%a1%e3%83%b3%e3%83%90%e9%96%a2%e6%95%b0%e3%83%9d%e3%82%a4%e3%83%b3%e3%82%bf%e3%81%a8%e3%81%9d%e3%81%ae%e5%91%a8%e8%be%ba">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ポインタ (pointer) とは，メモリアドレスを格納するためのオブジェクトのことで，関数のエントリーポイントとなるメモリアドレスを格納できます（関数ポインタ）．&lt;/p>
+&lt;p>前ページでは，関数ポインタを利用して，関数を引数にとる関数が実現できることを確認しました．
+本ページでは，関数がクラスのメンバ関数の場合にどうなるかについて説明します．&lt;/p>
+&lt;h2 id="クラス定義とオブジェクト指向に基づく通常の対応">
+ クラス定義とオブジェクト指向に基づく通常の対応
+ &lt;a class="anchor" href="#%e3%82%af%e3%83%a9%e3%82%b9%e5%ae%9a%e7%be%a9%e3%81%a8%e3%82%aa%e3%83%96%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e6%8c%87%e5%90%91%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%8f%e9%80%9a%e5%b8%b8%e3%81%ae%e5%af%be%e5%bf%9c">#&lt;/a>
+&lt;/h2>
+&lt;p>前節の関数を多項式関数に限定します．
+そのため，多項式関数を表すクラス &lt;code>Polynomial&lt;/code> を以下のように用意したとします．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;initializer_list&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;vector&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * @brief 多項式関数を表すクラス．
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * 例えば f(x) = x^2 - 2 の表現と f(1.0) の計算は以下のようにできる．
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Polynomial f = { -2, 0, 1 }; // x^2 - 2 = -2 + 0x + 1x^2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * std::cout &amp;lt;&amp;lt; f.Eval(1.0) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // -1.0 (=f(1.0))
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Polynomial&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Polynomial(std&lt;span style="color:#f92672">::&lt;/span>initializer_list&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">double&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> init) &lt;span style="color:#f92672">:&lt;/span> coeffs_(init.begin(), init.end()) {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">Eval&lt;/span>(&lt;span style="color:#66d9ef">double&lt;/span> x) &lt;span style="color:#66d9ef">const&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">auto&lt;/span> iter &lt;span style="color:#f92672">=&lt;/span> coeffs_.crbegin();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> y &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> (iter &lt;span style="color:#f92672">!=&lt;/span> coeffs_.crend()) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y &lt;span style="color:#f92672">=&lt;/span> y&lt;span style="color:#f92672">*&lt;/span>x &lt;span style="color:#f92672">+&lt;/span> (&lt;span style="color:#f92672">*&lt;/span>iter&lt;span style="color:#f92672">++&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> y;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">private&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">double&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> coeffs_;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このクラスを使う場合，Newton メソッドの呼び出し部分はどうしたらよいでしょうか．
+適当に書いてみると以下のようになります．&lt;/p></description></item><item><title>std::function とその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/fp/stdfunc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/stdfunc/</guid><description>&lt;h1 id="stdfunction-とその周辺">
+ std::function とその周辺
+ &lt;a class="anchor" href="#stdfunction-%e3%81%a8%e3%81%9d%e3%81%ae%e5%91%a8%e8%be%ba">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページまでは，関数ポインタやメンバ関数ポインタについて説明しました．本ページでは，標準ライブラリ &lt;code>std::function&lt;/code> を利用する方法について説明します．&lt;/p>
+&lt;p>実用上は &lt;code>std::function&lt;/code> を使う方法で十分と思います．&lt;/p>
+&lt;h2 id="stdfunction-について">
+ std::function について
+ &lt;a class="anchor" href="#stdfunction-%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;code>functional&lt;/code> ヘッダを include すると，&lt;code>std::function&lt;/code> が利用できます．
+&lt;code>std::function&lt;/code> の定義は以下のとおりです &lt;a href="#cite:1">[1]&lt;/a>．
+テンプレートクラスですが，テンプレートの特殊化によって，関数型のみが受け付けられるようになっています．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">template&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">class&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">function&lt;/span>; &lt;span style="color:#75715e">/* undefined */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">template&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">R&lt;/span>, &lt;span style="color:#66d9ef">class&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">... &lt;/span>&lt;span style="color:#a6e22e">Args&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">function&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>R(Args...)&lt;span style="color:#f92672">&amp;gt;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>まず，&lt;code>Args...&lt;/code> は可変テンプレート引数の型を表します．
+よって，&lt;code>R(Args...)&lt;/code> は 戻り値の型が &lt;code>R&lt;/code> で，引数の型が &lt;code>Args...&lt;/code> である関数の型です．
+したがって，&lt;code>Newton&lt;/code> 関数を以下のように定義しておけば，&lt;code>f&lt;/code>, &lt;code>df&lt;/code> は関数を渡せます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;cmath&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;functional&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> func_t &lt;span style="color:#f92672">=&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>function&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">double&lt;/span>(&lt;span style="color:#66d9ef">double&lt;/span>)&lt;span style="color:#f92672">&amp;gt;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">Newton&lt;/span>(func_t f, func_t df, &lt;span style="color:#66d9ef">double&lt;/span> x0, &lt;span style="color:#66d9ef">double&lt;/span> eps&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1.0e-10&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>size_t loop_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1024&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> x &lt;span style="color:#f92672">=&lt;/span> x0;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (std&lt;span style="color:#f92672">::&lt;/span>size_t i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> loop_max; i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> x &lt;span style="color:#f92672">-=&lt;/span> f(x) &lt;span style="color:#f92672">/&lt;/span> df(x);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (std&lt;span style="color:#f92672">::&lt;/span>abs(f(x)) &lt;span style="color:#f92672">&amp;lt;&lt;/span> eps) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> x;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>runtime_error(&lt;span style="color:#e6db74">&amp;#34;Convergence error: This method did not converge.&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>たとえば，&lt;/p></description></item><item><title>関数への参照</title><link>https://htakeuchi0.github.io/docs/cpp/fp/fref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/fref/</guid><description>&lt;h1 id="関数への参照">
+ 関数への参照
+ &lt;a class="anchor" href="#%e9%96%a2%e6%95%b0%e3%81%b8%e3%81%ae%e5%8f%82%e7%85%a7">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページまでで，関数ポインタとその周辺事項について説明しました．
+本ページでは，関数への参照型について説明します．&lt;/p>
+&lt;h2 id="関数への参照型">
+ 関数への参照型
+ &lt;a class="anchor" href="#%e9%96%a2%e6%95%b0%e3%81%b8%e3%81%ae%e5%8f%82%e7%85%a7%e5%9e%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>戻り値の型が &lt;code>T&lt;/code>, 第 
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \(k\)
+&lt;/span>
+ 番目の引数の型が &lt;code>Sk&lt;/code> である関数への関数ポインタ型は，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> fp_t &lt;span style="color:#f92672">=&lt;/span> T (&lt;span style="color:#f92672">*&lt;/span>)(S1, S2,..., Sn);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>または，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> f_t &lt;span style="color:#f92672">=&lt;/span> T(S1, S2,..., Sn);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> fp_t &lt;span style="color:#f92672">=&lt;/span> f_t&lt;span style="color:#f92672">*&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>として定義できるのでした．&lt;/p>
+&lt;p>ここで，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> fref_t &lt;span style="color:#f92672">=&lt;/span> T (&lt;span style="color:#f92672">&amp;amp;&lt;/span>)(S1, S2,..., Sn);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>または，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> f_t &lt;span style="color:#f92672">=&lt;/span> T(S1, S2,..., Sn);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> fref_t &lt;span style="color:#f92672">=&lt;/span> f_t&lt;span style="color:#f92672">&amp;amp;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>とすると，&lt;strong>関数への参照型&lt;/strong> をつくることができます．&lt;/p>
+&lt;p>つまり，下記のコードをコンパイルして実行することができます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;cmath&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;exception&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> fref_t &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">double&lt;/span> (&lt;span style="color:#f92672">&amp;amp;&lt;/span>)(&lt;span style="color:#66d9ef">double&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">Newton&lt;/span>(fref_t f, fref_t df, &lt;span style="color:#66d9ef">double&lt;/span> x0, &lt;span style="color:#66d9ef">double&lt;/span> eps&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1.0e-10&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>size_t loop_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1024&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> x &lt;span style="color:#f92672">=&lt;/span> x0;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (std&lt;span style="color:#f92672">::&lt;/span>size_t i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> loop_max; i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> x &lt;span style="color:#f92672">-=&lt;/span> f(x) &lt;span style="color:#f92672">/&lt;/span> df(x);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (std&lt;span style="color:#f92672">::&lt;/span>abs(f(x)) &lt;span style="color:#f92672">&amp;lt;&lt;/span> eps) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> x;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>runtime_error(&lt;span style="color:#e6db74">&amp;#34;Convergence error: This method did not converge.&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">f&lt;/span>(&lt;span style="color:#66d9ef">double&lt;/span> x) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> x&lt;span style="color:#f92672">*&lt;/span>x &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">df&lt;/span>(&lt;span style="color:#66d9ef">double&lt;/span> x) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#f92672">*&lt;/span>x;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> x0 &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1.0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> x &lt;span style="color:#f92672">=&lt;/span> Newton(f, df, x0);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> x &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>endl; &lt;span style="color:#75715e">// 1.41421
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>関数ポインタ版に対するメリットとして，関数が &lt;code>nullptr&lt;/code> で渡されるおそれがないことが挙げられます．
+ただし，&lt;code>std::function&lt;/code> を使えばその問題は発生しないため，あえて利用することはないと思います．&lt;/p></description></item><item><title>関数ポインタを返却する関数</title><link>https://htakeuchi0.github.io/docs/cpp/fp/retfp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/retfp/</guid><description>&lt;h1 id="関数ポインタを返却する関数">
+ 関数ポインタを返却する関数
+ &lt;a class="anchor" href="#%e9%96%a2%e6%95%b0%e3%83%9d%e3%82%a4%e3%83%b3%e3%82%bf%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e9%96%a2%e6%95%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページまでで，関数ポインタを引数にとる関数を例示しました．&lt;/p>
+&lt;p>本ページでは，逆に関数ポインタを返却する関数について述べます．&lt;/p>
+&lt;p>結論からいうと，文字列を受け取って，&lt;code>(double, double) -&amp;gt; double&lt;/code> の関数へのポインタを返す関数は，以下のような（奇妙な）宣言になります．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">double&lt;/span> (&lt;span style="color:#f92672">*&lt;/span>From(&lt;span style="color:#66d9ef">const&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>string&lt;span style="color:#f92672">&amp;amp;&lt;/span> label))(&lt;span style="color:#66d9ef">double&lt;/span>, &lt;span style="color:#66d9ef">double&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="文字列に対応する関数を返却する関数オブジェクト指向">
+ 文字列に対応する関数を返却する関数（オブジェクト指向）
+ &lt;a class="anchor" href="#%e6%96%87%e5%ad%97%e5%88%97%e3%81%ab%e5%af%be%e5%bf%9c%e3%81%99%e3%82%8b%e9%96%a2%e6%95%b0%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e9%96%a2%e6%95%b0%e3%82%aa%e3%83%96%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e6%8c%87%e5%90%91">#&lt;/a>
+&lt;/h2>
+&lt;p>いま，&lt;code>&amp;quot;ADD&amp;quot;, &amp;quot;SUB&amp;quot;&lt;/code> という文字列を指定したら，その文字列に対応する関数を返却する関数を考えます．&lt;/p>
+&lt;p>オブジェクト指向プログラミングでは，以下のような実装が考えられます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;memory&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Operator&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">virtual&lt;/span> &lt;span style="color:#f92672">~&lt;/span>Operator() {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">virtual&lt;/span> &lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">Compute&lt;/span>(&lt;span style="color:#66d9ef">double&lt;/span>, &lt;span style="color:#66d9ef">double&lt;/span>) &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Add&lt;/span> &lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#66d9ef">public&lt;/span> Operator {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> Compute(&lt;span style="color:#66d9ef">double&lt;/span> a, &lt;span style="color:#66d9ef">double&lt;/span> b) &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#66d9ef">override&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> a &lt;span style="color:#f92672">+&lt;/span> b; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Sub&lt;/span> &lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#66d9ef">public&lt;/span> Operator {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> Compute(&lt;span style="color:#66d9ef">double&lt;/span> a, &lt;span style="color:#66d9ef">double&lt;/span> b) &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#66d9ef">override&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> a &lt;span style="color:#f92672">-&lt;/span> b; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>std&lt;span style="color:#f92672">::&lt;/span>unique_ptr&lt;span style="color:#f92672">&amp;lt;&lt;/span>Operator&lt;span style="color:#f92672">&amp;gt;&lt;/span> From(&lt;span style="color:#66d9ef">const&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>string&lt;span style="color:#f92672">&amp;amp;&lt;/span> label) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (label &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ADD&amp;#34;&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>make_unique&lt;span style="color:#f92672">&amp;lt;&lt;/span>Add&lt;span style="color:#f92672">&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (label &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;SUB&amp;#34;&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>make_unique&lt;span style="color:#f92672">&amp;lt;&lt;/span>Sub&lt;span style="color:#f92672">&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>invalid_argument(&lt;span style="color:#e6db74">&amp;#34;Not implemented.&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">auto&lt;/span> add &lt;span style="color:#f92672">=&lt;/span> From(&lt;span style="color:#e6db74">&amp;#34;ADD&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34; + &amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34; = &amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> add&lt;span style="color:#f92672">-&amp;gt;&lt;/span>Compute(&lt;span style="color:#ae81ff">3&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">auto&lt;/span> sub &lt;span style="color:#f92672">=&lt;/span> From(&lt;span style="color:#e6db74">&amp;#34;SUB&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34; - &amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34; = &amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> sub&lt;span style="color:#f92672">-&amp;gt;&lt;/span>Compute(&lt;span style="color:#ae81ff">3&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>インタフェースクラス &lt;code>Operator&lt;/code> が &lt;code>Compute&lt;/code> メソッドの実装を要求し，移譲された継承クラスの実装関数で，それぞれ具体的なロジックを定義しています．&lt;/p></description></item></channel></rss>

@@ -1,6 +1,91 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>差分プライバシ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/math/stat/dp/</link><description>Recent content in 差分プライバシ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/math/stat/dp/index.xml" rel="self" type="application/rss+xml"/><item><title>差分プライバシの基本</title><link>https://htakeuchi0.github.io/docs/math/stat/dp/basic/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/dp/basic/</guid><description>差分プライバシの基本 # 概要 # 本ページでは，差分プライバシの基本事項についてまとめます．
-準備 # 記号定義 # \(\Omega\) を集合， \(\mathfrak{F}\subseteq 2^\Omega\) , \(P:\mathfrak{F}\to\mathbb{R}\) とし， \((\Omega,\mathfrak{F},P)\) を確率空間とします．
-\(X:(\Omega,\mathfrak{F})\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) を確率変数としたとき， \(S\in\mathfrak{B}(\mathbb{R}^{k})\) について \([X\in S]\) を \[ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}\] で定め， \(P([X\in S])\) を \(P(X\in S)\) と略記します．ただし， \(\mathfrak{B}(\mathbb{R}^{k})\) とは， \(\mathbb{R}^{k}\) の開集合全体 \(\mathfrak{O}(\mathbb{R}^{k})\) について， \(\mathfrak{O}(\mathbb{R}^{k})\) を含む最小の完全加法族を表します．
-ふたつの確率空間 \((\Omega_1,\mathfrak{F}_1,P_1)\) , \((\Omega_2,\mathfrak{F}_2,P_2)\) に対して，ふたつの確率変数 \(X:(\Omega_1,\mathfrak{F}_1)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) , \(Y:(\Omega_2,\mathfrak{F}_2)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) があったとき， \(P_1(X\in S)\) , \(P_2(Y\in S)\) と書くべきところを， \(P(X\in S)\) , \(P(Y\in S)\) と略記します．
-また，本ページでは簡単のため，確率変数が連続的確率変数である場合のみを想定し，論証を行います．
-\(\epsilon\)-indistinguishable # まず，確率変数どうしの関係のひとつである， \(\epsilon\) -indistiguishability という概念を導入します [1]．</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>差分プライバシ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/math/stat/dp/</link><description>Recent content in 差分プライバシ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/math/stat/dp/index.xml" rel="self" type="application/rss+xml"/><item><title>差分プライバシの基本</title><link>https://htakeuchi0.github.io/docs/math/stat/dp/basic/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/dp/basic/</guid><description>&lt;h1 id="差分プライバシの基本">
+ 差分プライバシの基本
+ &lt;a class="anchor" href="#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%81%ae%e5%9f%ba%e6%9c%ac">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，差分プライバシの基本事項についてまとめます．&lt;/p>
+&lt;h2 id="準備">
+ 準備
+ &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="記号定義">
+ 記号定義
+ &lt;a class="anchor" href="#%e8%a8%98%e5%8f%b7%e5%ae%9a%e7%be%a9">#&lt;/a>
+&lt;/h3>
+&lt;p>
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \(\Omega\)
+&lt;/span>
+ を集合，&lt;span>
+ \(\mathfrak{F}\subseteq 2^\Omega\)
+&lt;/span>
+, &lt;span>
+ \(P:\mathfrak{F}\to\mathbb{R}\)
+&lt;/span>
+ とし，&lt;span>
+ \((\Omega,\mathfrak{F},P)\)
+&lt;/span>
+ を確率空間とします．&lt;/p>
+&lt;p>&lt;span>
+ \(X:(\Omega,\mathfrak{F})\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\)
+&lt;/span>
+ を確率変数としたとき，&lt;span>
+ \(S\in\mathfrak{B}(\mathbb{R}^{k})\)
+&lt;/span>
+ について &lt;span>
+ \([X\in S]\)
+&lt;/span>
+ を
+&lt;span>
+ \[ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}\]
+&lt;/span>
+
+で定め，&lt;span>
+ \(P([X\in S])\)
+&lt;/span>
+ を &lt;span>
+ \(P(X\in S)\)
+&lt;/span>
+ と略記します．ただし，&lt;span>
+ \(\mathfrak{B}(\mathbb{R}^{k})\)
+&lt;/span>
+ とは，&lt;span>
+ \(\mathbb{R}^{k}\)
+&lt;/span>
+ の開集合全体 &lt;span>
+ \(\mathfrak{O}(\mathbb{R}^{k})\)
+&lt;/span>
+ について，&lt;span>
+ \(\mathfrak{O}(\mathbb{R}^{k})\)
+&lt;/span>
+ を含む最小の完全加法族を表します．&lt;/p>
+&lt;p>ふたつの確率空間 &lt;span>
+ \((\Omega_1,\mathfrak{F}_1,P_1)\)
+&lt;/span>
+, &lt;span>
+ \((\Omega_2,\mathfrak{F}_2,P_2)\)
+&lt;/span>
+ に対して，ふたつの確率変数 &lt;span>
+ \(X:(\Omega_1,\mathfrak{F}_1)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\)
+&lt;/span>
+, &lt;span>
+ \(Y:(\Omega_2,\mathfrak{F}_2)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\)
+&lt;/span>
+ があったとき，&lt;span>
+ \(P_1(X\in S)\)
+&lt;/span>
+, &lt;span>
+ \(P_2(Y\in S)\)
+&lt;/span>
+ と書くべきところを，&lt;span>
+ \(P(X\in S)\)
+&lt;/span>
+, &lt;span>
+ \(P(Y\in S)\)
+&lt;/span>
+ と略記します．&lt;/p></description></item></channel></rss>

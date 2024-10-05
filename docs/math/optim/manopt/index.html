@@ -1,0 +1,328 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  多様体上の数理最適化
+  #
+
+
+  概要
+  #
+
+特定の制約のもとで与えられた関数を最小化または最大化する問題を 最適化問題 と呼び，何らかの条件のもとでよいものを選択する実世界の問題を，最適化問題に定式化してその解を求めることを 数理最適化 といいます．
+近年，多様体 と呼ばれる空間の上での関数に対する最適化問題を考えることが，応用上有用であるとして注目されているようです．
+本ページでは，[1] を一読した記録として，多様体上の数理最適化の実行例について述べます．
+
+  文献 [1] 初読時の記録
+  #
+
+文献 [1] 初読時の感想やメモは，X 上の次のリプライツリーで投稿しています． 
+多分に誤りを含むものと思いますが，記録のためにリンクを貼っておきます．
+[佐藤 寛之，多様体上の最適化理論，オーム社，2024] を購入．確かに丁寧ではあるけれど，本題の第III部にたどり着けるかしら．まえがきに，不要ならこんな感じにスキップしながら読んでいいよとあるので，そうしようかな．https://t.co/bommzuzK2f&mdash; htakeuchi0 (@htakeuchi0) January 30, 2024
+
+
+
+
+  はじめに：多様体と最適化問題
+  #
+
+通常の微積分は，
+
+
+
+  \(\mathbb{R}^n\)
+
+ という，実数またはその組全体がつくる空間で議論されます．
+ここではその空間のことを ユークリッド空間 と呼んでおきます．
+そうではない一般の空間においても，実数の組で表される座標というものをいい感じに導入して，もとの空間の代わりにその座標で考えることにすれば，通常の微積分が一般の空間でも使えそうです．
+また， 
+  \(\mathbb{R}^n\)
+
+ の部分空間であっても，通常とは別の座標を導入してそこで議論したい場合にも，この考え方が使えそうです．
+もっとも，“いい感じ” に導入できていないと議論に不都合がでてくるので，なんでもよいわけではありません．
+多様体 とは，上記の要領で 
+  \(\mathbb{R}^n\)
+
+ の議論を抽象化して規定された “いい感じ” の空間であり，リーマン多様体 とは，特にそこにより扱いやすくするための条件を加えたものになります．
+ところで，最適化問題には以下の分類があります．
+
+無制約最適化問題
+制約付き最適化問題
+
+制約付き最適化問題というのは，“ある条件を満たすものの中で最適なものを求めよ” という問題です．
+例えば，球面上の関数を最小にする点を求めよ，という問題は，制約付き最適化問題となります．
+球面に “いい感じ” に座標を設定すればリーマン多様体とみなせることが知られています．
+地球は3次元空間に浮いていますが，2次元平面の地図や，それを集めた地図帳が作れる，ということがそれを示唆しています．
+すると，球面上の最適化問題は，もともと制約付き最適化問題であったものを，リーマン多様体上の無制約最適化問題とみることができます．
+一般に，制約付き最適化問題は無制約最適化問題より難しい問題なので，制約付き最適化問題を多様体上の無制約最適化問題とみることで，通常の方法とは異なる解き方を考える余地が生まれます．
+本ページでは，球面よりさらに簡単に，円周上の最適化問題を例示します．
+小さすぎる例ではありますが，導入としてはこれくらい単純な方がよいと考えるためです．"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/optim/manopt/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="多様体上の数理最適化"><meta property="og:description" content=" 多様体上の数理最適化 # 概要 # 特定の制約のもとで与えられた関数を最小化または最大化する問題を 最適化問題 と呼び，何らかの条件のもとでよいものを選択する実世界の問題を，最適化問題に定式化してその解を求めることを 数理最適化 といいます．
+近年，多様体 と呼ばれる空間の上での関数に対する最適化問題を考えることが，応用上有用であるとして注目されているようです．
+本ページでは，[1] を一読した記録として，多様体上の数理最適化の実行例について述べます．
+文献 [1] 初読時の記録 # 文献 [1] 初読時の感想やメモは，X 上の次のリプライツリーで投稿しています． 多分に誤りを含むものと思いますが，記録のためにリンクを貼っておきます．
+[佐藤 寛之，多様体上の最適化理論，オーム社，2024] を購入．確かに丁寧ではあるけれど，本題の第III部にたどり着けるかしら．まえがきに，不要ならこんな感じにスキップしながら読んでいいよとあるので，そうしようかな．https://t.co/bommzuzK2f
+— htakeuchi0 (@htakeuchi0) January 30, 2024 はじめに：多様体と最適化問題 # 通常の微積分は， \(\mathbb{R}^n\) という，実数またはその組全体がつくる空間で議論されます． ここではその空間のことを ユークリッド空間 と呼んでおきます．
+そうではない一般の空間においても，実数の組で表される座標というものをいい感じに導入して，もとの空間の代わりにその座標で考えることにすれば，通常の微積分が一般の空間でも使えそうです．
+また， \(\mathbb{R}^n\) の部分空間であっても，通常とは別の座標を導入してそこで議論したい場合にも，この考え方が使えそうです．
+もっとも，“いい感じ” に導入できていないと議論に不都合がでてくるので，なんでもよいわけではありません．
+多様体 とは，上記の要領で \(\mathbb{R}^n\) の議論を抽象化して規定された “いい感じ” の空間であり，リーマン多様体 とは，特にそこにより扱いやすくするための条件を加えたものになります．
+ところで，最適化問題には以下の分類があります．
+無制約最適化問題 制約付き最適化問題 制約付き最適化問題というのは，“ある条件を満たすものの中で最適なものを求めよ” という問題です． 例えば，球面上の関数を最小にする点を求めよ，という問題は，制約付き最適化問題となります．
+球面に “いい感じ” に座標を設定すればリーマン多様体とみなせることが知られています． 地球は3次元空間に浮いていますが，2次元平面の地図や，それを集めた地図帳が作れる，ということがそれを示唆しています． すると，球面上の最適化問題は，もともと制約付き最適化問題であったものを，リーマン多様体上の無制約最適化問題とみることができます．
+一般に，制約付き最適化問題は無制約最適化問題より難しい問題なので，制約付き最適化問題を多様体上の無制約最適化問題とみることで，通常の方法とは異なる解き方を考える余地が生まれます．
+本ページでは，球面よりさらに簡単に，円周上の最適化問題を例示します． 小さすぎる例ではありますが，導入としてはこれくらい単純な方がよいと考えるためです．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="website"><title>多様体上の数理最適化 | htakeuchi0 のノート</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script><link rel=alternate type=application/rss+xml href=https://htakeuchi0.github.io/docs/math/optim/manopt/index.xml title="htakeuchi0 のノート"></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/ class=active>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>多様体上の数理最適化</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#文献-1-初読時の記録>文献 [1] 初読時の記録</a></li><li><a href=#はじめに多様体と最適化問題>はじめに：多様体と最適化問題</a></li><li><a href=#本ページで対象とする最適化問題>本ページで対象とする最適化問題</a></li><li><a href=#厳密解>厳密解</a></li><li><a href=#数値解法>数値解法</a></li><li><a href=#数値例>数値例</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class=markdown><h1 id=多様体上の数理最適化>多様体上の数理最適化
+<a class=anchor href=#%e5%a4%9a%e6%a7%98%e4%bd%93%e4%b8%8a%e3%81%ae%e6%95%b0%e7%90%86%e6%9c%80%e9%81%a9%e5%8c%96>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>特定の制約のもとで与えられた関数を最小化または最大化する問題を <strong>最適化問題</strong> と呼び，何らかの条件のもとでよいものを選択する実世界の問題を，最適化問題に定式化してその解を求めることを <strong>数理最適化</strong> といいます．</p><p>近年，<strong>多様体</strong> と呼ばれる空間の上での関数に対する最適化問題を考えることが，応用上有用であるとして注目されているようです．</p><p>本ページでは，<a href=#cite:1>[1]</a> を一読した記録として，多様体上の数理最適化の実行例について述べます．</p><h2 id=文献-1-初読時の記録>文献 [1] 初読時の記録
+<a class=anchor href=#%e6%96%87%e7%8c%ae-1-%e5%88%9d%e8%aa%ad%e6%99%82%e3%81%ae%e8%a8%98%e9%8c%b2>#</a></h2><p>文献 <a href=#cite:1>[1]</a> 初読時の感想やメモは，X 上の次のリプライツリーで投稿しています．<br>多分に誤りを含むものと思いますが，記録のためにリンクを貼っておきます．</p><blockquote class=twitter-tweet><p lang=ja dir=ltr>[佐藤 寛之，多様体上の最適化理論，オーム社，2024] を購入．確かに丁寧ではあるけれど，本題の第III部にたどり着けるかしら．まえがきに，不要ならこんな感じにスキップしながら読んでいいよとあるので，そうしようかな．<a href=https://t.co/bommzuzK2f>https://t.co/bommzuzK2f</a></p>&mdash; htakeuchi0 (@htakeuchi0) <a href="https://twitter.com/htakeuchi0/status/1752321169896956367?ref_src=twsrc%5Etfw">January 30, 2024</a></blockquote><script async src=https://platform.twitter.com/widgets.js></script><h2 id=はじめに多様体と最適化問題>はじめに：多様体と最適化問題
+<a class=anchor href=#%e3%81%af%e3%81%98%e3%82%81%e3%81%ab%e5%a4%9a%e6%a7%98%e4%bd%93%e3%81%a8%e6%9c%80%e9%81%a9%e5%8c%96%e5%95%8f%e9%a1%8c>#</a></h2><p>通常の微積分は，
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\(\mathbb{R}^n\)
+</span>という，実数またはその組全体がつくる空間で議論されます．
+ここではその空間のことを <strong>ユークリッド空間</strong> と呼んでおきます．</p><p>そうではない一般の空間においても，実数の組で表される座標というものをいい感じに導入して，もとの空間の代わりにその座標で考えることにすれば，通常の微積分が一般の空間でも使えそうです．</p><p>また， <span>\(\mathbb{R}^n\)
+</span>の部分空間であっても，通常とは別の座標を導入してそこで議論したい場合にも，この考え方が使えそうです．</p><p>もっとも，“いい感じ” に導入できていないと議論に不都合がでてくるので，なんでもよいわけではありません．</p><p><strong>多様体</strong> とは，上記の要領で <span>\(\mathbb{R}^n\)
+</span>の議論を抽象化して規定された “いい感じ” の空間であり，<strong>リーマン多様体</strong> とは，特にそこにより扱いやすくするための条件を加えたものになります．</p><p>ところで，最適化問題には以下の分類があります．</p><ol><li>無制約最適化問題</li><li>制約付き最適化問題</li></ol><p>制約付き最適化問題というのは，“ある条件を満たすものの中で最適なものを求めよ” という問題です．
+例えば，球面上の関数を最小にする点を求めよ，という問題は，制約付き最適化問題となります．</p><p>球面に “いい感じ” に座標を設定すればリーマン多様体とみなせることが知られています．
+地球は3次元空間に浮いていますが，2次元平面の地図や，それを集めた地図帳が作れる，ということがそれを示唆しています．
+すると，球面上の最適化問題は，もともと制約付き最適化問題であったものを，リーマン多様体上の無制約最適化問題とみることができます．</p><p>一般に，制約付き最適化問題は無制約最適化問題より難しい問題なので，制約付き最適化問題を多様体上の無制約最適化問題とみることで，通常の方法とは異なる解き方を考える余地が生まれます．</p><p>本ページでは，球面よりさらに簡単に，円周上の最適化問題を例示します．
+小さすぎる例ではありますが，導入としてはこれくらい単純な方がよいと考えるためです．</p><h2 id=本ページで対象とする最適化問題>本ページで対象とする最適化問題
+<a class=anchor href=#%e6%9c%ac%e3%83%9a%e3%83%bc%e3%82%b8%e3%81%a7%e5%af%be%e8%b1%a1%e3%81%a8%e3%81%99%e3%82%8b%e6%9c%80%e9%81%a9%e5%8c%96%e5%95%8f%e9%a1%8c>#</a></h2><p>本ページでは，以下の形の問題を解くことを考えます．</p><span>\[\begin{aligned}
+&\mathrm{Minimize}\ x^TAx\\
+&\mathrm{subject\ to}\ x^Tx=1.
+\end{aligned}\]</span><p>ただし，<span>
+\(A\in\mathbb{R}^{n\times n},x\in\mathbb{R}^n\)
+</span>であり，<span>
+\(A\)
+</span>は与えられるものとします．
+また，<span>
+\(\mathbb{R}^{n\times n}\)
+</span>で， <span>\(n\times n\)
+</span>型行列全体の集合を表すことにします．</p><p>本ページでは特に，<span>
+\(n=2\)
+</span>を考え，具体的には以下の問題を解くことにします．<span>
+\(x\in\mathbb{R}^2\)
+</span>です．</p><span>\[\begin{aligned}
+&\mathrm{Minimize}\ x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x\\
+&\mathrm{subject\ to}\ x^Tx=1.
+\end{aligned}\]</span><p>この制約条件は <span>\(S^{n-1}=\{x\in\mathbb{R}^n\mid x^Tx=1\}\)
+</span>によって，<span>
+\(x\in S^1\)
+</span>と表すことができます．
+<span>\(S^{n-1}\)
+</span>は <span>\((n-1)\)
+</span>次元球面と呼ばれる多様体です．
+<span>\(n=2\)
+</span>のとき，つまり <span>\(S^1\)
+</span>は <strong>半径1の円周</strong> を表します．</p><p>以上より，本ページで対象とする最適化問題を，以下のように表現しておきます．</p><span>\[\begin{aligned}
+&\mathrm{Minimize}\ x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x\\
+&\mathrm{subject\ to}\ x\in S^1.
+\end{aligned}\]</span><h2 id=厳密解>厳密解
+<a class=anchor href=#%e5%8e%b3%e5%af%86%e8%a7%a3>#</a></h2><p>数値的に解を求める前に，この問題の厳密解を解析的な方法で求めます．</p><p>この最適化問題は， <strong>ラグランジュの未定乗数法</strong> という方法で解くことができます．
+この解析的な方法はユークリッド空間上で考えればよく，多様体を意識する必要はありません．</p><p>この問題の場合，ラグランジュの未定乗数法によると，<span>
+\(x^*\)
+</span>が局所的最適解であるとき，<span>
+\(\lambda^*\in\mathbb{R}\)
+</span>が存在し，
+<span>\[\begin{aligned}
+&\left.\frac{\partial}{\partial x_1}\left(x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x+\lambda(x^Tx-1)\right)\right|_{x=x^*, \lambda=\lambda^*}=0,\\
+&\left.\frac{\partial}{\partial x_2}\left(x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x+\lambda(x^Tx-1)\right)\right|_{x=x^*, \lambda=\lambda^*}=0,\\
+&\left.\frac{\partial}{\partial \lambda}\left(x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x+\lambda(x^Tx-1)\right)\right|_{x=x^*, \lambda=\lambda^*}=0
+\end{aligned}\]
+</span>を満たします．
+ただし，<span>
+\(x\)
+</span>の第<span>
+\(i\)
+</span>要素を<span>
+\(x_i\)
+</span>と表します．</p><p>よって，以下の方程式を解くと，解の候補が得られることになります．
+<span>\[\begin{aligned}
+&amp;10x_1+4x_2+2\lambda x_1=0,\\
+&amp;4x_1+6x_2+2\lambda x_2=0,\\
+&amp;x_1^2+x_2^2-1=0.
+\end{aligned}\]
+</span>上2つの式は，
+<span>\[\begin{aligned}
+&(10+2\lambda)x_1+4x_2=0,\\
+&amp;4x_1+(6+2\lambda)x_2=0
+\end{aligned}\]
+</span>と書けて，それぞれの両辺を2で割って，第2式の <span>\((-1/2)(5+\lambda)\)
+</span>を第1式にたすと，
+<span>\[\begin{aligned}
+&\left(2-\frac{1}{2}(3+\lambda)(5+\lambda)\right)x_2=0,\\
+&amp;2x_1+(3+\lambda)x_2=0
+\end{aligned}\]
+</span>となります．</p><p>これが解をもつには，
+<span>\[\begin{aligned}
+&amp;2-\frac{1}{2}(3+\lambda)(5+\lambda)=0,\\
+&amp;2x_1+(3+\lambda)x_2=0
+\end{aligned}\]
+</span>が必要なので，復号同順で
+<span>\[\begin{aligned}
+&\lambda=-4\pm\sqrt{5},\\
+&amp;x_2=-\frac{1\pm\sqrt{5}}{2}x_1
+\end{aligned}\]
+</span>が得られます．</p><p>次に，<span>
+\(x_1^2+x_2^2=1\)
+</span>なので，
+<span>\[ 1=x_1^2+x_2^2=x_1^2+\left(-\frac{1\pm\sqrt{5}}{2}x_1\right)^2\]
+</span>から，
+<span>\[ x_1=\sqrt{\frac{5\pm\sqrt{5}}{10}},-\sqrt{\frac{5\pm\sqrt{5}}{10}}\]
+</span>が得られ，<span>
+\((x_1,x_2)\)
+</span>としては，
+<span>\[\begin{aligned}
+&\left(\sqrt{\frac{5-\sqrt{5}}{10}},-\frac{1+\sqrt{5}}{2}\sqrt{\frac{5-\sqrt{5}}{10}}\right),\\
+&\left(-\sqrt{\frac{5-\sqrt{5}}{10}},\frac{1+\sqrt{5}}{2}\sqrt{\frac{5-\sqrt{5}}{10}}\right),\\
+&\left(\sqrt{\frac{5+\sqrt{5}}{10}},-\frac{1-\sqrt{5}}{2}\sqrt{\frac{5+\sqrt{5}}{10}}\right),\\
+&\left(-\sqrt{\frac{5+\sqrt{5}}{10}},\frac{1-\sqrt{5}}{2}\sqrt{\frac{5+\sqrt{5}}{10}}\right)
+\end{aligned}\]
+</span>が得られます．
+また，複号同順で
+<span>\[ (x_1,x_2)=\left(\pm\sqrt{\frac{5-\sqrt{5}}{10}},\mp\frac{1+\sqrt{5}}{2}\sqrt{\frac{5-\sqrt{5}}{10}}\right)\]
+</span>のとき，
+<span>\[ x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x=4-\sqrt{5}\]
+</span>で，複号同順で
+<span>\[ (x_1,x_2)=\left(\pm\sqrt{\frac{5+\sqrt{5}}{10}},\mp\frac{1-\sqrt{5}}{2}\sqrt{\frac{5+\sqrt{5}}{10}}\right)\]
+</span>のとき，
+<span>\[ x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x=4+\sqrt{5}\]
+</span>です．</p><p>以上より，最小解は
+<span>\[ (x_1,x_2)=\left(\pm\sqrt{\frac{5-\sqrt{5}}{10}},\mp\frac{1+\sqrt{5}}{2}\sqrt{\frac{5-\sqrt{5}}{10}}\right)\]
+</span>であって，そのときの目的関数の値は
+<span>\[ x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x=4-\sqrt{5}\]
+</span>となります．</p><p>目的関数の等高線は以下 (Fig. 1) の通りで，▲は上記で計算した最小解です．
+参考のため，最大解を●で表します．
+中央の太い円が制約式の示す円周です．<figure class=text-center><img src=/images/docs/math/optim/manopt/contour.png><figcaption><h4>Figure 1. 目的関数の等高線．太い円が等式制約，▲が最小解，●が最大解．</h4></figcaption></figure></p><p>Fig. 1より，▲における関数値より値が小さくなる点が存在しないことがわかるので，正しく計算できていることがわかります．
+また，最小解も最大解も，制約式のグラフと等高線のグラフの接点であることもわかります．
+実は，ラグランジュの未定乗数法は，そのような点を計算していたのでした．</p><h2 id=数値解法>数値解法
+<a class=anchor href=#%e6%95%b0%e5%80%a4%e8%a7%a3%e6%b3%95>#</a></h2><p>本節では，前節で得られた厳密解を，数値的に求めることを考えます．</p><p>いま，<span>
+\(S^1\)
+</span>はリーマン多様体なので，本ページで解こうとしている問題は，実行可能集合が多様体全体となり，多様体上の無制約最適化問題とみなせます．</p><p>通常のユークリッド空間では，無制約最適化問題の解法は，直線探索に基づく手法が典型的です．
+これは，その時点で得られている近似解に対して，目的関数値が減少する方向に少しずつ解を更新し，最適解を求める方法です．</p><p>ユークリッド空間の場合，無制約最適化問題の数値解法では，得られている近似解 <span>\(x_k\in\mathbb{R}^n\)
+</span>に対し，探索方向 <span>\(d_k\in\mathbb{R}^n\)
+</span>とステップ幅 <span>\(t_k>0\)
+</span>を計算し，<span>
+\(x_{k+1}=x_k+t_kd_k\)
+</span>によって解を更新します．
+この <span>\(d_k\)
+</span>や <span>\(t_k\)
+</span>は，目的関数の値が下がると期待される方向や量で決めます．
+例えば，目的関数が <span>\(f:\mathbb{R}^n\to\mathbb{R}\)
+</span>のとき，<span>
+\(d_k=-\nabla f(x_k)\)
+</span>，<span>
+\(t_k\)
+</span>は <strong>(strong) Wolfe 条件</strong> と呼ばれる条件を満たすようにとる方法があります．ここで，<span>
+\(\nabla\)
+</span>は勾配を表します．</p><p>リーマン多様体の場合も同様の考え方で近似解を更新して求めます．
+リーマン多様体では，勾配 <span>\(\nabla\)
+</span>の代わりに，リーマン計量から定まる勾配（リーマン勾配）<span>
+\(\mathrm{grad}\)
+</span>によって，<span>
+\(-\mathrm{grad}\ f(x_k)\)
+</span>を考えることができるので，<span>
+\(d_k=-\mathrm{grad}\ f(x_k)\)
+</span>と計算できます．
+また，ステップ幅 <span>\(t_k>0\)
+</span>に対して，<span>
+\(t_kd_k\)
+</span>を考えることもできます．
+しかし，一般のリーマン多様体では，<span>
+\(x_k\)
+</span>と <span>\(d_k\)
+</span>は異なる空間のものなので，<span>
+\(x_k+t_kd_k\)
+</span>というものを考えることができません．
+したがって，これに相当する概念が必要となります．
+この概念があれば，(strong) Wolfe 条件もリーマン多様体上の条件に拡張できます．</p><p>リーマン多様体を <span>\(\mathcal{M}\)
+</span>と表すと，ユークリッド空間の勾配に相当する <strong>リーマン勾配</strong> は接束 <span>\(T\mathcal{M}\)
+</span>と呼ばれる空間に属します．
+<span>\(x_k\in\mathcal{M}\)
+</span>と <span>\(t_kd_k\in T\mathcal{M}\)
+</span>の和が定義できないので，勾配 <span>\(d_k\in T\mathcal{M}\)
+</span>を多様体 <span>\(\mathcal{M}\)
+</span>上の曲線に対応させ，<span>
+\(x_k+t_kd_k\)
+</span>の代わりに， <strong>多様体上の点 <span>\(x_k\)
+</span>を通る多様体 <span>\(\mathcal{M}\)
+</span>上の曲線に沿って <span>\(d_k\)
+</span>方向に <span>\(t_k\)
+</span>の幅だけ進む</strong>，ということを考えます．
+これには，<span>
+\(R:T\mathcal{M}\to\mathcal{M}\)
+</span>という，接ベクトルと多様体上の点を対応させる写像があればよく，<span>
+\(x_{k+1}=x_k+t_kd_k\)
+</span>の代わりに <span>\(x_{k+1}=R_{x_k}(t_kd_k)\)
+</span>の形で近似解を更新することを考えます．
+この写像 <span>\(R\)
+</span>を <strong>レトラクション</strong> といいます．</p><p>さて，本ページの問題の場合の具体的な計算方法について考えます．
+まず，<span>
+\(x_k\in S^1\)
+</span>に対する <span>\(d_k=-\mathrm{grad}\ f(x_k)\)
+</span>は，<span>
+\(\mathrm{grad}\ f(x)=(I-xx^T)\nabla f(x)\)
+</span>によって具体的に計算できます．
+ここで，<span>
+\(I\)
+</span>は恒等行列です．</p><p>例として，目的関数 <span>\(f\)
+</span>を
+<span>\[ f(x)=x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x\]
+</span>とした場合の，<span>
+\(x_0=(1/\sqrt{2},1/\sqrt{2})\in S^1\)
+</span>に対する <span>\(\nabla f(x_0)\)
+</span>と <span>\(\mathrm{grad}\ f(x_0)\)
+</span>は以下のようになります．</p><figure class=text-center><img src=/images/docs/math/optim/manopt/grad.png><figcaption><h4>Figure 2. \(\nabla f(x_0)\) と \(\mathrm{grad}\ f(x_0)\)</h4></figcaption></figure><p><span>\(d_k=-\mathrm{grad}\ f(x_k)\)
+</span>とすると <span>\(d_k\sub\mathbb{R}^2\)
+</span>にはなりますが，<span>
+\(x_k+t_kd_k\in\mathbb{R}^2\)
+</span>は一般に <span>\(S^1\)
+</span>に属しませんので，やはり単純には解の更新はできません．そこでレトラクションにより <span>\(x_{k+1}=R_{x_k}(t_kd_k)\)
+</span>と更新することを考えます．</p><p>本ページでは，レトラクション <span>\(R\)
+</span>を
+<span>\[ R_x(d)=\frac{x+d}{\|x+d\|_2}\]
+</span>と定義します．
+多様体 <span>\(S^1\)
+</span>の点 <span>\(x\)
+</span>における接ベクトル <span>\(d\in TS^1\)
+</span>を <span>\(R_x(d)\in S^1\)
+</span>によって多様体上の点に対応付けています．
+<span>\(\phi(t)=R_x(td)\,(t\ge0)\)
+</span>とすると，接ベクトル <span>\(d\)
+</span>の方向が決める多様体上の曲線ができます．</p><p>この <span>\(R\)
+</span>がレトラクションの定義を満たすことは確認できますが，ここでは <span>\(T\mathcal{M}\)
+</span>も <span>\(R\)
+</span>も定義していないので，詳しく述べません．
+また，このレトラクションは，単に <strong>正規化しているだけのもの</strong> といえますが，これ以外のレトラクションも考えられます．</p><p>先ほどの例において，<span>
+\(t_0=0.2\)
+</span>とした場合の <span>\(x_0+t_0d_0\)
+</span>と <span>\(R_{x_0}(t_0d_0)\)
+</span>は以下のようになります．
+<span>\(x_0+t_0d_0\)
+</span>は <span>\(S^1\)
+</span>の外に出てしまうので，レトラクションを利用して，正規化することで，更新後の近似解 <span>\(x_1\in S^1\)
+</span>を求めていることがわかります．</p><figure class=text-center><img src=/images/docs/math/optim/manopt/retract.png><figcaption><h4>Figure 3. レトラクションの例</h4></figcaption></figure><p>とにかくこれで，本ページの問題
+<span>\[\begin{aligned}
+&\mathrm{Minimize}\ x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x\\
+&\mathrm{subject\ to}\ x\in S^1
+\end{aligned}\]
+</span>を，リーマン多様体の無制約最適化問題とみて数値計算ができるようになりました．</p><p>手順としてまとめると以下のようになります．</p><ul><li>Input: <span>\(x_0\in S^1\)</span></li><li>Output: 最適化問題の近似解</li></ul><ol><li>for <span>\(k=0,1,2,\dots\)
+</span>do</li><li><span>\(\quad d_k\leftarrow-2(I-x_kx_k^T)\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x_k\)</span></li><li><span>\(\quad t_k>0\)
+</span>を決める．</li><li><span>\(\quad x_{k+1}\leftarrow(x_k+t_kd_k)/\|x_k+t_kd_k\|_2\)</span></li><li><span>\(\quad\)
+</span>収束判定条件を満たすなら <span>\(x_{k+1}\)
+</span>を返して終了．</li><li>end for</li></ol><h2 id=数値例>数値例
+<a class=anchor href=#%e6%95%b0%e5%80%a4%e4%be%8b>#</a></h2><p>本節では，以下の問題を数値的に解いた場合の例を示します．</p><span>\[\begin{aligned}
+&\mathrm{Minimize}\ x^T\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x\\
+&\mathrm{subject\ to}\ x\in S^1.
+\end{aligned}\]</span><p>ステップ幅は，本来は (strong) Wolfe 条件を満たすようにとるべきですが，ここでは簡単のため <span>\(t_k=0.2\)
+</span>とします．</p><p>初期値は <span>\(x_0=(1/\sqrt{2},1/\sqrt{2})\in S^1\)
+</span>とし，近似解の更新のようすをとらえることを目的として，収束判定は省略し，反復回数を128回とします．</p><p>以上より，本節の解法の具体的な手順は以下のようになります．</p><ul><li>Input: <span>\(x_0=(1/\sqrt{2},1/\sqrt{2})\in S^1\)</span></li><li>Output: 最適化問題の近似解 <span>\(x_{128}\)</span></li></ul><ol><li>for <span>\(k=0,1,2,\dots,127\)
+</span>do</li><li><span>\(\quad d_k\leftarrow-2(I-x_kx_k^T)\begin{pmatrix}5&amp;2\\2&amp;3\end{pmatrix}x_k\)</span></li><li><span>\(\quad t_k\leftarrow 0.2\)</span></li><li><span>\(\quad x_{k+1}\leftarrow(x_k+t_kd_k)/\|x_k+t_kd_k\|_2\)</span></li><li>end for</li></ol><p>この手順をC++で実装・実行し，解の更新の様子を図示すると以下のようになります．
+リーマン勾配にそって近似解を仮に更新し，飛び出してしまったものをレトラクションにより <span>\(S^1\)
+</span>に落とすことを繰り返し，真の解に近づいていることがわかります．</p><figure class=text-center><img src=/images/docs/math/optim/manopt/solve.png><figcaption><h4>Figure 4. 実行例</h4></figcaption></figure><p>すでに計算した結果から，このときの収束先 <span>\(x^*\)
+</span>は
+<span>\[ x^*=\left(-\sqrt{\frac{5-\sqrt{5}}{10}},\frac{1+\sqrt{5}}{2}\sqrt{\frac{5-\sqrt{5}}{10}}\right)\]
+</span>と考えられます．</p><p>この値を真の解として，各反復における近似解と真の解の相対誤差を計算すると以下のようになり，1次収束していることがわかります．<figure class=text-center><img src=/images/docs/math/optim/manopt/error.png><figcaption><h4>Figure 5. 相対誤差の履歴</h4></figcaption></figure></p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，<a href=#cite:1>[1]</a> を一読した記録として，多様体上の数理最適化の実行例について述べました．</p><p>簡単な <span>\(S^1\)
+</span>上の最適化問題の数値例を示しました．
+C++でアルゴリズムを実装・実行したところ，近似解が真の解に近づき，1次収束している様子が観察できました．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>[1] 佐藤 寛之，多様体上の最適化理論，オーム社，2024.</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/45678ab90c96a5fc144d005ad0db0e051ce77f2c title='Last modified by htakeuchi0 | October 5, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
+<span>October 5, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#文献-1-初読時の記録>文献 [1] 初読時の記録</a></li><li><a href=#はじめに多様体と最適化問題>はじめに：多様体と最適化問題</a></li><li><a href=#本ページで対象とする最適化問題>本ページで対象とする最適化問題</a></li><li><a href=#厳密解>厳密解</a></li><li><a href=#数値解法>数値解法</a></li><li><a href=#数値例>数値例</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>

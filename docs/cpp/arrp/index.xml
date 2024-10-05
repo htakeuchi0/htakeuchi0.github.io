@@ -1,28 +1,180 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>配列へのポインタ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/</link><description>Recent content in 配列へのポインタ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/cpp/arrp/index.xml" rel="self" type="application/rss+xml"/><item><title>配列へのポインタとその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/arrp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/arrp/</guid><description>配列へのポインタとその周辺 # 概要 # 配列とは，同じ型の複数の変数をまとめて扱うためのデータ構造です．
-ポインタ (pointer) とは，メモリアドレスを格納するためのオブジェクトのことです． C++ では，変数のメモリアドレスはもちろん，関数のエントリーポイントとなるメモリアドレスを格納することができます．
-関数ポインタ の節では，関数へのポインタについて説明しました．本ページでは，C++における配列とポインタの関係を説明した後，配列型へのポインタ型について説明します．ここで，配列型へのポインタ型とは，そのポインタ型の変数に対して * 演算子で値を得ると，要素ではなく，配列そのものが得られるようなポインタ型を指すものとします．
-配列とポインタ # 配列とは，同じ型の複数の変数をまとめて扱うためのデータ構造です．例えば，int 型の変数を10個まとめて扱うための配列は以下のように宣言できます．
-int arr[10]; 使いかたは以下のとおりです．
-#include &amp;lt;iostream&amp;gt; int main() { int arr[10]; for (int i = 0; i &amp;lt; 10; i++) { arr[i] = i * 2; } std::cout &amp;lt;&amp;lt; arr[0] &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 0 std::cout &amp;lt;&amp;lt; arr[1] &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 2 std::cout &amp;lt;&amp;lt; arr[2] &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 4 return 0; } 配列変数は，変数からその要素数を取得する方法は，言語仕様としては提供されていません．ただし，C言語の時代から，配列変数の要素数を取得する方法として，以下の方法が広く知られています．</description></item><item><title>配列への参照</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/arr_ref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/arr_ref/</guid><description>配列への参照 # 概要 # 前ページまでで，配列へのポインタ，特に配列型へのポインタ型について説明しました．ここで，配列型へのポインタ型とは，そのポインタ型の変数に対して * 演算子で値を得ると，要素ではなく，配列そのものが得られるようなポインタ型を指すものとします．本ページでは，配列型への参照型について説明します．
-配列型への参照型 # クラス T の要素数 N の配列型へのポインタ変数 p_arr の宣言は，
-using p_arr_t = T (*)[N]; または，
-using arr_t = T[N]; using p_arr_t = arr_t *; として定義できるのでした．
-ここで，
-using arr_ref_t = T (&amp;amp;)[N]; または，
-using arr_t = T[N]; using arr_ref_t = arr_t&amp;amp;; とすると，配列型への参照型 をつくることができます．
-これを利用すると，前ページで説明した ArraySize 関数テンプレートを参照型で定義できるため，呼び出し側で &amp;amp; をつけずに利用できるようになります．
-具体的には，以下のようにできます．
-#include &amp;lt;cstddef&amp;gt; #include &amp;lt;iostream&amp;gt; template &amp;lt;class T, std::size_t N&amp;gt; std::size_t ArraySize(T (&amp;amp;)[N]) { return N; } int main() { int arr[100]; std::cout &amp;lt;&amp;lt; ArraySize(arr) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 100 double arr2[1024]; std::cout &amp;lt;&amp;lt; ArraySize(arr2) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 1024 return 0; } まとめ # 本ページでは，配列型への参照型が定義できることを説明しました．配列型へのポインタ型でなく，配列型への参照型を利用すると，前ページの ArraySize 関数テンプレートの呼び出し方を，少しだけ簡単にできます．</description></item><item><title>std::array について</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/stdarray/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/stdarray/</guid><description>std::array について # 概要 # 前ページまでで，配列型へのポインタ型や参照型について説明しました．一方で，標準ライブラリには std::array 構造体テンプレートがあり，通常の配列のパフォーマンスを保ったまま，サイズの取得などの付随的な機能を利用できます．
-std::array について # array ヘッダを include すると，std::array が利用できます． std::array の定義は以下のとおりです [1]．
-namespace std { template &amp;lt;class T, std::size_t N&amp;gt; struct array; } // namespace std std::array は通常の配列と同等のパフォーマンスで利用できるとされています．通常の配列と異なり，以下のように，変数から配列のサイズが取得できます．よって，std::array を使う限り，前ページで定義した ArraySize は不要です．
-#include &amp;lt;array&amp;gt; #include &amp;lt;iostream&amp;gt; int main() { std::array&amp;lt;int, 3&amp;gt; a; std::cout &amp;lt;&amp;lt; a.size() &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 3 return 0; } まとめ # 本ページでは，std::array について説明しました．std::array を使えば，配列から要素数を取得できます．よって，std::array を使う限り，前ページで定義した ArraySize 関数テンプレートは不要になります．
-参考文献 # [1] cppreference.</description></item><item><title>配列への参照を返却する関数</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/retarrref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/retarrref/</guid><description>配列への参照を返却する関数 # 概要 # 関数ポインタを返却する関数 のページでは，C++の関数ポインタを返却する関数の宣言が特徴的であることを述べました．
-このページでは，配列への参照を返却する関数の宣言も同様となることをまとめます．
-結論からいうと，要素が5個の配列の const 参照を返す，const 修飾されたメンバ関数は，以下のような宣言になります．
-const double (&amp;amp;A() const)[5]; 配列への参照を返却する関数 # いま，クラス Array が生の配列 a_ をもっていて，その配列への const 参照を返す関数を定義したいとします．
-もちろん，生の配列の代わりに std::array を使ったり，インデックスに対応する要素を返すアクセサを用意したりすれば，その状況にはならないので，実用上は出会うことのないケースと思います．
-クラス Array を以下のようにします． 要素はデフォルトコンストラクタで指定しておきます．
-class Array { public: Array() : a_{0, 1, 2, 3, 4} {} private: double a_[5]; }; このとき，a_ の const 参照を返す関数 A を定義します．
-関数ポインタを返却する関数と同様に，
-const double[5]&amp;amp; A() const { return a_; } // NG という書き方はできず，以下のような書き方になります．
-const double (&amp;amp;A() const)[5] { return a_; } // OK これは以下のように分解されます．</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>配列へのポインタ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/</link><description>Recent content in 配列へのポインタ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/cpp/arrp/index.xml" rel="self" type="application/rss+xml"/><item><title>配列へのポインタとその周辺</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/arrp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/arrp/</guid><description>&lt;h1 id="配列へのポインタとその周辺">
+ 配列へのポインタとその周辺
+ &lt;a class="anchor" href="#%e9%85%8d%e5%88%97%e3%81%b8%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%82%bf%e3%81%a8%e3%81%9d%e3%81%ae%e5%91%a8%e8%be%ba">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>配列とは，同じ型の複数の変数をまとめて扱うためのデータ構造です．&lt;/p>
+&lt;p>ポインタ (pointer) とは，メモリアドレスを格納するためのオブジェクトのことです．
+C++ では，変数のメモリアドレスはもちろん，関数のエントリーポイントとなるメモリアドレスを格納することができます．&lt;/p>
+&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/cpp/fp/">関数ポインタ&lt;/a> の節では，関数へのポインタについて説明しました．本ページでは，C++における配列とポインタの関係を説明した後，&lt;strong>配列型へのポインタ型&lt;/strong>について説明します．ここで，配列型へのポインタ型とは，そのポインタ型の変数に対して &lt;code>*&lt;/code> 演算子で値を得ると，要素ではなく，配列そのものが得られるようなポインタ型を指すものとします．&lt;/p>
+&lt;h2 id="配列とポインタ">
+ 配列とポインタ
+ &lt;a class="anchor" href="#%e9%85%8d%e5%88%97%e3%81%a8%e3%83%9d%e3%82%a4%e3%83%b3%e3%82%bf">#&lt;/a>
+&lt;/h2>
+&lt;p>配列とは，同じ型の複数の変数をまとめて扱うためのデータ構造です．例えば，&lt;code>int&lt;/code> 型の変数を10個まとめて扱うための配列は以下のように宣言できます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> arr[&lt;span style="color:#ae81ff">10&lt;/span>];
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使いかたは以下のとおりです．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> arr[&lt;span style="color:#ae81ff">10&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (&lt;span style="color:#66d9ef">int&lt;/span> i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> arr[i] &lt;span style="color:#f92672">=&lt;/span> i &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> arr[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#75715e">// 0
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> arr[&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#75715e">// 2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> arr[&lt;span style="color:#ae81ff">2&lt;/span>] &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#75715e">// 4
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配列変数は，変数からその要素数を取得する方法は，言語仕様としては提供されていません．ただし，C言語の時代から，配列変数の要素数を取得する方法として，以下の方法が広く知られています．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> arr[&lt;span style="color:#ae81ff">10&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">sizeof&lt;/span>(arr) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#66d9ef">sizeof&lt;/span>(arr[&lt;span style="color:#ae81ff">0&lt;/span>]);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>これは，&lt;code>sizeof&lt;/code> 演算子を利用して，配列全体のサイズを，配列の先頭要素のサイズで割れば，要素数が得られるという仕組みです．以下のように，関数形式マクロとして定義されることが多いです．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> arr[&lt;span style="color:#ae81ff">10&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> ARRAY_SIZE(arr) &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#75715e">// 10
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>さて，ある型の配列変数は，同じ型のポインタ型変数に代入できます．&lt;/p></description></item><item><title>配列への参照</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/arr_ref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/arr_ref/</guid><description>&lt;h1 id="配列への参照">
+ 配列への参照
+ &lt;a class="anchor" href="#%e9%85%8d%e5%88%97%e3%81%b8%e3%81%ae%e5%8f%82%e7%85%a7">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページまでで，配列へのポインタ，特に配列型へのポインタ型について説明しました．ここで，配列型へのポインタ型とは，そのポインタ型の変数に対して &lt;code>*&lt;/code> 演算子で値を得ると，要素ではなく，配列そのものが得られるようなポインタ型を指すものとします．本ページでは，配列型への参照型について説明します．&lt;/p>
+&lt;h2 id="配列型への参照型">
+ 配列型への参照型
+ &lt;a class="anchor" href="#%e9%85%8d%e5%88%97%e5%9e%8b%e3%81%b8%e3%81%ae%e5%8f%82%e7%85%a7%e5%9e%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>クラス &lt;code>T&lt;/code> の要素数 &lt;code>N&lt;/code> の配列型へのポインタ変数 &lt;code>p_arr&lt;/code> の宣言は，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> p_arr_t &lt;span style="color:#f92672">=&lt;/span> T (&lt;span style="color:#f92672">*&lt;/span>)[N];
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>または，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> arr_t &lt;span style="color:#f92672">=&lt;/span> T[N];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> p_arr_t &lt;span style="color:#f92672">=&lt;/span> arr_t &lt;span style="color:#f92672">*&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>として定義できるのでした．&lt;/p>
+&lt;p>ここで，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> arr_ref_t &lt;span style="color:#f92672">=&lt;/span> T (&lt;span style="color:#f92672">&amp;amp;&lt;/span>)[N];
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>または，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> arr_t &lt;span style="color:#f92672">=&lt;/span> T[N];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">using&lt;/span> arr_ref_t &lt;span style="color:#f92672">=&lt;/span> arr_t&lt;span style="color:#f92672">&amp;amp;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>とすると，&lt;strong>配列型への参照型&lt;/strong> をつくることができます．&lt;/p>
+&lt;p>これを利用すると，前ページで説明した &lt;code>ArraySize&lt;/code> 関数テンプレートを参照型で定義できるため，呼び出し側で &lt;code>&amp;amp;&lt;/code> をつけずに利用できるようになります．&lt;/p>
+&lt;p>具体的には，以下のようにできます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;cstddef&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">template&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">T&lt;/span>, std&lt;span style="color:#f92672">::&lt;/span>size_t N&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>std&lt;span style="color:#f92672">::&lt;/span>size_t ArraySize(T (&lt;span style="color:#f92672">&amp;amp;&lt;/span>)[N]) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> N;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> arr[&lt;span style="color:#ae81ff">100&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> ArraySize(arr) &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#75715e">// 100
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> arr2[&lt;span style="color:#ae81ff">1024&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> ArraySize(arr2) &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#75715e">// 1024
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">
+ まとめ
+ &lt;a class="anchor" href="#%e3%81%be%e3%81%a8%e3%82%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，配列型への参照型が定義できることを説明しました．配列型へのポインタ型でなく，配列型への参照型を利用すると，前ページの &lt;code>ArraySize&lt;/code> 関数テンプレートの呼び出し方を，少しだけ簡単にできます．&lt;/p></description></item><item><title>std::array について</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/stdarray/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/stdarray/</guid><description>&lt;h1 id="stdarray-について">
+ std::array について
+ &lt;a class="anchor" href="#stdarray-%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>前ページまでで，配列型へのポインタ型や参照型について説明しました．一方で，標準ライブラリには &lt;code>std::array&lt;/code> 構造体テンプレートがあり，通常の配列のパフォーマンスを保ったまま，サイズの取得などの付随的な機能を利用できます．&lt;/p>
+&lt;h2 id="stdarray-について-1">
+ std::array について
+ &lt;a class="anchor" href="#stdarray-%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6-1">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;code>array&lt;/code> ヘッダを include すると，&lt;code>std::array&lt;/code> が利用できます．
+&lt;code>std::array&lt;/code> の定義は以下のとおりです &lt;a href="#cite:1">[1]&lt;/a>．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">namespace&lt;/span> std {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">template&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">T&lt;/span>, std&lt;span style="color:#f92672">::&lt;/span>size_t N&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">struct&lt;/span> &lt;span style="color:#a6e22e">array&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>} &lt;span style="color:#75715e">// namespace std
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>std::array&lt;/code> は通常の配列と同等のパフォーマンスで利用できるとされています．通常の配列と異なり，以下のように，変数から配列のサイズが取得できます．よって，&lt;code>std::array&lt;/code> を使う限り，&lt;strong>前ページで定義した &lt;code>ArraySize&lt;/code> は不要です&lt;/strong>．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;array&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>array&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> a;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> std&lt;span style="color:#f92672">::&lt;/span>cout &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> a.size() &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#75715e">// 3
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">
+ まとめ
+ &lt;a class="anchor" href="#%e3%81%be%e3%81%a8%e3%82%81">#&lt;/a>
+&lt;/h2>
+&lt;p>本ページでは，&lt;code>std::array&lt;/code> について説明しました．&lt;code>std::array&lt;/code> を使えば，配列から要素数を取得できます．よって，&lt;code>std::array&lt;/code> を使う限り，前ページで定義した &lt;code>ArraySize&lt;/code> 関数テンプレートは不要になります．&lt;/p>
+&lt;h2 id="参考文献">
+ 参考文献
+ &lt;a class="anchor" href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a id="cite:1">&lt;/a>
+[1] cppreference.com, &amp;ldquo;std::array - cppreference.com&amp;rdquo;, &lt;a href="https://en.cppreference.com/w/cpp/container/array">https://en.cppreference.com/w/cpp/container/array&lt;/a>, 2022/8/21 最終アクセス.&lt;/p></description></item><item><title>配列への参照を返却する関数</title><link>https://htakeuchi0.github.io/docs/cpp/arrp/retarrref/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/arrp/retarrref/</guid><description>&lt;h1 id="配列への参照を返却する関数">
+ 配列への参照を返却する関数
+ &lt;a class="anchor" href="#%e9%85%8d%e5%88%97%e3%81%b8%e3%81%ae%e5%8f%82%e7%85%a7%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e9%96%a2%e6%95%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/cpp/fp/retfp/">関数ポインタを返却する関数&lt;/a> のページでは，C++の関数ポインタを返却する関数の宣言が特徴的であることを述べました．&lt;/p>
+&lt;p>このページでは，配列への参照を返却する関数の宣言も同様となることをまとめます．&lt;/p>
+&lt;p>結論からいうと，要素が5個の配列の const 参照を返す，const 修飾されたメンバ関数は，以下のような宣言になります．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">double&lt;/span> (&lt;span style="color:#f92672">&amp;amp;&lt;/span>A() &lt;span style="color:#66d9ef">const&lt;/span>)[&lt;span style="color:#ae81ff">5&lt;/span>];
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配列への参照を返却する関数-1">
+ 配列への参照を返却する関数
+ &lt;a class="anchor" href="#%e9%85%8d%e5%88%97%e3%81%b8%e3%81%ae%e5%8f%82%e7%85%a7%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e9%96%a2%e6%95%b0-1">#&lt;/a>
+&lt;/h2>
+&lt;p>いま，クラス &lt;code>Array&lt;/code> が生の配列 &lt;code>a_&lt;/code> をもっていて，その配列への const 参照を返す関数を定義したいとします．&lt;/p>
+&lt;p>もちろん，生の配列の代わりに &lt;code>std::array&lt;/code> を使ったり，インデックスに対応する要素を返すアクセサを用意したりすれば，その状況にはならないので，実用上は出会うことのないケースと思います．&lt;/p>
+&lt;p>クラス &lt;code>Array&lt;/code> を以下のようにします．
+要素はデフォルトコンストラクタで指定しておきます．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Array&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Array() &lt;span style="color:#f92672">:&lt;/span> a_{&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>, &lt;span style="color:#ae81ff">4&lt;/span>} {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">private&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> a_[&lt;span style="color:#ae81ff">5&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このとき，&lt;code>a_&lt;/code> の const 参照を返す関数 &lt;code>A&lt;/code> を定義します．&lt;/p>
+&lt;p>関数ポインタを返却する関数と同様に，&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#66d9ef">double&lt;/span>[&lt;span style="color:#ae81ff">5&lt;/span>]&lt;span style="color:#f92672">&amp;amp;&lt;/span> A() &lt;span style="color:#66d9ef">const&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> a_; } &lt;span style="color:#75715e">// NG
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>という書き方はできず，以下のような書き方になります．&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">double&lt;/span> (&lt;span style="color:#f92672">&amp;amp;&lt;/span>A() &lt;span style="color:#66d9ef">const&lt;/span>)[&lt;span style="color:#ae81ff">5&lt;/span>] { &lt;span style="color:#66d9ef">return&lt;/span> a_; } &lt;span style="color:#75715e">// OK
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>これは以下のように分解されます．&lt;/p>
+&lt;pre tabindex="0">&lt;code>const double (&amp;amp; A () const )[5];
+~~~~~~~~~~~~~~~ ==^^ +++++ ~~~~
+ | | | |_ メンバ関数 A の const 修飾
+ | | | | 
+ | | | |
+ | | |_ メンバ関数 A の引数リスト
+ | | () |
+ | | |
+ | |__ メンバ関数名
+ | A |
+ | |
+ |_______ 戻り値の型 _________|
+ const double (&amp;amp;)[5]
+&lt;/code>&lt;/pre>&lt;p>ちなみに，&lt;code>noexcept&lt;/code> にしたい場合は以下です．&lt;/p></description></item></channel></rss>
