@@ -15,10 +15,7 @@
  記号定義
  &lt;a class="anchor" href="#%e8%a8%98%e5%8f%b7%e5%ae%9a%e7%be%a9">#&lt;/a>
 &lt;/h3>
-&lt;p>
-&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
-&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
-&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+&lt;p>&lt;span>
  \(\Omega\)
 &lt;/span>
  を集合，&lt;span>
@@ -42,7 +39,9 @@
 &lt;/span>
  を
 &lt;span>
- \[ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}\]
+ \[
+ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}
+\]
 &lt;/span>
 
 で定め，&lt;span>

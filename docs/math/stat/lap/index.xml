@@ -23,21 +23,20 @@
 &lt;/span>
  を使います．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;b>Definition 1&lt;/b>.
+&lt;p>&lt;b>Definition 1&lt;/b>.
 \(\mu,b\in\mathbb{R}\), \(b&amp;gt;0\) とする．
 連続的確率変数 \(Y:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_Y\) が
 \[
 f_Y(y;\mu,b)=\frac{1}{2b}\exp\left(-\frac{|y-\mu|}{b}\right)
 \]
-と表されるとき，\(Y\) を &lt;strong>ラプラス分布&lt;/strong> に従う確率変数であるという．
+と表されるとき，\(Y\) を &lt;strong>ラプラス分布&lt;/strong> に従う確率変数であるという．&lt;/p>
 &lt;/blockquote>
-
 &lt;p>ラプラス分布はどのような実数でもとり得る分布ですが，これを区間 &lt;span>
  \([A,B]\,(A\le B)\)
 &lt;/span>
  に制限した分布を &lt;strong>切断ラプラス分布&lt;/strong> といいます．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;b>Definition 2&lt;/b>.
+&lt;p>&lt;b>Definition 2&lt;/b>.
 \(\mu,b\in\mathbb{R}\), \(b&amp;gt;0\), \(A,B\in\mathbb{R}\), \(A\le B\) とする．連続的確率変数 \(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_X\) が
 \[
 f_X(x;\mu,b,A,B)=\begin{cases}
@@ -45,9 +44,8 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 0,&amp;amp;\text{otherwise}
 \end{cases}
 \]
-と表されるとき，\(X\) を &lt;strong>切断ラプラス分布&lt;/strong> に従う確率変数であるという．
+と表されるとき，\(X\) を &lt;strong>切断ラプラス分布&lt;/strong> に従う確率変数であるという．&lt;/p>
 &lt;/blockquote>
-
 &lt;h2 id="切断ラプラス分布の確率密度関数">
  切断ラプラス分布の確率密度関数
  &lt;a class="anchor" href="#%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%ae%e7%a2%ba%e7%8e%87%e5%af%86%e5%ba%a6%e9%96%a2%e6%95%b0">#&lt;/a>
@@ -115,10 +113,12 @@ f_X(x;\mu,b,A,B)=\begin{cases}
  上の一様分布とします．
 つまり，
 &lt;span>
- \[ f_U(u)=\begin{cases}
- 1,&amp;amp; 0\le u\le 1,\\
- 0,&amp;amp;\text{otherwise}
- \end{cases}\]
+ \[
+ f_U(u)=\begin{cases}
+ 1,&amp; 0\le u\le 1,\\
+ 0,&amp;\text{otherwise}
+ \end{cases}
+\]
 &lt;/span>
 
 とします．
@@ -127,10 +127,12 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;/span>
  とすると，
 &lt;span>
- \[\begin{aligned}
- F_Z(z)&amp;amp;=P([Z\le z])\\
- &amp;amp;=P([F^*_X(U)\le z])\\
-\end{aligned}\]
+ \[
+\begin{aligned}
+ F_Z(z)&amp;=P([Z\le z])\\
+ &amp;=P([F^*_X(U)\le z])\\
+\end{aligned}
+\]
 &lt;/span>
 
 となりますが，&lt;span>
@@ -141,12 +143,14 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;/span>
  であることは同じことなので，
 &lt;span>
- \[\begin{aligned}
- F_Z(z)&amp;amp;=P([F^*_X(U)\le z])\\
- &amp;amp;=P([U\le F_X(z)])\\
- &amp;amp;=F_U(F_X(z))\\
- &amp;amp;=F_X(z)
-\end{aligned}\]
+ \[
+\begin{aligned}
+ F_Z(z)&amp;=P([F^*_X(U)\le z])\\
+ &amp;=P([U\le F_X(z)])\\
+ &amp;=F_U(F_X(z))\\
+ &amp;=F_X(z)
+\end{aligned}
+\]
 &lt;/span>
 
 となり，&lt;span>
@@ -192,7 +196,9 @@ f_X(x;\mu,b,A,B)=\begin{cases}
  とします．&lt;/p>
 &lt;p>このとき，
 &lt;span>
- \[ f_{X_1,X_2,\dots,X_N}(x_1,x_2,\dots,x_N;b)=\prod_{i=1}^N\frac{1}{2b}\exp\left(-\frac{|x_i|}{b}\right)\]
+ \[
+ f_{X_1,X_2,\dots,X_N}(x_1,x_2,\dots,x_N;b)=\prod_{i=1}^N\frac{1}{2b}\exp\left(-\frac{|x_i|}{b}\right)
+\]
 &lt;/span>
 
 と表されます．
@@ -201,11 +207,13 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;/span>
  とおくと，
 &lt;span>
- \[\begin{aligned}
- \mathcal{L}_{x_1,\dots,x_N}(b)&amp;amp;=\log\prod_{i=1}^N\frac{1}{2b}\exp\left(-\frac{|x_i|}{b}\right)\\
- &amp;amp;=\sum_{i=1}^N\left(\log\frac{1}{2b}&amp;#43;\log\exp\left(-\frac{|x_i|}{b}\right)\right)\\
- &amp;amp;=-N\log 2b-\frac{1}{b}\sum_{i=1}^N|x_i|
-\end{aligned}\]
+ \[
+\begin{aligned}
+ \mathcal{L}_{x_1,\dots,x_N}(b)&amp;=\log\prod_{i=1}^N\frac{1}{2b}\exp\left(-\frac{|x_i|}{b}\right)\\
+ &amp;=\sum_{i=1}^N\left(\log\frac{1}{2b}+\log\exp\left(-\frac{|x_i|}{b}\right)\right)\\
+ &amp;=-N\log 2b-\frac{1}{b}\sum_{i=1}^N|x_i|
+\end{aligned}
+\]
 &lt;/span>
 
 となります．&lt;/p>
@@ -217,12 +225,14 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;/span>
  を求めます．
 &lt;span>
- \[\begin{aligned}
-\frac{d\mathcal{L}_{x_1,\dots,x_N}}{db}(b)&amp;amp;=-\frac{N}{b}&amp;#43;\frac{1}{b^2}\sum_{i=1}^N|x_i|\\
-&amp;amp;=-\frac{N}{b^2}\left(b-\frac{1}{N}\sum_{i=1}^N|x_i|\right),\\
-\frac{d^2\mathcal{L}_{x_1,\dots,x_N}}{db^2}(b)&amp;amp;=\frac{N}{b^2}-\frac{2}{b^3}\sum_{i=1}^N|x_i|\\
-&amp;amp;=\frac{N}{b^3}\left(b-\frac{2}{N}\sum_{i=1}^N|x_i|\right)
-\end{aligned}\]
+ \[
+\begin{aligned}
+\frac{d\mathcal{L}_{x_1,\dots,x_N}}{db}(b)&amp;=-\frac{N}{b}+\frac{1}{b^2}\sum_{i=1}^N|x_i|\\
+&amp;=-\frac{N}{b^2}\left(b-\frac{1}{N}\sum_{i=1}^N|x_i|\right),\\
+\frac{d^2\mathcal{L}_{x_1,\dots,x_N}}{db^2}(b)&amp;=\frac{N}{b^2}-\frac{2}{b^3}\sum_{i=1}^N|x_i|\\
+&amp;=\frac{N}{b^3}\left(b-\frac{2}{N}\sum_{i=1}^N|x_i|\right)
+\end{aligned}
+\]
 &lt;/span>
 
 なので，&lt;span>
@@ -232,7 +242,7 @@ f_X(x;\mu,b,A,B)=\begin{cases}
  \(d\mathcal{L}_{x_1,\dots,x_N}/db=0\)
 &lt;/span>
 , &lt;span>
- \(d^2\mathcal{L}_{x_1,\dots,x_N}/db^2=-(1/b^3)\sum_{i=1}^N|x_i|&amp;lt;0\)
+ \(d^2\mathcal{L}_{x_1,\dots,x_N}/db^2=-(1/b^3)\sum_{i=1}^N|x_i|&lt;0\)
 &lt;/span>
  なので，&lt;span>
  \(b=(1/N)\sum_{i=1}^N|x_i|\)
@@ -240,17 +250,4 @@ f_X(x;\mu,b,A,B)=\begin{cases}
  で &lt;span>
  \(\mathcal{L}_{x_1,\dots,x_N}(b)\)
 &lt;/span>
- は最大値をとります．&lt;/p>
-&lt;p>よって，&lt;span>
- \(x_1,x_2,\dots,x_N\)
-&lt;/span>
- がパラメータ &lt;span>
- \(\mu,b\)
-&lt;/span>
- のラプラス分布からサンプリングされた乱数であって，&lt;span>
- \(\mu=0\)
-&lt;/span>
- が既知であれば，&lt;span>
- \(b=(1/N)\sum_{i=1}^N|x_i|\)
-&lt;/span>
- と推定することができます．&lt;/p></description></item></channel></rss>
+ は最大値をとります．&lt;/p></description></item></channel></rss>

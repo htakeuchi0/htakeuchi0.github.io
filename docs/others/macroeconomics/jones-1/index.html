@@ -1,0 +1,537 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  ジョーンズ マクロ経済学Ⅰ
+  #
+
+
+  概要
+  #
+
+手取りを増やすことを公約に掲げた政党の台頭が示すように，昨今，日本経済再生への期待が高まっています．
+本ページは，国の経済全体に関する経済学についてのノートです．
+経済を構成する個々の主体に着目するミクロ経済学に対し，それらを合わせて一国の経済全体に着目する経済学の領域は マクロ経済学 と呼ばれます．
+本ページでは，作成者が『ジョーンズ マクロ経済学Ⅰ 長期成長編』[1] を初読した際のメモをまとめます．
+本ページの作成者は，[1] を読むまで，経済学に関する知識を一切有していませんでした．
+本教科書 [1] は，簡単な数式を使って説明がなされており，数式に抵抗がない初心者にとってはわかりやすく感じました．
+本ページでは，数式で表現された箇所を中心に，初読時のメモを整理して記載します．
+本ページは解説文ではなく，あくまでメモの整理として数式で表されたモデルを中心にまとめますが，本教科書 [1] は数式ばかりがでてくるものではありません．
+また，本文中にもあるように，マクロ経済学は数式のみから議論・検討を行う学問でないこともお断りしておきます．
+
+  第1章 マクロ経済学への招待
+  #
+
+マクロ経済学の方法は以下のとおりです．
+
+事実を記述する．
+モデル を開発する．
+モデルから導き出される予見と元の事実とを比較する．
+モデルを使って他のケースの予見を行う．
+
+本ページでは，特に項番2にあるように，どのようなモデルが知られているかに着目してまとめます．
+モデルの入力は パラメータ と 外生変数 で，出力は 内生変数 であると整理されます．
+パラメータ -----> モデル ----> 内生変数
+外生変数
+
+パラメータ：モデルの外から与える定数
+外生変数：モデルの外から与える変数（時間的変化を許す）
+内生変数：未知数に相当する変数
+
+以下，外から与えられるものを 
+
+
+
+  \(\bar{\cdot}\)
+
+ と上線を付けた記号で表します．
+
+  第2章 マクロ経済学の計測
+  #
+
+GDP とは国内生産とのことです．
+生産＝支出＝所得 の関係が基本的原則で，それぞれの観点からGDPを計算しても同じ値となります．
+GDP の支出アプローチでは，GDP は以下の式で表されます．
+
+  \[
+Y=C+I+G+\mathit{NX}
+\]
+
+
+記号の意味は以下のとおりです．"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/others/macroeconomics/jones-1/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="ジョーンズ マクロ経済学Ⅰ"><meta property="og:description" content="ジョーンズ マクロ経済学Ⅰ # 概要 # 手取りを増やすことを公約に掲げた政党の台頭が示すように，昨今，日本経済再生への期待が高まっています． 本ページは，国の経済全体に関する経済学についてのノートです．
+経済を構成する個々の主体に着目するミクロ経済学に対し，それらを合わせて一国の経済全体に着目する経済学の領域は マクロ経済学 と呼ばれます． 本ページでは，作成者が『ジョーンズ マクロ経済学Ⅰ 長期成長編』[1] を初読した際のメモをまとめます． 本ページの作成者は，[1] を読むまで，経済学に関する知識を一切有していませんでした．
+本教科書 [1] は，簡単な数式を使って説明がなされており，数式に抵抗がない初心者にとってはわかりやすく感じました． 本ページでは，数式で表現された箇所を中心に，初読時のメモを整理して記載します．
+本ページは解説文ではなく，あくまでメモの整理として数式で表されたモデルを中心にまとめますが，本教科書 [1] は数式ばかりがでてくるものではありません． また，本文中にもあるように，マクロ経済学は数式のみから議論・検討を行う学問でないこともお断りしておきます．
+第1章 マクロ経済学への招待 # マクロ経済学の方法は以下のとおりです．
+事実を記述する． モデル を開発する． モデルから導き出される予見と元の事実とを比較する． モデルを使って他のケースの予見を行う． 本ページでは，特に項番2にあるように，どのようなモデルが知られているかに着目してまとめます．
+モデルの入力は パラメータ と 外生変数 で，出力は 内生変数 であると整理されます．
+パラメータ -----> モデル ----> 内生変数 外生変数 パラメータ：モデルの外から与える定数 外生変数：モデルの外から与える変数（時間的変化を許す） 内生変数：未知数に相当する変数 以下，外から与えられるものを \(\bar{\cdot}\) と上線を付けた記号で表します．
+第2章 マクロ経済学の計測 # GDP とは国内生産とのことです． 生産＝支出＝所得 の関係が基本的原則で，それぞれの観点からGDPを計算しても同じ値となります．
+GDP の支出アプローチでは，GDP は以下の式で表されます．
+\[ Y=C+I+G+\mathit{NX} \] 記号の意味は以下のとおりです．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2025-01-20T23:46:26+09:00"><title>ジョーンズ マクロ経済学Ⅰ | htakeuchi0 のノート</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://htakeuchi0.github.io/docs/others/macroeconomics/jones-1/><link rel=stylesheet href=/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css integrity="sha256-Q0A154hcf10SgYvZ8RHPGgklxvt4OCZnOBw9Xto/tPE=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li><li><a href=/docs/others/macroeconomics/>マクロ経済学</a><ul><li><a href=/docs/others/macroeconomics/jones-1/ class=active>ジョーンズ マクロ経済学Ⅰ</a></li></ul></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>ジョーンズ マクロ経済学Ⅰ</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#第1章-マクロ経済学への招待>第1章 マクロ経済学への招待</a></li><li><a href=#第2章-マクロ経済学の計測>第2章 マクロ経済学の計測</a></li><li><a href=#第3章-経済成長の概観>第3章 経済成長の概観</a></li><li><a href=#第4章-生産のモデル>第4章 生産のモデル</a></li><li><a href=#第5章-ソローモデル>第5章 ソロー・モデル</a></li><li><a href=#第6章-アイディアと経済成長>第6章 アイディアと経済成長</a></li><li><a href=#第7章-労働市場賃金および失業>第7章 労働市場，賃金，および失業</a></li><li><a href=#第8章-インフレーション>第8章 インフレーション</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=ジョーンズ-マクロ経済学>ジョーンズ マクロ経済学Ⅰ
+<a class=anchor href=#%e3%82%b8%e3%83%a7%e3%83%bc%e3%83%b3%e3%82%ba-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>手取りを増やすことを公約に掲げた政党の台頭が示すように，昨今，日本経済再生への期待が高まっています．
+本ページは，国の経済全体に関する経済学についてのノートです．</p><p>経済を構成する個々の主体に着目するミクロ経済学に対し，それらを合わせて一国の経済全体に着目する経済学の領域は <strong>マクロ経済学</strong> と呼ばれます．
+本ページでは，作成者が『ジョーンズ マクロ経済学Ⅰ 長期成長編』<a href=#cite:1>[1]</a> を初読した際のメモをまとめます．
+本ページの作成者は，<a href=#cite:1>[1]</a> を読むまで，経済学に関する知識を一切有していませんでした．</p><p>本教科書 <a href=#cite:1>[1]</a> は，簡単な数式を使って説明がなされており，数式に抵抗がない初心者にとってはわかりやすく感じました．
+本ページでは，数式で表現された箇所を中心に，初読時のメモを整理して記載します．</p><p>本ページは解説文ではなく，あくまでメモの整理として数式で表されたモデルを中心にまとめますが，本教科書 <a href=#cite:1>[1]</a> は数式ばかりがでてくるものではありません．
+また，本文中にもあるように，マクロ経済学は数式のみから議論・検討を行う学問でないこともお断りしておきます．</p><h2 id=第1章-マクロ経済学への招待>第1章 マクロ経済学への招待
+<a class=anchor href=#%e7%ac%ac1%e7%ab%a0-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6%e3%81%b8%e3%81%ae%e6%8b%9b%e5%be%85>#</a></h2><p>マクロ経済学の方法は以下のとおりです．</p><ol><li>事実を記述する．</li><li><strong>モデル</strong> を開発する．</li><li>モデルから導き出される予見と元の事実とを比較する．</li><li>モデルを使って他のケースの予見を行う．</li></ol><p>本ページでは，特に項番2にあるように，どのようなモデルが知られているかに着目してまとめます．</p><p>モデルの入力は <strong>パラメータ</strong> と <strong>外生変数</strong> で，出力は <strong>内生変数</strong> であると整理されます．</p><pre tabindex=0><code>パラメータ -----&gt; モデル ----&gt; 内生変数
+外生変数
+</code></pre><ul><li>パラメータ：モデルの外から与える定数</li><li>外生変数：モデルの外から与える変数（時間的変化を許す）</li><li>内生変数：未知数に相当する変数</li></ul><p>以下，外から与えられるものを
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\(\bar{\cdot}\)
+</span>と上線を付けた記号で表します．</p><h2 id=第2章-マクロ経済学の計測>第2章 マクロ経済学の計測
+<a class=anchor href=#%e7%ac%ac2%e7%ab%a0-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6%e3%81%ae%e8%a8%88%e6%b8%ac>#</a></h2><p><strong>GDP</strong> とは国内生産とのことです．
+<strong>生産＝支出＝所得</strong> の関係が基本的原則で，それぞれの観点からGDPを計算しても同じ値となります．</p><p>GDP の支出アプローチでは，GDP は以下の式で表されます．</p><span>\[
+Y=C+I+G+\mathit{NX}
+\]</span><p>記号の意味は以下のとおりです．</p><ul><li><span>\(Y\)
+</span>: GDP</li><li><span>\(C\)
+</span>: 消費</li><li><span>\(I\)
+</span>: 投資</li><li><span>\(G\)
+</span>: 政府支出</li><li><span>\(\mathit{NX}\)
+</span>: 純輸出</li></ul><p>純輸出は <strong>貿易・サービス収支</strong> のことで，<span>
+\(<0\)
+</span>のとき <strong>貿易赤字</strong> と呼ばれるものです．</p><p>GDP は <strong>名目GDP</strong> という考え方と <strong>実質GDP</strong> という考え方があり，以下の関係があります．</p><span>\[
+\text{名目GDP}=\text{価格水準}\times\text{実質GDP}
+\]</span><p>名目GDPは価格レベルの表現で，実質GDPは数量レベルの表現といえます．
+ただし，実質GDPも特定の年の価格で表すことがふつうです．
+年をまたぐときに，どの年で統一するかにはいくつかの流儀があります．</p><ul><li><strong>ラスパイレス指数</strong>：基準時点（当初）で表す．</li><li><strong>パーシェ指数</strong>：比較時点（終わり）で表す．</li><li><strong>連鎖指数</strong>：各指数の倍率の相乗平均で表す．</li></ul><p><strong>価格水準</strong> は <strong>GDPデフレータ</strong> と呼ばれることもあります．
+また，価格水準の変化率は <strong>インフレ率</strong> と呼ばれます．</p><h2 id=第3章-経済成長の概観>第3章 経済成長の概観
+<a class=anchor href=#%e7%ac%ac3%e7%ab%a0-%e7%b5%8c%e6%b8%88%e6%88%90%e9%95%b7%e3%81%ae%e6%a6%82%e8%a6%b3>#</a></h2><p>人類がこの世に登場してからの13万年を1日に圧縮すると，近代経済成長の時代はわずか最後の3分で，急激な成長といえます．
+また，この近代経済成長の開始のタイミングの違いが経済発展水準の格差拡大を生んでいます．</p><p>この <strong>経済成長</strong> をどう定義するかですが，これは1人あたりのGDPの変化率と捉えることができます．</p><p>成長率については一般に次のことが成り立ちます．
+<span>\(\bar{g}\)
+</span>を成長率とし，<span>
+\(y_t\)
+</span>を時刻 <span>\(t\)
+</span>における変数 <span>\(y\)
+</span>の値とします．
+このとき，</p><span>\[
+\begin{aligned}
+&y_t=y_0(1+\bar{g})^t,\\
+  &\bar{g}=\left(\frac{y_t}{y_0}\right)^{1/t}-1
+\end{aligned}
+\]</span><p>が成り立ちます．
+後者を <strong>成長率の計算公式</strong> と呼びます．</p><p>いま，<span>
+\(y_t=2y_0\)
+</span>となる <span>\(t\)
+</span>を求めることを考えます．
+<span>\((1+\bar{g})^t=2\)
+</span>なので，<span>
+\(t=\ln 2/\ln(1+\bar{g})\)
+</span>ですが，<span>
+\(\bar{g}\ll1\)
+</span>ならば <span>\(\ln(1+\bar{g})\approx\bar{g}\)
+</span>なので，<span>
+\(t\approx\ln 2/\bar{g}\approx0.7/\bar{g}\)
+</span>となります．</p><p>つまり，1年に2%ずつ成長するなら <span>\(70\%/2\%=35\)
+</span>なので，およそ35年で2倍になることがわかります．</p><p>この法則を <strong>成長に関する70の法則</strong> といいます．</p><p>成長率の公式については次のことも言えます．</p><p><span>\(x,y,z\)
+</span>を変数とし，その成長率を <span>\(g_x,g_y,g_z\)
+</span>とします．
+つまり，<span>
+\(x=(x_t),y=(y_t),z=(z_t)\)
+</span>とし，</p><span>\[
+\begin{aligned}
+&x_{t+1}=(1+g_x)x_t,\\
+  &y_{t+1}=(1+g_y)y_t,\\
+&z_{t+1}=(1+g_z)z_t
+\end{aligned}
+\]</span><p>とします．</p><p>いま，<span>
+\(xy=(x_ty_t)\)
+</span>で定義し，<span>
+\(x=y\)
+</span>を任意の <span>\(t\)
+</span>について <span>\(x_t=y_t\)
+</span>であると定義します．
+ほかの演算（<span>
+\(x/y\)
+</span>など）も同様とします．</p><p><span>\(x_0,y_0,z_0>0\)
+</span>としたとき，<span>
+\(z=xy\)
+</span>ならば，</p><span>\[
+\frac{z_{t+1}}{z_t}=\frac{x_{t+1}}{x_t}\frac{y_{t+1}}{y_t}
+\]</span><p>なので，</p><span>\[
+1+g_z=(1+g_x)(1+g_y)=1+(g_x+g_y)+g_xg_y
+\]</span><p>となります．
+ここで，<span>
+\(g_x,g_y\ll1\)
+</span>なら <span>\(g_xg_y\approx0\)
+</span>なので，</p><span>\[
+g_z=(g_x+g_y)+g_xg_y\approx g_x+g_y
+\]</span><p>が成り立ちます．
+つまり，<span>
+\(g_x,g_y\ll1\)
+</span>ならば，</p><span>\[
+z=xy\implies g_z\approx g_x+g_y
+\]</span><p>同様の仮定のもとで，</p><span>\[
+\begin{aligned}
+&z=x/y\implies g_z\approx g_x-g_y,\\
+&z=x^a\implies g_z\approx ag_x
+\end{aligned}
+\]</span><p>がいえます．</p><h2 id=第4章-生産のモデル>第4章 生産のモデル
+<a class=anchor href=#%e7%ac%ac4%e7%ab%a0-%e7%94%9f%e7%94%a3%e3%81%ae%e3%83%a2%e3%83%87%e3%83%ab>#</a></h2><p>以下のモデルを <strong>コブ=ダグラス型生産関数</strong> と呼びます．</p><span>\[
+Y=F(K,L)=\bar{A}K^{1/3}L^{2/3}
+\]</span><p>ただし，</p><ul><li><span>\(Y\)
+</span>: 生産量</li><li><span>\(K\)
+</span>: 資本</li><li><span>\(L\)
+</span>: 労働力</li><li><span>\(\bar{A}\)
+</span>: 生産性パラメータ</li></ul><p>です．</p><p><strong>資本の限界生産物</strong> <span>\(\mathit{MPK}\)
+</span>は
+<span>\[
+\mathit{MPK}=\frac{\partial Y}{\partial K}=\frac{1}{3}\bar{A}K^{-2/3}L^{2/3}=\frac{1}{3}\frac{Y}{K}
+\]
+</span>と表されます．</p><p><strong>労働の限界生産物</strong> <span>\(\mathit{MPL}\)
+</span>は
+<span>\[
+\mathit{MPL}=\frac{\partial Y}{\partial L}=\frac{2}{3}\bar{A}K^{1/3}L^{-1/3}=\frac{2}{3}\frac{Y}{L}
+\]
+</span>と表されます．</p><p>賃金率 <span>\(w\)
+</span>, 資本のレンタル価格 <span>\(r\)
+</span>に対し，以下の最適化問題を考えます．</p><span>\[
+\text{maximize\ }\Pi=F(K,L)-rK-wL.
+\]</span><p>ここで，</p><ul><li><span>\(\mathit{MPK}\ge r\)
+</span>なら資本投入</li><li><span>\(\mathit{MPL}\ge w\)
+</span>なら労働投入</li></ul><p>なる戦略をとるとき，<span>
+\(\bar{K},\bar{L}\)
+</span>を所与とすると，以下の生産のモデルが立てられます．</p><span>\[
+\begin{cases}
+Y=\bar{A}K^{1/3}L^{2/3},\\
+\dfrac{1}{3}\dfrac{Y}{K}=r,\\[8pt]
+\dfrac{2}{3}\dfrac{Y}{L}=w,\\
+K=\bar{K},\\
+L=\bar{L}.
+\end{cases}
+\]</span><p>この方程式系の解は以下のとおりで，解のことを <strong>均衡</strong> と呼びます．</p><span>\[
+\begin{cases}
+K^*=\bar{K},\\
+L^*=\bar{L},\\
+r^*=\dfrac{1}{3}\bar{A}\left(\dfrac{\bar{L}}{\bar{K}}\right)^{2/3},\\[8pt]
+w^*=\dfrac{2}{3}\bar{A}\left(\dfrac{\bar{K}}{\bar{L}}\right)^{1/3},\\
+Y^*=\bar{A}\bar{K}^{1/3}{L}^{2/3}.
+\end{cases}
+\]</span><p><span>\(y=Y/L\)
+</span>, <span>\(k=K/L\)
+</span>とおくと，</p><ul><li><span>\(y\)
+</span>: 1人あたりの産出量</li><li><span>\(k\)
+</span>: 1人あたりの資本</li></ul><p>となりますが，</p><span>\[
+y^*=\frac{Y^*}{L^*}=\frac{\bar{A}\bar{K}^{1/3}\bar{L}^{2/3}}{\bar{L}}=\bar{A}\left(\frac{\bar{K}}{\bar{L}}\right)^{1/3}=\bar{A}\bar{k}^{1/3}
+\]</span><p>が成り立ちます．
+<span>\(\bar{A}\)
+</span>は <strong>全要素生産性 (TFP)</strong> といい，逆に以下から求めることもできます．
+<span>\[
+\bar{A}=\frac{y^*}{\bar{k}^{1/3}}.
+\]</span></p><p>A国，B国の比較では以下のように計算することができます．
+<span>\[
+\frac{y^*_{\mathrm{A}}}{y^*_{\mathrm{B}}}=\frac{\bar{A}_{\mathrm{A}}}{\bar{A}_{\mathrm{B}}}\left(\frac{\bar{k}_{\mathrm{A}}}{\bar{k}_{\mathrm{B}}}\right)^{1/3}.
+\]</span></p><h2 id=第5章-ソローモデル>第5章 ソロー・モデル
+<a class=anchor href=#%e7%ac%ac5%e7%ab%a0-%e3%82%bd%e3%83%ad%e3%83%bc%e3%83%a2%e3%83%87%e3%83%ab>#</a></h2><p>コブ=ダグラス型生産関数から <strong>ソロー・モデル</strong> を構築します．</p><p>コブ=ダグラス型関数とは次のようなものでした．</p><span>\[
+Y=F(K,L)=\bar{A}K^{1/3}Y^{2/3}
+\]</span><p>ただし，</p><ul><li><span>\(Y\)
+</span>: 生産量</li><li><span>\(K\)
+</span>: 資本</li><li><span>\(L\)
+</span>: 労働力</li><li><span>\(\bar{A}\)
+</span>: 生産性パラメータ</li></ul><p>です．</p><p>これを時刻 <span>\(t\)
+</span>ごとの方程式に置き換えると以下のようになります．</p><span>\[
+Y_t=F(K_t,L_t)=\bar{A}K_t^{1/3}L_t^{2/3}
+\]</span><p>次に，生産物と消費，投資との関係を以下のように表します．</p><span>\[
+C_t+I_t=Y_t
+\]</span><p>ただし，</p><ul><li><span>\(C_t\)
+</span>: 消費</li><li><span>\(I_t\)
+</span>: 投資</li></ul><p>です．
+<span>\(Y_t-C_t\)
+</span>は <strong>貯蓄</strong> に対応し，<span>
+\(Y_t-C_t=I_t\)
+</span>なので，貯蓄額が投資額に一致することを表しています．</p><p>次に <strong>資本蓄積方程式</strong> を以下のように与えます．</p><span>\[
+\Delta K_{t+1}=I_t-\bar{d}K_t.
+\]</span><p>ただし，</p><ul><li><span>\(\bar{d}\)
+</span>: 資本減耗率</li></ul><p>です．
+また，<span>
+\(\Delta K_{t+1}=K_{t+1}-K_t \)
+</span>として，他の変数でも同様の意味とします．
+ここで，<span>
+\(K_t\)
+</span>は <strong>資本ストック</strong>，<span>
+\(\Delta K_{t+1}\)
+</span>は <strong>資本ストックの変化量</strong> と捉えられます．
+この式は，</p><span>\[
+K_{t+1}=K_t+I_t-\bar{d}K_t.
+\]</span><p>と捉えたほうがわかりやすいかもしれません．
+<span>\(\bar{d}K_t\)
+</span>は <strong>資本減耗</strong> の量を表します．</p><p>なお，<strong>ストック</strong> とは期を超えて存在し続けるものを指しますが，これに対してひと期間しか持続しない量は <strong>フロー</strong> と呼ばれます．</p><p>次に，投資への割合を
+<span>\[
+I_t=\bar{s}Y_t
+\]
+</span>とします．ただし，</p><ul><li><span>\(\bar{s}\)
+</span>: 投資率</li></ul><p>とします．</p><p>労働供給が一定とすると <span>\(L_t=\bar{L}\)
+</span>とできるので，以上をまとめると次の方程式系が得られます．
+<span>\[
+\begin{cases}
+Y_t=F(K_t,L_t)=\bar{A}K_t^{1/3}L_t^{2/3},\\
+\Delta K_{t+1}=I_t-\bar{d}K_t,\\
+L_t=\bar{L},\\
+C_t+I_t=Y_t,\\
+I_t=\bar{s}Y_t.
+\end{cases}
+\]
+</span>これを <strong>ソロー・モデル</strong> といいます．</p><p><span>\(\Delta K_{t+1}=0\)
+</span>のときを <strong>定常状態</strong> といい，<span>
+\(K_t=K_{t+1}=\cdots\)
+</span>となる <span>\(t\)
+</span>を用いて <span>\(K^*=K_t,Y^*=Y_t\)
+</span>などとします．</p><p><span>\(0=\Delta K_{t+1}=I_t-\bar{d}K_t=\bar{s}Y_t-\bar{d}K_t=\bar{s}Y^*-\bar{d}K^*\)
+</span>なので <span>\(\bar{s}Y^*=\bar{d}K^*\)
+</span>です．
+これは，
+<span>\[
+\frac{K^*}{Y^*}=\frac{\bar{s}}{\bar{d}}
+\]
+</span>であることも表しています．</p><p>また，<span>
+\(Y^*=\bar{A}{K^*}^{1/3}\bar{L}^{2/3}\)
+</span>なので，
+<span>\[
+\frac{\bar{d}}{\bar{s}}K^*=\bar{A}{K^*}^{1/3}\bar{L}^{2/3}\\
+\]
+</span>から
+<span>\[
+{K^*}^{2/3}=\frac{\bar{s}\bar{A}}{\bar{d}}\bar{L}^{2/3}\\
+\]
+</span>なので
+<span>\[
+K^*=\left(\frac{\bar{s}\bar{A}}{\bar{d}}\right)^{3/2}\bar{L}
+\]
+</span>であることがわかりました．</p><p>同様に，
+<span>\[
+\begin{aligned}
+Y^*&=\bar{A}{K^*}^{1/3}\bar{L}^{2/3}\\
+&=\bar{A}\left(\frac{\bar{s}\bar{A}}{\bar{d}}\right)^{1/2}\bar{L}^{1/3}\bar{L}^{2/3}\\
+&=\left(\frac{\bar{s}}{\bar{d}}\right)^{1/2}\bar{A}^{3/2}\bar{L}
+\end{aligned}
+\]
+</span>であることがわかります．</p><p>また，<span>
+\(L^*=\bar{L}\)
+</span>なので，
+<span>\[
+y^*=\frac{Y^*}{L^*}=\bar{A}^{3/2}\left(\frac{\bar{s}}{\bar{d}}\right)^{1/2}
+\]
+</span>です．</p><p>ソロー・モデルからは <strong>移行過程の動学原理</strong> と呼ばれる原理が導かれます．
+これは，定常状態より低い所得水準にあればあるほど成長率は大きいという原理です．
+この原理は資本蓄積方程式から導かれます．</p><p>資本蓄積方程式から <span>\(\Delta K_{t+1}=I_t-\bar{d}K_t\)
+</span>ですが，<span>
+\(I_t=\bar{s}Y_t\)
+</span>なので，</p><span>\[
+\frac{\Delta K_{t+1}}{K_t}=\bar{s}\frac{Y_t}{K_t}-\bar{d}
+\]</span><p>となります（ただし <span>\(K_t>0\)
+</span>とします）．</p><p>さらに，<span>
+\(\bar{s}Y^*=\bar{d}K^*\)
+</span>なので，</p><span>\[
+\begin{aligned}
+&\frac{\Delta K_{t+1}}{K_t}=\bar{s}\frac{Y_t}{K_t}-\bar{d}\\
+&=\bar{S}\left(\frac{Y_t}{K_t}-\frac{Y^*}{K^*}\right)\\
+&=\bar{s}\frac{Y^*}{K^*}\left(\frac{Y_t/K_t}{Y^*/K^*}-1\right)\\
+&=\bar{s}\frac{Y^*}{K^*}\left(\frac{\bar{A}K_t^{1/3}\bar{L}^{2/3}/K_t}{\bar{A}{K^*}^{1/3}\bar{L}^{2/3}/K^*}-1\right)\\
+&=\bar{s}\frac{Y^*}{K^*}\left(\frac{K_t^{-2/3}}{{K^*}^{-2/3}}-1\right)\\
+&=\bar{s}\frac{Y^*}{K^*}\left(\frac{{K^*}^{2/3}}{K_t^{2/3}}-1\right)
+\end{aligned}
+\]</span><p>となります．</p><p>よって <span>\(K_t < K^*\)
+</span>ならば資本ストック <span>\(K_{t+1}\)
+</span>は増加し，その成長率は <span>\(K_t\ll K^*\)
+</span>の方が大きくなります．
+さらに，生産過程を通じて，資本ストック <span>\(K_t\)
+</span>は <span>\(K^*\)
+</span>に向かい，その後はそこに留まり続けることを示しています．</p><h2 id=第6章-アイディアと経済成長>第6章 アイディアと経済成長
+<a class=anchor href=#%e7%ac%ac6%e7%ab%a0-%e3%82%a2%e3%82%a4%e3%83%87%e3%82%a3%e3%82%a2%e3%81%a8%e7%b5%8c%e6%b8%88%e6%88%90%e9%95%b7>#</a></h2><p>ソロー・モデルには，長期的な成長を説明する理論的な枠組みが欠けている欠点があります．
+そこで，モノに加えて <strong>アイディア</strong> も考えることで，そのような理論が構築できることが知られています．
+アイディアは競合性がないことが重要です．
+そのモデルは <strong>ローマー・モデル</strong> と呼ばれています．</p><p>ローマー・モデルを次のように構築します．
+まず，以下の方程式を考えます．</p><span>\[
+Y_t=A_tL_{yt}.
+\]</span><p>ただし，</p><ul><li><span>\(Y_t\)
+</span>: 生産量</li><li><span>\(A_t\)
+</span>: <strong>知識ストック</strong></li><li><span>\(L_t\)
+</span>: 労働投入量</li></ul><p>を表します．</p><p>労働ストックの変化を以下のように表します．</p><span>\[
+\Delta A_{t+1}=\bar{z}A_tL_{at}.
+\]</span><p>ただし，</p><ul><li><span>\(\bar{z}\)
+</span>: <strong>生産性パラメータ</strong></li><li><span>\(L_{at}\)
+</span>: アイディア開発のために投入される労働量</li></ul><p>を表します．また，</p><span>\[
+\begin{aligned}
+&L_{yt}+L_{at}=\bar{L},\\
+  &L_{at}=\bar{\ell}\bar{L}
+\end{aligned}
+\]</span><p>とします．
+ただし，</p><ul><li><span>\(\bar{\ell}\)
+</span>: アイディア開発に従事する労働量の割合</li></ul><p>を表します．</p><p>以上をまとめると以下のようになります．
+<span>\[
+\begin{cases}
+Y_t=A_tL_{yt},\\
+\Delta A_{t+1}=\bar{z}A_tL_{at},\\
+L_{yt}+L_{at}=\bar{L},\\
+L_{at}=\bar{\ell}\bar{L}
+\end{cases}
+\]</span></p><p>これを <strong>ローマー・モデル</strong> といいます．</p><p>ローマー・モデルの解を求めます．</p><p><span>\(y_t=Y_t/\bar{L}\)
+</span>とすると，</p><span>\[
+\begin{aligned}
+y_t&=\frac{Y_t}{\bar{L}}\\
+&=\frac{A_tL_{yt}}{\bar{L}}\\
+&=\frac{A_t(1-\bar{\ell})\bar{L}}{\bar{L}}\\
+&=A_t(1-\bar{\ell})
+\end{aligned}
+\]</span><p>となるので，1人あたりの生産量は <span>\(A_t\)
+</span>に比例することがわかります．
+また，</p><span>\[
+\frac{\Delta A_{t+1}}{A_t}=\bar{z}L_{at}=\bar{z}\bar{\ell}\bar{L}
+\]</span><p>なので，<span>
+\(\bar{g}=\bar{z}\bar{\ell}\bar{L}\)
+</span>とおくと</p><span>\[
+A_t=\bar{A}_0(1+\bar{g})^t
+\]</span><p>となり，</p><span>\[
+y_t=\bar{A}_0(1-\bar{\ell})(1+\bar{g})^t
+\]</span><p>と表せます．</p><p>さて，ソロー・モデルは以下のようなもので，アイディアが考慮されていないモデルでした．</p><span>\[
+\begin{cases}
+Y_t=F(K_t,L_t)=\bar{A}K_t^{1/3}L_t^{2/3},\\
+\Delta K_{t+1}=I_t-\bar{d}K_t,\\
+L_t=\bar{L},\\
+C_t+I_t=Y_t,\\
+I_t=\bar{s}Y_t.
+\end{cases}
+\]</span><p>ローマー・モデルは以下のようなもので，アイディアは考慮しますが資産については省略したモデルでした．</p><span>\[
+\begin{cases}
+Y_t=A_tL_{yt},\\
+\Delta A_{t+1}=\bar{z}A_tL_{at},\\
+L_{yt}+L_{at}=\bar{L},\\
+L_{at}=\bar{\ell}\bar{L}
+\end{cases}
+\]</span><p>そこで，これらを統合し，資産とアイディアを両方考慮するモデルが考えられます．
+このモデルを <strong>ソロー=ローマー統合モデル</strong> と呼びます．</p><p>ソロー=ローマー統合モデルは以下のように表されます．</p><span>\[
+\begin{cases}
+Y_t=A_tK_t^{1/3}L_{yt}^{2/3},\\
+\Delta K_{t+1}=\bar{s}Y_t-\bar{d}K_t,\\
+\Delta A_{t+1}=\bar{z}A_tL_{at},\\
+L_{yt}+L_{at}=\bar{L},\\
+L_{at}=\bar{\ell}\bar{L}.
+\end{cases}
+\]</span><p>ソロー=ローマー統合モデルの解を求めます．</p><p>変数 <span>\(X=(X_t)\)
+</span>について，<span>
+\(t\)
+</span>における成長率 <span>\(g_{X_t}\)
+</span>を</p><span>\[
+g_{X_t}=\frac{\Delta X_{t+1}}{X_t}
+\]</span><p>で定めます．
+すると，
+<span>\[
+\begin{aligned}
+&g_{Y_t}=g_{A_t}+\frac{1}{3}g_{K_t}+\frac{2}{3}g_{L_{yt}},\\
+&g_{A_t}=\frac{\Delta A_{t+1}}{A_t}=\bar{z}\bar{\ell}\bar{L}=\bar{g},\\
+&g_{K_t}=\frac{\Delta K_{t+1}}{K_t}=\bar{s}\frac{Y_t}{K_t}-\bar{d}
+\end{aligned}
+\]
+</span>が得られます．</p><p>よって，資本ストック <span>\(K_t\)
+</span>の成長率 <span>\(g_{K_t}\)
+</span>が一定になる場合を考えると，<span>
+\(Y_t/K_t\)
+</span>が一定となる必要があることがわかります．
+つまり，<span>
+\(g_K^*=g_Y^*\)
+</span>です．
+また，労働量が一定である仮定をおくと <span>\(g_{L_{yt}}=0\)
+</span>となります．
+このとき，
+<span>\[
+g_Y^*=\bar{g}+\frac{1}{3}g_K^*+\frac{2}{3}\cdot0=\bar{g}+\frac{1}{3}g_Y^*
+\]
+</span>なので，
+<span>\[
+g_Y^*=\frac{3}{2}\bar{g}
+\]
+</span>となります．</p><p>さて，<span>
+\(g_K^*=g_Y^*\)
+</span>なので，
+<span>\[
+\frac{K_t^*}{Y_t^*}=\frac{\bar{s}}{g_K^*+\bar{d}}=\frac{\bar{s}}{g_Y^*+\bar{d}}
+\]
+</span>です．
+そして，
+<span>\[
+Y_t^*=A_t^*\left(\frac{\bar{s}Y_t^*}{g_Y^*+\bar{d}}\right)^{1/3}L_{yt}^{2/3}
+\]
+</span>なので，
+<span>\[
+{Y_t^*}^{2/3}=A_t^*\left(\frac{\bar{s}}{g_Y^*+\bar{d}}\right)^{1/3}L_{yt}^{2/3}
+\]
+</span>より，
+<span>\[
+\begin{aligned}
+Y_t^*&={A_t^*}^{3/2}\left(\frac{\bar{s}}{g_Y^*+\bar{d}}\right)^{1/2}L_{yt}\\
+&={A_t^*}^{3/2}\left(\frac{\bar{s}}{g_Y^*+\bar{d}}\right)^{1/2}\bar{L}(1-\bar{\ell})
+\end{aligned}
+\]
+</span>です．
+よって，
+<span>\[
+\begin{aligned}
+y_t^*&=\frac{Y_t^*}{\bar{L}}\\
+&={A_t^*}^{3/2}\left(\frac{\bar{s}}{g_Y^*+\bar{d}}\right)^{1/2}(1-\bar{\ell})
+\end{aligned}
+\]
+</span>と求まります．</p><h2 id=第7章-労働市場賃金および失業>第7章 労働市場，賃金，および失業
+<a class=anchor href=#%e7%ac%ac7%e7%ab%a0-%e5%8a%b4%e5%83%8d%e5%b8%82%e5%a0%b4%e8%b3%83%e9%87%91%e3%81%8a%e3%82%88%e3%81%b3%e5%a4%b1%e6%a5%ad>#</a></h2><p>失業は以下のように分けられます．</p><span>\[
+\text{失業}=\text{自然的}+\text{循環的}=(\text{摩擦的}+\text{構造的})+\text{循環的}
+\]</span><ul><li>摩擦的：経済環境の変化により労働者が食を変更するための失業</li><li>構造的：労働者と企業のマッチングによる失業</li><li>循環的：短期変動に関連した失業</li></ul><p>以下を <strong>バスタブ・モデル</strong> と呼びます．</p><span>\[
+\begin{cases}
+E_t+U_t=\bar{L},\\
+\Delta U_{t+1}=\bar{s}E_t+\bar{f}U_t
+\end{cases}
+\]</span><p>ただし，</p><ul><li><span>\(E_t\)
+</span>: 就業者</li><li><span>\(U_t\)
+</span>: 失業者</li><li><span>\(\bar{s}\)
+</span>: 離職率</li><li><span>\(\bar{f}\)
+</span>: 新規就職率</li></ul><p>という意味です．</p><p>定常状態は <span>\(\Delta U_{t+1}=0\)
+</span>の状態です．
+このとき，
+<span>\[
+\begin{aligned}
+0&=\bar{s}E_t-\bar{f}U_t\\
+  &=\bar{s}(\bar{L}-U_t)-\bar{f}U_t\\
+&=\bar{s}\bar{L}-(\bar{f}+\bar{s})U_t
+\end{aligned}
+\]
+</span>なので，
+<span>\[
+U^*=\frac{\bar{s}\bar{L}}{\bar{f}+\bar{s}}
+\]
+</span>となります．
+または，
+<span>\[
+u^*=\frac{U^*}{\bar{L}}=\frac{\bar{s}}{\bar{f}+\bar{s}}
+\]
+</span>といえます．</p><p>このバスタブ・モデルという呼称は，蛇口と排水溝をもつ入れ物と水かさの関係で例えたもので，バスタブ曲線のようにグラフの形状を表すものではありません．</p><h2 id=第8章-インフレーション>第8章 インフレーション
+<a class=anchor href=#%e7%ac%ac8%e7%ab%a0-%e3%82%a4%e3%83%b3%e3%83%95%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a></h2><p><strong>貨幣数量説</strong> は以下で表されます．</p><span>\[
+M_tV_t=P_tY_t
+\]</span><p>ただし，</p><ul><li><span>\(M_t\)
+</span>: 貨幣量</li><li><span>\(V_t\)
+</span>: 貨幣の流通速度</li><li><span>\(P_t\)
+</span>: 物価水準</li><li><span>\(Y_t\)
+</span>: 実質GDP</li></ul><p>を表します．</p><p>ここで，<span>
+\(Y_t=\bar{Y}_t,V_t=\bar{V},M_t=\bar{M}_t\)
+</span>は所与としてよいと考えられるので，</p><span>\[
+P_t^*=\frac{\bar{M}_t\bar{V}}{\bar{Y}_t}
+\]</span><p>と表せます．</p><p><span>\(\bar{g}_M+\bar{g}_V=\bar{g}_P+\bar{g}_Y\)
+</span>としたとき，流通速度一定とすると <span>\(\bar{g}_V=0\)
+</span>となります．</p><p>インフレ率を <span>\(\pi\)
+</span>で表すことが多いので，<span>
+\(\bar{g}_P\)
+</span>（物価水準の変化率＝インフレ率）を <span>\(\pi\)
+</span>で表すと，
+<span>\[
+\pi=\bar{g}_M-\bar{g}_Y
+\]
+</span>と書けます．</p><p>また，<span>
+\(\text{名目GDP}=\text{価格水準}\times\text{実質GDP}\)
+</span>より，
+<span>\[
+\text{名目利子率}=\text{実質利子率}+\text{インフレ率}
+\]
+</span>となり，次の記号で表されます．
+<span>\[
+i=R+\pi.
+\]</span></p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，作成者が『ジョーンズ マクロ経済学Ⅰ 長期成長編』<a href=#cite:1>[1]</a> を初読した際のメモをまとめました．</p><p>本文中にもあるように，マクロ経済学は数式のみから議論・検討を行う学問ではありませんので，本ページの内容だけでは，概観を掴むためにも不十分と思いますが，マクロ経済学がどのようなモデルで経済を解釈・分析しようとしているかはわかるかもしれません．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>[1] チャールズ I.ジョーンズ（宮川努，荒井信幸，大久保正勝，釣雅雄，徳井丞次，細谷圭：訳），ジョーンズ マクロ経済学Ⅰ長期成長編，東洋経済新報社，2011.</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/3abe19e942b625f6c2e98461b3d9bdc2a83f79c0 title='Last modified by htakeuchi0 | January 20, 2025' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>January 20, 2025</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#第1章-マクロ経済学への招待>第1章 マクロ経済学への招待</a></li><li><a href=#第2章-マクロ経済学の計測>第2章 マクロ経済学の計測</a></li><li><a href=#第3章-経済成長の概観>第3章 経済成長の概観</a></li><li><a href=#第4章-生産のモデル>第4章 生産のモデル</a></li><li><a href=#第5章-ソローモデル>第5章 ソロー・モデル</a></li><li><a href=#第6章-アイディアと経済成長>第6章 アイディアと経済成長</a></li><li><a href=#第7章-労働市場賃金および失業>第7章 労働市場，賃金，および失業</a></li><li><a href=#第8章-インフレーション>第8章 インフレーション</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>

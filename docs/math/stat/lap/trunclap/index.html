@@ -23,7 +23,7 @@
 
  を使います．
 
-  Definition 1.
+Definition 1.
 \(\mu,b\in\mathbb{R}\), \(b>0\) とする．
 連続的確率変数 \(Y:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_Y\) が
 \[
@@ -31,13 +31,12 @@ f_Y(y;\mu,b)=\frac{1}{2b}\exp\left(-\frac{|y-\mu|}{b}\right)
 \]
 と表されるとき，\(Y\) を ラプラス分布 に従う確率変数であるという．
 
-
 ラプラス分布はどのような実数でもとり得る分布ですが，これを区間 
   \([A,B]\,(A\le B)\)
 
  に制限した分布を 切断ラプラス分布 といいます．
 
-  Definition 2.
+Definition 2.
 \(\mu,b\in\mathbb{R}\), \(b>0\), \(A,B\in\mathbb{R}\), \(A\le B\) とする．連続的確率変数 \(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_X\) が
 \[
 f_X(x;\mu,b,A,B)=\begin{cases}
@@ -46,7 +45,6 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 \end{cases}
 \]
 と表されるとき，\(X\) を 切断ラプラス分布 に従う確率変数であるという．
-
 
 
   切断ラプラス分布の確率密度関数
@@ -65,28 +63,28 @@ f_X(x;\mu,b,A,B)=\begin{cases}
  から決まるので， 
   \(C_{\mu,b}(A,B)\)
 
- と表します．"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/stat/lap/trunclap/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="ラプラス分布と切断ラプラス分布"><meta property="og:description" content=" ラプラス分布と切断ラプラス分布 # 概要 # 本ページでは，ラプラス分布と切断ラプラス分布の定義を述べ，切断ラプラス分布の確率密度関数，累積分布関数を具体的に求めます．
+ と表します．"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/stat/lap/trunclap/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="ラプラス分布と切断ラプラス分布"><meta property="og:description" content="ラプラス分布と切断ラプラス分布 # 概要 # 本ページでは，ラプラス分布と切断ラプラス分布の定義を述べ，切断ラプラス分布の確率密度関数，累積分布関数を具体的に求めます．
 ラプラス分布と切断ラプラス分布の定義 # まずは，ラプラス分布を定義します． 切断ラプラス分布に従う確率変数に \(X\) の文字を使うため，ラプラス分布に従う確率変数には \(Y\) を使います．
-Definition 1. \(\mu,b\in\mathbb{R}\), \(b>0\) とする． 連続的確率変数 \(Y:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_Y\) が \[ f_Y(y;\mu,b)=\frac{1}{2b}\exp\left(-\frac{|y-\mu|}{b}\right) \] と表されるとき，\(Y\) を ラプラス分布 に従う確率変数であるという． ラプラス分布はどのような実数でもとり得る分布ですが，これを区間 \([A,B]\,(A\le B)\) に制限した分布を 切断ラプラス分布 といいます．
-Definition 2. \(\mu,b\in\mathbb{R}\), \(b>0\), \(A,B\in\mathbb{R}\), \(A\le B\) とする．連続的確率変数 \(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_X\) が \[ f_X(x;\mu,b,A,B)=\begin{cases} \dfrac{1}{2bC}\exp\left(-\dfrac{|x-\mu|}{b}\right),&amp;A\le x\le B,\\ 0,&\text{otherwise} \end{cases} \] と表されるとき，\(X\) を 切断ラプラス分布 に従う確率変数であるという． 切断ラプラス分布の確率密度関数 # 以下，Definition 2 の \(C\) を具体的に求めてみます． \(C\) は \(\mu,b,A,B\) から決まるので， \(C_{\mu,b}(A,B)\) と表します．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2024-06-11T23:53:47+09:00"><title>ラプラス分布と切断ラプラス分布 | htakeuchi0 のノート</title>
-<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/ class=active>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
-</label><strong>ラプラス分布と切断ラプラス分布</strong>
-<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#ラプラス分布と切断ラプラス分布の定義>ラプラス分布と切断ラプラス分布の定義</a></li><li><a href=#切断ラプラス分布の確率密度関数>切断ラプラス分布の確率密度関数</a></li><li><a href=#切断ラプラス分布の累積分布関数>切断ラプラス分布の累積分布関数</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside></header><article class=markdown><h1 id=ラプラス分布と切断ラプラス分布>ラプラス分布と切断ラプラス分布
+Definition 1. \(\mu,b\in\mathbb{R}\), \(b>0\) とする． 連続的確率変数 \(Y:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_Y\) が \[ f_Y(y;\mu,b)=\frac{1}{2b}\exp\left(-\frac{|y-\mu|}{b}\right) \] と表されるとき，\(Y\) を ラプラス分布 に従う確率変数であるという．
+ラプラス分布はどのような実数でもとり得る分布ですが，これを区間 \([A,B]\,(A\le B)\) に制限した分布を 切断ラプラス分布 といいます．
+Definition 2. \(\mu,b\in\mathbb{R}\), \(b>0\), \(A,B\in\mathbb{R}\), \(A\le B\) とする．連続的確率変数 \(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_X\) が \[ f_X(x;\mu,b,A,B)=\begin{cases} \dfrac{1}{2bC}\exp\left(-\dfrac{|x-\mu|}{b}\right),&amp;A\le x\le B,\\ 0,&\text{otherwise} \end{cases} \] と表されるとき，\(X\) を 切断ラプラス分布 に従う確率変数であるという．
+切断ラプラス分布の確率密度関数 # 以下，Definition 2 の \(C\) を具体的に求めてみます． \(C\) は \(\mu,b,A,B\) から決まるので， \(C_{\mu,b}(A,B)\) と表します．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2025-01-19T19:45:55+09:00"><title>ラプラス分布と切断ラプラス分布 | htakeuchi0 のノート</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://htakeuchi0.github.io/docs/math/stat/lap/trunclap/><link rel=stylesheet href=/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css integrity="sha256-Q0A154hcf10SgYvZ8RHPGgklxvt4OCZnOBw9Xto/tPE=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/ class=active>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li><li><a href=/docs/others/macroeconomics/>マクロ経済学</a><ul><li><a href=/docs/others/macroeconomics/jones-1/>ジョーンズ マクロ経済学Ⅰ</a></li></ul></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>ラプラス分布と切断ラプラス分布</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#ラプラス分布と切断ラプラス分布の定義>ラプラス分布と切断ラプラス分布の定義</a></li><li><a href=#切断ラプラス分布の確率密度関数>切断ラプラス分布の確率密度関数</a></li><li><a href=#切断ラプラス分布の累積分布関数>切断ラプラス分布の累積分布関数</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=ラプラス分布と切断ラプラス分布>ラプラス分布と切断ラプラス分布
 <a class=anchor href=#%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%a8%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83>#</a></h1><h2 id=概要>概要
 <a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>本ページでは，ラプラス分布と切断ラプラス分布の定義を述べ，切断ラプラス分布の確率密度関数，累積分布関数を具体的に求めます．</p><h2 id=ラプラス分布と切断ラプラス分布の定義>ラプラス分布と切断ラプラス分布の定義
 <a class=anchor href=#%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%a8%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%ae%e5%ae%9a%e7%be%a9>#</a></h2><p>まずは，ラプラス分布を定義します．
 切断ラプラス分布に従う確率変数に
 <link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\(X\)
 </span>の文字を使うため，ラプラス分布に従う確率変数には <span>\(Y\)
-</span>を使います．</p><blockquote class="book-hint info"><b>Definition 1</b>.
+</span>を使います．</p><blockquote class="book-hint info"><p><b>Definition 1</b>.
 \(\mu,b\in\mathbb{R}\), \(b>0\) とする．
 連続的確率変数 \(Y:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_Y\) が
 \[
 f_Y(y;\mu,b)=\frac{1}{2b}\exp\left(-\frac{|y-\mu|}{b}\right)
 \]
-と表されるとき，\(Y\) を <strong>ラプラス分布</strong> に従う確率変数であるという．</blockquote><p>ラプラス分布はどのような実数でもとり得る分布ですが，これを区間 <span>\([A,B]\,(A\le B)\)
-</span>に制限した分布を <strong>切断ラプラス分布</strong> といいます．</p><blockquote class="book-hint info"><b>Definition 2</b>.
+と表されるとき，\(Y\) を <strong>ラプラス分布</strong> に従う確率変数であるという．</p></blockquote><p>ラプラス分布はどのような実数でもとり得る分布ですが，これを区間 <span>\([A,B]\,(A\le B)\)
+</span>に制限した分布を <strong>切断ラプラス分布</strong> といいます．</p><blockquote class="book-hint info"><p><b>Definition 2</b>.
 \(\mu,b\in\mathbb{R}\), \(b>0\), \(A,B\in\mathbb{R}\), \(A\le B\) とする．連続的確率変数 \(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_X\) が
 \[
 f_X(x;\mu,b,A,B)=\begin{cases}
@@ -94,7 +92,7 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 0,&\text{otherwise}
 \end{cases}
 \]
-と表されるとき，\(X\) を <strong>切断ラプラス分布</strong> に従う確率変数であるという．</blockquote><h2 id=切断ラプラス分布の確率密度関数>切断ラプラス分布の確率密度関数
+と表されるとき，\(X\) を <strong>切断ラプラス分布</strong> に従う確率変数であるという．</p></blockquote><h2 id=切断ラプラス分布の確率密度関数>切断ラプラス分布の確率密度関数
 <a class=anchor href=#%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%ae%e7%a2%ba%e7%8e%87%e5%af%86%e5%ba%a6%e9%96%a2%e6%95%b0>#</a></h2><p>以下，Definition 2 の <span>\(C\)
 </span>を具体的に求めてみます．
 <span>\(C\)
@@ -105,65 +103,81 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 </span>をパラメータ <span>\(\mu,b\)
 </span>であるラプラス分布に従う確率変数としたとき，その累積分布関数 <span>\(F_Y(y;\mu,b)\)
 </span>を求めます．</p><p>累積分布関数の定義より，
-<span>\[\begin{aligned}
+<span>\[
+\begin{aligned}
 F_Y(y;\mu,b)&=\int_{-\infty}^yf_Y(t;\mu,b)dt\\
 &=\int_{-\infty}^y\frac{1}{2b}\exp\left(-\frac{|t-\mu|}{b}\right)dt
-\end{aligned}\]
+\end{aligned}
+\]
 </span>となります．
-積分範囲を <span>\(y&lt;\mu\)
+積分範囲を <span>\(y<\mu\)
 </span>, <span>\(y\ge\mu\)
-</span>に分けて計算を行います．</p><p>まず <span>\(y&lt;\mu\)
+</span>に分けて計算を行います．</p><p>まず <span>\(y<\mu\)
 </span>のとき，<span>
-\(t&lt;y\)
-</span>ならば <span>\(t-\mu&lt;y-\mu&lt;0\)
+\(t < y\)
+</span>ならば <span>\(t-\mu < y-\mu<0\)
 </span>なので，
-<span>\[\begin{aligned}
+<span>\[
+\begin{aligned}
 F_Y(y;\mu,b)&=\int_{-\infty}^y\frac{1}{2b}\exp\left(\frac{t-\mu}{b}\right)dt\\
 &=\left[\frac{1}{2}\exp\left(\frac{t-\mu}{b}\right)\right]_{-\infty}^y\\
 &=\frac{1}{2}\exp\left(\frac{y-\mu}{b}\right)\\
 &=\frac{1}{2}\exp\left(-\frac{|y-\mu|}{b}\right)
-\end{aligned}\]
+\end{aligned}
+\]
 </span>となります．</p><p>一方，<span>
 \(y\ge\mu\)
 </span>のとき，<span>
 \(t\ge\mu\)
 </span>ならば <span>\(t-\mu\ge0\)
 </span>なので，
-<span>\[\begin{aligned}
+<span>\[
+\begin{aligned}
 F_Y(y;\mu,b)&=\int_{-\infty}^\mu\frac{1}{2b}\exp\left(\frac{t-\mu}{b}\right)dt+\int_\mu^y\frac{1}{2b}\exp\left(-\frac{t-\mu}{b}\right)dt\\
 &=\left.\frac{1}{2}\exp\left(\frac{y-\mu}{b}\right)\right|_{y=\mu}+\left[-\frac{1}{2}\exp\left(-\frac{t-\mu}{b}\right)\right]_\mu^y\\
 &=\frac{1}{2}+\left(-\frac{1}{2}\exp\left(-\frac{y-\mu}{b}\right)+\frac{1}{2}\right)\\
 &=1-\frac{1}{2}\exp\left(-\frac{y-\mu}{b}\right)\\
 &=1-\frac{1}{2}\exp\left(-\frac{|y-\mu|}{b}\right)
-\end{aligned}\]
+\end{aligned}
+\]
 </span>となります．</p><p>よって，
-<span>\[F_Y(y;\mu,b)=\begin{cases}
-\dfrac{1}{2}\exp\left(-\dfrac{|y-\mu|}{b}\right),&amp;y&lt;\mu,\\
-1-\dfrac{1}{2}\exp\left(-\dfrac{|y-\mu|}{b}\right),&amp;y\ge\mu
-\end{cases}\]
+<span>\[
+F_Y(y;\mu,b)=\begin{cases}
+\dfrac{1}{2}\exp\left(-\dfrac{|y-\mu|}{b}\right),&y<\mu,\\
+1-\dfrac{1}{2}\exp\left(-\dfrac{|y-\mu|}{b}\right),&y\ge\mu
+\end{cases}
+\]
 </span>となります．</p><p><span>\(X\)
 </span>がパラメータ <span>\(\mu,b,A,B\)
 </span>の切断ラプラス分布に従う確率変数であるなら，
-<span>\[ \int_{-\infty}^\infty f_X(x;\mu,b,A,B)dx=1\]
+<span>\[
+\int_{-\infty}^\infty f_X(x;\mu,b,A,B)dx=1
+\]
 </span>を満たします．</p><p>ここで，<span>
 \(Y\)
 </span>を（<span>
 \(X\)
 </span>と同じ）パラメータ <span>\(\mu,b\)
 </span>のラプラス分布に従う確率変数とすると，
-<span>\[\begin{aligned}
+<span>\[
+\begin{aligned}
 1&=\int_{-\infty}^{\infty}\frac{1}{2bC}\exp\left(-\frac{|x-\mu|}{b}\right)dx\\
 &=\frac{1}{C}\int_A^B\frac{1}{2b}\exp\left(-\frac{|x-\mu|}{b}\right)dx\\
 &=\frac{1}{C}(F_Y(B;\mu,b)-F_Y(A;\mu,b))
-\end{aligned}\]
+\end{aligned}
+\]
 </span>となります．
 よって，
-<span>\[C=F_Y(B;\mu,b)-F_Y(A;\mu,b)\]
+<span>\[
+C=F_Y(B;\mu,b)-F_Y(A;\mu,b)
+\]
 </span>とわかります．
 パラメータ <span>\(\mu,b,A,B\)
 </span>を明示して書くと，
-<span>\[C_{\mu,b}(A,B)=F_Y(B;\mu,b)-F_Y(A;\mu,b)\]
-</span>です．</p><p>以上より，次のことがわかります．<blockquote class="book-hint info"><b>Proposition 3</b>.
+<span>\[
+C_{\mu,b}(A,B)=F_Y(B;\mu,b)-F_Y(A;\mu,b)
+\]
+</span>です．</p><p>以上より，次のことがわかります．</p><blockquote class="book-hint info"><p><b>Proposition 3</b>.
 \(\mu,b\in\mathbb{R}\), \(b>0\), \(A,B\in\mathbb{R}\), \(A\le B\) とする．
 \[
 C_{\mu,b}(A,B)=\begin{cases}
@@ -180,22 +194,24 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 0,&\text{otherwise}
 \end{cases}
 \]
-を満たすとき，\(X\) は切断ラプラス分布に従う確率変数である．</blockquote></p><h2 id=切断ラプラス分布の累積分布関数>切断ラプラス分布の累積分布関数
+を満たすとき，\(X\) は切断ラプラス分布に従う確率変数である．</p></blockquote><h2 id=切断ラプラス分布の累積分布関数>切断ラプラス分布の累積分布関数
 <a class=anchor href=#%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%ae%e7%b4%af%e7%a9%8d%e5%88%86%e5%b8%83%e9%96%a2%e6%95%b0>#</a></h2><p>切断ラプラス分布に従う確率変数の累積分布関数を求めます．</p><p><span>\(A\le x\le B\)
 </span>ならば，
-<span>\[\begin{aligned}
-&amp;F_X(x;\mu,b,A,B)\\
+<span>\[
+\begin{aligned}
+&F_X(x;\mu,b,A,B)\\
 &=\int_{-\infty}^xf_X(t;\mu,b,A,B)dt\\
 &=\int_{-\infty}^x\frac{1}{2bC_{\mu,b}(A,B)}\exp\left(-\frac{|t-\mu|}{b}\right)dt\\
 &=\frac{F_Y(x;\mu,b)-F_Y(A;\mu,b)}{C_{\mu,b}(A,B)}
-\end{aligned}\]
+\end{aligned}
+\]
 </span>です．
 ただし，<span>
 \(F_Y(y;\mu,b)\)
 </span>は，パラメータ <span>\(\mu,b\)
 </span>のラプラス分布に従う確率変数の累積分布関数です．
 そして，<span>
-\(x&lt;A\)
+\(x < A\)
 </span>ならば <span>\(F_X(x;\mu,b,A,B)=0\)
 </span>, <span>\(x>B\)
 </span>ならば <span>\(F_X(x;\mu,b,A,B)=1\)
@@ -218,5 +234,5 @@ F_Y(y;\mu,b)=\begin{cases}
 \end{aligned}
 \]
 と表される．</p></li></ol></blockquote><h2 id=まとめ>まとめ
-<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，ラプラス分布と切断ラプラス分布の定義を述べ，切断ラプラス分布の確率密度関数，累積分布関数を具体的に求めました．</p><p><a href=https://htakeuchi0.github.io/docs/math/stat/lap/trunclap/#%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%ae%e7%a2%ba%e7%8e%87%e5%af%86%e5%ba%a6%e9%96%a2%e6%95%b0>切断ラプラス分布の確率密度関数</a> の議論から，ラプラス分布の累積分布関数が簡単な形で表せることで（Prop. 4も参照），切断ラプラス分布の確率密度関数や，累積分布関数も具体的に書き下せることがわかります．</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/f7983fa5b1da67d124e9e657f3d374d0314fc151 title='Last modified by htakeuchi0 | June 11, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
-<span>June 11, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#ラプラス分布と切断ラプラス分布の定義>ラプラス分布と切断ラプラス分布の定義</a></li><li><a href=#切断ラプラス分布の確率密度関数>切断ラプラス分布の確率密度関数</a></li><li><a href=#切断ラプラス分布の累積分布関数>切断ラプラス分布の累積分布関数</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></div></aside></main></body></html>
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，ラプラス分布と切断ラプラス分布の定義を述べ，切断ラプラス分布の確率密度関数，累積分布関数を具体的に求めました．</p><p><a href=https://htakeuchi0.github.io/docs/math/stat/lap/trunclap/#%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%ae%e7%a2%ba%e7%8e%87%e5%af%86%e5%ba%a6%e9%96%a2%e6%95%b0>切断ラプラス分布の確率密度関数</a> の議論から，ラプラス分布の累積分布関数が簡単な形で表せることで（Prop. 4も参照），切断ラプラス分布の確率密度関数や，累積分布関数も具体的に書き下せることがわかります．</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/a028fd030dd5378f26b638c40daeff7209a793c9 title='Last modified by htakeuchi0 | January 19, 2025' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>January 19, 2025</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#ラプラス分布と切断ラプラス分布の定義>ラプラス分布と切断ラプラス分布の定義</a></li><li><a href=#切断ラプラス分布の確率密度関数>切断ラプラス分布の確率密度関数</a></li><li><a href=#切断ラプラス分布の累積分布関数>切断ラプラス分布の累積分布関数</a></li><li><a href=#まとめ>まとめ</a></li></ul></nav></div></aside></main></body></html>

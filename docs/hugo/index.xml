@@ -180,26 +180,26 @@
 &lt;table>
  &lt;thead>
  &lt;tr>
- &lt;th style="text-align: left">項番&lt;/th>
- &lt;th style="text-align: left">呼び出し方&lt;/th>
- &lt;th style="text-align: left">結果&lt;/th>
+ &lt;th>項番&lt;/th>
+ &lt;th>呼び出し方&lt;/th>
+ &lt;th>結果&lt;/th>
  &lt;/tr>
  &lt;/thead>
  &lt;tbody>
  &lt;tr>
- &lt;td style="text-align: left">1&lt;/td>
- &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
- &lt;td style="text-align: left">&lt;strong>Theorem 1&lt;/strong>.&lt;/td>
+ &lt;td>1&lt;/td>
+ &lt;td>&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td>&lt;strong>Theorem 1&lt;/strong>.&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">2&lt;/td>
- &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
- &lt;td style="text-align: left">&lt;strong>Theorem 5.2.2&lt;/strong>.&lt;/td>
+ &lt;td>2&lt;/td>
+ &lt;td>&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td>&lt;strong>Theorem 5.2.2&lt;/strong>.&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">3&lt;/td>
- &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
- &lt;td style="text-align: left">&lt;strong>Theorem 3.3&lt;/strong> (補足).&lt;/td>
+ &lt;td>3&lt;/td>
+ &lt;td>&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td>&lt;strong>Theorem 3.3&lt;/strong> (補足).&lt;/td>
  &lt;/tr>
  &lt;/tbody>
 &lt;/table>
@@ -211,10 +211,7 @@
  概要
  &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
 &lt;/h2>
-&lt;p>Book テーマ &lt;a href="#cite:1">[1]&lt;/a> では，
-&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
-&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
-&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+&lt;p>Book テーマ &lt;a href="#cite:1">[1]&lt;/a> では，&lt;span>
  \(\KaTeX\)
 &lt;/span>
 を使うための &lt;code>katex&lt;/code> ショートコードが用意されています &lt;a href="#cite:2">[2]&lt;/a>．
@@ -231,33 +228,31 @@
  &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0%e3%81%aa%e3%81%97">#&lt;/a>
 &lt;/h3>
 &lt;p>markdown の記述例は以下のとおりです．&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{% hint %}}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{% /hint %}}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p>
 &lt;blockquote class="book-hint ">
- ヒント．
+&lt;p>ヒント．&lt;/p>
 &lt;/blockquote>
-
 &lt;h3 id="第1引数info">
  第1引数：info
  &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0info">#&lt;/a>
 &lt;/h3>
 &lt;p>markdown の記述例は以下のとおりです．&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &lt;span style="color:#a6e22e">info&lt;/span> &amp;gt;}}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{% hint info %}}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{% /hint %}}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p>
 &lt;blockquote class="book-hint info">
- ヒント．
+&lt;p>ヒント．&lt;/p>
 &lt;/blockquote>
-
 &lt;h3 id="第1引数warning">
  第1引数：warning
  &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0warning">#&lt;/a>
 &lt;/h3>
 &lt;p>markdown の記述例は以下のとおりです．&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &lt;span style="color:#a6e22e">warning&lt;/span> &amp;gt;}}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{% hint warning %}}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{% /hint %}}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p></description></item></channel></rss>

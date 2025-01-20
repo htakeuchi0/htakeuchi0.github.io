@@ -16,9 +16,6 @@
   #
 
 
-
-
-
   \(\Omega\)
 
  を集合，
@@ -42,7 +39,9 @@
 
  を
 
-  \[  [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}\]
+  \[
+  [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}
+\]
 
 
 で定め，
@@ -88,18 +87,16 @@
 , 
   \(P(Y\in S)\)
 
- と略記します．"><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/stat/dp/basic/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="差分プライバシの基本"><meta property="og:description" content=" 差分プライバシの基本 # 概要 # 本ページでは，差分プライバシの基本事項についてまとめます．
+ と略記します．"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/stat/dp/basic/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="差分プライバシの基本"><meta property="og:description" content="差分プライバシの基本 # 概要 # 本ページでは，差分プライバシの基本事項についてまとめます．
 準備 # 記号定義 # \(\Omega\) を集合， \(\mathfrak{F}\subseteq 2^\Omega\) , \(P:\mathfrak{F}\to\mathbb{R}\) とし， \((\Omega,\mathfrak{F},P)\) を確率空間とします．
-\(X:(\Omega,\mathfrak{F})\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) を確率変数としたとき， \(S\in\mathfrak{B}(\mathbb{R}^{k})\) について \([X\in S]\) を \[ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}\] で定め， \(P([X\in S])\) を \(P(X\in S)\) と略記します．ただし， \(\mathfrak{B}(\mathbb{R}^{k})\) とは， \(\mathbb{R}^{k}\) の開集合全体 \(\mathfrak{O}(\mathbb{R}^{k})\) について， \(\mathfrak{O}(\mathbb{R}^{k})\) を含む最小の完全加法族を表します．
-ふたつの確率空間 \((\Omega_1,\mathfrak{F}_1,P_1)\) , \((\Omega_2,\mathfrak{F}_2,P_2)\) に対して，ふたつの確率変数 \(X:(\Omega_1,\mathfrak{F}_1)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) , \(Y:(\Omega_2,\mathfrak{F}_2)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) があったとき， \(P_1(X\in S)\) , \(P_2(Y\in S)\) と書くべきところを， \(P(X\in S)\) , \(P(Y\in S)\) と略記します．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2024-01-08T23:06:21+09:00"><title>差分プライバシの基本 | htakeuchi0 のノート</title>
-<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.a82d7e77ceb134d151c4d7e381eeb30623fbd5a524d58c584d8716ecec0205bd.css integrity="sha256-qC1+d86xNNFRxNfjge6zBiP71aUk1YxYTYcW7OwCBb0=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/ class=active>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
-</label><strong>差分プライバシの基本</strong>
-<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#準備>準備</a><ul><li><a href=#記号定義>記号定義</a></li><li><a href=#epsilon-indistinguishable>\(\epsilon\)-indistinguishable</a></li></ul></li><li><a href=#差分プライバシの定義と性質>差分プライバシの定義と性質</a><ul><li><a href=#差分プライバシ-differential-privacy>差分プライバシ (differential privacy)</a></li><li><a href=#差分プライバシの例>差分プライバシの例</a></li><li><a href=#差分プライバシの性質>差分プライバシの性質</a></li><li><a href=#近似的差分プライバシ-approximate-differential-privacy>近似的差分プライバシ (approximate differential privacy)</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class=markdown><h1 id=差分プライバシの基本>差分プライバシの基本
+\(X:(\Omega,\mathfrak{F})\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) を確率変数としたとき， \(S\in\mathfrak{B}(\mathbb{R}^{k})\) について \([X\in S]\) を \[ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\} \] で定め， \(P([X\in S])\) を \(P(X\in S)\) と略記します．ただし， \(\mathfrak{B}(\mathbb{R}^{k})\) とは， \(\mathbb{R}^{k}\) の開集合全体 \(\mathfrak{O}(\mathbb{R}^{k})\) について， \(\mathfrak{O}(\mathbb{R}^{k})\) を含む最小の完全加法族を表します．
+ふたつの確率空間 \((\Omega_1,\mathfrak{F}_1,P_1)\) , \((\Omega_2,\mathfrak{F}_2,P_2)\) に対して，ふたつの確率変数 \(X:(\Omega_1,\mathfrak{F}_1)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) , \(Y:(\Omega_2,\mathfrak{F}_2)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) があったとき， \(P_1(X\in S)\) , \(P_2(Y\in S)\) と書くべきところを， \(P(X\in S)\) , \(P(Y\in S)\) と略記します．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2025-01-19T19:45:55+09:00"><title>差分プライバシの基本 | htakeuchi0 のノート</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://htakeuchi0.github.io/docs/math/stat/dp/basic/><link rel=stylesheet href=/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css integrity="sha256-Q0A154hcf10SgYvZ8RHPGgklxvt4OCZnOBw9Xto/tPE=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/ class=active>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li><li><a href=/docs/others/macroeconomics/>マクロ経済学</a><ul><li><a href=/docs/others/macroeconomics/jones-1/>ジョーンズ マクロ経済学Ⅰ</a></li></ul></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>差分プライバシの基本</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#準備>準備</a><ul><li><a href=#記号定義>記号定義</a></li><li><a href=#hahahugoshortcode53s22hbhb-indistinguishable>HAHAHUGOSHORTCODE53s22HBHB-indistinguishable</a></li></ul></li><li><a href=#差分プライバシの定義と性質>差分プライバシの定義と性質</a><ul><li><a href=#差分プライバシ-differential-privacy>差分プライバシ (differential privacy)</a></li><li><a href=#差分プライバシの例>差分プライバシの例</a></li><li><a href=#差分プライバシの性質>差分プライバシの性質</a></li><li><a href=#近似的差分プライバシ-approximate-differential-privacy>近似的差分プライバシ (approximate differential privacy)</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=差分プライバシの基本>差分プライバシの基本
 <a class=anchor href=#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%81%ae%e5%9f%ba%e6%9c%ac>#</a></h1><h2 id=概要>概要
 <a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>本ページでは，差分プライバシの基本事項についてまとめます．</p><h2 id=準備>準備
 <a class=anchor href=#%e6%ba%96%e5%82%99>#</a></h2><h3 id=記号定義>記号定義
-<a class=anchor href=#%e8%a8%98%e5%8f%b7%e5%ae%9a%e7%be%a9>#</a></h3><p><link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\(\Omega\)
+<a class=anchor href=#%e8%a8%98%e5%8f%b7%e5%ae%9a%e7%be%a9>#</a></h3><p><span>\(\Omega\)
 </span>を集合，<span>
 \(\mathfrak{F}\subseteq 2^\Omega\)
 </span>, <span>\(P:\mathfrak{F}\to\mathbb{R}\)
@@ -110,7 +107,9 @@
 \(S\in\mathfrak{B}(\mathbb{R}^{k})\)
 </span>について <span>\([X\in S]\)
 </span>を
-<span>\[ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}\]
+<span>\[
+[X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}
+\]
 </span>で定め，<span>
 \(P([X\in S])\)
 </span>を <span>\(P(X\in S)\)
@@ -131,12 +130,13 @@
 </span>と書くべきところを，<span>
 \(P(X\in S)\)
 </span>, <span>\(P(Y\in S)\)
-</span>と略記します．</p><p>また，本ページでは簡単のため，確率変数が連続的確率変数である場合のみを想定し，論証を行います．</p><h3 id=epsilon-indistinguishable>\(\epsilon\)-indistinguishable
-<a class=anchor href=#epsilon-indistinguishable>#</a></h3><p>まず，確率変数どうしの関係のひとつである，<span>
+</span>と略記します．</p><p>また，本ページでは簡単のため，確率変数が連続的確率変数である場合のみを想定し，論証を行います．</p><h3 id=hahahugoshortcode53s22hbhb-indistinguishable><span>\(\epsilon\)
+</span>-indistinguishable
+<a class=anchor href=#hahahugoshortcode53s22hbhb-indistinguishable>#</a></h3><p>まず，確率変数どうしの関係のひとつである，<span>
 \(\epsilon\)
-</span>-indistiguishability という概念を導入します <a href=#desfontaines:2020:1>[1]</a>．</p><blockquote class="book-hint info"><b>Definition 1</b>.
-\(X:(\Omega_1,\mathfrak{F}_1)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\), \(Y:(\Omega_2,\mathfrak{F}_2)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) を確率変数とする．
-任意の \(S\in\mathfrak{B}(\mathbb{R}^{k})\) について \(P(X\in S)\le e^\epsilon P(Y\in S)\) かつ \(P(Y\in S)\le e^\epsilon P(X\in S)\) ならば，\(X\) と \(Y\) は <strong>\(\epsilon\)-indistinguishable</strong> であるといい，\(X\approx_\epsilon Y\) と表す．</blockquote><p><span>\(P(Y\in S)\not=0\)
+</span>-indistiguishability という概念を導入します <a href=#desfontaines:2020:1>[1]</a>．</p><blockquote class="book-hint info"><p><b>Definition 1</b>.
+\(X:(\Omega_1,\mathfrak{F}_1)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\), \(Y:(\Omega_2,\mathfrak{F}<em>2)\to(\mathbb{R}^{k},\mathfrak{B}(\mathbb{R}^{k}))\) を確率変数とする．
+任意の \(S\in\mathfrak{B}(\mathbb{R}^{k})\) について \(P(X\in S)\le e^\epsilon P(Y\in S)\) かつ \(P(Y\in S)\le e^\epsilon P(X\in S)\) ならば，\(X\) と \(Y\) は <strong>\(\epsilon\)-indistinguishable</strong> であるといい，\(X\approx</em>\epsilon Y\) と表す．</p></blockquote><p><span>\(P(Y\in S)\not=0\)
 </span>ならば，
 <span>\[e^{-\epsilon}\le\frac{P(X\in S)}{P(Y\in S)}\le e^{\epsilon}\]
 </span>なので，<span>
@@ -157,34 +157,43 @@
 </span>によって制限されます．特に <span>\(\epsilon\)
 </span>が小さいほど，その制限は強くなります．</p><h2 id=差分プライバシの定義と性質>差分プライバシの定義と性質
 <a class=anchor href=#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%81%ae%e5%ae%9a%e7%be%a9%e3%81%a8%e6%80%a7%e8%b3%aa>#</a></h2><h3 id=差分プライバシ-differential-privacy>差分プライバシ (differential privacy)
-<a class=anchor href=#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7-differential-privacy>#</a></h3><p>まずは， <strong>メカニズム</strong> という用語を定義します．</p><blockquote class="book-hint info"><b>Definition 2</b>.
-\(\mathscr{D}\) を集合とし，\(\mathscr{O}\subseteq\mathbb{R}^{k}\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\mathscr{O}\) とする．任意の \(D\in\mathscr{D}\) について，\(\mathscr{M}(D):\Omega\to\mathscr{O}\) が確率変数になるとき，\(\mathscr{M}\) を <strong>メカニズム</strong> という．</blockquote><p>メカニズム <span>\(\mathscr{M}\)
+<a class=anchor href=#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7-differential-privacy>#</a></h3><p>まずは， <strong>メカニズム</strong> という用語を定義します．</p><blockquote class="book-hint info"><p><b>Definition 2</b>.
+\(\mathscr{D}\) を集合とし，\(\mathscr{O}\subseteq\mathbb{R}^{k}\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\mathscr{O}\) とする．任意の \(D\in\mathscr{D}\) について，\(\mathscr{M}(D):\Omega\to\mathscr{O}\) が確率変数になるとき，\(\mathscr{M}\) を <strong>メカニズム</strong> という．</p></blockquote><p>メカニズム <span>\(\mathscr{M}\)
 </span>は，入力 <span>\(D\)
 </span>に対する何らかの処理を表すものとして導入したいものですが，確率的操作を含ませたい都合上，単なる関数でなく，上記のような定義としています．</p><blockquote class="book-hint info"><p><b>Definition 3</b>.
-\(\mathscr{D}\) を集合とする．\(\mathscr{D}=\bigoplus_{i=1}^k\mathscr{D}_i\) なる直和表現があるとき，\(\mathscr{D}_1,\mathscr{D}_2,\dots,\mathscr{D}_k\) と，\(\phi:\mathscr{D}\to(\mathscr{D}_1,\dots,\mathscr{D}_k)\) の組 \((\mathscr{D}_1,\dots,\mathscr{D}_k,\phi)\) を，\(\mathscr{D}\) の分割という．このとき，\(R_{\mathrm{neighb}}\subseteq\mathscr{D}^2\) を，以下を満たす \(\mathscr{D}\) 上の関係とする．</p><ol><li>\((D_1,D_1)\in R_{\mathrm{neighb}}\).</li><li>\((D_1,D_2)\in R_{\mathrm{neighb}}\implies (D_2,D_1)\in R_{\mathrm{neighb}}\).</li><li>\((D_1,D_2)\in R_{\mathrm{neighb}}\) ならば，\(\phi(D_1)\not=\emptyset\) かつ \(\phi(D_2)\not=\emptyset\) なる任意の分割 \((\mathscr{D}_1,\dots,\mathscr{D}_k,\phi)\) に対し，\(\phi(D_i)=(D_{i1},\dots,D_{ik})\ (i=1,2)\)
-とするとき，高々1つの \(j\) が存在し，\(D_{1j}\not=D_{2j}\) かつ，\(l\not=j\) ならば \(D_{1l}=D_{2l}\) である．</li></ol></blockquote><p>&ldquo;neighb&rdquo; は &ldquo;neighbour&rdquo; の略で，隣接したデータであるという関係を表しています．
+\(\mathscr{D}\) を集合とする．\(\mathscr{D}=\bigoplus_{i=1}^k\mathscr{D}_i\) なる直和表現があるとき，\(\mathscr{D}_1,\mathscr{D}_2,\dots,\mathscr{D}_k\) と，\(\phi:\mathscr{D}\to(\mathscr{D}_1,\dots,\mathscr{D}_k)\) の組 \((\mathscr{D}_1,\dots,\mathscr{D}_k,\phi)\) を，\(\mathscr{D}\) の分割という．このとき，\(R_{\mathrm{neighb}}\subseteq\mathscr{D}^2\) を，以下を満たす \(\mathscr{D}\) 上の関係とする．</p><ol><li>\((D_1,D_1)\in R_{\mathrm{neighb}}\).</li><li>\((D_1,D_2)\in R_{\mathrm{neighb}}\implies (D_2,D_1)\in R_{\mathrm{neighb}}\).</li><li>\((D_1,D_2)\in R_{\mathrm{neighb}}\) ならば，\(\phi(D_1)\not=\emptyset\) かつ \(\phi(D_2)\not=\emptyset\) なる任意の分割 \((\mathscr{D}_1,\dots,\mathscr{D}_k,\phi)\) に対し，\(\phi(D_i)=(D_{i1},\dots,D_{ik})\ (i=1,2)\) とするとき，高々1つの \(j\) が存在し，\(D_{1j}\not=D_{2j}\) かつ，\(l\not=j\) ならば \(D_{1l}=D_{2l}\) である．</li></ol></blockquote><p>&ldquo;neighb&rdquo; は &ldquo;neighbour&rdquo; の略で，隣接したデータであるという関係を表しています．
 反射律と対称律に加えて，隣接したデータ同士の差は局所的な差であることを要求しています．
-また，分割の定義は，入力空間をどのような空間に分割するかと，入力データを各分割空間に分割する方法のそれぞれを指定するように要求しています．</p><p>なお，この定義は，特に parallel composition の説明を意識したものになっており，本ページ独自の整理によるものです．</p><p>ここで， <a href=#desfontaines:2020:1>[1]</a> に沿って，差分プライバシ (differential privacy) という概念を導入します．</p><blockquote class="book-hint info"><b>Definition 4</b>.
-任意の \((D_1,D_2)\in R_{\mathrm{neighb}}\) について，\(\mathscr{M}(D_1)\approx_\epsilon\mathscr{M}(D_2)\) であるとき，メカニズム \(\mathscr{M}\) は <strong>\(\epsilon\)-differential privacy を満たす</strong> という．</blockquote><p><span>\(\mathscr{M}\)
+また，分割の定義は，入力空間をどのような空間に分割するかと，入力データを各分割空間に分割する方法のそれぞれを指定するように要求しています．</p><p>なお，この定義は，特に parallel composition の説明を意識したものになっており，本ページ独自の整理によるものです．</p><p>ここで， <a href=#desfontaines:2020:1>[1]</a> に沿って，差分プライバシ (differential privacy) という概念を導入します．</p><blockquote class="book-hint info"><p><b>Definition 4</b>.
+任意の \((D_1,D_2)\in R_{\mathrm{neighb}}\) について，\(\mathscr{M}(D_1)\approx_\epsilon\mathscr{M}(D_2)\) であるとき，メカニズム \(\mathscr{M}\) は <strong>\(\epsilon\)-differential privacy を満たす</strong> という．</p></blockquote><p><span>\(\mathscr{M}\)
 </span>が <span>\(\epsilon\)
-</span>-differential privacy を満たすとき，\(\mathscr{M}(D_1)\) と \(\mathscr{M}(D_2)\) が確率変数としておおよそ似たようなものということになります．これは実用上，公開される情報が \(\mathscr{M}(D_1)\) や \(\mathscr{M}(D_2)\) の実現値であれば，公開される情報から，入力が \(D_1\) であるか \(D_2\) であるかの区別が難しいということを主張しています．</p><p>たとえば，<span>
+</span>-differential privacy を満たすとき，<span>
+\(\mathscr{M}(D_1)\)
+</span>と <span>\(\mathscr{M}(D_2)\)
+</span>が確率変数としておおよそ似たようなものということになります．これは実用上，公開される情報が <span>\(\mathscr{M}(D_1)\)
+</span>や <span>\(\mathscr{M}(D_2)\)
+</span>の実現値であれば，公開される情報から，入力が <span>\(D_1\)
+</span>であるか <span>\(D_2\)
+</span>であるかの区別が難しいということを主張しています．</p><p>たとえば，<span>
 \(D_1,D_2\)
-</span>がテーブルデータであり，\(D_1\) と \(D_2\) の違いが，特定の個人に関するレコードの有無だけであれば，メカニズムの出力結果から，入力データにその特定の個人が含まれているかどうかが，類推困難であるということになります．</p><p>したがって，たとえば，個人に関する情報を含むデータに対するクエリ結果そのものではなく，そのクエリ結果に近い値が出力できる，\(\epsilon\)-differential privacy を満たすメカニズムの実現値を公開することで，そこに含まれる個人に関する情報が保護できると期待されるます．その意味で，\(\epsilon\)-differentai privacy は，一種の安全性指標とみることができます．</p><p>この安全性指標は，計算量に基づくものではなく，統計的性質だけから主張されている点も重要です．</p><p>ところで，<span>
+</span>がテーブルデータであり，<span>
+\(D_1\)
+</span>と <span>\(D_2\)
+</span>の違いが，特定の個人に関するレコードの有無だけであれば，メカニズムの出力結果から，入力データにその特定の個人が含まれているかどうかが，類推困難であるということになります．</p><p>したがって，たとえば，個人に関する情報を含むデータに対するクエリ結果そのものではなく，そのクエリ結果に近い値が出力できる，<span>
 \(\epsilon\)
-</span>-differential privacy について，以下の性質が成り立ちます．こちらの形の定義のほうが，よくみる形かもしれません．</p><blockquote class="book-hint info"><b>Proposition 5</b>.
-メカニズム \(\mathscr{M}\) が \(\epsilon\)-differential privacy を満たすならば，任意の \((D_1,D_2)\in R_{\mathrm{neighb}}\) について，
-\[
+</span>-differential privacy を満たすメカニズムの実現値を公開することで，そこに含まれる個人に関する情報が保護できると期待されるます．その意味で，<span>
+\(\epsilon\)
+</span>-differentai privacy は，一種の安全性指標とみることができます．</p><p>この安全性指標は，計算量に基づくものではなく，統計的性質だけから主張されている点も重要です．</p><p>ところで，<span>
+\(\epsilon\)
+</span>-differential privacy について，以下の性質が成り立ちます．こちらの形の定義のほうが，よくみる形かもしれません．</p><blockquote class="book-hint info"><p><b>Proposition 5</b>.
+メカニズム \(\mathscr{M}\) が \(\epsilon\)-differential privacy を満たすならば，任意の \((D_1,D_2)\in R_{\mathrm{neighb}}\) について，</p><link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\[
 P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)
-\]
-を満たす．</blockquote><p>これは，<span>
+\]</span><p>を満たす．</p></blockquote><p>これは，<span>
 \(R_{\mathrm{neighb}}\)
 </span>の対称律から明らかです．</p><h3 id=差分プライバシの例>差分プライバシの例
-<a class=anchor href=#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%81%ae%e4%be%8b>#</a></h3><p>まずは，sensitivity という概念を導入します．</p><blockquote class="book-hint info"><b>Definition 6</b>.
-\(f:\mathscr{D}\to\mathbb{R}^{k}\) とする．\(f\) の <strong>sensitivity</strong> \(\Delta f\) を
-\[
+<a class=anchor href=#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%81%ae%e4%be%8b>#</a></h3><p>まずは，sensitivity という概念を導入します．</p><blockquote class="book-hint info"><p><b>Definition 6</b>.
+\(f:\mathscr{D}\to\mathbb{R}^{k}\) とする．\(f\) の <strong>sensitivity</strong> \(\Delta f\) を</p><span>\[
 \Delta f=\max_{(D_1,D_2)\in R_{\mathrm{neighb}}}\|f(D_1)-f(D_2)\|_1
-\]
-と定める．</blockquote><p>定義から，<span>
+\]</span><p>と定める．</p></blockquote><p>定義から，<span>
 \(R_{\mathrm{neighb}}\)
 </span>の具体的なとり方によって，<span>
 \(\Delta f\)
@@ -193,8 +202,8 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)
 </span>が従う分布を <strong>ラプラス分布</strong> といいます．関数 <span>\(f\)
 </span>の結果に対して，ラプラス分布に従うノイズを加えると，<span>
 \(\epsilon\)
-</span>-differential privacy を満たすメカニズムが得られます <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><b>Theorem 7</b>.
-\(f:\mathscr{D}\to\mathbb{R}^{k}\) とする．確率変数 \(X\) の確率密度関数を \(f_X(x;b)=\prod_{i=1}^k(1/(2b))\exp(-|x_i|/b)\) とする．\(b=\Delta f/\epsilon\) ならば，\(\mathscr{M}(D)=f(D)+X\) で定めるメカニズム \(\mathscr{M}\) は \(\epsilon\)-differential privacy を満たす．</blockquote><p>証明は以下のとおりです．</p><p><span>\(D\in\mathscr{D}\)
+</span>-differential privacy を満たすメカニズムが得られます <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><p><b>Theorem 7</b>.
+\(f:\mathscr{D}\to\mathbb{R}^{k}\) とする．確率変数 \(X\) の確率密度関数を \(f_X(x;b)=\prod_{i=1}^k(1/(2b))\exp(-|x_i|/b)\) とする．\(b=\Delta f/\epsilon\) ならば，\(\mathscr{M}(D)=f(D)+X\) で定めるメカニズム \(\mathscr{M}\) は \(\epsilon\)-differential privacy を満たす．</p></blockquote><p>証明は以下のとおりです．</p><p><span>\(D\in\mathscr{D}\)
 </span>に対し，<span>
 \(f(D)\in\mathbb{R}^k\)
 </span>の第<span>
@@ -205,7 +214,8 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)
 <span>\(z\in\mathbb{R}^k\)
 </span>とし，<span>
 \(f_{\mathscr{M}(D_2)}(z)\neq0\)
-</span>に注意すると，</p><span>\[\begin{aligned}
+</span>に注意すると，</p><span>\[
+\begin{aligned}
 &\frac{f_{\mathscr{M}(D_1)}(z)}{f_{\mathscr{M}(D_2)}(z)}\\
 &=\prod_{i=1}^k\left(\frac{\exp(-\epsilon|(f(D_1))_i-z_i|/\Delta f)}{\exp(-\epsilon|(f(D_2))_i-z_i|/\Delta f)}\right)\\
 &=\prod_{i=1}^k\exp\left(\frac{\epsilon(|(f(D_2))_i-z_i)|-|(f(D_1))_i-z_i|)}{\Delta f}\right)\\
@@ -215,24 +225,27 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)
 &=\exp\left(\frac{\epsilon\|f(D_2)-f(D_1)\|_1}{\Delta f}\right)\\
 &\le\exp\left(\frac{\epsilon\Delta f}{\Delta f}\right)\\
 &\le\exp(\epsilon)\\
-\end{aligned}\]</span><p>が得られます．よって，<span>
+\end{aligned}
+\]</span><p>が得られます．よって，<span>
 \(f_{\mathscr{M}(D_1)}(z)\le e^{\epsilon}f_{\mathscr{M}(D_2)}(z)\)
 </span>となります．</p><p>したがって，任意の <span>\(S\in\mathfrak{B}(\mathbb{R}^k)\)
 </span>に対し，
-<span>\[\begin{aligned}
-&amp;P(\mathscr{M}(D_1)\in S)\\
-&=\int_Sf_{\mathscr{M}(D_1)}(z)dz\\
+<span>\[
+\begin{aligned}
+&P(\mathscr{M}(D_1)\in S)\\
+  &=\int_Sf_{\mathscr{M}(D_1)}(z)dz\\
 &\le\int_Se^{\epsilon}f_{\mathscr{M}(D_2)}(z)dz\\
 &=e^\epsilon P(\mathscr{M}(D_2)\in S)
-\end{aligned}\]
+\end{aligned}
+\]
 </span>が成り立ちます．しがたって，メカニズム <span>\(\mathscr{M}\)
 </span>は <span>\(\epsilon\)
 </span>-differential privacy を満たします．</p><p>この事実は，入力に関する確定的処理 <span>\(f\)
 </span>があったとき，sensitivity をもとに大きさを決めたラプラスノイズを加えると，<span>
 \(\epsilon\)
 </span>-differential privacy を満たすメカニズムによる出力が得られることを示しています．</p><h3 id=差分プライバシの性質>差分プライバシの性質
-<a class=anchor href=#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%81%ae%e6%80%a7%e8%b3%aa>#</a></h3><p>差分プライバシは，メカニズムの出力に，関数による後処理を施しても性質が変わらないという性質があります <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><b>Theorem 8</b> (Post-Processing).
-\(\mathscr{D}\) を集合とし，\(\mathscr{O}\subseteq\mathbb{R}^{k}\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\mathscr{O}\) とする．\(\mathscr{O}'\subseteq\mathbb{R}^{k'}\), \(g:\mathscr{O}\to\mathscr{O}'\) とする．\(\mathscr{M}\) が \(\epsilon\)-differential privacy を満たすとき，\(g\circ\mathscr{M}\) も \(\epsilon\)-differential privacy を満たす．</blockquote><p>証明は以下のとおりです．</p><p>まず，<span>
+<a class=anchor href=#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%81%ae%e6%80%a7%e8%b3%aa>#</a></h3><p>差分プライバシは，メカニズムの出力に，関数による後処理を施しても性質が変わらないという性質があります <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><p><b>Theorem 8</b> (Post-Processing).
+\(\mathscr{D}\) を集合とし，\(\mathscr{O}\subseteq\mathbb{R}^{k}\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\mathscr{O}\) とする．\(\mathscr{O}'\subseteq\mathbb{R}^{k'}\), \(g:\mathscr{O}\to\mathscr{O}'\) とする．\(\mathscr{M}\) が \(\epsilon\)-differential privacy を満たすとき，\(g\circ\mathscr{M}\) も \(\epsilon\)-differential privacy を満たす．</p></blockquote><p>証明は以下のとおりです．</p><p>まず，<span>
 \(g\circ\mathscr{M}:\mathscr{D}\times\Omega\to\mathscr{O}'\)
 </span>とみなします．いま，<span>
 \(S\in\mathfrak{B}(\mathscr{O}')\)
@@ -243,18 +256,20 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)
 </span>とします．このとき，<span>
 \(T_S\in\mathfrak{B}(\mathscr{O})\)
 </span>なので，
-<span>\[\begin{aligned}
-&amp;P((g\circ\mathscr{M})(D_1)\in S)\\
+<span>\[
+\begin{aligned}
+&P((g\circ\mathscr{M})(D_1)\in S)\\
 &=P(\mathscr{M}(D_1)\in T_S)\\
-&=e^\epsilon P(\mathscr{M}(D_2)\in T_S)\\
+  &=e^\epsilon P(\mathscr{M}(D_2)\in T_S)\\
 &=e^\epsilon P((g\circ\mathscr{M})(D_2)\in S)\\
-\end{aligned}\]
+\end{aligned}
+\]
 </span>が成り立ちます．つまり，メカニズムの出力に確定的な処理を施しても，differential privacy の性質は変わらないということがわかります．</p><p>また，複数のメカニズムを組み合わせた場合の性質は以下のとおりと知られています．これは，差分プライバシを満たすメカニズムを &ldquo;直列に&rdquo; 合成すると，<span>
 \(\epsilon\)
 </span>は和になり，&ldquo;並列に&rdquo; 合成すると，<span>
 \(\epsilon\)
-</span>は和にならない（最大値になる）ことを表しています．ここでいう並列とは，入力データが事前に互いに素な部分データに分割され，各部分データにメカニズムを適用するということを表します．</p><p>まずは，&ldquo;直列に&rdquo; 合成する場合の性質について述べます <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><b>Theorem 9</b> (Sequential Composition).
-\(\mathscr{D}\) を集合とし，\(\mathscr{O}_i\subseteq\mathbb{R}^{k_i}\,(i=1,2\dots,k)\) とする．\(\mathscr{M}_i:\mathscr{D}\times\Omega\to\mathscr{O}_i\,(i=1,2\dots,k)\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\prod_{i=1}^k\mathscr{O}_i\) を \(\mathscr{M}(D)=(\mathscr{M}_i(D))_{i=1,2,\dots,k}\) とする．\(\mathscr{M}_i\) が \(\epsilon_i\)-differential privacy を満たすとき，\(\mathscr{M}\) は \((\sum_{i=1}^k\epsilon_i)\)-differential privacy を満たす．</blockquote><p>証明は以下のとおりです．</p><p><span>\((D_1,D_2)\in R_{\mathrm{neighb}}\)
+</span>は和にならない（最大値になる）ことを表しています．ここでいう並列とは，入力データが事前に互いに素な部分データに分割され，各部分データにメカニズムを適用するということを表します．</p><p>まずは，&ldquo;直列に&rdquo; 合成する場合の性質について述べます <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><p><b>Theorem 9</b> (Sequential Composition).
+\(\mathscr{D}\) を集合とし，\(\mathscr{O}_i\subseteq\mathbb{R}^{k_i}\,(i=1,2\dots,k)\) とする．\(\mathscr{M}_i:\mathscr{D}\times\Omega\to\mathscr{O}_i,(i=1,2,\dots,k)\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\prod_{i=1}^k\mathscr{O}_i\) を \(\mathscr{M}(D)=(\mathscr{M}_i(D))_{i=1,2,\dots,k}\) とする．\(\mathscr{M}_i\) が \(\epsilon_i\)-differential privacy を満たすとき，\(\mathscr{M}\) は \((\sum_{i=1}^k\epsilon_i)\)-differential privacy を満たす．</p></blockquote><p>証明は以下のとおりです．</p><p><span>\((D_1,D_2)\in R_{\mathrm{neighb}}\)
 </span>とします．<span>
 \(i=1,2,\dots,k\)
 </span>について，<span>
@@ -262,18 +277,20 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)
 </span>です．<span>
 \(z=(z_1,\dots,z_k)\in\prod_{i=1}^k\mathscr{O}_i\)
 </span>のとき，
-<span>\[\begin{aligned}
-&amp;f_{\mathscr{M}(D_1)}(z)\\
+<span>\[
+\begin{aligned}
+&f_{\mathscr{M}(D_1)}(z)\\
 &=\prod_{i=1}^kf_{\mathscr{M}_i(D_1)}(z_i)\\
 &\le\prod_{i=1}^ke^{\epsilon_i}f_{\mathscr{M}_i(D_2)}(z_i)\\
 &=e^{\sum_{i=1}^k\epsilon_i}\prod_{i=1}^kf_{\mathscr{M}_i(D_2)}(z_i)\\
 &=e^{\sum_{i=1}^k\epsilon_i}f_{\mathscr{M}(D_2)}(z)
-\end{aligned}\]
+\end{aligned}
+\]
 </span>が成り立ちます．よって，任意の <span>\(S\in\mathfrak{B}(\prod_{i=1}^k\mathscr{O}_i)\)
 </span>について，<span>
 \(P(\mathscr{M}(D_1)\in S)=\int_Sf_{\mathscr{M}(D_1)}(z)dz\le\int_S e^{\sum_{i=1}^k\epsilon_i}f_{\mathscr{M}(D_2)}(z)dz=e^{\sum_{i=1}^k\epsilon_i}P(\mathscr{M}(D_2)\in S)\)
-</span>となります．</p><p>次に示すのが，&ldquo;並列に&rdquo; 合成する場合の性質です <a href=#mcsherry:2009:1>[3]</a>．</p><blockquote class="book-hint info"><b>Theorem 10</b> (Parallel Composition).
-\(\mathscr{D}\) を集合とし，\((\mathscr{D}_1,\dots,\mathscr{D}_k,\phi)\) をその分割とする．\(\mathscr{M}_i:\mathscr{D}_i\times\Omega\to\mathscr{O}_i\,(i=1,2\dots,k)\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\prod_{i=1}^k\mathscr{O}_i\) を，\(D\in\mathscr{D}\) について，\(\phi(D)=(D_1,\dots,D_k)\not=\emptyset\) であるとき，\(\mathscr{M}(D)=(\mathscr{M}_i(D_i))_{i=1,2,\dots,k}\) によって定める．\(\mathscr{M}_i\) が \(\epsilon_i\)-differential privacy を満たすとき，\(\mathscr{M}\) は \((\max_{i=1,2,\dots,k}\epsilon_i)\)-differential privacy を満たす．</blockquote><p>証明は以下のとおりです．</p><p><span>\((D_1,D_2)\in R_{\mathrm{neighb}}\)
+</span>となります．</p><p>次に示すのが，&ldquo;並列に&rdquo; 合成する場合の性質です <a href=#mcsherry:2009:1>[3]</a>．</p><blockquote class="book-hint info"><p><b>Theorem 10</b> (Parallel Composition).
+\(\mathscr{D}\) を集合とし，\((\mathscr{D}_1,\dots,\mathscr{D}_k,\phi)\) をその分割とする．\(\mathscr{M}_i:\mathscr{D}_i\times\Omega\to\mathscr{O}_i,(i=1,2,\dots,k)\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\prod_{i=1}^k\mathscr{O}_i\) を，\(D\in\mathscr{D}\) について，\(\phi(D)=(D_1,\dots,D_k)\not=\emptyset\) であるとき，\(\mathscr{M}(D)=(\mathscr{M}_i(D_i))_{i=1,2,\dots,k}\) によって定める．\(\mathscr{M}_i\) が \(\epsilon_i\)-differential privacy を満たすとき，\(\mathscr{M}\) は \((\max_{i=1,2,\dots,k}\epsilon_i)\)-differential privacy を満たす．</p></blockquote><p>証明は以下のとおりです．</p><p><span>\((D_1,D_2)\in R_{\mathrm{neighb}}\)
 </span>とし，<span>
 \(\phi(D_i)=(D_{i1},\dots,D_{ik})\ (i=1,2)\)
 </span>とします．ある <span>\(j\)
@@ -286,15 +303,17 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)
 </span>であり，<span>
 \(f_{\mathscr{M}_l(D_{1l})}=f_{\mathscr{M}_l(D_{2l})}\)
 </span>です．よって，
-<span>\[\begin{aligned}
-&amp;f_{\mathscr{M}(D_1)}(z)\\
+<span>\[
+\begin{aligned}
+&f_{\mathscr{M}(D_1)}(z)\\
 &=\prod_{l=1}^kf_{\mathscr{M}_l(D_{1l})}(z_l)\\
 &=f_{\mathscr{M}_j(D_{1j})}(z_j)\prod_{l\not=j}f_{\mathscr{M}_l(D_{2l})}(z_l)\\
 &\le e^{\epsilon_j}f_{\mathscr{M}_j(D_{2j})}(z_j)\prod_{l\not=j}f_{\mathscr{M}_l(D_{2l})}(z_l)\\
 &=e^{\epsilon_j}\prod_{l=1}^kf_{\mathscr{M}_l(D_{2l})}(z_l)\\
 &\le e^{\max_{i=1,2,\dots,k}\epsilon_i}\prod_{l=1}^kf_{\mathscr{M}_l(D_{2l})}(z_l)\\
 &=e^{\max_{i=1,2,\dots,k}\epsilon_i}f_{\mathscr{M}(D_2)}(z)
-\end{aligned}\]
+\end{aligned}
+\]
 </span>が成り立ちます．そのような <span>\(j\)
 </span>が存在しなければ，<span>
 \(f_{\mathscr{M}(D_1)}(z)=\prod_{l=1}^kf_{\mathscr{M}_l(D_{1l})}(z_l)=\prod_{l=1}^kf_{\mathscr{M}_l(D_{2l})}(z_l)=f_{\mathscr{M}(D_2)}(z)\le e^{\max_{i=1,2,\dots,k}\epsilon_i}f_{\mathscr{M}(D_2)}(z)\)
@@ -302,16 +321,16 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)
 </span>について，<span>
 \(P(\mathscr{M}(D_1)\in S)=\int_Sf_{\mathscr{M}(D_1)}(z)dz\le\int_S e^{\max_{i=1,2,\dots,k}\epsilon_i}f_{\mathscr{M}(D_2)}(z)dz=e^{\max_{i=1,2,\dots,k}\epsilon_i}P(\mathscr{M}(D_2)\in S)\)
 </span>となります．</p><h3 id=近似的差分プライバシ-approximate-differential-privacy>近似的差分プライバシ (approximate differential privacy)
-<a class=anchor href=#%e8%bf%91%e4%bc%bc%e7%9a%84%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7-approximate-differential-privacy>#</a></h3><p>近似的な differential privacy の定義が以下のように述べられます <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><b>Definition 11</b>.
-任意の \((D_1,D_2)\in R_{\mathrm{neighb}}\) と \(S\in\mathfrak{B}(\mathbb{R}^{k})\)について，
-\[
+<a class=anchor href=#%e8%bf%91%e4%bc%bc%e7%9a%84%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7-approximate-differential-privacy>#</a></h3><p>近似的な differential privacy の定義が以下のように述べられます <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><p><b>Definition 11</b>.
+任意の \((D_1,D_2)\in R_{\mathrm{neighb}}\) と \(S\in\mathfrak{B}(\mathbb{R}^{k})\)について，</p><span>\[
 P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)+\delta
-\]
-であるとき，メカニズム \(\mathscr{M}\) は <strong>\((\epsilon,\delta)\)-differential privacy を満たす</strong> という．</blockquote><p>この定義は，メカニズム \(\mathscr{M}\) が <span>\(1-\delta\)
-</span>の確率で \(\epsilon\)-differential privacy を満たすことと等価であることが知られています (<a href=#dwork:2014:1>[2]</a>)．</p><p>また，<span>
+\]</span><p>であるとき，メカニズム \(\mathscr{M}\) は <strong>\((\epsilon,\delta)\)-differential privacy を満たす</strong> という．</p></blockquote><p>この定義は，メカニズム <span>\(\mathscr{M}\)
+</span>が <span>\(1-\delta\)
+</span>の確率で <span>\(\epsilon\)
+</span>-differential privacy を満たすことと等価であることが知られています (<a href=#dwork:2014:1>[2]</a>)．</p><p>また，<span>
 \(\epsilon\)
-</span>-differential privacy と同様の性質が成り立ちます <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><b>Theorem 12</b> (Post-Processing).
-\(\mathscr{D}\) を集合とし，\(\mathscr{O}\subseteq\mathbb{R}^{k}\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\mathscr{O}\) とする．\(\mathscr{O}'\subseteq\mathbb{R}^{k'}\), \(g:\mathscr{O}\to\mathscr{O}'\) とする．\(\mathscr{M}\) が \((\epsilon,\delta)\)-differential privacy を満たすとき，\(g\circ\mathscr{M}\) も \((\epsilon,\delta)\)-differential privacy を満たす．</blockquote><p>証明は以下のとおりです．</p><p>まず，<span>
+</span>-differential privacy と同様の性質が成り立ちます <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><p><b>Theorem 12</b> (Post-Processing).
+\(\mathscr{D}\) を集合とし，\(\mathscr{O}\subseteq\mathbb{R}^{k}\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\mathscr{O}\) とする．\(\mathscr{O}&rsquo;\subseteq\mathbb{R}^{k&rsquo;}\), \(g:\mathscr{O}\to\mathscr{O}&rsquo;\) とする．\(\mathscr{M}\) が \((\epsilon,\delta)\)-differential privacy を満たすとき，\(g\circ\mathscr{M}\) も \((\epsilon,\delta)\)-differential privacy を満たす．</p></blockquote><p>証明は以下のとおりです．</p><p>まず，<span>
 \(g\circ\mathscr{M}:\mathscr{D}\times\Omega\to\mathscr{O}'\)
 </span>とみなします．いま，<span>
 \(S\in\mathfrak{B}(\mathscr{O}')\)
@@ -322,18 +341,20 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)+\delta
 </span>とします．このとき，<span>
 \(T_S\in\mathfrak{B}(\mathscr{O})\)
 </span>なので，
-<span>\[\begin{aligned}
-&amp;P((g\circ\mathscr{M})(D_1)\in S)\\
+<span>\[
+\begin{aligned}
+&P((g\circ\mathscr{M})(D_1)\in S)\\
 &=P(\mathscr{M}(D_1)\in T_S)\\
-&=e^\epsilon P(\mathscr{M}(D_2)\in T_S)+\delta\\
+  &=e^\epsilon P(\mathscr{M}(D_2)\in T_S)+\delta\\
 &=e^\epsilon P((g\circ\mathscr{M})(D_2)\in S)+\delta\\
-\end{aligned}\]
+\end{aligned}
+\]
 </span>が成り立ちます．つまり，メカニズムの出力に確定的な処理を施しても，differential privacy の性質は変わらないということがわかりますが，これは，<span>
 \(\delta\)
 </span>の項が増えただけで，<span>
 \(\epsilon\)
-</span>-differential privacy の議論とほとんどかわりません．</p><p>&ldquo;直列に&rdquo; 合成する場合の性質は以下のようになります <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><b>Theorem 13</b> (Sequential Composition).
-\(\mathscr{D}\) を集合とし，\(\mathscr{O}_i\subseteq\mathbb{R}^{k_i}\,(i=1,2\dots,k)\) とする．\(\mathscr{M}_i:\mathscr{D}\times\Omega\to\mathscr{O}_i\,(i=1,2\dots,k)\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\prod_{i=1}^k\mathscr{O}_i\) を \(\mathscr{M}(D)=(\mathscr{M}_i(D))_{i=1,2,\dots,k}\) とする．\(\mathscr{M}_i\) が \((\epsilon_i,\delta_i)\)-differential privacy を満たすとき，\(\mathscr{M}\) は \((\sum_{i=1}^k\epsilon_i,\sum_{i=1}^k\delta_i)\)-differential privacy を満たす．</blockquote><p>こちらの証明は省略します．<span>
+</span>-differential privacy の議論とほとんどかわりません．</p><p>&ldquo;直列に&rdquo; 合成する場合の性質は以下のようになります <a href=#dwork:2014:1>[2]</a>．</p><blockquote class="book-hint info"><p><b>Theorem 13</b> (Sequential Composition).
+\(\mathscr{D}\) を集合とし，\(\mathscr{O}_i\subseteq\mathbb{R}^{k_i}\,(i=1,2\dots,k)\) とする．\(\mathscr{M}_i:\mathscr{D}\times\Omega\to\mathscr{O}_i\,(i=1,2\dots,k)\) とする．\(\mathscr{M}:\mathscr{D}\times\Omega\to\prod_{i=1}^k\mathscr{O}_i\) を \(\mathscr{M}(D)=(\mathscr{M}_i(D))_{i=1,2,\dots,k}\) とする．\(\mathscr{M}_i\) が \((\epsilon_i,\delta_i)\)-differential privacy を満たすとき，\(\mathscr{M}\) は \((\sum_{i=1}^k\epsilon_i,\sum_{i=1}^k\delta_i)\)-differential privacy を満たす．</p></blockquote><p>こちらの証明は省略します．<span>
 \(\epsilon\)
 </span>-differential privacy の議論に比べ，<span>
 \(\delta_i\)
@@ -348,5 +369,5 @@ P(\mathscr{M}(D_1)\in S)\le e^\epsilon P(\mathscr{M}(D_2)\in S)+\delta
 </span>のとり方をすると，sensitivity の値が不自然なものになることはありますので，なんでもよいわけではありません．しかし，post-processing と sequential composition では，その関係がどのような関係であるかは意識していませんが，parallel composition の結論は，その関係の性質に強く依存する，という違いがあります．</p><p>一方で，parallel composition は，実際の応用を考えると，非常に自然かつ基本的な性質のようにも感じます．そこで本ページでは，paralle composition の性質が示せるように，<span>
 \(R_{\mathrm{neighb}}\)
 </span>が満たすべき性質を定義で課す形で議論を整理しました．</p><h2 id=参考文献>参考文献
-<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=desfontaines:2020:1></a>[1] D. Desfontaines, B. Pejó, SoK: Differential privacies, Proceedings on Privacy Enhancing Technologies Symposium 2020, 2020. <a href=https://petsymposium.org/popets/2020/popets-2020-0028.pdf>https://petsymposium.org/popets/2020/popets-2020-0028.pdf</a> , 2024/1/4 最終アクセス．</p><p><a id=dwork:2014:1></a>[2] C. Dwork, A. Roth, The Algorithmic Foundations of Differential Privacy, Foundations and Trends(R) in Theoretical Computer Science, 2014, <a href=https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf>https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf</a> , 2024/1/4 最終アクセス．</p><p><a id=mcsherry:2009:1></a>[3] F. D. McSherry, Privacy Integrated Queries: An Extensible Platform for Privacy-Preserving Data Analysis, SIGMOD'09, 2009, <a href=https://www.microsoft.com/en-us/research/wp-content/uploads/2009/06/sigmod115-mcsherry.pdf>https://www.microsoft.com/en-us/research/wp-content/uploads/2009/06/sigmod115-mcsherry.pdf</a> , 2024/1/4 最終アクセス．</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/a4090501a49d62a42b6cae59ab11eb85381c7a83 title='Last modified by htakeuchi0 | January 8, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt=Calendar>
-<span>January 8, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#準備>準備</a><ul><li><a href=#記号定義>記号定義</a></li><li><a href=#epsilon-indistinguishable>\(\epsilon\)-indistinguishable</a></li></ul></li><li><a href=#差分プライバシの定義と性質>差分プライバシの定義と性質</a><ul><li><a href=#差分プライバシ-differential-privacy>差分プライバシ (differential privacy)</a></li><li><a href=#差分プライバシの例>差分プライバシの例</a></li><li><a href=#差分プライバシの性質>差分プライバシの性質</a></li><li><a href=#近似的差分プライバシ-approximate-differential-privacy>近似的差分プライバシ (approximate differential privacy)</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=desfontaines:2020:1></a>[1] D. Desfontaines, B. Pejó, SoK: Differential privacies, Proceedings on Privacy Enhancing Technologies Symposium 2020, 2020. <a href=https://petsymposium.org/popets/2020/popets-2020-0028.pdf>https://petsymposium.org/popets/2020/popets-2020-0028.pdf</a> , 2024/1/4 最終アクセス．</p><p><a id=dwork:2014:1></a>[2] C. Dwork, A. Roth, The Algorithmic Foundations of Differential Privacy, Foundations and Trends(R) in Theoretical Computer Science, 2014, <a href=https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf>https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf</a> , 2024/1/4 最終アクセス．</p><p><a id=mcsherry:2009:1></a>[3] F. D. McSherry, Privacy Integrated Queries: An Extensible Platform for Privacy-Preserving Data Analysis, SIGMOD'09, 2009, <a href=https://www.microsoft.com/en-us/research/wp-content/uploads/2009/06/sigmod115-mcsherry.pdf>https://www.microsoft.com/en-us/research/wp-content/uploads/2009/06/sigmod115-mcsherry.pdf</a> , 2024/1/4 最終アクセス．</p></article><hr><p><small><a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx"><img src=https://i.creativecommons.org/l/by-nd/4.0/88x31.png alt=クリエイティブ・コモンズ・ライセンス style=border-width:0></a><br>本ページは <a rel=license href="https://creativecommons.org/licenses/by-nd/4.0/deed.ja?_fsi=E6fL9iEx">クリエイティブ・コモンズ 表示 - 改変禁止 4.0 国際ライセンス (CC BY-ND 4.0)</a> の下に提供されています。</small></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/a028fd030dd5378f26b638c40daeff7209a793c9 title='Last modified by htakeuchi0 | January 19, 2025' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>January 19, 2025</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#準備>準備</a><ul><li><a href=#記号定義>記号定義</a></li><li><a href=#hahahugoshortcode53s22hbhb-indistinguishable>HAHAHUGOSHORTCODE53s22HBHB-indistinguishable</a></li></ul></li><li><a href=#差分プライバシの定義と性質>差分プライバシの定義と性質</a><ul><li><a href=#差分プライバシ-differential-privacy>差分プライバシ (differential privacy)</a></li><li><a href=#差分プライバシの例>差分プライバシの例</a></li><li><a href=#差分プライバシの性質>差分プライバシの性質</a></li><li><a href=#近似的差分プライバシ-approximate-differential-privacy>近似的差分プライバシ (approximate differential privacy)</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>

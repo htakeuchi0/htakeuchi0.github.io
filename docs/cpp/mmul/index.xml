@@ -30,7 +30,9 @@
 &lt;/span>
  は
 &lt;span>
- \[(AB)_{ij}=\sum_{k=0}^{n-1}a_{ik}b_{kj},\quad0\le i&amp;lt;n,\quad0\le j&amp;lt;n\]
+ \[
+(AB)_{ij}=\sum_{k=0}^{n-1}a_{ik}b_{kj},\quad 0\le i &lt; n,\quad 0\le j &lt; n
+\]
 &lt;/span>
 
 と定義されます&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．ただし，行列 &lt;span>

@@ -14,7 +14,7 @@
 &lt;p>レールは直線や曲線のものが基本的ですが，ほかに，並走するもの，分岐するもの，高さが変わるものなどがあります．また，レール同士の接続部は，凹凸の形状になっています．さらに，一部を除き，裏返しても使えるようになっています．&lt;/p>
 &lt;p>以上をふまえ，レールの形式的定義を以下のようにまとめます．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
+&lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>\(\Phi\) を，以下を満たす写像 \(\phi\) 全体の集合とする．&lt;/p>
@@ -43,15 +43,15 @@
 &lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
 &lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
 &lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
- \[\begin{aligned}
-&amp;amp;\mathcal{R}=\bigg\{(\phi_1,\dots,\phi_n,t_1,\dots,t_m,\psi,u_1,\dots,u_{n-1})\\
-&amp;amp;\quad\in\left(\bigcup_{m=1,2,\dots}(\Phi\times\mathcal{T}^m\times\Psi_{1,m})\right)\cup\left(\bigcup_{\begin{subarray}{c}n=2,3,\dots,\\m=1,2,\dots\end{subarray}}(\Phi^n\times\mathcal{T}^m\times\Psi_{n,m}\times(\mathbb{R}^3)^{n-1})\right)\,\bigg|\\
-&amp;amp;\qquad\qquad\qquad\forall i,j\,(t_{\psi(i,j)}\not=\bot\implies\forall i&amp;#39;,j&amp;#39;\,(i\not=i&amp;#39;\implies \psi(i,j)\not=\psi(i&amp;#39;,j&amp;#39;)))\bigg\}
-\end{aligned}\]
+ \[
+\begin{aligned}
+&amp;\mathcal{R}=\bigg\{(\phi_1,\dots,\phi_n,t_1,\dots,t_m,\psi,u_1,\dots,u_{n-1})\\
+&amp;\quad\in\left(\bigcup_{m=1,2,\dots}(\Phi\times\mathcal{T}^m\times\Psi_{1,m})\right)\cup\left(\bigcup_{\begin{subarray}{c}n=2,3,\dots,\\m=1,2,\dots\end{subarray}}(\Phi^n\times\mathcal{T}^m\times\Psi_{n,m}\times(\mathbb{R}^3)^{n-1})\right)\,\bigg|\\
+&amp;\qquad\qquad\qquad\forall i,j\,(t_{\psi(i,j)}\not=\bot\implies\forall i',j'\,(i\not=i'\implies \psi(i,j)\not=\psi(i',j')))\bigg\}
+\end{aligned}
+\]
 &lt;/span>
-
 &lt;/blockquote>
-
 &lt;p>&lt;span>
  \(\phi_i\,(1\le i\le n)\)
 &lt;/span>
@@ -101,7 +101,7 @@
 これらをふまえて，レイアウトの形式的定義を考えます．&lt;/p>
 &lt;p>まず，そのレイアウトが実現できるかを確認する前段階である &lt;strong>擬レイアウト&lt;/strong> を定義します．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
+&lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
 &lt;ol>
 &lt;li>\(\Gamma_m=(\mathbb{Z}^2\times(\mathbb{Z}^2)^*)^m \) とし，\(\Gamma^*\) の元を &lt;strong>接続情報&lt;/strong> と呼ぶ．ただし，集合 \(A\) に対して \(A^*=\bigcup_mA^m\) とする．&lt;/li>
 &lt;li>\(\tilde{\mathcal{A}}\) を，以下を満たす \(R\) 全体の集合とし，\(\tilde{\mathcal{A}}\) の元 \(R\) を &lt;strong>擬レイアウト&lt;/strong> という．
@@ -138,7 +138,6 @@
  \(\)
 &lt;/span>
 &lt;/blockquote>
-
 &lt;p>接続情報 &lt;span>
  \(c\in\Gamma_m\)
 &lt;/span>
@@ -168,7 +167,7 @@
 通常，手元にあるレールは有限です．もう少し正確にいうと，有限種類のレールが有限個ずつあるのが普通です．レールは接続ができればどの向きにおいても裏返しても構わないのでした．&lt;/p>
 &lt;p>問題の定式化を考える前に，まず準備として記号の定義を追加します．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.
+&lt;p>&lt;b>Definition 1&lt;/b>.
 \(\sigma\) を \(\mathbb{R}^3\) 上の直交変換とする．&lt;/p>
 &lt;ol>
 &lt;li>\(\phi\in\Phi\) に対して \(\phi^\sigma\) を，\(\phi^\sigma(\theta)=\phi(\theta)^\sigma,(0&amp;lt;\theta&amp;lt;1)\) で定める．&lt;/li>
@@ -180,14 +179,12 @@
  \(\)
 &lt;/span>
 &lt;/blockquote>
-
 &lt;p>&lt;span>
  \(\sigma\)
 &lt;/span>
  は3次元空間上の回転を表すので，これはレールの回転を表すための記号です．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;b>Definition 2&lt;/b>.
-\(N\) を1以上の整数とし，\(r_1,\dots,r_N\) をレール，\(n_1,\dots,n_N\) を1以上の整数とする．レイアウト \(R=(r'_1,\dots,r'_n,c_1,\dots,c_m)\) について，各 \(i=1,2,\dots,n\) について，\(j_i\) と，ある \(\mathbb{R}^3\) 上の直交変換 \(\sigma_i\) が存在し，\(r'_i=r_{j_i}^{\sigma_i}\) であり，\(|\{j\mid \exists \sigma\,(r_i={r'_j}^\sigma\}|\le n_i\) であるとき，レイアウト \(R\) は \(r'_1,\dots,r'_n,c_1,\dots,c_m\) で &lt;strong>実現可能&lt;/strong> であるといい，このレイアウト全体を \(\mathcal{A}_{r_1,\dots,r_N,n_1,\dots,n_N}\) で表す．
+&lt;p>&lt;b>Definition 2&lt;/b>.
+\(N\) を1以上の整数とし，\(r_1,\dots,r_N\) をレール，\(n_1,\dots,n_N\) を1以上の整数とする．レイアウト \(R=(r'_1,\dots,r'_n,c_1,\dots,c_m)\) について，各 \(i=1,2,\dots,n\) について，\(j_i\) と，ある \(\mathbb{R}^3\) 上の直交変換 \(\sigma_i\) が存在し，\(r'_i=r_{j_i}^{\sigma_i}\) であり，\(|\{j\mid \exists \sigma\,(r_i={r'_j}^\sigma\}|\le n_i\) であるとき，レイアウト \(R\) は \(r'_1,\dots,r'_n,c_1,\dots,c_m\) で &lt;strong>実現可能&lt;/strong> であるといい，このレイアウト全体を \(\mathcal{A}_{r_1,\dots,r_N,n_1,\dots,n_N}\) で表す．&lt;/p>
 &lt;/blockquote>
-
 &lt;p>実現可能という定義は，手元のレールセットでレイアウトが組めるものを指します．&lt;/p></description></item></channel></rss>

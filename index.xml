@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ホームページ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content in ホームページ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sat, 03 Aug 2024 00:50:06 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ホームページ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content in ホームページ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Mon, 20 Jan 2025 23:46:26 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
  2023 - 実装改良編
  &lt;a class="anchor" href="#2023---%e5%ae%9f%e8%a3%85%e6%94%b9%e8%89%af%e7%b7%a8">#&lt;/a>
 &lt;/h1>
@@ -11,17 +11,16 @@
 &lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
 &lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
 &lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
- \[2023=(2&amp;#43;0&amp;#43;2&amp;#43;3)(2^2&amp;#43;0^2&amp;#43;2^2&amp;#43;3^2)^2\]
+ \[2023=(2+0+2+3)(2^2+0^2+2^2+3^2)^2\]
 &lt;/span>
 
 &lt;p>であることに着目して，以下の問題を解いたのでした．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;b>Problem 1&lt;/b>.
+&lt;p>&lt;b>Problem 1&lt;/b>.
 整数 \(x=\sum_{j=0}^{n-1}a_j10^j\) \((0\le a_j\le 9,j=0,1,\dots,n-1)\) に対して，
 \[ \prod_{k=1}^K\sum_{j=0}^{n-1}a_j^{i_k}=x \]
-を満たす整数 \(K\ge1\), \(1\le i_1\le\cdots\le i_K\) が存在するかを判定せよ．存在する場合はこの方程式を満たす \((i_1,i_2,\dots,i_K)\) をひとつ求めよ．
+を満たす整数 \(K\ge1\), \(1\le i_1\le\cdots\le i_K\) が存在するかを判定せよ．存在する場合はこの方程式を満たす \((i_1,i_2,\dots,i_K)\) をひとつ求めよ．&lt;/p>
 &lt;/blockquote>
-
 &lt;p>本ページでは，そこで解説した解法を改良する方法を説明します．
 その後，改良前後で実行時間を比較します．ただし，結果はほとんど変わりませんでした．&lt;/p>
 &lt;h2 id="実装改良">
@@ -30,7 +29,7 @@
 &lt;/h2>
 &lt;p>前ページで解説した解法は以下のとおりでした&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Algorithm 2&lt;/b>.
+&lt;p>&lt;b>Algorithm 2&lt;/b>.
 \(\mathtt{Solve}(a, x, i)\) の擬似コードを以下で定める．ただし，\((a_1,\dots,a_n)\in\mathbb{N}^n,(b_1,\dots,b_m)\in\mathbb{N}^m\) に対して，\(\mathtt{append}(a,b)=(a_1,\dots,a_n,b_1,\dots,b_m)\in\mathbb{N}^{n+m}\) とする．&lt;/p>
 &lt;ul>
 &lt;li>Input: \(a\in\mathbb{N}^n,x\in\mathbb{N},i\in\mathbb{N}\)&lt;/li>
@@ -54,7 +53,6 @@
 &lt;li>end for&lt;/li>
 &lt;/ol>
 &lt;/blockquote>
-
 &lt;p>このアルゴリズムは，11行目によって再帰処理になっていますが， &lt;strong>再帰させずに，単に &lt;span>
  \(x\)
 &lt;/span>
@@ -152,9 +150,9 @@
 &lt;/h2>
 &lt;p>確率の定義は以下の通りです．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
+&lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
 &lt;ol>
-&lt;li>\(X\) を集合とする．\(\mathfrak{F}\subset2^X\) が \(X\) の完全加法族であるとは，次の1&amp;ndash;3を満たすことである．ただし，\(A^c=X-A=\{x\in X\mid x\notin a\}\), \(2^X=\{A\mid A\subset X\}\) とする．
+&lt;li>\(X\) を集合とする．\(\mathfrak{F}\subset2^X\) が \(X\) の完全加法族であるとは，次の1&amp;ndash;3を満たすことである．ただし，\(A^c=X-A={x\in X\mid x\notin a}\), \(2^X={A\mid A\subset X}\) とする．
 &lt;ol>
 &lt;li>\(\emptyset\in\mathfrak{F}\),&lt;/li>
 &lt;li>\(A\in\mathfrak{F}\) ならば \(A^c\in\mathfrak{F}\),&lt;/li>
@@ -172,12 +170,68 @@
 &lt;li>\(\Omega\) を集合とし，\(\mathfrak{F}\) を \(\Omega\) の完全加法族とする．関数 \(P:\mathfrak{F}\to\mathbb{R}\) を確率とする．このとき，\((\Omega,\mathfrak{F},P)\) を&lt;strong>確率空間&lt;/strong>という．&lt;/li>
 &lt;/ol>
 &lt;/blockquote>
-
 &lt;h2 id="偏りのないサイコロを1回だけ投げる試行の確率モデル">
  偏りのないサイコロを1回だけ投げる試行の確率モデル
  &lt;a class="anchor" href="#%e5%81%8f%e3%82%8a%e3%81%ae%e3%81%aa%e3%81%84%e3%82%b5%e3%82%a4%e3%82%b3%e3%83%ad%e3%82%921%e5%9b%9e%e3%81%a0%e3%81%91%e6%8a%95%e3%81%92%e3%82%8b%e8%a9%a6%e8%a1%8c%e3%81%ae%e7%a2%ba%e7%8e%87%e3%83%a2%e3%83%87%e3%83%ab">#&lt;/a>
 &lt;/h2>
-&lt;p>まずは，偏りのないサイコロを1回だけ投げる試行の確率モデルを考えます．&lt;/p></description></item><item><title>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</title><link>https://htakeuchi0.github.io/docs/others/pmbok/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/others/pmbok/</guid><description>&lt;h1 id="プロジェクトマネジメント知識体系-pmbok-ガイドに関するノート">
+&lt;p>まずは，偏りのないサイコロを1回だけ投げる試行の確率モデルを考えます．&lt;/p></description></item><item><title>ジョーンズ マクロ経済学Ⅰ</title><link>https://htakeuchi0.github.io/docs/others/macroeconomics/jones-1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/others/macroeconomics/jones-1/</guid><description>&lt;h1 id="ジョーンズ-マクロ経済学">
+ ジョーンズ マクロ経済学Ⅰ
+ &lt;a class="anchor" href="#%e3%82%b8%e3%83%a7%e3%83%bc%e3%83%b3%e3%82%ba-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>手取りを増やすことを公約に掲げた政党の台頭が示すように，昨今，日本経済再生への期待が高まっています．
+本ページは，国の経済全体に関する経済学についてのノートです．&lt;/p>
+&lt;p>経済を構成する個々の主体に着目するミクロ経済学に対し，それらを合わせて一国の経済全体に着目する経済学の領域は &lt;strong>マクロ経済学&lt;/strong> と呼ばれます．
+本ページでは，作成者が『ジョーンズ マクロ経済学Ⅰ 長期成長編』&lt;a href="#cite:1">[1]&lt;/a> を初読した際のメモをまとめます．
+本ページの作成者は，&lt;a href="#cite:1">[1]&lt;/a> を読むまで，経済学に関する知識を一切有していませんでした．&lt;/p>
+&lt;p>本教科書 &lt;a href="#cite:1">[1]&lt;/a> は，簡単な数式を使って説明がなされており，数式に抵抗がない初心者にとってはわかりやすく感じました．
+本ページでは，数式で表現された箇所を中心に，初読時のメモを整理して記載します．&lt;/p>
+&lt;p>本ページは解説文ではなく，あくまでメモの整理として数式で表されたモデルを中心にまとめますが，本教科書 &lt;a href="#cite:1">[1]&lt;/a> は数式ばかりがでてくるものではありません．
+また，本文中にもあるように，マクロ経済学は数式のみから議論・検討を行う学問でないこともお断りしておきます．&lt;/p>
+&lt;h2 id="第1章-マクロ経済学への招待">
+ 第1章 マクロ経済学への招待
+ &lt;a class="anchor" href="#%e7%ac%ac1%e7%ab%a0-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6%e3%81%b8%e3%81%ae%e6%8b%9b%e5%be%85">#&lt;/a>
+&lt;/h2>
+&lt;p>マクロ経済学の方法は以下のとおりです．&lt;/p>
+&lt;ol>
+&lt;li>事実を記述する．&lt;/li>
+&lt;li>&lt;strong>モデル&lt;/strong> を開発する．&lt;/li>
+&lt;li>モデルから導き出される予見と元の事実とを比較する．&lt;/li>
+&lt;li>モデルを使って他のケースの予見を行う．&lt;/li>
+&lt;/ol>
+&lt;p>本ページでは，特に項番2にあるように，どのようなモデルが知られているかに着目してまとめます．&lt;/p>
+&lt;p>モデルの入力は &lt;strong>パラメータ&lt;/strong> と &lt;strong>外生変数&lt;/strong> で，出力は &lt;strong>内生変数&lt;/strong> であると整理されます．&lt;/p>
+&lt;pre tabindex="0">&lt;code>パラメータ -----&amp;gt; モデル ----&amp;gt; 内生変数
+外生変数
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>パラメータ：モデルの外から与える定数&lt;/li>
+&lt;li>外生変数：モデルの外から与える変数（時間的変化を許す）&lt;/li>
+&lt;li>内生変数：未知数に相当する変数&lt;/li>
+&lt;/ul>
+&lt;p>以下，外から与えられるものを 
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \(\bar{\cdot}\)
+&lt;/span>
+ と上線を付けた記号で表します．&lt;/p>
+&lt;h2 id="第2章-マクロ経済学の計測">
+ 第2章 マクロ経済学の計測
+ &lt;a class="anchor" href="#%e7%ac%ac2%e7%ab%a0-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6%e3%81%ae%e8%a8%88%e6%b8%ac">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;strong>GDP&lt;/strong> とは国内生産とのことです．
+&lt;strong>生産＝支出＝所得&lt;/strong> の関係が基本的原則で，それぞれの観点からGDPを計算しても同じ値となります．&lt;/p>
+&lt;p>GDP の支出アプローチでは，GDP は以下の式で表されます．&lt;/p>
+&lt;span>
+ \[
+Y=C+I+G+\mathit{NX}
+\]
+&lt;/span>
+
+&lt;p>記号の意味は以下のとおりです．&lt;/p></description></item><item><title>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</title><link>https://htakeuchi0.github.io/docs/others/pmbok/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/others/pmbok/</guid><description>&lt;h1 id="プロジェクトマネジメント知識体系-pmbok-ガイドに関するノート">
  プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート
  &lt;a class="anchor" href="#%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%83%9e%e3%83%8d%e3%82%b8%e3%83%a1%e3%83%b3%e3%83%88%e7%9f%a5%e8%ad%98%e4%bd%93%e7%b3%bb-pmbok-%e3%82%ac%e3%82%a4%e3%83%89%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e3%83%8e%e3%83%bc%e3%83%88">#&lt;/a>
 &lt;/h1>
@@ -261,21 +315,20 @@
 &lt;/span>
  を使います．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;b>Definition 1&lt;/b>.
+&lt;p>&lt;b>Definition 1&lt;/b>.
 \(\mu,b\in\mathbb{R}\), \(b&amp;gt;0\) とする．
 連続的確率変数 \(Y:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_Y\) が
 \[
 f_Y(y;\mu,b)=\frac{1}{2b}\exp\left(-\frac{|y-\mu|}{b}\right)
 \]
-と表されるとき，\(Y\) を &lt;strong>ラプラス分布&lt;/strong> に従う確率変数であるという．
+と表されるとき，\(Y\) を &lt;strong>ラプラス分布&lt;/strong> に従う確率変数であるという．&lt;/p>
 &lt;/blockquote>
-
 &lt;p>ラプラス分布はどのような実数でもとり得る分布ですが，これを区間 &lt;span>
  \([A,B]\,(A\le B)\)
 &lt;/span>
  に制限した分布を &lt;strong>切断ラプラス分布&lt;/strong> といいます．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;b>Definition 2&lt;/b>.
+&lt;p>&lt;b>Definition 2&lt;/b>.
 \(\mu,b\in\mathbb{R}\), \(b&amp;gt;0\), \(A,B\in\mathbb{R}\), \(A\le B\) とする．連続的確率変数 \(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}[\mathbb{R}])\) の確率密度関数 \(f_X\) が
 \[
 f_X(x;\mu,b,A,B)=\begin{cases}
@@ -283,9 +336,8 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 0,&amp;amp;\text{otherwise}
 \end{cases}
 \]
-と表されるとき，\(X\) を &lt;strong>切断ラプラス分布&lt;/strong> に従う確率変数であるという．
+と表されるとき，\(X\) を &lt;strong>切断ラプラス分布&lt;/strong> に従う確率変数であるという．&lt;/p>
 &lt;/blockquote>
-
 &lt;h2 id="切断ラプラス分布の確率密度関数">
  切断ラプラス分布の確率密度関数
  &lt;a class="anchor" href="#%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%ae%e7%a2%ba%e7%8e%87%e5%af%86%e5%ba%a6%e9%96%a2%e6%95%b0">#&lt;/a>
@@ -319,7 +371,7 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;p>レールは直線や曲線のものが基本的ですが，ほかに，並走するもの，分岐するもの，高さが変わるものなどがあります．また，レール同士の接続部は，凹凸の形状になっています．さらに，一部を除き，裏返しても使えるようになっています．&lt;/p>
 &lt;p>以上をふまえ，レールの形式的定義を以下のようにまとめます．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
+&lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>\(\Phi\) を，以下を満たす写像 \(\phi\) 全体の集合とする．&lt;/p>
@@ -348,15 +400,15 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
 &lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
 &lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
- \[\begin{aligned}
-&amp;amp;\mathcal{R}=\bigg\{(\phi_1,\dots,\phi_n,t_1,\dots,t_m,\psi,u_1,\dots,u_{n-1})\\
-&amp;amp;\quad\in\left(\bigcup_{m=1,2,\dots}(\Phi\times\mathcal{T}^m\times\Psi_{1,m})\right)\cup\left(\bigcup_{\begin{subarray}{c}n=2,3,\dots,\\m=1,2,\dots\end{subarray}}(\Phi^n\times\mathcal{T}^m\times\Psi_{n,m}\times(\mathbb{R}^3)^{n-1})\right)\,\bigg|\\
-&amp;amp;\qquad\qquad\qquad\forall i,j\,(t_{\psi(i,j)}\not=\bot\implies\forall i&amp;#39;,j&amp;#39;\,(i\not=i&amp;#39;\implies \psi(i,j)\not=\psi(i&amp;#39;,j&amp;#39;)))\bigg\}
-\end{aligned}\]
+ \[
+\begin{aligned}
+&amp;\mathcal{R}=\bigg\{(\phi_1,\dots,\phi_n,t_1,\dots,t_m,\psi,u_1,\dots,u_{n-1})\\
+&amp;\quad\in\left(\bigcup_{m=1,2,\dots}(\Phi\times\mathcal{T}^m\times\Psi_{1,m})\right)\cup\left(\bigcup_{\begin{subarray}{c}n=2,3,\dots,\\m=1,2,\dots\end{subarray}}(\Phi^n\times\mathcal{T}^m\times\Psi_{n,m}\times(\mathbb{R}^3)^{n-1})\right)\,\bigg|\\
+&amp;\qquad\qquad\qquad\forall i,j\,(t_{\psi(i,j)}\not=\bot\implies\forall i',j'\,(i\not=i'\implies \psi(i,j)\not=\psi(i',j')))\bigg\}
+\end{aligned}
+\]
 &lt;/span>
-
 &lt;/blockquote>
-
 &lt;p>&lt;span>
  \(\phi_i\,(1\le i\le n)\)
 &lt;/span>
@@ -396,19 +448,18 @@ f_X(x;\mu,b,A,B)=\begin{cases}
  &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
 &lt;/h2>
 &lt;p>本ページでは，指数関数に関するいくつかの定積分の求め方と結果を説明します．
-指数関数 
-&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
-&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
-&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+指数関数 &lt;span>
  \(\exp:\mathbb{R}\to\mathbb{R}\)
 &lt;/span>
 とは，
 &lt;span>
- \[\exp(x)=\sum_{k=0}^n\frac{x^k}{k!}\]
+ \[
+\exp(x)=\sum_{k=0}^n\frac{x^k}{k!}
+\]
 &lt;/span>
 
 で定められる関数であり，&lt;span>
- \(\exp&amp;#39;(x)=\exp(x)\)
+ \(\exp'(x)=\exp(x)\)
 &lt;/span>
 が成り立つことが知られています．&lt;/p>
 &lt;p>本ページでは，以下の定積分の求め方と結果をまとめます．&lt;/p>
@@ -418,23 +469,26 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;/span>
 &lt;/li>
 &lt;li>&lt;span>
- \(\int_{\alpha}^{\beta}\exp(ax&amp;#43;b)dx\quad(a\not=0)\)
+ \(\int_{\alpha}^{\beta}\exp(ax+b)dx\quad(a\not=0)\)
 &lt;/span>
 &lt;/li>
 &lt;li>&lt;span>
- \(\int_{\alpha}^{\beta}\exp(ax^2&amp;#43;bx&amp;#43;c)dx\quad(a&amp;lt;0)\)
+ \(\int_{\alpha}^{\beta}\exp(ax^2+bx+c)dx\quad(a&lt;0)\)
 &lt;/span>
 &lt;/li>
 &lt;/ol>
 &lt;p>ただし，以下の関数を既知とします．この関数は，&lt;strong>相補誤差関数&lt;/strong>と呼ばれ，たとえば C++ の標準ライブラリで &lt;code>std::erfc&lt;/code> として定義されています．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.
+&lt;p>&lt;b>Definition 1&lt;/b>.
 相補誤差関数 \(\mathrm{erfc}:\mathbb{R}\to\mathbb{R}\) を以下のように定める．&lt;/p>
-&lt;span>
- \[\mathrm{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^{\infty}\exp(-t^2)dt.\]
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \[
+\mathrm{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^{\infty}\exp(-t^2)dt.
+\]
 &lt;/span>
 &lt;/blockquote>
-
 &lt;h2 id="定積分1">
  定積分1
  &lt;a class="anchor" href="#%e5%ae%9a%e7%a9%8d%e5%88%861">#&lt;/a>
@@ -444,11 +498,13 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;/span>
  を計算します．
 これは，&lt;span>
- \(\exp&amp;#39;(x)=\exp(x)\)
+ \(\exp'(x)=\exp(x)\)
 &lt;/span>
 なので，
 &lt;span>
- \[\int_{\alpha}^{\beta}\exp(x)dx=\exp(\beta)-\exp(\alpha)\]
+ \[
+\int_{\alpha}^{\beta}\exp(x)dx=\exp(\beta)-\exp(\alpha)
+\]
 &lt;/span>
 
 です．&lt;/p>
@@ -457,20 +513,13 @@ f_X(x;\mu,b,A,B)=\begin{cases}
  &lt;a class="anchor" href="#%e5%ae%9a%e7%a9%8d%e5%88%862">#&lt;/a>
 &lt;/h2>
 &lt;p>次に，&lt;span>
- \(\int_{\alpha}^{\beta}\exp(ax&amp;#43;b)dx\ (a\not=0)\)
+ \(\int_{\alpha}^{\beta}\exp(ax+b)dx\ (a\not=0)\)
 &lt;/span>
  を計算します． &lt;br>
 これには，&lt;a href="#cite:1">[1, 定理5.6]&lt;/a> を利用します．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Theorem 2&lt;/b>.
-関数 \(f,\phi\) が次の 1&amp;ndash;4 を満たすと仮定する．&lt;/p>
-&lt;ol>
-&lt;li>\(f(x)\) は区間 \(I=[a,b]\) で連続，&lt;/li>
-&lt;li>\(\phi(t)\) は区間 \(J=[\alpha,\beta]\) で微分可能，&lt;/li>
-&lt;li>\(\phi'(t)\) は \(J\) で有界可積分（例えば連続），&lt;/li>
-&lt;li>\(\phi(J)\subset I\), \(\phi(\alpha)=a\), \(\phi(\beta)=b\).&lt;/li>
-&lt;/ol>
-&lt;p>このとき，次の等式が成り立つ．&lt;/p></description></item><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>&lt;h1 id="空のサイトの生成">
+&lt;p>&lt;b>Theorem 2&lt;/b>.
+関数 \(f,\phi\) が次の 1&amp;ndash;4 を満たすと仮定する．&lt;/p></description></item><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>&lt;h1 id="空のサイトの生成">
  空のサイトの生成
  &lt;a class="anchor" href="#%e7%a9%ba%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e7%94%9f%e6%88%90">#&lt;/a>
 &lt;/h1>
@@ -539,7 +588,9 @@ f_X(x;\mu,b,A,B)=\begin{cases}
 &lt;/span>
  は
 &lt;span>
- \[(AB)_{ij}=\sum_{k=0}^{n-1}a_{ik}b_{kj},\quad0\le i&amp;lt;n,\quad0\le j&amp;lt;n\]
+ \[
+(AB)_{ij}=\sum_{k=0}^{n-1}a_{ik}b_{kj},\quad 0\le i &lt; n,\quad 0\le j &lt; n
+\]
 &lt;/span>
 
 と定義されます&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．ただし，行列 &lt;span>
@@ -670,16 +721,18 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/span>
  としたとき，近似解の更新式は，&lt;/p>
 &lt;span>
- \[x_{k&amp;#43;1}=x_k-\frac{f(x_k)}{f&amp;#39;(x_k)},\quad k=0,1,\dots\]
+ \[
+x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)},\quad k=0,1,\dots
+\]
 &lt;/span>
 
 &lt;p>となります．&lt;/p>
 &lt;p>関数 &lt;code>f&lt;/code>, 導関数 &lt;code>df&lt;/code> に対して，初期点 &lt;code>x0&lt;/code> に最も近い零点を求めるための関数 &lt;code>Newton&lt;/code> の素朴な実装として，以下が考えられます．
 ここでは，収束判定条件を &lt;span>
- \(|f(x_k)|&amp;lt;\epsilon\)
+ \(|f(x_k)|&lt;\epsilon\)
 &lt;/span>
  &lt;span>
- \((\epsilon&amp;gt;0)\)
+ \((\epsilon>0)\)
 &lt;/span>
  とし，
 最大反復回数 &lt;code>loop_max&lt;/code> を超えたら収束しなかった旨のエラーを返すようにしています．&lt;/p>
@@ -969,7 +1022,7 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 これらをふまえて，レイアウトの形式的定義を考えます．&lt;/p>
 &lt;p>まず，そのレイアウトが実現できるかを確認する前段階である &lt;strong>擬レイアウト&lt;/strong> を定義します．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
+&lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
 &lt;ol>
 &lt;li>\(\Gamma_m=(\mathbb{Z}^2\times(\mathbb{Z}^2)^*)^m \) とし，\(\Gamma^*\) の元を &lt;strong>接続情報&lt;/strong> と呼ぶ．ただし，集合 \(A\) に対して \(A^*=\bigcup_mA^m\) とする．&lt;/li>
 &lt;li>\(\tilde{\mathcal{A}}\) を，以下を満たす \(R\) 全体の集合とし，\(\tilde{\mathcal{A}}\) の元 \(R\) を &lt;strong>擬レイアウト&lt;/strong> という．
@@ -1006,7 +1059,6 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  \(\)
 &lt;/span>
 &lt;/blockquote>
-
 &lt;p>接続情報 &lt;span>
  \(c\in\Gamma_m\)
 &lt;/span>
@@ -1036,10 +1088,7 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  記号定義
  &lt;a class="anchor" href="#%e8%a8%98%e5%8f%b7%e5%ae%9a%e7%be%a9">#&lt;/a>
 &lt;/h3>
-&lt;p>
-&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
-&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
-&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+&lt;p>&lt;span>
  \(\Omega\)
 &lt;/span>
  を集合，&lt;span>
@@ -1063,7 +1112,9 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/span>
  を
 &lt;span>
- \[ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}\]
+ \[
+ [X\in S]=\{\omega\in\Omega\mid X(\omega)\in S\}
+\]
 &lt;/span>
 
 で定め，&lt;span>
@@ -1126,10 +1177,7 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  &lt;a class="anchor" href="#%e6%ad%a3%e8%a6%8f%e5%88%86%e5%b8%83">#&lt;/a>
 &lt;/h2>
 &lt;p>&lt;strong>正規分布&lt;/strong> とは，連続型確率変数のしたがう確率分布のひとつで，様々な場面で用いられます．&lt;/p>
-&lt;p>平均 
-&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
-&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
-&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+&lt;p>平均 &lt;span>
  \(\mu\)
 &lt;/span>
 , 分散 &lt;span>
@@ -1137,13 +1185,17 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/span>
  の正規分布の &lt;strong>確率密度関数&lt;/strong> は，
 &lt;span>
- \[f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\]
+ \[
+f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\]
 &lt;/span>
 
 と表されます．
 ここで，
 &lt;span>
- \[F_X(x)=\int_{-\infty}^xf_X(x)dx\]
+ \[
+F_X(x)=\int_{-\infty}^xf_X(x)dx
+\]
 &lt;/span>
 
 とおくと，&lt;span>
@@ -1169,37 +1221,45 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/h2>
 &lt;p>いま，
 &lt;span>
- \[-\frac{(x-\mu)^2}{2\sigma^2}=-\frac{1}{2\sigma^2}x^2&amp;#43;\frac{\mu}{\sigma^2}x-\frac{\mu^2}{2\sigma^2}\]
+ \[
+-\frac{(x-\mu)^2}{2\sigma^2}=-\frac{1}{2\sigma^2}x^2+\frac{\mu}{\sigma^2}x-\frac{\mu^2}{2\sigma^2}
+\]
 &lt;/span>
 
 なので，
 &lt;span>
- \[\begin{aligned}
- &amp;amp;a=-\frac{1}{2\sigma^2},\\
- &amp;amp;b=\frac{\mu}{\sigma^2},\\
- &amp;amp;c=-\frac{\mu^2}{2\sigma^2}
-\end{aligned}\]
+ \[
+\begin{aligned}
+ &amp;a=-\frac{1}{2\sigma^2},\\
+ &amp;b=\frac{\mu}{\sigma^2},\\
+ &amp;c=-\frac{\mu^2}{2\sigma^2}
+\end{aligned}
+\]
 &lt;/span>
 
 として，&lt;a href="https://htakeuchi0.github.io/docs/math/exp/#定積分3">指数関数の定積分の定積分3&lt;/a>を適用すると，
 &lt;span>
- \[\begin{aligned}
-&amp;amp;\frac{\sqrt{\pi}}{2\sqrt{-a}}=\frac{\sqrt{\pi}}{2\sqrt{1/(2\sigma^2)}}
+ \[
+\begin{aligned}
+&amp;\frac{\sqrt{\pi}}{2\sqrt{-a}}=\frac{\sqrt{\pi}}{2\sqrt{1/(2\sigma^2)}}
 =\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}},\\
-&amp;amp;\frac{b^2-4ac}{4a}=\frac{b^2}{4a}-c=\frac{\mu^2/\sigma^4}{-2/\sigma^2}-\left(-\frac{\mu^2}{2\sigma^2}\right)=0\\
-&amp;amp;\frac{b}{2a}
+&amp;\frac{b^2-4ac}{4a}=\frac{b^2}{4a}-c=\frac{\mu^2/\sigma^4}{-2/\sigma^2}-\left(-\frac{\mu^2}{2\sigma^2}\right)=0\\
+&amp;\frac{b}{2a}
 =\frac{\mu/\sigma^2}{-1/\sigma^2}
 =-\mu
-\end{aligned}\]
+\end{aligned}
+\]
 &lt;/span>
 
 より，
 &lt;span>
- \[\begin{aligned}
-&amp;amp;\int_{\alpha}^{\beta}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
-&amp;amp;=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}}\\
-&amp;amp;\quad\times\left(\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(\alpha-\mu)\right)-\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(\beta-\mu)\right)\right)
-\end{aligned}\]
+ \[
+\begin{aligned}
+&amp;\int_{\alpha}^{\beta}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
+&amp;=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}}\\
+&amp;\quad\times\left(\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(\alpha-\mu)\right)-\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(\beta-\mu)\right)\right)
+\end{aligned}
+\]
 &lt;/span>
 
 となります．特に，&lt;span>
@@ -1210,10 +1270,12 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/span>
  のとき，
 &lt;span>
- \[\begin{aligned}
-&amp;amp;\int_{-\infty}^x\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
-&amp;amp;=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}}\left(2-\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(x-\mu)\right)\right)
-\end{aligned}\]
+ \[
+\begin{aligned}
+&amp;\int_{-\infty}^x\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
+&amp;=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}}\left(2-\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(x-\mu)\right)\right)
+\end{aligned}
+\]
 &lt;/span>
 
 です．&lt;/p></description></item><item><title>行列積の計算時間のOpenMPによる高速化</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</guid><description>&lt;h1 id="行列積の計算時間のopenmpによる高速化">
@@ -1513,13 +1575,13 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  \(p(N,k)\)
 &lt;/span>
  が最大になるとき，&lt;span>
- \(k&amp;lt;k_0\)
+ \(k&lt;k_0\)
 &lt;/span>
  の範囲では &lt;span>
  \(p(N,k)\)
 &lt;/span>
  は大きくなり，&lt;span>
- \(k&amp;gt;k_0\)
+ \(k>k_0\)
 &lt;/span>
  の範囲では，&lt;span>
  \(p(N,k)\)
@@ -1547,7 +1609,7 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 通常，手元にあるレールは有限です．もう少し正確にいうと，有限種類のレールが有限個ずつあるのが普通です．レールは接続ができればどの向きにおいても裏返しても構わないのでした．&lt;/p>
 &lt;p>問題の定式化を考える前に，まず準備として記号の定義を追加します．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.
+&lt;p>&lt;b>Definition 1&lt;/b>.
 \(\sigma\) を \(\mathbb{R}^3\) 上の直交変換とする．&lt;/p>
 &lt;ol>
 &lt;li>\(\phi\in\Phi\) に対して \(\phi^\sigma\) を，\(\phi^\sigma(\theta)=\phi(\theta)^\sigma,(0&amp;lt;\theta&amp;lt;1)\) で定める．&lt;/li>
@@ -1559,16 +1621,14 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  \(\)
 &lt;/span>
 &lt;/blockquote>
-
 &lt;p>&lt;span>
  \(\sigma\)
 &lt;/span>
  は3次元空間上の回転を表すので，これはレールの回転を表すための記号です．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;b>Definition 2&lt;/b>.
-\(N\) を1以上の整数とし，\(r_1,\dots,r_N\) をレール，\(n_1,\dots,n_N\) を1以上の整数とする．レイアウト \(R=(r'_1,\dots,r'_n,c_1,\dots,c_m)\) について，各 \(i=1,2,\dots,n\) について，\(j_i\) と，ある \(\mathbb{R}^3\) 上の直交変換 \(\sigma_i\) が存在し，\(r'_i=r_{j_i}^{\sigma_i}\) であり，\(|\{j\mid \exists \sigma\,(r_i={r'_j}^\sigma\}|\le n_i\) であるとき，レイアウト \(R\) は \(r'_1,\dots,r'_n,c_1,\dots,c_m\) で &lt;strong>実現可能&lt;/strong> であるといい，このレイアウト全体を \(\mathcal{A}_{r_1,\dots,r_N,n_1,\dots,n_N}\) で表す．
+&lt;p>&lt;b>Definition 2&lt;/b>.
+\(N\) を1以上の整数とし，\(r_1,\dots,r_N\) をレール，\(n_1,\dots,n_N\) を1以上の整数とする．レイアウト \(R=(r'_1,\dots,r'_n,c_1,\dots,c_m)\) について，各 \(i=1,2,\dots,n\) について，\(j_i\) と，ある \(\mathbb{R}^3\) 上の直交変換 \(\sigma_i\) が存在し，\(r'_i=r_{j_i}^{\sigma_i}\) であり，\(|\{j\mid \exists \sigma\,(r_i={r'_j}^\sigma\}|\le n_i\) であるとき，レイアウト \(R\) は \(r'_1,\dots,r'_n,c_1,\dots,c_m\) で &lt;strong>実現可能&lt;/strong> であるといい，このレイアウト全体を \(\mathcal{A}_{r_1,\dots,r_N,n_1,\dots,n_N}\) で表す．&lt;/p>
 &lt;/blockquote>
-
 &lt;p>実現可能という定義は，手元のレールセットでレイアウトが組めるものを指します．&lt;/p></description></item><item><title>ラプラス分布や切断ラプラス分布からのサンプリング</title><link>https://htakeuchi0.github.io/docs/math/stat/lap/sampling/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/lap/sampling/</guid><description>&lt;h1 id="ラプラス分布や切断ラプラス分布からのサンプリング">
  ラプラス分布や切断ラプラス分布からのサンプリング
  &lt;a class="anchor" href="#%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%82%84%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%8b%e3%82%89%e3%81%ae%e3%82%b5%e3%83%b3%e3%83%97%e3%83%aa%e3%83%b3%e3%82%b0">#&lt;/a>
@@ -1619,10 +1679,12 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  上の一様分布とします．
 つまり，
 &lt;span>
- \[ f_U(u)=\begin{cases}
- 1,&amp;amp; 0\le u\le 1,\\
- 0,&amp;amp;\text{otherwise}
- \end{cases}\]
+ \[
+ f_U(u)=\begin{cases}
+ 1,&amp; 0\le u\le 1,\\
+ 0,&amp;\text{otherwise}
+ \end{cases}
+\]
 &lt;/span>
 
 とします．
@@ -1631,10 +1693,12 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/span>
  とすると，
 &lt;span>
- \[\begin{aligned}
- F_Z(z)&amp;amp;=P([Z\le z])\\
- &amp;amp;=P([F^*_X(U)\le z])\\
-\end{aligned}\]
+ \[
+\begin{aligned}
+ F_Z(z)&amp;=P([Z\le z])\\
+ &amp;=P([F^*_X(U)\le z])\\
+\end{aligned}
+\]
 &lt;/span>
 
 となりますが，&lt;span>
@@ -1645,12 +1709,14 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/span>
  であることは同じことなので，
 &lt;span>
- \[\begin{aligned}
- F_Z(z)&amp;amp;=P([F^*_X(U)\le z])\\
- &amp;amp;=P([U\le F_X(z)])\\
- &amp;amp;=F_U(F_X(z))\\
- &amp;amp;=F_X(z)
-\end{aligned}\]
+ \[
+\begin{aligned}
+ F_Z(z)&amp;=P([F^*_X(U)\le z])\\
+ &amp;=P([U\le F_X(z)])\\
+ &amp;=F_U(F_X(z))\\
+ &amp;=F_X(z)
+\end{aligned}
+\]
 &lt;/span>
 
 となり，&lt;span>
@@ -1743,7 +1809,9 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  とします．&lt;/p>
 &lt;p>このとき，
 &lt;span>
- \[ f_{X_1,X_2,\dots,X_N}(x_1,x_2,\dots,x_N;b)=\prod_{i=1}^N\frac{1}{2b}\exp\left(-\frac{|x_i|}{b}\right)\]
+ \[
+ f_{X_1,X_2,\dots,X_N}(x_1,x_2,\dots,x_N;b)=\prod_{i=1}^N\frac{1}{2b}\exp\left(-\frac{|x_i|}{b}\right)
+\]
 &lt;/span>
 
 と表されます．
@@ -1752,11 +1820,13 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/span>
  とおくと，
 &lt;span>
- \[\begin{aligned}
- \mathcal{L}_{x_1,\dots,x_N}(b)&amp;amp;=\log\prod_{i=1}^N\frac{1}{2b}\exp\left(-\frac{|x_i|}{b}\right)\\
- &amp;amp;=\sum_{i=1}^N\left(\log\frac{1}{2b}&amp;#43;\log\exp\left(-\frac{|x_i|}{b}\right)\right)\\
- &amp;amp;=-N\log 2b-\frac{1}{b}\sum_{i=1}^N|x_i|
-\end{aligned}\]
+ \[
+\begin{aligned}
+ \mathcal{L}_{x_1,\dots,x_N}(b)&amp;=\log\prod_{i=1}^N\frac{1}{2b}\exp\left(-\frac{|x_i|}{b}\right)\\
+ &amp;=\sum_{i=1}^N\left(\log\frac{1}{2b}+\log\exp\left(-\frac{|x_i|}{b}\right)\right)\\
+ &amp;=-N\log 2b-\frac{1}{b}\sum_{i=1}^N|x_i|
+\end{aligned}
+\]
 &lt;/span>
 
 となります．&lt;/p>
@@ -1768,12 +1838,14 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
 &lt;/span>
  を求めます．
 &lt;span>
- \[\begin{aligned}
-\frac{d\mathcal{L}_{x_1,\dots,x_N}}{db}(b)&amp;amp;=-\frac{N}{b}&amp;#43;\frac{1}{b^2}\sum_{i=1}^N|x_i|\\
-&amp;amp;=-\frac{N}{b^2}\left(b-\frac{1}{N}\sum_{i=1}^N|x_i|\right),\\
-\frac{d^2\mathcal{L}_{x_1,\dots,x_N}}{db^2}(b)&amp;amp;=\frac{N}{b^2}-\frac{2}{b^3}\sum_{i=1}^N|x_i|\\
-&amp;amp;=\frac{N}{b^3}\left(b-\frac{2}{N}\sum_{i=1}^N|x_i|\right)
-\end{aligned}\]
+ \[
+\begin{aligned}
+\frac{d\mathcal{L}_{x_1,\dots,x_N}}{db}(b)&amp;=-\frac{N}{b}+\frac{1}{b^2}\sum_{i=1}^N|x_i|\\
+&amp;=-\frac{N}{b^2}\left(b-\frac{1}{N}\sum_{i=1}^N|x_i|\right),\\
+\frac{d^2\mathcal{L}_{x_1,\dots,x_N}}{db^2}(b)&amp;=\frac{N}{b^2}-\frac{2}{b^3}\sum_{i=1}^N|x_i|\\
+&amp;=\frac{N}{b^3}\left(b-\frac{2}{N}\sum_{i=1}^N|x_i|\right)
+\end{aligned}
+\]
 &lt;/span>
 
 なので，&lt;span>
@@ -1783,7 +1855,7 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  \(d\mathcal{L}_{x_1,\dots,x_N}/db=0\)
 &lt;/span>
 , &lt;span>
- \(d^2\mathcal{L}_{x_1,\dots,x_N}/db^2=-(1/b^3)\sum_{i=1}^N|x_i|&amp;lt;0\)
+ \(d^2\mathcal{L}_{x_1,\dots,x_N}/db^2=-(1/b^3)\sum_{i=1}^N|x_i|&lt;0\)
 &lt;/span>
  なので，&lt;span>
  \(b=(1/N)\sum_{i=1}^N|x_i|\)
@@ -1791,20 +1863,7 @@ C++ では，変数のメモリアドレスはもちろん，関数のエント�
  で &lt;span>
  \(\mathcal{L}_{x_1,\dots,x_N}(b)\)
 &lt;/span>
- は最大値をとります．&lt;/p>
-&lt;p>よって，&lt;span>
- \(x_1,x_2,\dots,x_N\)
-&lt;/span>
- がパラメータ &lt;span>
- \(\mu,b\)
-&lt;/span>
- のラプラス分布からサンプリングされた乱数であって，&lt;span>
- \(\mu=0\)
-&lt;/span>
- が既知であれば，&lt;span>
- \(b=(1/N)\sum_{i=1}^N|x_i|\)
-&lt;/span>
- と推定することができます．&lt;/p></description></item><item><title>行列積の計算時間のCPU拡張命令による高速化</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</guid><description>&lt;h1 id="行列積の計算時間のcpu拡張命令による高速化">
+ は最大値をとります．&lt;/p></description></item><item><title>行列積の計算時間のCPU拡張命令による高速化</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/avx/</guid><description>&lt;h1 id="行列積の計算時間のcpu拡張命令による高速化">
  行列積の計算時間のCPU拡張命令による高速化
  &lt;a class="anchor" href="#%e8%a1%8c%e5%88%97%e7%a9%8d%e3%81%ae%e8%a8%88%e7%ae%97%e6%99%82%e9%96%93%e3%81%aecpu%e6%8b%a1%e5%bc%b5%e5%91%bd%e4%bb%a4%e3%81%ab%e3%82%88%e3%82%8b%e9%ab%98%e9%80%9f%e5%8c%96">#&lt;/a>
 &lt;/h1>
@@ -1873,10 +1932,7 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  概要
  &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
 &lt;/h2>
-&lt;p>前ページまでで，サイコロを 
-&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
-&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
-&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+&lt;p>前ページまでで，サイコロを &lt;span>
  \(N\)
 &lt;/span>
 回投げるとき，次が成り立つことがわかりました．&lt;/p>
@@ -1898,7 +1954,7 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
 &lt;/h2>
 &lt;p>まずは，確率変数の定義について述べます．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
+&lt;p>&lt;b>Definition 1&lt;/b>.&lt;/p>
 &lt;ol>
 &lt;li>\(A\) を集合，\(\mathfrak{F}\) をその完全加法族とする．一般に，\((A,\mathfrak{F})\) を &lt;strong>可測空間&lt;/strong> という．また，\((A,\mathfrak{F}),(B,\mathfrak{G})\) を可測空間とするとき，関数 \(F:A\to B\) を \(F:(A,\mathfrak{F})\to(B,\mathfrak{B})\) と表す．&lt;/li>
 &lt;li>\((A,\mathfrak{F}),(B,\mathfrak{G})\) を可測空間とする．関数 \(F:(A,\mathfrak{F})\to (B,\mathfrak{F})\) が，任意の \(b\in B\) について \(F^{-1}(b)=\{a\in A\mid F(a)=b\}\in\mathfrak{F}\) であるとき，関数 \(F\) を&lt;strong>可測関数&lt;/strong>と呼ぶ．&lt;/li>
@@ -1906,7 +1962,6 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
 &lt;li>\(\Omega,\mathfrak{F}\) を標本空間とする，\(X:(\Omega,\mathfrak{F})\to(\mathbb{R},\mathfrak{B}(\mathbb{R}))\) が可測関数のとき，\(X\) を&lt;strong>確率変数&lt;/strong>という．&lt;/li>
 &lt;/ol>
 &lt;/blockquote>
-
 &lt;p>なお，可測空間も標本空間も集合とその完全加法族の組なので，実質的には同じものですが，数理統計の文脈では，可測空間のことを標本空間と呼ぶ，という理解でよいです．また，本来は &lt;span>
  \(\mathfrak{B}(\mathbb{R})\)
 &lt;/span>
@@ -1956,26 +2011,26 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
 &lt;table>
  &lt;thead>
  &lt;tr>
- &lt;th style="text-align: left">項番&lt;/th>
- &lt;th style="text-align: left">呼び出し方&lt;/th>
- &lt;th style="text-align: left">結果&lt;/th>
+ &lt;th>項番&lt;/th>
+ &lt;th>呼び出し方&lt;/th>
+ &lt;th>結果&lt;/th>
  &lt;/tr>
  &lt;/thead>
  &lt;tbody>
  &lt;tr>
- &lt;td style="text-align: left">1&lt;/td>
- &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
- &lt;td style="text-align: left">&lt;strong>Theorem 1&lt;/strong>.&lt;/td>
+ &lt;td>1&lt;/td>
+ &lt;td>&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td>&lt;strong>Theorem 1&lt;/strong>.&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">2&lt;/td>
- &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
- &lt;td style="text-align: left">&lt;strong>Theorem 5.2.2&lt;/strong>.&lt;/td>
+ &lt;td>2&lt;/td>
+ &lt;td>&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Theorem&amp;quot; section=&amp;quot;5.2&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td>&lt;strong>Theorem 5.2.2&lt;/strong>.&lt;/td>
  &lt;/tr>
  &lt;tr>
- &lt;td style="text-align: left">3&lt;/td>
- &lt;td style="text-align: left">&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
- &lt;td style="text-align: left">&lt;strong>Theorem 3.3&lt;/strong> (補足).&lt;/td>
+ &lt;td>3&lt;/td>
+ &lt;td>&lt;code>{{&amp;lt; theorem-label name=&amp;quot;Proposition&amp;quot; section=&amp;quot;3&amp;quot; comment=&amp;quot;補足&amp;quot; &amp;gt;}}&lt;/code>&lt;/td>
+ &lt;td>&lt;strong>Theorem 3.3&lt;/strong> (補足).&lt;/td>
  &lt;/tr>
  &lt;/tbody>
 &lt;/table>
@@ -2144,10 +2199,7 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  概要
  &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
 &lt;/h2>
-&lt;p>Book テーマ &lt;a href="#cite:1">[1]&lt;/a> では，
-&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
-&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
-&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+&lt;p>Book テーマ &lt;a href="#cite:1">[1]&lt;/a> では，&lt;span>
  \(\KaTeX\)
 &lt;/span>
 を使うための &lt;code>katex&lt;/code> ショートコードが用意されています &lt;a href="#cite:2">[2]&lt;/a>．
@@ -2164,35 +2216,33 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0%e3%81%aa%e3%81%97">#&lt;/a>
 &lt;/h3>
 &lt;p>markdown の記述例は以下のとおりです．&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{% hint %}}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{% /hint %}}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p>
 &lt;blockquote class="book-hint ">
- ヒント．
+&lt;p>ヒント．&lt;/p>
 &lt;/blockquote>
-
 &lt;h3 id="第1引数info">
  第1引数：info
  &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0info">#&lt;/a>
 &lt;/h3>
 &lt;p>markdown の記述例は以下のとおりです．&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &lt;span style="color:#a6e22e">info&lt;/span> &amp;gt;}}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{% hint info %}}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{% /hint %}}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p>
 &lt;blockquote class="book-hint info">
- ヒント．
+&lt;p>ヒント．&lt;/p>
 &lt;/blockquote>
-
 &lt;h3 id="第1引数warning">
  第1引数：warning
  &lt;a class="anchor" href="#%e7%ac%ac1%e5%bc%95%e6%95%b0warning">#&lt;/a>
 &lt;/h3>
 &lt;p>markdown の記述例は以下のとおりです．&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{&amp;lt; &lt;span style="color:#f92672">hint&lt;/span> &lt;span style="color:#a6e22e">warning&lt;/span> &amp;gt;}}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>{{% hint warning %}}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ヒント．
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{&amp;lt; /&lt;span style="color:#f92672">hint&lt;/span> &amp;gt;}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{% /hint %}}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力結果は以下のとおりです．&lt;/p></description></item><item><title>サイコロを無限回投げる場合の確率モデル</title><link>https://htakeuchi0.github.io/docs/math/stat/dice/dice_inf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/dice/dice_inf/</guid><description>&lt;h1 id="サイコロを無限回投げる場合の確率モデル">
  サイコロを無限回投げる場合の確率モデル
  &lt;a class="anchor" href="#%e3%82%b5%e3%82%a4%e3%82%b3%e3%83%ad%e3%82%92%e7%84%a1%e9%99%90%e5%9b%9e%e6%8a%95%e3%81%92%e3%82%8b%e5%a0%b4%e5%90%88%e3%81%ae%e7%a2%ba%e7%8e%87%e3%83%a2%e3%83%87%e3%83%ab">#&lt;/a>
@@ -2227,9 +2277,24 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
 &lt;/span>
  を確率と呼ぶのでした．&lt;/p>
 &lt;ol>
-&lt;li>\(A\in\mathfrak{F}\) ならば \(P(A)\ge0\),&lt;/li>
-&lt;li>\(P(\Omega)=1\),&lt;/li>
-&lt;li>\(A_1,A_2,\dots\in\mathfrak{F}\) が互いに素ならば，\(P(\sum_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}P(A_i)\).&lt;/li>
+&lt;li>&lt;span>
+ \(A\in\mathfrak{F}\)
+&lt;/span>
+ ならば &lt;span>
+ \(P(A)\ge0\)
+&lt;/span>
+,&lt;/li>
+&lt;li>&lt;span>
+ \(P(\Omega)=1\)
+&lt;/span>
+,&lt;/li>
+&lt;li>&lt;span>
+ \(A_1,A_2,\dots\in\mathfrak{F}\)
+&lt;/span>
+ が互いに素ならば，&lt;span>
+ \(P(\sum_{i=1}^{\infty}A_i)=\sum_{i=1}^{\infty}P(A_i)\)
+&lt;/span>
+.&lt;/li>
 &lt;/ol>
 &lt;p>また，&lt;span>
  \((\Omega,\mathfrak{F},P)\)
@@ -2243,9 +2308,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\)
 &lt;/span>
  を具体的に構成します．&lt;/p>
-&lt;h3 id="omega_infty-の構成">
- \(\Omega_\infty\) の構成
- &lt;a class="anchor" href="#omega_infty-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+&lt;h3 id="hahahugoshortcode45s13hbhb-の構成">
+ &lt;span>
+ \(\Omega_\infty\)
+&lt;/span>
+ の構成
+ &lt;a class="anchor" href="#hahahugoshortcode45s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\)
@@ -2255,16 +2323,21 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
 &lt;/span>
  を，&lt;/p>
 &lt;span>
- \[\Omega_{\infty}=\{(\omega^i)_{i\in\mathbb{N}}\mid\forall i\in\mathbb{N}\,(\omega^i\in\Omega_1)\}\]
+ \[
+\Omega_{\infty}=\{(\omega^i)_{i\in\mathbb{N}}\mid\forall i\in\mathbb{N}\,(\omega^i\in\Omega_1)\}
+\]
 &lt;/span>
 
 &lt;p>つまり，&lt;span>
  \(\Omega_{\infty}=\Omega^{\mathbb{N}}\)
 &lt;/span>
  とします&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;sup>, &lt;/sup>&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>．&lt;/p>
-&lt;h3 id="mathfrakf_inftyp_infty-の構成">
- \(\mathfrak{F}_{\infty},P_{\infty}\) の構成
- &lt;a class="anchor" href="#mathfrakf_inftyp_infty-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+&lt;h3 id="hahahugoshortcode45s25hbhb-の構成">
+ &lt;span>
+ \(\mathfrak{F}_{\infty},P_{\infty}\)
+&lt;/span>
+ の構成
+ &lt;a class="anchor" href="#hahahugoshortcode45s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)
@@ -2275,13 +2348,11 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
 &lt;/span>
  について，
 &lt;span>
- \[N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1&amp;lt;\dots&amp;lt;n_k\}\]
+ \[
+N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1&lt;\dots &lt; n_k\}
+\]
 &lt;/span>
-&lt;/p>
-&lt;p>とし，&lt;span>
- \(N^{(0)}=\{\emptyset\}\)
-&lt;/span>
- とします．&lt;/p></description></item><item><title>関数ポインタを返却する関数</title><link>https://htakeuchi0.github.io/docs/cpp/fp/retfp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/retfp/</guid><description>&lt;h1 id="関数ポインタを返却する関数">
+&lt;/p></description></item><item><title>関数ポインタを返却する関数</title><link>https://htakeuchi0.github.io/docs/cpp/fp/retfp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/fp/retfp/</guid><description>&lt;h1 id="関数ポインタを返却する関数">
  関数ポインタを返却する関数
  &lt;a class="anchor" href="#%e9%96%a2%e6%95%b0%e3%83%9d%e3%82%a4%e3%83%b3%e3%82%bf%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e9%96%a2%e6%95%b0">#&lt;/a>
 &lt;/h1>

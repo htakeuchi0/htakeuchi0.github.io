@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>マクロ経済学 on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/docs/others/macroeconomics/</link><description>Recent content in マクロ経済学 on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://htakeuchi0.github.io/docs/others/macroeconomics/index.xml" rel="self" type="application/rss+xml"/><item><title>ジョーンズ マクロ経済学Ⅰ</title><link>https://htakeuchi0.github.io/docs/others/macroeconomics/jones-1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/others/macroeconomics/jones-1/</guid><description>&lt;h1 id="ジョーンズ-マクロ経済学">
+ ジョーンズ マクロ経済学Ⅰ
+ &lt;a class="anchor" href="#%e3%82%b8%e3%83%a7%e3%83%bc%e3%83%b3%e3%82%ba-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>手取りを増やすことを公約に掲げた政党の台頭が示すように，昨今，日本経済再生への期待が高まっています．
+本ページは，国の経済全体に関する経済学についてのノートです．&lt;/p>
+&lt;p>経済を構成する個々の主体に着目するミクロ経済学に対し，それらを合わせて一国の経済全体に着目する経済学の領域は &lt;strong>マクロ経済学&lt;/strong> と呼ばれます．
+本ページでは，作成者が『ジョーンズ マクロ経済学Ⅰ 長期成長編』&lt;a href="#cite:1">[1]&lt;/a> を初読した際のメモをまとめます．
+本ページの作成者は，&lt;a href="#cite:1">[1]&lt;/a> を読むまで，経済学に関する知識を一切有していませんでした．&lt;/p>
+&lt;p>本教科書 &lt;a href="#cite:1">[1]&lt;/a> は，簡単な数式を使って説明がなされており，数式に抵抗がない初心者にとってはわかりやすく感じました．
+本ページでは，数式で表現された箇所を中心に，初読時のメモを整理して記載します．&lt;/p>
+&lt;p>本ページは解説文ではなく，あくまでメモの整理として数式で表されたモデルを中心にまとめますが，本教科書 &lt;a href="#cite:1">[1]&lt;/a> は数式ばかりがでてくるものではありません．
+また，本文中にもあるように，マクロ経済学は数式のみから議論・検討を行う学問でないこともお断りしておきます．&lt;/p>
+&lt;h2 id="第1章-マクロ経済学への招待">
+ 第1章 マクロ経済学への招待
+ &lt;a class="anchor" href="#%e7%ac%ac1%e7%ab%a0-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6%e3%81%b8%e3%81%ae%e6%8b%9b%e5%be%85">#&lt;/a>
+&lt;/h2>
+&lt;p>マクロ経済学の方法は以下のとおりです．&lt;/p>
+&lt;ol>
+&lt;li>事実を記述する．&lt;/li>
+&lt;li>&lt;strong>モデル&lt;/strong> を開発する．&lt;/li>
+&lt;li>モデルから導き出される予見と元の事実とを比較する．&lt;/li>
+&lt;li>モデルを使って他のケースの予見を行う．&lt;/li>
+&lt;/ol>
+&lt;p>本ページでは，特に項番2にあるように，どのようなモデルが知られているかに着目してまとめます．&lt;/p>
+&lt;p>モデルの入力は &lt;strong>パラメータ&lt;/strong> と &lt;strong>外生変数&lt;/strong> で，出力は &lt;strong>内生変数&lt;/strong> であると整理されます．&lt;/p>
+&lt;pre tabindex="0">&lt;code>パラメータ -----&amp;gt; モデル ----&amp;gt; 内生変数
+外生変数
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>パラメータ：モデルの外から与える定数&lt;/li>
+&lt;li>外生変数：モデルの外から与える変数（時間的変化を許す）&lt;/li>
+&lt;li>内生変数：未知数に相当する変数&lt;/li>
+&lt;/ul>
+&lt;p>以下，外から与えられるものを 
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \(\bar{\cdot}\)
+&lt;/span>
+ と上線を付けた記号で表します．&lt;/p>
+&lt;h2 id="第2章-マクロ経済学の計測">
+ 第2章 マクロ経済学の計測
+ &lt;a class="anchor" href="#%e7%ac%ac2%e7%ab%a0-%e3%83%9e%e3%82%af%e3%83%ad%e7%b5%8c%e6%b8%88%e5%ad%a6%e3%81%ae%e8%a8%88%e6%b8%ac">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;strong>GDP&lt;/strong> とは国内生産とのことです．
+&lt;strong>生産＝支出＝所得&lt;/strong> の関係が基本的原則で，それぞれの観点からGDPを計算しても同じ値となります．&lt;/p>
+&lt;p>GDP の支出アプローチでは，GDP は以下の式で表されます．&lt;/p>
+&lt;span>
+ \[
+Y=C+I+G+\mathit{NX}
+\]
+&lt;/span>
+
+&lt;p>記号の意味は以下のとおりです．&lt;/p></description></item></channel></rss>

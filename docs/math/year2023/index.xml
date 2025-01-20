@@ -11,17 +11,16 @@
 &lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
 &lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
 &lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
- \[2023=(2&amp;#43;0&amp;#43;2&amp;#43;3)(2^2&amp;#43;0^2&amp;#43;2^2&amp;#43;3^2)^2\]
+ \[2023=(2+0+2+3)(2^2+0^2+2^2+3^2)^2\]
 &lt;/span>
 
 &lt;p>であることに着目して，以下の問題を解いたのでした．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;b>Problem 1&lt;/b>.
+&lt;p>&lt;b>Problem 1&lt;/b>.
 整数 \(x=\sum_{j=0}^{n-1}a_j10^j\) \((0\le a_j\le 9,j=0,1,\dots,n-1)\) に対して，
 \[ \prod_{k=1}^K\sum_{j=0}^{n-1}a_j^{i_k}=x \]
-を満たす整数 \(K\ge1\), \(1\le i_1\le\cdots\le i_K\) が存在するかを判定せよ．存在する場合はこの方程式を満たす \((i_1,i_2,\dots,i_K)\) をひとつ求めよ．
+を満たす整数 \(K\ge1\), \(1\le i_1\le\cdots\le i_K\) が存在するかを判定せよ．存在する場合はこの方程式を満たす \((i_1,i_2,\dots,i_K)\) をひとつ求めよ．&lt;/p>
 &lt;/blockquote>
-
 &lt;p>本ページでは，そこで解説した解法を改良する方法を説明します．
 その後，改良前後で実行時間を比較します．ただし，結果はほとんど変わりませんでした．&lt;/p>
 &lt;h2 id="実装改良">
@@ -30,7 +29,7 @@
 &lt;/h2>
 &lt;p>前ページで解説した解法は以下のとおりでした&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．&lt;/p>
 &lt;blockquote class="book-hint info">
- &lt;p>&lt;b>Algorithm 2&lt;/b>.
+&lt;p>&lt;b>Algorithm 2&lt;/b>.
 \(\mathtt{Solve}(a, x, i)\) の擬似コードを以下で定める．ただし，\((a_1,\dots,a_n)\in\mathbb{N}^n,(b_1,\dots,b_m)\in\mathbb{N}^m\) に対して，\(\mathtt{append}(a,b)=(a_1,\dots,a_n,b_1,\dots,b_m)\in\mathbb{N}^{n+m}\) とする．&lt;/p>
 &lt;ul>
 &lt;li>Input: \(a\in\mathbb{N}^n,x\in\mathbb{N},i\in\mathbb{N}\)&lt;/li>
@@ -54,7 +53,6 @@
 &lt;li>end for&lt;/li>
 &lt;/ol>
 &lt;/blockquote>
-
 &lt;p>このアルゴリズムは，11行目によって再帰処理になっていますが， &lt;strong>再帰させずに，単に &lt;span>
  \(x\)
 &lt;/span>
