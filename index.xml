@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ホームページ on htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content in ホームページ on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Mon, 20 Jan 2025 23:46:26 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Mon, 27 Jan 2025 22:53:01 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
  2023 - 実装改良編
  &lt;a class="anchor" href="#2023---%e5%ae%9f%e8%a3%85%e6%94%b9%e8%89%af%e7%b7%a8">#&lt;/a>
 &lt;/h1>
@@ -78,7 +78,7 @@
 &lt;/h2>
 &lt;p>本ページで説明するディレクトリ構成のプロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
 &lt;p>&lt;a href="https://github.com/htakeuchi0/cpp_env_sample">https://github.com/htakeuchi0/cpp_env_sample&lt;/a>&lt;/p>
-&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;p>本ページは CC BY 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
 &lt;h2 id="動作環境">
  動作環境
  &lt;a class="anchor" href="#%e5%8b%95%e4%bd%9c%e7%92%b0%e5%a2%83">#&lt;/a>
@@ -2162,7 +2162,7 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
 &lt;/h2>
 &lt;p>本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
 &lt;p>&lt;a href="https://github.com/htakeuchi0/autoconf_sample">https://github.com/htakeuchi0/autoconf_sample&lt;/a>&lt;/p>
-&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;p>本ページは CC BY 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
 &lt;h2 id="準備">
  準備
  &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
@@ -2308,12 +2308,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\)
 &lt;/span>
  を具体的に構成します．&lt;/p>
-&lt;h3 id="hahahugoshortcode46s13hbhb-の構成">
+&lt;h3 id="hahahugoshortcode44s13hbhb-の構成">
  &lt;span>
  \(\Omega_\infty\)
 &lt;/span>
  の構成
- &lt;a class="anchor" href="#hahahugoshortcode46s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode44s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\)
@@ -2332,12 +2332,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \(\Omega_{\infty}=\Omega^{\mathbb{N}}\)
 &lt;/span>
  とします&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;sup>, &lt;/sup>&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>．&lt;/p>
-&lt;h3 id="hahahugoshortcode46s25hbhb-の構成">
+&lt;h3 id="hahahugoshortcode44s25hbhb-の構成">
  &lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)
 &lt;/span>
  の構成
- &lt;a class="anchor" href="#hahahugoshortcode46s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode44s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)
@@ -2470,7 +2470,7 @@ N^{(k)}=\{(n_1,n_2,\dots,n_k)\in\mathbb{N}^k\mid 1\le n_1&lt;\dots &lt; n_k\}
 &lt;/h2>
 &lt;p>本ページで説明するディレクトリ構成の CMake プロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
 &lt;p>&lt;a href="https://github.com/htakeuchi0/cmake_sample">https://github.com/htakeuchi0/cmake_sample&lt;/a>&lt;/p>
-&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;p>本ページは CC BY 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
 &lt;h2 id="準備">
  準備
  &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>

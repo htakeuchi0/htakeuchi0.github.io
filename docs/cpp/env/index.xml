@@ -14,7 +14,7 @@
 &lt;/h2>
 &lt;p>本ページで説明するディレクトリ構成のプロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
 &lt;p>&lt;a href="https://github.com/htakeuchi0/cpp_env_sample">https://github.com/htakeuchi0/cpp_env_sample&lt;/a>&lt;/p>
-&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;p>本ページは CC BY 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
 &lt;h2 id="動作環境">
  動作環境
  &lt;a class="anchor" href="#%e5%8b%95%e4%bd%9c%e7%92%b0%e5%a2%83">#&lt;/a>
@@ -193,7 +193,7 @@
 &lt;/h2>
 &lt;p>本ページで説明するディレクトリ構成の autoconf プロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
 &lt;p>&lt;a href="https://github.com/htakeuchi0/autoconf_sample">https://github.com/htakeuchi0/autoconf_sample&lt;/a>&lt;/p>
-&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;p>本ページは CC BY 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
 &lt;h2 id="準備">
  準備
  &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
@@ -283,7 +283,7 @@
 &lt;/h2>
 &lt;p>本ページで説明するディレクトリ構成の CMake プロジェクトは，以下の Github リポジトリ &lt;a href="#cite:1">[1]&lt;/a> として公開しています．&lt;/p>
 &lt;p>&lt;a href="https://github.com/htakeuchi0/cmake_sample">https://github.com/htakeuchi0/cmake_sample&lt;/a>&lt;/p>
-&lt;p>本ページは CC BY-ND 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
+&lt;p>本ページは CC BY 4.0 のもとで提供していますが，このリポジトリはMITライセンスで公開しています．&lt;/p>
 &lt;h2 id="準備">
  準備
  &lt;a class="anchor" href="#%e6%ba%96%e5%82%99">#&lt;/a>
