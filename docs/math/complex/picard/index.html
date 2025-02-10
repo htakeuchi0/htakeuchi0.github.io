@@ -1,0 +1,566 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Picard の定理
+  #
+
+
+  概要
+  #
+
+複素数上で定義された関数を扱う分野は，複素解析や 函数論 と呼ばれます．
+複素解析・函数論の教科書は多く執筆されていますが，吉田洋一の『函数論』[1] が古典的名著として知られています．
+本ページでは，その中から，Picard の定理 について概説します．
+Picard の定理は 真性特異点 の性質を述べた定理です．
+この定理から，真性特異点のまわりでは函数が複雑なふるまいをすることがわかります．
+真性特異点とは 
+
+
+
+  \(\exp(1/z)\)
+
+ の 
+  \(z=0\)
+
+ のような点をいいます．
+
+  \(1/z\)
+
+ の 
+  \(z=0\)
+
+ と似ていますが，これは真性特異点ではありません．
+
+  \(1/z\)
+
+ の 
+  \(z=0\)
+
+ のまわりより，
+  \(\exp(1/z)\)
+
+ の 
+  \(z=0\)
+
+ のまわりの方が，函数は様々な値をとります．
+
+  Picard の定理
+  #
+
+[1] の 
+  \(\S\)
+
+59 では，以下の主張がなされています．
+
+Theorem 1 (Picard の定理 [1]).
+\(f(z)\) は \(0<|z-c|<R\) で有理型で，\(c\) は \(f(z)\) の真性特異点であるとする．しかるときは
+\[ 0<|z-c|<R\quad\text{では}\quad f(z)\neq\omega\]
+であるような \(\omega\) は，もしあるにしても，その数は2個を超えることはない．
+
+
+  \(f\)
+
+ が有理型という仮定がありますが，これが正則である場合の記述を目にすることの方が多いかもしれません．"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/complex/picard/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="Picard の定理"><meta property="og:description" content="Picard の定理 # 概要 # 複素数上で定義された関数を扱う分野は，複素解析や 函数論 と呼ばれます．
+複素解析・函数論の教科書は多く執筆されていますが，吉田洋一の『函数論』[1] が古典的名著として知られています．
+本ページでは，その中から，Picard の定理 について概説します．
+Picard の定理は 真性特異点 の性質を述べた定理です． この定理から，真性特異点のまわりでは函数が複雑なふるまいをすることがわかります．
+真性特異点とは \(\exp(1/z)\) の \(z=0\) のような点をいいます． \(1/z\) の \(z=0\) と似ていますが，これは真性特異点ではありません． \(1/z\) の \(z=0\) のまわりより， \(\exp(1/z)\) の \(z=0\) のまわりの方が，函数は様々な値をとります．
+Picard の定理 # [1] の \(\S\) 59 では，以下の主張がなされています．
+Theorem 1 (Picard の定理 [1]). \(f(z)\) は \(0<|z-c|<R\) で有理型で，\(c\) は \(f(z)\) の真性特異点であるとする．しかるときは
+\[ 0<|z-c|<R\quad\text{では}\quad f(z)\neq\omega\]
+であるような \(\omega\) は，もしあるにしても，その数は2個を超えることはない．
+\(f\) が有理型という仮定がありますが，これが正則である場合の記述を目にすることの方が多いかもしれません．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2025-02-10T20:57:18+09:00"><title>Picard の定理 | htakeuchi0 のノート</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://htakeuchi0.github.io/docs/math/complex/picard/><link rel=stylesheet href=/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css integrity="sha256-Q0A154hcf10SgYvZ8RHPGgklxvt4OCZnOBw9Xto/tPE=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/complex/>函数論</a><ul><li><a href=/docs/math/complex/picard/ class=active>Picard の定理</a></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li><li><a href=/docs/others/macroeconomics/>マクロ経済学</a><ul><li><a href=/docs/others/macroeconomics/jones-1/>ジョーンズ マクロ経済学Ⅰ</a></li></ul></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Picard の定理</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#picard-の定理-1>Picard の定理</a></li><li><a href=#用語や関連する概念>用語や関連する概念</a><ul><li><a href=#有理型真性特異点>有理型・真性特異点</a></li><li><a href=#無限遠点>無限遠点</a></li></ul></li><li><a href=#picard-の定理の証明>Picard の定理の証明</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=picard-の定理>Picard の定理
+<a class=anchor href=#picard-%e3%81%ae%e5%ae%9a%e7%90%86>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>複素数上で定義された関数を扱う分野は，複素解析や <strong>函数論</strong> と呼ばれます．</p><p>複素解析・函数論の教科書は多く執筆されていますが，吉田洋一の『函数論』<a href=#cite:1>[1]</a> が古典的名著として知られています．</p><p>本ページでは，その中から，<strong>Picard の定理</strong> について概説します．</p><p>Picard の定理は <strong>真性特異点</strong> の性質を述べた定理です．
+この定理から，真性特異点のまわりでは函数が複雑なふるまいをすることがわかります．</p><p>真性特異点とは
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\(\exp(1/z)\)
+</span>の <span>\(z=0\)
+</span>のような点をいいます．
+<span>\(1/z\)
+</span>の <span>\(z=0\)
+</span>と似ていますが，これは真性特異点ではありません．
+<span>\(1/z\)
+</span>の <span>\(z=0\)
+</span>のまわりより，<span>
+\(\exp(1/z)\)
+</span>の <span>\(z=0\)
+</span>のまわりの方が，函数は様々な値をとります．</p><h2 id=picard-の定理-1>Picard の定理
+<a class=anchor href=#picard-%e3%81%ae%e5%ae%9a%e7%90%86-1>#</a></h2><p><a href=#cite:1>[1]</a> の <span>\(\S\)
+</span>59 では，以下の主張がなされています．</p><blockquote class="book-hint info"><p><b>Theorem 1</b> (Picard の定理 <a href=#cite:1>[1]</a>).
+\(f(z)\) は \(0&lt;|z-c|&lt;R\) で有理型で，\(c\) は \(f(z)\) の真性特異点であるとする．しかるときは</p><p>\[ 0&lt;|z-c|&lt;R\quad\text{では}\quad f(z)\neq\omega\]</p><p>であるような \(\omega\) は，もしあるにしても，その数は2個を超えることはない．</p></blockquote><p><span>\(f\)
+</span>が有理型という仮定がありますが，これが正則である場合の記述を目にすることの方が多いかもしれません．</p><p>さらに，<a href=#cite:1>[1]</a> では，この定理から，以下がいえることも言及されています．</p><blockquote class="book-hint info"><p><b>Corollary 2</b> (<a href=#cite:1>[1]</a>).
+\(f(z)\) は \(0&lt;|z-c|&lt;R\) で有理型で，\(c\) は \(f(z)\) の真性特異点であるとする．\(\delta\le R\) とする．</p><p>\[ 0&lt;|z-c|&lt;\delta\quad\text{では}\quad f(z)\neq\omega\]</p><p>であるような \(\omega\) は，もしあるにしても，その数は2個を超えることはない．</p></blockquote><blockquote class="book-hint info"><p><b>Corollary 3</b> (<a href=#cite:1>[1]</a>).
+\(f(z)\) は \(0&lt;|z-c|&lt;R\) で有理型で，\(c\) は \(f(z)\) の真性特異点であるとする．</p><p>\[ 0&lt;|z-c|&lt;R\quad\text{では}\quad f(z)=\omega\]</p><p>であるような \(z\) が高々有限個しかない \(\omega\) （<strong>Picard の除外値</strong>）はあるにしても2個もしくは1個である．</p></blockquote><p>つまり，<strong>真性特異点のまわりでは，その有理型函数は，高々2個の例外を除き，すべての値を無限回とる</strong> ということになり，要するに，函数は真性特異点のまわりで <strong>“大暴れする”</strong> ということになります．</p><p>本ページでは，この定理に関する用語・概念や証明の概略を <a href=#cite:1>[1]</a> に沿ってまとめます．</p><h2 id=用語や関連する概念>用語や関連する概念
+<a class=anchor href=#%e7%94%a8%e8%aa%9e%e3%82%84%e9%96%a2%e9%80%a3%e3%81%99%e3%82%8b%e6%a6%82%e5%bf%b5>#</a></h2><h3 id=有理型真性特異点>有理型・真性特異点
+<a class=anchor href=#%e6%9c%89%e7%90%86%e5%9e%8b%e7%9c%9f%e6%80%a7%e7%89%b9%e7%95%b0%e7%82%b9>#</a></h3><p>まずは，Theorem 1 の内容を理解するため，用語や関連する概念の説明をします．
+ただし，ここではその目的で必要な説明に絞り，ごく基本的なことや，本論に関係しない詳細な議論は適宜省略します．</p><p><span>\(\mathbb{C}\)
+</span>を複素数全体の集合とします．</p><p><span>\(D\subseteq\mathbb{C}\)
+</span>が <strong>領域</strong> であるとは，<span>
+\(D\)
+</span>上の任意の2点が <span>\(D\)
+</span>上の曲線で結べることをいいます．</p><p>函数 <span>\(f:D\to\mathbb{C}\)
+</span>を考えます．
+このような函数を <span>\(D\)
+</span>上の函数と呼ぶことにします．
+<span>\(f\)
+</span>が <span>\(D\)
+</span>のすべての点で微分可能なら，<span>
+\(f\)
+</span>は <span>\(D\)
+</span>上で <strong>正則</strong> であるといいます．
+ここで，<span>
+\(f\)
+</span>が <span>\(c\in D\)
+</span>で <strong>微分可能</strong> であるとは，
+<span>\[
+\frac{f(z)-f(c)}{z-c}
+\]
+</span>の <span>\(z\to c\)
+</span>における（有限な）極限値が存在することをいいます．</p><p><span>\(\{x\mid R'<|z-c|< R\}\,(0\le R'< R\le+\infty)\)
+</span>という領域を考えます．
+ただし，<span>
+\(R=+\infty\)
+</span>の場合は <span>\(\{x\mid R'<|z-c|\}\,(0\le R')\)
+</span>を指すものとします．</p><p>いま，<span>
+\(f\)
+</span>が <span>\(\{x\mid R'<|z-c|< R\}\,(0\le R'< R\le+\infty)\)
+</span>上で正則であるとします．
+このとき，</p><span>\[
+f(z)=\sum_{n=0}^{\infty}c_n(z-c)^n+\sum_{n=1}^{\infty}\frac{c_{-n}}{(z-c)^n}
+\]</span><p>なる <span>\(\{c_n\}_{c\in\mathbb{Z}}\)
+</span>が一意に存在することが知られています（<strong>Laurant展開</strong>）．</p><p>特に，<span>
+\(f\)
+</span>が <span>\(\{x\mid 0<|z-c|< R\}\,(0< R\le+\infty)\)
+</span>上で正則であるならば，<span>
+\(0<|z-c|< R\)
+</span>において，</p><span>\[
+f(z)=\sum_{n=0}^{\infty}c_n(z-c)^n+\sum_{n=1}^{\infty}\frac{c_{-n}}{(z-c)^n}
+\]</span><p>なる <span>\(\{c_n\}_{c\in\mathbb{Z}}\)
+</span>が一意に存在します．</p><p>ここで，ある <span>\(k\)
+</span>が存在し，<span>
+\(c_{-k}\neq0\)
+</span>かつ <span>\(n>k\)
+</span>ならば <span>\(c_{-n}=0\)
+</span>であるとき，<span>
+\(f\)
+</span>は <span>\(c\)
+</span>において <strong>極</strong> を有するといいます．</p><p>一方，すべての <span>\(n=1,2,\dots\)
+</span>について <span>\(c_{-n}=0\)
+</span>である場合，<span>
+\(c\)
+</span>は <span>\(f\)
+</span>の <strong>除去可能な特異点</strong> といいます．
+このとき，<span>
+\(f(c)=\lim_{z\to c}f(z)=c_0\)
+</span>と定めると，<span>
+\(f\)
+</span>は <span>\(\{z\mid|z-c|< R\}\)
+</span>において正則であるようにできます．
+以降，<strong>除去可能な特異点は，この方法で函数がその近傍で正則になるように直してしまうことにします．</strong></p><p><span>\(D\)
+</span>を領域とします．<span>
+\(E\subseteq D\)
+</span>が存在し，<span>
+\(D'=D-E\)
+</span>が領域であり，<span>
+\(f|_{D'}\)
+</span>が <span>\(D'\)
+</span>上正則で，<span>
+\(E\)
+</span>の各点で <span>\(f\)
+</span>が極を有する場合，<span>
+\(f\)
+</span>は <span>\(D\)
+</span>で <strong>有理型</strong> であるといいます．</p><p>簡単にいうと，<strong>“その函数が領域 <span>\(D\)
+</span>の極を除いて正則ならば，その函数は <span>\(D\)
+</span>上で有理型という”</strong> ということです．</p><p>有理型函数の例としては，&ldquo;多項式分の多項式” の形で表される有理函数が挙げられます．</p><p>なお，正則函数のように，有理型函数でも，有理型函数 <span>\(f\)
+</span>は <span>\(c\in E\)
+</span>において極を有する，ということにします．</p><p>いま <span>\(f\)
+</span>を <span>\(\{z\mid |z-c|< R\}\)
+</span>上の函数とします．
+<span>\(f\)
+</span>が <span>\(\{z\mid 0<|z-c|< R\}\)
+</span>上有理型で <span>\(\{z\mid |z-c|< R\}\)
+</span>では有理型でない場合，<span>
+\(c\)
+</span>は <span>\(f\)
+</span>の <strong>真性特異点</strong> であるといいます．</p><p>真性特異点の例としては，冒頭に挙げたとおり，<span>
+\(\exp(1/z)\)
+</span>の <span>\(z=0\)
+</span>があります．</p><p>以上により，有理型函数と真性特異点の定義を確認することができました．</p><h3 id=無限遠点>無限遠点
+<a class=anchor href=#%e7%84%a1%e9%99%90%e9%81%a0%e7%82%b9>#</a></h3><p>複素数の世界，特に有理型函数の議論においては，複素平面の原点から無限に離れた点を1つの点とみなし，<span>
+\(\mathbb{C}\)
+</span>の代わりに，この <strong>無限遠点</strong> <span>\(\infty\)
+</span>を付け加えた <span>\(\mathbb{C}\cup\{\infty\}\)
+</span>を考えると議論がしやすいことがあります．</p><p>本節では，その取り扱いについて補足します．
+なぜなら，Theorem 1 は <span>\(\mathbb{C}\cup\{\infty\}\)
+</span>の上で考えることが前提となっているからです．</p><p>まずは，<span>
+\(f:\mathbb{C}\to\mathbb{C}\)
+</span>の値域 <span>\(\mathbb{C}\)
+</span>を <span>\(\mathbb{C}\cup\{\infty\}\)
+</span>に拡張する考え方について説明します．</p><p><span>\(f\)
+</span>を領域 <span>\(D\)
+</span>上の函数とします．
+<span>\(c\in D\)
+</span>について
+<span>\[
+\lim_{z\to c}|f(z)|=+\infty
+\]
+</span>であることを，無限遠点 <span>\(\infty\)
+</span>を使って
+<span>\(
+f(c)=\infty
+\)
+</span>と表します．</p><p>これで，函数 <span>\(f\)
+</span>の値が <span>\(\infty\)
+</span>である場合が定義できました．
+なお，有理型函数 <span>\(f\)
+</span>が <span>\(c\)
+</span>において極を有するなら，<span>
+\(f(c)=\infty\)
+</span>であることが知られています．</p><p>次に，有理型関数 <span>\(f:\mathbb{C}\to\mathbb{C}\cup\{\infty\}\)
+</span>の定義域 <span>\(\mathbb{C}\)
+</span>を <span>\(\mathbb{C}\cup\{\infty\}\)
+</span>に拡張する考え方について説明します．
+まずは，極，真性特異点，正則の概念を，<span>
+\(z=\infty\)
+</span>やその近傍で定義できるようにします．</p><p><span>\(R>0\)
+</span>とします．<span>
+\(f\)
+</span>は <span>\(\{z\mid |z|>R\}\)
+</span>で有理型であるとします．</p><p><span>\(E=\{c\mid f\text{ は }1/c\text{ において極を有する}\}\)
+</span>とすると，<span>
+\(D'=\{\zeta\mid0<|\zeta|<1/R\}-E\)
+</span>は領域になることが示せます．
+ここで，<span>
+\(D'\)
+</span>上の函数 <span>\(\phi_f\)
+</span>を <span>\(\phi_f(\zeta)=f(1/\zeta)\)
+</span>で定めます．
+このとき，</p><ul><li><span>\(\phi_f(\zeta)\)
+</span>が <span>\(\zeta=0\)
+</span>の近傍で正則ならば，<span>
+\(f\)
+</span>は <span>\(z=\infty\)
+</span>の近傍で正則であるといいます．</li><li><span>\(\phi_f(\zeta)\)
+</span>が <span>\(\zeta=0\)
+</span>において極を有するならば，<span>
+\(f\)
+</span>は <span>\(z=\infty\)
+</span>で極を有するといいます．</li><li><span>\(\phi_f(\zeta)\)
+</span>が <span>\(\zeta=0\)
+</span>において真性特異点を有するならば，<span>
+\(f\)
+</span>は <span>\(z=\infty\)
+</span>で真性特異点を有するといいます．</li></ul><p>これで，極，真性特異点，正則の概念を，<span>
+\(z=\infty\)
+</span>やその近傍で定義できるようにできました．</p><p>次に，有理型函数の <span>\(z=\infty\)
+</span>における値が定義できるようにします．</p><p><span>\(R'\ge R\)
+</span>を選び，<span>
+\(0<|\zeta|<1/R'\)
+</span>で <span>\(f(1/\zeta)\)
+</span>が正則で，<span>
+\(f\)
+</span>が <span>\(z=\infty\)
+</span>の近傍でも正則なら，<span>
+\(|z|>R'\)
+</span>において</p><p><span>\[
+f(z)=\sum_{n=0}^\infty\frac{c_n}{z^n}
+\]
+</span>なる <span>\(\{c_n\}_{n=0,1,\dots}\)
+</span>が一意に存在することが示せます．
+これを利用して，<span>
+\(f\)
+</span>が <span>\(z=\infty\)
+</span>の近傍で正則ならば，<span>
+\(f(\infty)=c_0\)
+</span>とします．
+また，<span>
+\(f\)
+</span>が <span>\(z=\infty\)
+</span>で極を有するなら，<span>
+\(f(\infty)=\infty\)
+</span>とします．</p><p>以上により，<span>
+\(\mathbb{C}\)
+</span>の代わりに <span>\(\mathbb{C}\cup\{\infty\}\)
+</span>を考えることで，領域 <span>\(D\subseteq\mathbb{C}\cup\{\infty\}\)
+</span>上で有理型な函数 <span>\(f\)
+</span>は，<span>
+\(D\)
+</span>の（極や無限遠点を含む）すべての点でその値が定義されることになります．</p><p>これで，Theorem 1 の主張が正確に理解できるようになりました．</p><h2 id=picard-の定理の証明>Picard の定理の証明
+<a class=anchor href=#picard-%e3%81%ae%e5%ae%9a%e7%90%86%e3%81%ae%e8%a8%bc%e6%98%8e>#</a></h2><p>以降では，Picard の定理の証明について述べます．
+<a href=#cite:1>[1]</a> に従い，<strong>Schottky の定理</strong> を用いて証明しますが，いくつかの補題や定理の証明は省略します．</p><p>本ページでは認めて使う補題と定理は以下のとおりです．</p><blockquote class="book-hint info"><p><b>Lemma 4</b>.
+\(f\) は \(\{z\mid 0&lt;|z-c|&lt;R\}\) で正則な函数とする．\(\{R_\nu\}\) を \(R>R_1>\dots>R_{\nu}>\dots\) であって，\(R_\nu\to0\) であるような数列とする．すべての円 \(\{z\mid |z-c|=R_\nu\}\) の上で \(|f(z)|&lt; M\) であるような定数 \(M\) が存在するならば，\(c\) は \(f\) の除去可能な特異点である．</p></blockquote><blockquote class="book-hint info"><p><b>Lemma 5</b>.
+\(R>0\) とする．\(f\) を \(\{z\mid 0&lt;|z-c|&lt;R\}\) で有理型な函数とし，\(f\) は \(c\) において真性特異点を有するとする．
+このとき，
+\[ c_n\neq c,\quad c_n\to c,\quad f(c_n)=\gamma \]
+であるような複素数 \(\gamma\) と点列 \(\{c_n\}\) が存在する．</p></blockquote><blockquote class="book-hint info"><p><b>Theorem 6</b> (Schottky).
+\(R>0\) とする．\(f\) が \(\{z\mid |z|&lt;R\}\) 上正則で，\(f(z)\neq0\), \(f(z)\neq1\) を満たすとする．
+\(f\) が
+\[ f(z)=\sum_{n=0}^\infty c_nz^n \]
+と展開されるとする．
+\(0\le\theta&lt;1\), \(|z|\le\theta R\) に対して，\(c_0\), \(\theta\) のみによって決まる正の定数 \(S(c_0,\theta)\) が存在し，
+\[ |f(z)|&lt;S(c_0,\theta) \]
+が成り立つ．</p></blockquote><p>ここで，Picard の定理の証明に向けて，いくつかの補題を示しておきます．</p><blockquote class="book-hint info"><p><b>Lemma 7</b>.
+\(R>0\) とする．\(f\) を \(\{z\mid 0&lt;|z-c|&lt;R\}\) で有理型な函数とし，\(f\) は値に \(\omega_1,\omega_2,\omega_3\) をとらないとする．ただし，\(\omega_1,\omega_2,\omega_3\) は相異なるものとする．</p><p>\(\omega_1,\omega_2,\omega_3\) がすべて有限であれば，</p><p>\[ g(z)=\frac{f(c+zR)-\omega_1}{f(c+zR)-\omega_3}\cdot\frac{\omega_2-\omega_3}{\omega_2-\omega_1},\quad 0&lt;|z|&lt;1 \]</p><p>とする．
+そうでない場合は，一般性を失わず \(\omega_3=\infty\) として，</p><p>\[ g(z)=\frac{f(c+zR)-\omega_1}{\omega_2-\omega_1},\quad 0&lt;|z|&lt;1 \]</p><p>とする．このとき，以下が成り立つ．</p><ol><li>\(g\) は \(\{z\mid 0&lt;|z|&lt;1\}\) 上で正則である，</li><li>\(z=0\) は \(g\) の真性特異点である，</li><li>\(g(z)\not=0\),</li><li>\(g(z)\not=1\).</li></ol></blockquote><p>Lemma 7 を示します．</p><p><span>\(D=\{z\mid 0<|z-c|< R\}\)
+</span>とします．
+<span>\(f\)
+</span>は <span>\(D\)
+</span>で有理型なので，ある <span>\(E\subseteq D\)
+</span>が存在し，<span>
+\(D-E\)
+</span>で <span>\(f\)
+</span>は正則で，<span>
+\(E\)
+</span>の各点において <span>\(f\)
+</span>は極を有します．</p><p>また，<span>
+\(|(c+zR)-c|=R|z|\)
+</span>より，<span>
+\(0<|z|<1\)
+</span>ならば <span>\(0<|(c+zR)-c|< R\)
+</span>となります．</p><p>そして，<span>
+\(g(z)\)
+</span>において <span>\(z=0\)
+</span>であることは，<span>
+\(f(z)\)
+</span>において <span>\(z=c+0\cdot R=c\)
+</span>に対応するので，<span>
+\(z=0\)
+</span>は <span>\(g\)
+</span>の真性特異点です．</p><p>これで2が示せました．
+残りの 1, 3, 4 は <span>\(\omega_1,\omega_2,\omega_3\)
+</span>がすべて有限か，そうでないかの場合に分けて示します．</p><p>まず \(\omega_1,\omega_2,\omega_3\) がすべて有限とします．</p><span>\[
+g(z)=\frac{f(c+zR)-\omega_1}{f(c+zR)-\omega_3}\cdot\frac{\omega_2-\omega_3}{\omega_2-\omega_1},\quad 0<|z|<1
+\]</span><p>とします．
+<span>\(g\)
+</span>は有理型函数になります．</p><p>仮定より <span>\(f(c+zR)=\omega_3\)
+</span>となる <span>\(0<|z|<1\)
+</span>は存在しないため，分母は0になりません．</p><p><span>\(c'\in E\)
+</span>について <span>\(\gamma=(c'-c)/R\)
+</span>とします．<span>
+\(E\subseteq D\)
+</span>より， <span>\(0<|\gamma|<1\)
+</span>です．
+このとき，</p><span>\[
+\begin{aligned}
+&\frac{f(c+z R)-\omega_1}{f(c+z R)-\omega_3}\cdot\frac{\omega_2-\omega_3}{\omega_2-\omega_1}\\
+&=\frac{1-\omega_1/f(c+z R)}{1-\omega_3/f(c+z R)}\cdot\frac{\omega_2-\omega_3}{\omega_2-\omega_1}\\
+&\to \frac{\omega_2-\omega_3}{\omega_2-\omega_1}\quad (z\to\gamma)
+\end{aligned}
+\]</span><p>となり，これは有限の値なので，<span>
+\(\gamma\)
+</span>は <span>\(g\)
+</span>の除去可能な特異点となります．</p><p>よって，各 <span>\(c'\in E\)
+</span>について，<span>
+\(\gamma=(c'-c)/R\)
+</span>として，<span>
+\(g(\gamma)=(\omega_2-\omega_3)/(\omega_2-\omega_1)\)
+</span>と定めれば，<span>
+\(g\)
+</span>は <span>\(\{z\mid0<|z|<1\}\)
+</span>で正則となります．
+これで1が示せました．</p><p><span>\(0<|z|<1\)
+</span>ならば <span>\(f(c+zR)\not=\omega_1\)
+</span>なので，<span>
+\(g(z)\not=0\)
+</span>です．
+ここで，<span>
+\(g(\gamma)=1\)
+</span>となる <span>\(0<|\gamma|<1\)
+</span>が存在するとします．
+<span>\(g(\gamma)=1\)
+</span>なので，
+<span>\[
+(f(c+\gamma R)-\omega_3)(\omega_2-\omega_1)=(f(c+\gamma R)-\omega_1)(\omega_2-\omega_3)
+\]
+</span>となりますが，
+<span>\[
+f(c+\gamma R)=\frac{\omega_2(\omega_3-\omega_1)}{\omega_3-\omega_1}=\omega_2
+\]
+</span>となり矛盾します．
+よって，<span>
+\(0<|z|<1\)
+</span>ならば <span>\(g(z)\neq1\)
+</span>です．
+これで，3, 4が示せました．</p><p>次に，<span>
+\(\omega_3=\infty\)
+</span>とします．</p><span>\[
+g(z)=\frac{f(c+zR)-\omega_1}{\omega_2-\omega_1}
+\]</span><p>とします．
+<span>\(g\)
+</span>は有理型函数になります．</p><p>このとき，<span>
+\(f(c+zR)\)
+</span>は <span>\(\omega_3=\infty\)
+</span>をとらないので，<span>
+\(E=\emptyset\)
+</span>となり，<span>
+\(0<|z|<1\)
+</span>において <span>\(z\mapsto f(c+zR)\)
+</span>は正則です．
+よって，<span>
+\(0<|z|<1\)
+</span>において <span>\(g\)
+</span>は正則です．
+これで1が示せました．</p><p><span>\(0<|z|<1\)
+</span>ならば <span>\(f(c+zR)\not=\omega_1\)
+</span>なので，<span>
+\(g(z)\not=0\)
+</span>です．
+ここで，<span>
+\(g(\gamma)=1\)
+</span>となる <span>\(0<|\gamma|<1\)
+</span>が存在するとします．
+<span>\(g(\gamma)=1\)
+</span>なので，<span>
+\(f(c+zR)=\omega_2\)
+</span>となり矛盾します．
+よって，<span>
+\(0<|z|<1\)
+</span>ならば <span>\(g(z)\neq1\)
+</span>です．
+これで，3, 4が示せました．</p><p>以上より，Lemma 7 が示せました．</p><blockquote class="book-hint info"><p><b>Lemma 8</b>.
+\(c\ge0\) とする．\(|z|&lt; c\) ならば \(|e^z|&lt; e^c\) である．</p></blockquote><p>Lemma 8 を示します．</p><p><span>\(c\ge0\)
+</span>とし，<span>
+\(|z|< c\)
+</span>とします．
+<span>\(z=x+iy\)
+</span>, <span>\(x,y\in\mathbb{R}\)
+</span>とします．
+<span>\(|z|=\sqrt{x^2+y^2}\)
+</span>より <span>\(|z|< c\)
+</span>なら <span>\(x< c\)
+</span>です．
+これは例えば，<span>
+\(x\ge c\)
+</span>なら <span>\(|z|=\sqrt{x^2+y^2}\ge\sqrt{c^2+y^2}\ge\sqrt{c^2}=c\)
+</span>より矛盾することから確かめられます．</p><p>すると，
+<span>\[
+\begin{aligned}
+|e^z|&=|e^{x+iy}|\\
+&=|e^xe^{iy}|\\
+&=|e^x||e^{iy}|\\
+&=e^x|e^i|^y\\
+&=e^x\\
+&< e^c\\
+\end{aligned}
+\]</span></p><p>より成り立ちます．</p><blockquote class="book-hint info"><p><b>Lemma 9</b>.
+函数 \(g\) が以下を満たすとする．</p><ol><li>\(g\) は \(\{z\mid 0&lt;|z|&lt;1\}\) 上で正則である，</li><li>\(g(z)\not=0\),</li><li>\(g(z)\not=1\).</li></ol><p>複素数 \(c'\) が \(0&lt;|c'|&lt;e^{-2\pi}\) を満たすとする．
+このとき，\(h(\zeta)=g(c'e^{2\pi i\zeta})\) は \(\{\zeta\mid|\zeta|&lt;1\}\) において正則で，\(h(\zeta)\neq0\), \(h(\zeta)\neq1\) である．</p></blockquote><p>Lemma 9 を示します．</p><p>複素数 <span>\(c'\)
+</span>が <span>\(0<|c'|< e^{-2\pi i}\)
+</span>を満たすとします．<span>
+\(|\zeta|<1\)
+</span>とします．</p><p>すると，<span>
+\(|2\pi i\zeta|=2\pi|\zeta|<2\pi\)
+</span>なので，Lemma 8 より <span>\(|e^{2\pi i\zeta}|< e^{2\pi}\)
+</span>です．</p><p>よって，<span>
+\(|c'e^{2\pi i\zeta}|=|c'|\cdot|e^{2\pi i\zeta}|<|c'|\cdot|e^{2\pi}|< e^{-2\pi}e^{2\pi}=1\)
+</span>です．また，<span>
+\(|c'e^{2\pi i\zeta}|>0\)
+</span>なので，<span>
+\(0<|c'e^{2\pi i\zeta}|<1\)
+</span>です．
+したがって，<span>
+\(g\)
+</span>は <span>\(\{z\mid 0<|z|<1\}\)
+</span>上で正則なので，<span>
+\(h\)
+</span>は <span>\(\{\zeta\mid|\zeta|<1\}\)
+</span>において正則で，<span>
+\(g(z)\neq0\)
+</span>, <span>\(g(z)\neq1\)
+</span>から <span>\(h(\zeta)\neq0\)
+</span>, <span>\(h(\zeta)\neq1\)
+</span>とわかります．</p><p>以上より，Lemma 9 が成り立ちます．</p><p>さて，ここから Picard の定理を証明します．
+Picard の定理を再掲すると以下のとおりです．</p><blockquote class="book-hint info"><p><strong>Theorem 1</strong> (Picard の定理 <a href=#cite:1>[1]</a>). \(f(z)\) は \(0&lt;|z-c|&lt;R\) で有理型で，\(c\) は \(f(z)\) の真性特異点であるとする．しかるときは</p><p>\[ 0&lt;|z-c|&lt;R\quad\text{では}\quad f(z)\neq\omega\]</p><p>であるような \(\omega\) は，もしあるにしても，その数は2個を超えることはない．</p></blockquote><p>Theorem 1 を示します．</p><p><span>\(R>0\)
+</span>とします．
+仮に，<span>
+\(\omega\)
+</span>の3つの相異なる値 <span>\(\omega_1,\omega_2,\omega_3\)
+</span>について</p><span>\[
+0<|z-c|< R\quad\text{では}\quad f(z)\neq\omega
+\]</span><p>であるとします．</p><p><span>\(\omega_1,\omega_2,\omega_3\)
+</span>がすべて有限であれば，</p><span>\[
+g(z)=\frac{f(c+zR)-\omega_1}{f(c+zR)-\omega_3}\cdot\frac{\omega_2-\omega_3}{\omega_2-\omega_1},\quad 0<|z|<1
+\]</span><p>として，そうでない場合は，一般性を失わず <span>\(\omega_3=\infty\)
+</span>として，</p><span>\[
+g(z)=\frac{f(c+zR)-\omega_1}{\omega_2-\omega_1},\quad 0<|z|<1
+\]</span><p>とします．このとき，Lemma 7 より，<span>
+\(g\)
+</span>は <span>\(\{z\mid 0<|z|<1\}\)
+</span>上で正則で，<span>
+\(g(z)\neq0\)
+</span>, <span>\(g(z)\neq1\)
+</span>で，<span>
+\(z=0\)
+</span>は <span>\(g\)
+</span>の真性特異点になります．</p><p>よって，Lemma 5 により，
+<span>\[
+c_\nu\neq0,\quad c_\nu\to0,\quad g(c_\nu)=\gamma
+\]
+</span>であるような点列 <span>\(\{c_\nu\}\)
+</span>と複素数 <span>\(\gamma\)
+</span>が存在します．</p><p>したがって，必要ならばこの点列の部分列をとることで，一般性を失わず，</p><span>\[
+e^{-2\pi}>|c_1|>|c_2|>\dots,\quad c_\nu\to0,\quad g(c_\nu)=\gamma
+\]</span><p>とすることができます．</p><p>各 <span>\(\nu\)
+</span>について，<span>
+\(g_\nu(\zeta)=g(c_\nu e^{2\pi i\zeta})\)
+</span>とします．
+すると，Lemma 9 より，<span>
+\(g_\nu\)
+</span>は <span>\(\{\zeta\mid |\zeta|<1\}\)
+</span>において正則で，<span>
+\(g_\nu(\zeta)\neq0\)
+</span>, <span>\(g_\nu(\zeta)\neq1\)
+</span>となります．
+すると，Schottky の定理 (Theorem 6) より，<span>
+\(|\zeta|\le(1/2)\cdot1\)
+</span>に対して，定数 <span>\(S(\gamma,1/2)\)
+</span>が存在し，<span>
+\(|g_\nu(\zeta)|< S(\gamma,1/2)\)
+</span>が成り立ちます．</p><p>ここで，<span>
+\(\zeta\in\mathbb{R}\)
+</span>ならば <span>\(|c_\nu e^{2\pi i\zeta}|=|c_\nu|\)
+</span>なので，<span>
+\(\zeta\in\mathbb{R}\cap\{\zeta\mid |\zeta|\le1/2\}\)
+</span>においては，<span>
+\(z=c_\nu e^{2\pi i\zeta}\)
+</span>とおくと，<span>
+\(|z|=|c_\nu|\)
+</span>であって，<span>
+\(g(z)=g(c_\nu e^{2\pi i\zeta})=g_\nu(\zeta)\)
+</span>より，<span>
+\(|g(z)|< S(\gamma,1/2)\)
+</span>となります．</p><p><span>\(R_\nu=|c_\nu|\)
+</span>, <span>\(M=S(\gamma,1/2)\)
+</span>とおくと，<span>
+\(R_1>R_2>\dots\)
+</span>, <span>\(R_\nu\to0\)
+</span>であり，<span>
+\(\{z\mid |z|=R_\nu\}\)
+</span>の上で <span>\(|g(z)|< M\)
+</span>なので，Lemma 4 より，<span>
+\(z=0\)
+</span>は <span>\(g\)
+</span>の除去可能な特異点となります．</p><p>これは <span>\(z=0\)
+</span>が <span>\(g\)
+</span>の真性特異点であることに反するので，背理法によって主張が示せました．</p><p>なお，Corollay 2 は，<span>
+\(R\)
+</span>を <span>\(\delta\)
+</span>に置き換えても証明が成り立つことからわかり，Corollary 3 は，除外値が3個存在し，<span>
+\(\omega_1,\omega_2,\omega_3\)
+</span>であるとすると，<span>
+\(\delta=\argmin_z\{|z-c|\mid f(z)\in\{\omega_1,\omega_2,\omega_3\}\}\)
+</span>とおくと，<span>
+\(0<|z-c|<\delta\)
+</span>では <span>\(f(z)\notin\{\omega_1,\omega_2,\omega_3\}\)
+</span>となり，Corollary 2 に反することから示せます．</p><p>また，<span>
+\(f\)
+</span>が <span>\(0<|z-c|< R\)
+</span>で正則な場合は，<span>
+\(\infty\)
+</span>をとらないことがわかっているので，Theorem 1 や Collorary 2, 3 にある <span>\(\omega\)
+</span>は，ほかにあっても1個ということになります．</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，Picard の定理について概説しました．
+はじめに，Picard の定理を説明し，定理に関連する用語や概念を簡単にまとめ，その後，いくつかの事実を認めて証明を述べました．</p><p>Picard の定理は，真性特異点の強烈な特徴を述べた，非常に面白い定理と思います．</p><p>証明や周辺の議論に関する詳細は <a href=#cite:1>[1]</a> をご参照ください．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>[1] 吉田洋一，函数論 第2版，岩波全書，東京，1965.</p></article><hr><p xmlns:cc=http://creativecommons.org/ns#>This work is licensed under <a href=https://creativecommons.org/licenses/by/4.0/deed.ja target=_blank rel="license noopener noreferrer" style=display:inline-block>CC BY 4.0<img style=height:22px!important;margin-left:3px;vertical-align:text-bottom src=https://mirrors.creativecommons.org/presskit/icons/cc.svg alt><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom src=https://mirrors.creativecommons.org/presskit/icons/by.svg alt></a></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/0e5dc853ad6f03adf88ac6a70fafa6b132c29f6d title='Last modified by htakeuchi0 | February 10, 2025' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>February 10, 2025</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#picard-の定理-1>Picard の定理</a></li><li><a href=#用語や関連する概念>用語や関連する概念</a><ul><li><a href=#有理型真性特異点>有理型・真性特異点</a></li><li><a href=#無限遠点>無限遠点</a></li></ul></li><li><a href=#picard-の定理の証明>Picard の定理の証明</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>
