@@ -1,0 +1,547 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  多項式
+  #
+
+
+  概要
+  #
+
+実数 
+
+
+
+  \(a_0,a_1,\dots,a_n\)
+
+ に対し，
+  \(X\)
+
+ という文字を導入して作られる
+
+  \[
+a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0
+\]
+
+
+は 多項式 と呼ばれます．
+
+  \(3X^2+2X-1\)
+
+ や 
+  \(X\)
+
+ がその例ですが，
+  \(X,Y\)
+
+ という2種類の文字を使った 
+  \(3X^2-3XY+2X-Y+1\)
+
+ や，3つ以上の文字を使った 
+  \(3XYZ+2Y\)
+
+ も多項式と呼ばれます．
+本ページでは，この多項式の定義についてまとめます．
+用語や構成は [1] を参考にしました．
+
+  用語の定義
+  #
+
+本論の前に，いくつかの用語と記号を定義します．
+
+  添字づけられた族
+  #
+
+
+  \(\Lambda,M\)
+
+ を集合とします．
+
+  \(a\)
+
+ を 
+  \(\Lambda\)
+
+ から 
+  \(M\)
+
+ への写像とします．
+
+  \(\lambda\in\Lambda\)
+
+ に対する 
+  \(a(\lambda)\)
+
+ を 
+  \(a_{\lambda}\)
+
+ と表し，
+
+  \(a\)
+
+ を 
+  \((a_{\lambda})_{\lambda\in\Lambda}\)
+
+ と表すことがあります．
+
+  \((a_{\lambda})_{\lambda\in\Lambda}\)
+
+ を 添字づけられた族 といい，
+  \(\Lambda\)
+
+ を 添字集合，
+  \(\lambda\in\Lambda\)
+
+ を 添字 と呼びます．"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/algebra/poly/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="多項式"><meta property="og:description" content="多項式 # 概要 # 実数 \(a_0,a_1,\dots,a_n\) に対し， \(X\) という文字を導入して作られる \[ a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0 \] は 多項式 と呼ばれます． \(3X^2+2X-1\) や \(X\) がその例ですが， \(X,Y\) という2種類の文字を使った \(3X^2-3XY+2X-Y+1\) や，3つ以上の文字を使った \(3XYZ+2Y\) も多項式と呼ばれます．
+本ページでは，この多項式の定義についてまとめます． 用語や構成は [1] を参考にしました．
+用語の定義 # 本論の前に，いくつかの用語と記号を定義します．
+添字づけられた族 # \(\Lambda,M\) を集合とします． \(a\) を \(\Lambda\) から \(M\) への写像とします． \(\lambda\in\Lambda\) に対する \(a(\lambda)\) を \(a_{\lambda}\) と表し， \(a\) を \((a_{\lambda})_{\lambda\in\Lambda}\) と表すことがあります． \((a_{\lambda})_{\lambda\in\Lambda}\) を 添字づけられた族 といい， \(\Lambda\) を 添字集合， \(\lambda\in\Lambda\) を 添字 と呼びます．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2025-02-22T00:52:19+09:00"><title>多項式 | htakeuchi0 のノート</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://htakeuchi0.github.io/docs/math/algebra/poly/><link rel=stylesheet href=/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css integrity="sha256-Q0A154hcf10SgYvZ8RHPGgklxvt4OCZnOBw9Xto/tPE=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/algebra/>代数</a><ul><li><a href=/docs/math/algebra/poly/ class=active>多項式</a></li></ul></li><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/complex/>函数論</a><ul><li><a href=/docs/math/complex/picard/>Picard の定理</a></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li><li><a href=/docs/others/macroeconomics/>マクロ経済学</a><ul><li><a href=/docs/others/macroeconomics/jones-1/>ジョーンズ マクロ経済学Ⅰ</a></li></ul></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>多項式</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#用語の定義>用語の定義</a><ul><li><a href=#添字づけられた族>添字づけられた族</a></li><li><a href=#集合族>集合族</a></li><li><a href=#直積>直積</a></li><li><a href=#二項演算>二項演算</a></li><li><a href=#単位的可換半群>単位的可換半群</a></li><li><a href=#単位的可換環>単位的可換環</a></li><li><a href=#体>体</a></li><li><a href=#単位的可換多元環>単位的可換多元環</a></li></ul></li><li><a href=#多項式の定義>多項式の定義</a></li><li><a href=#代入>代入</a></li><li><a href=#おわりに>おわりに</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=多項式>多項式
+<a class=anchor href=#%e5%a4%9a%e9%a0%85%e5%bc%8f>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>実数
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\(a_0,a_1,\dots,a_n\)
+</span>に対し，<span>
+\(X\)
+</span>という文字を導入して作られる
+<span>\[
+a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0
+\]
+</span>は <strong>多項式</strong> と呼ばれます．
+<span>\(3X^2+2X-1\)
+</span>や <span>\(X\)
+</span>がその例ですが，<span>
+\(X,Y\)
+</span>という2種類の文字を使った <span>\(3X^2-3XY+2X-Y+1\)
+</span>や，3つ以上の文字を使った <span>\(3XYZ+2Y\)
+</span>も多項式と呼ばれます．</p><p>本ページでは，この多項式の定義についてまとめます．
+用語や構成は <a href=#cite:1>[1]</a> を参考にしました．</p><h2 id=用語の定義>用語の定義
+<a class=anchor href=#%e7%94%a8%e8%aa%9e%e3%81%ae%e5%ae%9a%e7%be%a9>#</a></h2><p>本論の前に，いくつかの用語と記号を定義します．</p><h3 id=添字づけられた族>添字づけられた族
+<a class=anchor href=#%e6%b7%bb%e5%ad%97%e3%81%a5%e3%81%91%e3%82%89%e3%82%8c%e3%81%9f%e6%97%8f>#</a></h3><p><span>\(\Lambda,M\)
+</span>を集合とします．
+<span>\(a\)
+</span>を <span>\(\Lambda\)
+</span>から <span>\(M\)
+</span>への写像とします．
+<span>\(\lambda\in\Lambda\)
+</span>に対する <span>\(a(\lambda)\)
+</span>を <span>\(a_{\lambda}\)
+</span>と表し，
+<span>\(a\)
+</span>を <span>\((a_{\lambda})_{\lambda\in\Lambda}\)
+</span>と表すことがあります．
+<span>\((a_{\lambda})_{\lambda\in\Lambda}\)
+</span>を <strong>添字づけられた族</strong> といい，<span>
+\(\Lambda\)
+</span>を <strong>添字集合</strong>，<span>
+\(\lambda\in\Lambda\)
+</span>を <strong>添字</strong> と呼びます．</p><p>また，任意の <span>\(\lambda\in\Lambda\)
+</span>に対して <span>\(\alpha_\lambda=\alpha\)
+</span>となる <span>\(\alpha\in M\)
+</span>が存在するとき，<span>
+\((\alpha_\lambda)_{\lambda\in\Lambda}\)
+</span>を <span>\((\alpha)_{\lambda\in\Lambda}\)
+</span>と書くことがあります．</p><p>例えば，<span>
+\(\Lambda=\{1,2,\dots,\}\)
+</span>として <span>\(M\)
+</span>を実数全体の集合 <span>\(\mathbb{R}\)
+</span>とすると，<span>
+\((a_n)_{n\in\Lambda}\)
+</span>は実数列 <span>\((a_n)_{n=1,2,\dots}\)
+</span>となります．
+よって，添字付けられた族は，数列を一般化した定義と捉えることもできます．</p><h3 id=集合族>集合族
+<a class=anchor href=#%e9%9b%86%e5%90%88%e6%97%8f>#</a></h3><p><span>\(\mathfrak{M}\)
+</span>を集合とし，<span>
+\(\mathfrak{M}\)
+</span>の元もまた集合であるとします．
+<span>\(\Lambda\)
+</span>を集合とし，<span>
+\(M\)
+</span>を <span>\(\Lambda\)
+</span>から <span>\(\mathfrak{M}\)
+</span>への写像とします．
+このとき，<span>
+\(\Lambda\)
+</span>を添字集合とする添字付けられた族 <span>\((M_\lambda)_{\lambda\in\Lambda}\)
+</span>を <strong>集合族</strong> といいます．</p><h3 id=直積>直積
+<a class=anchor href=#%e7%9b%b4%e7%a9%8d>#</a></h3><p>集合族 <span>\((M_\lambda)_{\lambda\in\Lambda}\)
+</span>に対して， <span>\(x\)
+</span>を <span>\(\Lambda\)
+</span>から <span>\(\bigcup_{\mu\in\Lambda}M_\mu\)
+</span>への写像とします．
+このとき，
+<span>\[
+\prod_{\lambda\in\Lambda}M_\lambda=\{(x_\lambda)_{\lambda\in\Lambda}\mid\forall\lambda\in\Lambda\,(x_\lambda\in M_\lambda)\}
+\]
+</span>を，集合族 <span>\((M_\lambda)_{\lambda\in\Lambda}\)
+</span>の <strong>直積</strong> といいます．</p><p>任意の <span>\(\lambda\in\Lambda\)
+</span>について <span>\(M_\lambda=M\)
+</span>なる集合 <span>\(M\)
+</span>が存在するとき，<span>
+\(\prod_{\lambda\in\Lambda}M_\lambda=\prod_{\lambda\in\Lambda}M\)
+</span>を <span>\(M^\Lambda\)
+</span>と表します．</p><h3 id=二項演算>二項演算
+<a class=anchor href=#%e4%ba%8c%e9%a0%85%e6%bc%94%e7%ae%97>#</a></h3><p><span>\(S\)
+</span>を集合とします．
+<span>\(S\times S\)
+</span>から <span>\(S\)
+</span>への写像を，<span>
+\(S\)
+</span>における <strong>二項演算</strong> といいます．
+<span>\(\alpha:S\times S\to S\)
+</span>を <span>\(S\)
+</span>における二項演算とするとき，<span>
+\(x,y\in S\)
+</span>に対する <span>\(\alpha(x,y)\)
+</span>を <span>\(x\alpha y\)
+</span>と書きます．</p><p>例えば，実数上の通常の加算 <span>\(+\)
+</span>や乗算 <span>\(\cdot\)
+</span>は実数全体の集合 <span>\(\mathbb{R}\)
+</span>における二項演算ですが，<span>
+\(x,y\in\mathbb{R}\)
+</span>に対して，<span>
+\(+(x,y)\)
+</span>や <span>\(\cdot(x,y)\)
+</span>を <span>\(x+y,x\cdot y\)
+</span>と表します．</p><p>特に，<span>
+\(\alpha\)
+</span>として記号 <span>\(\cdot\)
+</span>を用いるとき，<span>
+\(x\cdot y\)
+</span>は <span>\(xy\)
+</span>と表されることがあります．</p><h3 id=単位的可換半群>単位的可換半群
+<a class=anchor href=#%e5%8d%98%e4%bd%8d%e7%9a%84%e5%8f%af%e6%8f%9b%e5%8d%8a%e7%be%a4>#</a></h3><p><span>\(S\)
+</span>を集合とします．
+<span>\(S\)
+</span>における二項演算 <span>\(+:S\times S\to S\)
+</span>, <span>\(0\in S\)
+</span>に対して，
+<span>\[
+\begin{aligned}
+&\forall x,y,z\in S\,(x+(y+z)=(x+y)+z),\\
+&\forall x\in S\,(0+x=x+0=x),\\
+  &\forall x,y\in S\,(y+x=x+y)
+\end{aligned}
+\]
+</span>が成り立つとき，<span>
+\((S,+,0)\)
+</span>は <strong>単位的可換半群</strong> をなすといいます．
+単に，<span>
+\(S\)
+</span>は単位的可換半群をなす，ということもあります．</p><p>詳しくは述べませんが，単位的可換半群をなすとは，単位的であること，可換であること，半群をなすことを意味します．
+上式では，上から順に，半群をなすこと，単位的であること，可換であることを要請しています．</p><p>例えば，<span>
+\(\mathbb{N}\)
+</span>を0以上の整数全体の集合とするとき，<span>
+\((\mathbb{N},+,0)\)
+</span>は単位的可換半群をなします．</p><h3 id=単位的可換環>単位的可換環
+<a class=anchor href=#%e5%8d%98%e4%bd%8d%e7%9a%84%e5%8f%af%e6%8f%9b%e7%92%b0>#</a></h3><p><span>\(R\)
+</span>を集合とし，<span>
+\(+,\cdot\)
+</span>を2つの異なる <span>\(R\)
+</span>における二項演算とします．
+<span>\(0,1\in R\)
+</span>とし，<span>
+\(0\neq1\)
+</span>とします．
+<span>\[
+\begin{aligned}
+&\forall x,y,z\in R\,(x+(y+z)=(x+y)+z),\\
+&\forall x\in R\,(0+x=x+0=x),\\
+  &\forall x\in R\,\exists y\in R\,(y+x=x+y=0),\\
+&\forall x,y\in R\,(y+x=x+y),\\
+  &\forall x,y,z\in R\,(x(yz)=(xy)z),\\
+&\forall x,y,z\in R\,(x(y+z)=xy+xz),\\
+&\forall x,y,z\in R\,((x+y)z=xz+yz),\\
+&\forall x,y\in R\,(yx=xy),\\
+  &\forall x\in R\,(x1=1x=x)
+\end{aligned}
+\]
+</span>であるとき，<span>
+\((R,+,\cdot,0,1)\)
+</span>は <strong>単位的可換環</strong> をなすといいます．
+単に，<span>
+\(R\)
+</span>は単位的可換環をなす，ということもあります．</p><p>単位的可換半群と同じく，単位的可換環も，単位的であること，可換であること，環をなすことを意味しますが，
+一番下の <span>\(\forall x\in R\,(x1=1x=x)\)
+</span>が単位的であること，その上の <span>\(\forall x,y\in R\,(yx=xy)\)
+</span>が可換であること，それ以外が環をなすことを要請しています．</p><p>例えば，<span>
+\(\mathbb{Z}\)
+</span>を整数全体の集合とするとき，<span>
+\((\mathbb{Z},+,\cdot,0,1)\)
+</span>は単位的可換環をなします．</p><h3 id=体>体
+<a class=anchor href=#%e4%bd%93>#</a></h3><p><span>\(k\)
+</span>を集合とし，<span>
+\(+,\cdot\)
+</span>を2つの異なる <span>\(k\)
+</span>における二項演算とします．
+<span>\(0,1\in R\)
+</span>とし，<span>
+\(0\neq1\)
+</span>とします．
+<span>\[
+\begin{aligned}
+&\forall x,y,z\in k\,(x+(y+z)=(x+y)+z),\\
+&\forall x\in k\,(0+x=x+0=x),\\
+  &\forall x\in k\,\exists y\in k\,(y+x=x+y=0),\\
+&\forall x,y\in k\,(y+x=x+y),\\
+  &\forall x,y,z\in k\,(x(yz)=(xy)z),\\
+&\forall x,y,z\in k\,(x(y+z)=xy+xz),\\
+&\forall x,y,z\in k\,((x+y)z=xz+yz),\\
+&\forall x,y\in k\,(yx=xy),\\
+  &\forall x\in k\,(x1=1x=x),\\
+&\forall x\in k\,\exists y\in k\,(x\neq0\implies xy=yx=1)
+\end{aligned}
+\]
+</span>であるとき，<span>
+\((k,+,\cdot,0,1)\)
+</span>は <strong>体</strong> をなすといいます．
+単に，<span>
+\(k\)
+</span>は体をなす，ということもあります．</p><p>体は単位的可換環に対して，最後の <span>\(\forall x\in k\,\exists y\in k\,(x\neq0\implies xy=yx=1)\)
+</span>を付け加えたものです．</p><p>例えば，<span>
+\(\mathbb{Q}\)
+</span>を有理数全体の集合とするとき，<span>
+\((\mathbb{Q},+,\cdot,0,1)\)
+</span>は体をなします．</p><h3 id=単位的可換多元環>単位的可換多元環
+<a class=anchor href=#%e5%8d%98%e4%bd%8d%e7%9a%84%e5%8f%af%e6%8f%9b%e5%a4%9a%e5%85%83%e7%92%b0>#</a></h3><p><span>\(R,A\)
+</span>をそれぞれ単位的可換環とします．
+<span>\(R\)
+</span>の単位元を <span>\(1_R\)
+</span>と表します．</p><p><span>\(R\times A\)
+</span>から <span>\(A\)
+</span>への写像を <span>\(\cdot:R\times A\to A\)
+</span>として，<span>
+\(a,\in R,x\in A\)
+</span>に対する <span>\(a\cdot x\)
+</span>を <span>\(ax\)
+</span>と表すことにします．</p><p><span>\[
+\begin{aligned}
+&\forall a\in R\,\forall x,y\in A\,(a(x+y)=ax+ay),\\
+&\forall a,b\in R\,\forall x\in A\,((a+b)x=ax+bx),\\
+&\forall a,b\in R\,\forall x\in A((ab)x=a(bx)),\\
+&\forall x\in A\,(1_Rx=x),\\
+  &\forall a\in R\,\forall x,y\in A\,(a(xy)=(ax)y=x(ay))
+\end{aligned}
+\]
+</span>が成り立つとき，<span>
+\(A\)
+</span>は <span>\(R\)
+</span>の上の <strong>単位的可換多元環</strong> といいます．</p><p><span>\(k\)
+</span>を体とすると，体は単位的可換環の特別な場合なので，<span>
+\(R=k\)
+</span>のとき，<span>
+\(A\)
+</span>は <span>\(k\)
+</span>の上の単位的可換多元環であるといいます．</p><h2 id=多項式の定義>多項式の定義
+<a class=anchor href=#%e5%a4%9a%e9%a0%85%e5%bc%8f%e3%81%ae%e5%ae%9a%e7%be%a9>#</a></h2><p><span>\(\mathbb{N}\)
+</span>を0以上の整数全体の集合とします．
+つまり，<span>
+\(\mathbb{N}=\{0,1,\dots\}\)
+</span>とします．</p><p><span>\(K\)
+</span>を空でない集合とします．
+<span>\(\mathbb{N}^{(K)}\)
+</span>を以下の通り定義します．</p><span>\[
+\mathbb{N}^{(K)}=\left\{\left.(x_{\kappa})_{\kappa\in K}\in\mathbb{N}^K\,\right|\,\text{有限個の } \kappa\in K \text{ を除いて } x_{\kappa}=0\right\}.
+\]</span><p><span>\((x_{\kappa})_{\kappa\in K}\)
+</span>, <span>\((y_{\kappa})_{\kappa\in K}\)
+</span>に対し，<span>
+\((x_{\kappa}+y_{\kappa})_{\kappa \in K}\)
+</span>を考えると，<span>
+\(x_{\kappa}+y_{\kappa}\neq0\)
+</span>となる <span>\(\kappa\in K\)
+</span>は有限個なので，<span>
+\((x_{\kappa}+y_{\kappa})_{\kappa\in K}\in\mathbb{N}^{(K)}\)
+</span>となります．</p><p>これをもとに，<span>
+\(\mathbb{N}^{(K)}\)
+</span>上の二項演算 <span>\(+\)
+</span>を以下の通り定義します．</p><span>\[
++:\mathbb{N}^{(K)}\times\mathbb{N}^{(K)}\ni((x_{\kappa})_{\kappa\in K},(y_{\kappa})_{\kappa\in K})\mapsto(x_{\kappa}+y_{\kappa})_{\kappa\in K}\in\mathbb{N}^{(K)}
+\]</span><p><span>\(x,y\in\mathbb{N}^{(K)}\)
+</span>に対して <span>\(+(x,y)\)
+</span>を <span>\(x+y\)
+</span>と書くと，<span>
+\(y+x=x+y\)
+</span>となります．
+よって，<span>
+\(0=(0)_{\kappa\in K}\)
+</span>とすると，<span>
+\((\mathbb{N}^{(K)},+,0)\)
+</span>は <strong>単位的可換半群</strong> をなすといえます．</p><p><span>\(k\)
+</span>を体とします．<span>
+\(k^{(\mathbb{N}^{(K)})}\)
+</span>を，
+<span>\[
+k^{(\mathbb{N}^{(K)})}=\left\{\left.(x_{\lambda})_{\lambda\in\mathbb{N}^{(K)}}\in k^{\mathbb{N}^{(K)}}\right|\text{有限個の } \lambda\in\mathbb{N}^{(K)} \text{ を除いて } x_{\lambda}=0\right\}
+\]</span></p><p>とします．</p><p><span>\(\lambda\in\mathbb{N}^{(K)}\)
+</span>に対して <span>\(e_\lambda\in k^{(\mathbb{N}^{(K)})}\)
+</span>を，<span>
+\(e_\lambda=(\delta_{\kappa\lambda})_{\kappa\in\mathbb{N}^{(K)}}\)
+</span>で定めます．
+ただし，<span>
+\(\delta_{ij}\)
+</span>は</p><span>\[
+\delta_{ij}=\begin{cases}
+1,\quad i=j,\\
+0,\quad i\neq j
+\end{cases}
+\]</span><p>で定めます（クロネッカーのデルタ）．</p><p>すると，任意の <span>\(u\in k^{(\mathbb{N}^{(K)})}\)
+</span>に対して，有限個の <span>\(\lambda\in\mathbb{N}^{(K)}\)
+</span>を除いて <span>\(a_\lambda=0\)
+</span>であるような <span>\((a_{\lambda})_{\lambda\in\mathbb{N}^{(K)}}\)
+</span>が存在し，</p><span>\[
+u=\sum_{\lambda\in\mathbb{N}^{(K)}}a_\lambda e_\lambda
+\]</span><p>と表せます．</p><p>集合 <span>\(E\subseteq k^{(\mathbb{N}^{(K)})}\)
+</span>を <span>\(E=\{e_\lambda\mid\lambda\in\mathbb{N}^{(K)}\}\)
+</span>とします．
+集合 <span>\(E\)
+</span>上の二項演算 <span>\(\cdot\)
+</span>を以下で定義します．</p><span>\[
+\cdot:E\times E\ni(e_{(x_{\kappa})_{\kappa\in K}},e_{(y_{\kappa})_{\kappa\in K}})\mapsto e_{(x_{\kappa}+y_{\kappa})_{\kappa\in K}}\in E.
+\]</span><p><span>\(e,f\in E\)
+</span>に対して <span>\(\cdot(e,f)\)
+</span>を <span>\(ef\)
+</span>と書くと，<span>
+\(ef=fe\)
+</span>となります．
+また，<span>
+\(1_{k^{(\mathbb{N}^{(K)})}}=e_{(0)_{\kappa\in K}}\)
+</span>とおくと，<span>
+\((E,\cdot,1_{k^{(\mathbb{N}^{(K)})}})\)
+</span>も <strong>単位的可換半群</strong> をなします．</p><p><span>\(k^{(\mathbb{N}^{(K)})}\)
+</span>上の二項演算 <span>\(+,\cdot\)
+</span>を以下のように定めます．
+<span>\(u,v\in k^{(\mathbb{N}^{(K)})}\)
+</span>に対して，
+<span>\[
+\begin{aligned}
+&u=\sum_{\lambda\in\mathbb{N}^{(K)}}a_\lambda e_\lambda,\\
+&v=\sum_{\mu\in\mathbb{N}^{(K)}}b_\mu e_\mu
+\end{aligned}
+\]
+</span>とします．
+このとき，
+<span>\[
+\begin{aligned}
+&u+v=\sum_{\lambda\in\mathbb{N}^{(K)}}(a_\lambda+b_\lambda)e_\lambda,\\
+&uv=\sum_{\begin{subarray}{c}\lambda,\mu,\nu\in\mathbb{N}^{(K)},\\[3pt]\lambda+\mu=\nu\end{subarray}}a_\lambda b_\mu e_\nu
+\end{aligned}
+\]
+</span>とします．</p><p><span>\(0_{k^{(\mathbb{N}^{(K)})}}=(0)_{\lambda\in\mathbb{N}^{(K)}}\)
+</span>, <span>\(1_{k^{(\mathbb{N}^{(K)})}}=e_{(0)_{\kappa\in K}}\)
+</span>とすると，<span>
+\((k^{(\mathbb{N}^{(K)})},+,\cdot,0_{k^{(\mathbb{N}^{(K)})}},1_{k^{(\mathbb{N}^{(K)})}})\)
+</span>は <strong>単位的可換環</strong> をなします．</p><p>ここで，<span>
+\(P(k,K)=k^{(\mathbb{N}^{(K)})}\)
+</span>と表すことにして，<span>
+\(P(k,K)\)
+</span>を <strong><span>\(K\)
+</span>の上の多項式環</strong> と呼び，<span>
+\(k\)
+</span>を <span>\(P(k,K)\)
+</span>の <strong>係数体</strong> と呼びます．</p><p><span>\(\kappa\in K\)
+</span>に対し，<span>
+\(\delta_\kappa\in\mathbb{N}^{(K)}\)
+</span>を <span>\(\delta_\kappa=(\delta_{\nu\kappa})_{\nu\in K}\)
+</span>とします．
+このとき，<span>
+\(\kappa\in K\)
+</span>に対し，<span>
+\(X_\kappa\in P(k,K)\)
+</span>を <span>\(X_\kappa=e_{\delta_\kappa}\)
+</span>とします．</p><p>すると，<span>
+\((n_\kappa)_{\kappa\in K}\in\mathbb{N}^{(K)}\)
+</span>に対する <span>\(e_{(n_{\kappa})_{\kappa\in K}}\)
+</span>は</p><span>\[
+e_{(n_{\kappa})_{\kappa\in K}}=\prod_{\kappa\in K}X_\kappa^{n_\kappa}
+\]</span><p>と表されます．
+ただし，<span>
+\(e_{(0)_{\kappa\in K}}=1_{P(k,K)}\)
+</span>です．</p><p>先ほど述べたように，任意の <span>\(u\in P(k,K)\)
+</span>に対して，有限個の <span>\(\lambda\in\mathbb{N}^{(K)}\)
+</span>を除いて <span>\(a_\lambda=0\)
+</span>であるような <span>\((a_{\lambda})_{\lambda\in\mathbb{N}^{(K)}}\)
+</span>が存在し，</p><span>\[
+u=\sum_{\lambda\in\mathbb{N}^{(K)}}a_\lambda e_\lambda
+\]</span><p>が成り立ちますが，これはさらに，</p><span>\[
+u=\sum_{(n_\kappa)_{\kappa\in K}\in\mathbb{N}^{(K)}}a_{(n_\kappa)_{\kappa\in K}}\prod_{\kappa\in K}X_\kappa^{n_\kappa}
+\]</span><p>と表せます．</p><p>このように書かれた <span>\(u\)
+</span>を <strong>不定元</strong> <span>\(X_\kappa\)
+</span>の <span>\(k\)
+</span>の上の <strong>多項式</strong> と呼びます．</p><span>\[
+a_{(n_\kappa)_{\kappa\in K}}\prod_{\kappa\in K}X_\kappa^{n_\kappa}
+\]</span><p>を多項式 <span>\(a\)
+</span>の <strong>項</strong> といい，<span>
+\(a_{(n_\kappa)_{\kappa\in K}}\)
+</span>をその項の <strong>係数</strong>，または <span>\(\prod_{\kappa\in K}X_\kappa^{n_\kappa}\)
+</span>の <strong>係数</strong> といいます．
+さらに，<span>
+\(a_{(0)_{\kappa\in K}}1_{k[X_\kappa]_{\kappa\in K}}\)
+</span>と <span>\(a_{(0)_{\kappa\in K}}\)
+</span>を同一視し，<span>
+\(a_{(0)_{\kappa\in K}}\)
+</span>を <span>\(u\)
+</span>の <strong>定数項</strong> といいます．</p><p><span>\(P(k,K)\)
+</span>の元をすべて <span>\(\{X_\kappa\}_{\kappa\in K}\)
+</span>を使って表すとき，，<span>
+\(P(k,K)\)
+</span>を <span>\(k[X_\kappa]_{\kappa\in K}\)
+</span>と書き，<strong><span>
+\(\{X_\kappa\}_{\kappa\in K}\)
+</span>の多項式環</strong> と呼びます．
+特に，<span>
+\(K\)
+</span>が有限集合なら <span>\(X_1,X_2,\dots,X_n\)
+</span>と書いて，<span>
+\(k[X_1,X_2,\dots,X_n]\)
+</span>と書いたり，<span>
+\(n=1\)
+</span>なら <span>\(k[X]\)
+</span>と書いたりします．</p><h2 id=代入>代入
+<a class=anchor href=#%e4%bb%a3%e5%85%a5>#</a></h2><p><span>\(P(k,K)=k[X_\kappa]_{\kappa\in K}\)
+</span>を多項式環とし，<span>
+\(\phi:K\to k[X_\kappa]_{\kappa\in K}\)
+</span>を
+<span>\[
+\phi:K\ni \kappa\mapsto X_\kappa\in k[X_\kappa]_{\kappa\in K}
+\]
+</span>で定めます．
+<span>\((P',+,\cdot,0_{P'},1_{P'})\)
+</span>を <span>\(k\)
+</span>の上の単位的可換多元環とし，<span>
+\(\alpha\)
+</span>を <span>\(K\)
+</span>から <span>\(P'\)
+</span>への写像とします．
+このとき，
+<span>\[
+\begin{aligned}
+&\alpha=F\circ \phi,\\
+&\forall u,v\in k[X_\kappa]_{\kappa\in K}\,(F(u+v)=F(u)+F(v)),\\
+&\forall u,v\in k[X_\kappa]_{\kappa\in K}\,(F(uv)=F(u)F(v)),\\
+&F(1_{k[X_\kappa]_{\kappa\in K}})=1_{P'}
+\end{aligned}
+\]
+</span>を満たす <span>\(F:k[X_\kappa]_{\kappa\in K}\to P'\)
+</span>が存在することが知られています．</p><p>この <span>\(F\)
+</span>を <strong>代入写像</strong> といいます．</p><p><span>\(u\in k[X_\kappa]_{\kappa\in K}\)
+</span>とすると，
+<span>\[
+u=\sum_{(n_\kappa)_{\kappa\in K}\in\mathbb{N}^{(K)}}a_{(n_\kappa)_{\kappa\in K}}\prod_{\kappa\in K}X_\kappa^{n_\kappa}
+\]
+</span>と表せますが，この <span>\(F\)
+</span>による像 <span>\(F(u)\)
+</span>は
+<span>\[
+F(u)=F\left(\sum_{(n_\kappa)_{\kappa\in K}\in\mathbb{N}^{(K)}}a_{(n_\kappa)_{\kappa\in K}}\prod_{\kappa\in K}X_\kappa^{n_\kappa}\right)=\sum_{(n_\kappa)_{\kappa\in K}\in\mathbb{N}^{(K)}}a_{(n_\kappa)_{\kappa\in K}}\prod_{\kappa\in K}\alpha_\kappa^{n_\kappa}
+\]
+</span>となります．</p><p>特に <span>\((n_\kappa)_{\kappa\in K}=(0)_{\kappa\in K}\)
+</span>に対応する級数 <span>\(F(u)\)
+</span>の項は <span>\(a_{(0)_{\kappa\in K}}1_{P'}\)
+</span>になります．</p><p>この <span>\(F(u)\in P'\)
+</span>を，<span>
+\(u\)
+</span>に <span>\((\alpha_\kappa)_{\kappa\in K}\)
+</span>を代入したときの <span>\(u\)
+</span>の <strong>値</strong> といいます．</p><h2 id=おわりに>おわりに
+<a class=anchor href=#%e3%81%8a%e3%82%8f%e3%82%8a%e3%81%ab>#</a></h2><p>本ページでは，多項式の定義についてまとめました．</p><p>多項式の係数は体の元である必要はないのですが，今後の議論のために体に限定しています．
+また，詳細についてはほとんど触れられていないので，詳しい議論は <a href=#cite:1>[1]</a> をご参照ください．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>[1] 彌永 昌吉，小平 邦彦，現代数学概説Ⅰ，岩波書店，東京，1961.</p></article><hr><p xmlns:cc=http://creativecommons.org/ns#>This work is licensed under <a href=https://creativecommons.org/licenses/by/4.0/deed.ja target=_blank rel="license noopener noreferrer" style=display:inline-block>CC BY 4.0<img style=height:22px!important;margin-left:3px;vertical-align:text-bottom src=https://mirrors.creativecommons.org/presskit/icons/cc.svg alt><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom src=https://mirrors.creativecommons.org/presskit/icons/by.svg alt></a></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/7c78e0cd9127921a35e173cfc9d49941d207b7f2 title='Last modified by htakeuchi0 | February 22, 2025' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>February 22, 2025</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#用語の定義>用語の定義</a><ul><li><a href=#添字づけられた族>添字づけられた族</a></li><li><a href=#集合族>集合族</a></li><li><a href=#直積>直積</a></li><li><a href=#二項演算>二項演算</a></li><li><a href=#単位的可換半群>単位的可換半群</a></li><li><a href=#単位的可換環>単位的可換環</a></li><li><a href=#体>体</a></li><li><a href=#単位的可換多元環>単位的可換多元環</a></li></ul></li><li><a href=#多項式の定義>多項式の定義</a></li><li><a href=#代入>代入</a></li><li><a href=#おわりに>おわりに</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>

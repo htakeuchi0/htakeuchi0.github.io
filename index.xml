@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Mon, 10 Feb 2025 20:57:18 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sat, 22 Feb 2025 00:52:19 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
  2023 - 実装改良編
  &lt;a class="anchor" href="#2023---%e5%ae%9f%e8%a3%85%e6%94%b9%e8%89%af%e7%b7%a8">#&lt;/a>
 &lt;/h1>
@@ -499,87 +499,99 @@ f_X(x;\mu,b,A,B)=\begin{cases}
  側の点の，&lt;span>
  \(\lim_{\theta\to0}\phi_1(\theta)\)
 &lt;/span>
- からの変位を表します．&lt;/p></description></item><item><title>指数関数の定積分</title><link>https://htakeuchi0.github.io/docs/math/exp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/exp/</guid><description>&lt;h1 id="指数関数の定積分">
- 指数関数の定積分
- &lt;a class="anchor" href="#%e6%8c%87%e6%95%b0%e9%96%a2%e6%95%b0%e3%81%ae%e5%ae%9a%e7%a9%8d%e5%88%86">#&lt;/a>
+ からの変位を表します．&lt;/p></description></item><item><title>多項式</title><link>https://htakeuchi0.github.io/docs/math/algebra/poly/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/algebra/poly/</guid><description>&lt;h1 id="多項式">
+ 多項式
+ &lt;a class="anchor" href="#%e5%a4%9a%e9%a0%85%e5%bc%8f">#&lt;/a>
 &lt;/h1>
 &lt;h2 id="概要">
  概要
  &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
 &lt;/h2>
-&lt;p>本ページでは，指数関数に関するいくつかの定積分の求め方と結果を説明します．
-指数関数 &lt;span>
- \(\exp:\mathbb{R}\to\mathbb{R}\)
-&lt;/span>
-とは，
-&lt;span>
- \[
-\exp(x)=\sum_{k=0}^n\frac{x^k}{k!}
-\]
-&lt;/span>
-
-で定められる関数であり，&lt;span>
- \(\exp'(x)=\exp(x)\)
-&lt;/span>
-が成り立つことが知られています．&lt;/p>
-&lt;p>本ページでは，以下の定積分の求め方と結果をまとめます．&lt;/p>
-&lt;ol>
-&lt;li>&lt;span>
- \(\int_{\alpha}^{\beta}\exp(x)dx\)
-&lt;/span>
-&lt;/li>
-&lt;li>&lt;span>
- \(\int_{\alpha}^{\beta}\exp(ax+b)dx\quad(a\not=0)\)
-&lt;/span>
-&lt;/li>
-&lt;li>&lt;span>
- \(\int_{\alpha}^{\beta}\exp(ax^2+bx+c)dx\quad(a&lt;0)\)
-&lt;/span>
-&lt;/li>
-&lt;/ol>
-&lt;p>ただし，以下の関数を既知とします．この関数は，&lt;strong>相補誤差関数&lt;/strong>と呼ばれ，たとえば C++ の標準ライブラリで &lt;code>std::erfc&lt;/code> として定義されています．&lt;/p>
-&lt;blockquote class="book-hint info">
-&lt;p>&lt;b>Definition 1&lt;/b>.
-相補誤差関数 \(\mathrm{erfc}:\mathbb{R}\to\mathbb{R}\) を以下のように定める．&lt;/p>
+&lt;p>実数 
 &lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
 &lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
 &lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
- \[
-\mathrm{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^{\infty}\exp(-t^2)dt.
-\]
+ \(a_0,a_1,\dots,a_n\)
 &lt;/span>
-&lt;/blockquote>
-&lt;h2 id="定積分1">
- 定積分1
- &lt;a class="anchor" href="#%e5%ae%9a%e7%a9%8d%e5%88%861">#&lt;/a>
-&lt;/h2>
-&lt;p>まず，&lt;span>
- \(\int_{\alpha}^{\beta}\exp(x)dx\)
+ に対し，&lt;span>
+ \(X\)
 &lt;/span>
- を計算します．
-これは，&lt;span>
- \(\exp'(x)=\exp(x)\)
-&lt;/span>
-なので，
+ という文字を導入して作られる
 &lt;span>
  \[
-\int_{\alpha}^{\beta}\exp(x)dx=\exp(\beta)-\exp(\alpha)
+a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0
 \]
 &lt;/span>
 
-です．&lt;/p>
-&lt;h2 id="定積分2">
- 定積分2
- &lt;a class="anchor" href="#%e5%ae%9a%e7%a9%8d%e5%88%862">#&lt;/a>
-&lt;/h2>
-&lt;p>次に，&lt;span>
- \(\int_{\alpha}^{\beta}\exp(ax+b)dx\ (a\not=0)\)
+は &lt;strong>多項式&lt;/strong> と呼ばれます．
+&lt;span>
+ \(3X^2+2X-1\)
 &lt;/span>
- を計算します． &lt;br>
-これには，&lt;a href="#cite:1">[1, 定理5.6]&lt;/a> を利用します．&lt;/p>
-&lt;blockquote class="book-hint info">
-&lt;p>&lt;b>Theorem 2&lt;/b>.
-関数 \(f,\phi\) が次の 1&amp;ndash;4 を満たすと仮定する．&lt;/p></description></item><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>&lt;h1 id="空のサイトの生成">
+ や &lt;span>
+ \(X\)
+&lt;/span>
+ がその例ですが，&lt;span>
+ \(X,Y\)
+&lt;/span>
+ という2種類の文字を使った &lt;span>
+ \(3X^2-3XY+2X-Y+1\)
+&lt;/span>
+ や，3つ以上の文字を使った &lt;span>
+ \(3XYZ+2Y\)
+&lt;/span>
+ も多項式と呼ばれます．&lt;/p>
+&lt;p>本ページでは，この多項式の定義についてまとめます．
+用語や構成は &lt;a href="#cite:1">[1]&lt;/a> を参考にしました．&lt;/p>
+&lt;h2 id="用語の定義">
+ 用語の定義
+ &lt;a class="anchor" href="#%e7%94%a8%e8%aa%9e%e3%81%ae%e5%ae%9a%e7%be%a9">#&lt;/a>
+&lt;/h2>
+&lt;p>本論の前に，いくつかの用語と記号を定義します．&lt;/p>
+&lt;h3 id="添字づけられた族">
+ 添字づけられた族
+ &lt;a class="anchor" href="#%e6%b7%bb%e5%ad%97%e3%81%a5%e3%81%91%e3%82%89%e3%82%8c%e3%81%9f%e6%97%8f">#&lt;/a>
+&lt;/h3>
+&lt;p>&lt;span>
+ \(\Lambda,M\)
+&lt;/span>
+ を集合とします．
+&lt;span>
+ \(a\)
+&lt;/span>
+ を &lt;span>
+ \(\Lambda\)
+&lt;/span>
+ から &lt;span>
+ \(M\)
+&lt;/span>
+ への写像とします．
+&lt;span>
+ \(\lambda\in\Lambda\)
+&lt;/span>
+ に対する &lt;span>
+ \(a(\lambda)\)
+&lt;/span>
+ を &lt;span>
+ \(a_{\lambda}\)
+&lt;/span>
+ と表し，
+&lt;span>
+ \(a\)
+&lt;/span>
+ を &lt;span>
+ \((a_{\lambda})_{\lambda\in\Lambda}\)
+&lt;/span>
+ と表すことがあります．
+&lt;span>
+ \((a_{\lambda})_{\lambda\in\Lambda}\)
+&lt;/span>
+ を &lt;strong>添字づけられた族&lt;/strong> といい，&lt;span>
+ \(\Lambda\)
+&lt;/span>
+ を &lt;strong>添字集合&lt;/strong>，&lt;span>
+ \(\lambda\in\Lambda\)
+&lt;/span>
+ を &lt;strong>添字&lt;/strong> と呼びます．&lt;/p></description></item><item><title>空のサイトの生成</title><link>https://htakeuchi0.github.io/docs/hugo/base/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/hugo/base/</guid><description>&lt;h1 id="空のサイトの生成">
  空のサイトの生成
  &lt;a class="anchor" href="#%e7%a9%ba%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ae%e7%94%9f%e6%88%90">#&lt;/a>
 &lt;/h1>
@@ -1220,125 +1232,87 @@ x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)},\quad k=0,1,\dots
 , &lt;span>
  \(P(Y\in S)\)
 &lt;/span>
- と略記します．&lt;/p></description></item><item><title>指数関数の定積分：正規分布の累積分布関数の計算への応用</title><link>https://htakeuchi0.github.io/docs/math/exp_normal/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/exp_normal/</guid><description>&lt;h1 id="指数関数の定積分正規分布の累積分布関数の計算への応用">
- 指数関数の定積分：正規分布の累積分布関数の計算への応用
- &lt;a class="anchor" href="#%e6%8c%87%e6%95%b0%e9%96%a2%e6%95%b0%e3%81%ae%e5%ae%9a%e7%a9%8d%e5%88%86%e6%ad%a3%e8%a6%8f%e5%88%86%e5%b8%83%e3%81%ae%e7%b4%af%e7%a9%8d%e5%88%86%e5%b8%83%e9%96%a2%e6%95%b0%e3%81%ae%e8%a8%88%e7%ae%97%e3%81%b8%e3%81%ae%e5%bf%9c%e7%94%a8">#&lt;/a>
+ と略記します．&lt;/p></description></item><item><title>指数関数の定積分</title><link>https://htakeuchi0.github.io/docs/math/exp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/exp/</guid><description>&lt;h1 id="指数関数の定積分">
+ 指数関数の定積分
+ &lt;a class="anchor" href="#%e6%8c%87%e6%95%b0%e9%96%a2%e6%95%b0%e3%81%ae%e5%ae%9a%e7%a9%8d%e5%88%86">#&lt;/a>
 &lt;/h1>
 &lt;h2 id="概要">
  概要
  &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
 &lt;/h2>
-&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/math/exp/">指数関数の定積分&lt;/a> のページでは，指数関数に関するいくつかの定積分の表示について説明しました．本ページでは，その応用として，正規分布の累積分布関数の計算への応用について説明します．&lt;/p>
-&lt;p>例えば，C++17 では，標準ライブラリに &lt;code>std::erfc&lt;/code> 関数（相補誤差関数）がありますが，正規分布の累積分布関数を直接計算する関数は提供されていません．&lt;/p>
-&lt;p>しかし，相補誤差関数と正規分布の累積分布関数はスケールが異なるだけなので，&lt;code>std::erfc&lt;/code> 関数があれば，正規分布の累積分布関数は計算できます．&lt;/p>
-&lt;p>そこで，本ページでは，&lt;a href="https://htakeuchi0.github.io/docs/math/exp/">指数関数の定積分&lt;/a> の結果を用いて，相補誤差関数と正規分布の累積分布関数の具体的な関係式を導出します．&lt;/p>
-&lt;h2 id="正規分布">
- 正規分布
- &lt;a class="anchor" href="#%e6%ad%a3%e8%a6%8f%e5%88%86%e5%b8%83">#&lt;/a>
+&lt;p>本ページでは，指数関数に関するいくつかの定積分の求め方と結果を説明します．
+指数関数 &lt;span>
+ \(\exp:\mathbb{R}\to\mathbb{R}\)
+&lt;/span>
+とは，
+&lt;span>
+ \[
+\exp(x)=\sum_{k=0}^n\frac{x^k}{k!}
+\]
+&lt;/span>
+
+で定められる関数であり，&lt;span>
+ \(\exp'(x)=\exp(x)\)
+&lt;/span>
+が成り立つことが知られています．&lt;/p>
+&lt;p>本ページでは，以下の定積分の求め方と結果をまとめます．&lt;/p>
+&lt;ol>
+&lt;li>&lt;span>
+ \(\int_{\alpha}^{\beta}\exp(x)dx\)
+&lt;/span>
+&lt;/li>
+&lt;li>&lt;span>
+ \(\int_{\alpha}^{\beta}\exp(ax+b)dx\quad(a\not=0)\)
+&lt;/span>
+&lt;/li>
+&lt;li>&lt;span>
+ \(\int_{\alpha}^{\beta}\exp(ax^2+bx+c)dx\quad(a&lt;0)\)
+&lt;/span>
+&lt;/li>
+&lt;/ol>
+&lt;p>ただし，以下の関数を既知とします．この関数は，&lt;strong>相補誤差関数&lt;/strong>と呼ばれ，たとえば C++ の標準ライブラリで &lt;code>std::erfc&lt;/code> として定義されています．&lt;/p>
+&lt;blockquote class="book-hint info">
+&lt;p>&lt;b>Definition 1&lt;/b>.
+相補誤差関数 \(\mathrm{erfc}:\mathbb{R}\to\mathbb{R}\) を以下のように定める．&lt;/p>
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \[
+\mathrm{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^{\infty}\exp(-t^2)dt.
+\]
+&lt;/span>
+&lt;/blockquote>
+&lt;h2 id="定積分1">
+ 定積分1
+ &lt;a class="anchor" href="#%e5%ae%9a%e7%a9%8d%e5%88%861">#&lt;/a>
 &lt;/h2>
-&lt;p>&lt;strong>正規分布&lt;/strong> とは，連続型確率変数のしたがう確率分布のひとつで，様々な場面で用いられます．&lt;/p>
-&lt;p>平均 &lt;span>
- \(\mu\)
+&lt;p>まず，&lt;span>
+ \(\int_{\alpha}^{\beta}\exp(x)dx\)
 &lt;/span>
-, 分散 &lt;span>
- \(\sigma^2\)
+ を計算します．
+これは，&lt;span>
+ \(\exp'(x)=\exp(x)\)
 &lt;/span>
- の正規分布の &lt;strong>確率密度関数&lt;/strong> は，
-&lt;span>
- \[
-f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
-\]
-&lt;/span>
-
-と表されます．
-ここで，
-&lt;span>
- \[
-F_X(x)=\int_{-\infty}^xf_X(x)dx
-\]
-&lt;/span>
-
-とおくと，&lt;span>
- \(F_X(x)\)
-&lt;/span>
- は，正規分布に従う確率変数 &lt;span>
- \(X\)
-&lt;/span>
- が &lt;span>
- \(x\)
-&lt;/span>
- 以下である確率を表します．
-一般に，確率密度関数 &lt;span>
- \(f_X\)
-&lt;/span>
-を用いて上記の &lt;span>
- \(F_X\)
-&lt;/span>
- のように定義される関数を &lt;strong>累積分布関数&lt;/strong> と呼びます．&lt;/p>
-&lt;h2 id="正規分布の累積分布関数と誤差関数">
- 正規分布の累積分布関数と誤差関数
- &lt;a class="anchor" href="#%e6%ad%a3%e8%a6%8f%e5%88%86%e5%b8%83%e3%81%ae%e7%b4%af%e7%a9%8d%e5%88%86%e5%b8%83%e9%96%a2%e6%95%b0%e3%81%a8%e8%aa%a4%e5%b7%ae%e9%96%a2%e6%95%b0">#&lt;/a>
-&lt;/h2>
-&lt;p>いま，
-&lt;span>
- \[
--\frac{(x-\mu)^2}{2\sigma^2}=-\frac{1}{2\sigma^2}x^2+\frac{\mu}{\sigma^2}x-\frac{\mu^2}{2\sigma^2}
-\]
-&lt;/span>
-
 なので，
 &lt;span>
  \[
-\begin{aligned}
- &amp;a=-\frac{1}{2\sigma^2},\\
- &amp;b=\frac{\mu}{\sigma^2},\\
- &amp;c=-\frac{\mu^2}{2\sigma^2}
-\end{aligned}
+\int_{\alpha}^{\beta}\exp(x)dx=\exp(\beta)-\exp(\alpha)
 \]
 &lt;/span>
 
-として，&lt;a href="https://htakeuchi0.github.io/docs/math/exp/#定積分3">指数関数の定積分の定積分3&lt;/a>を適用すると，
-&lt;span>
- \[
-\begin{aligned}
-&amp;\frac{\sqrt{\pi}}{2\sqrt{-a}}=\frac{\sqrt{\pi}}{2\sqrt{1/(2\sigma^2)}}
-=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}},\\
-&amp;\frac{b^2-4ac}{4a}=\frac{b^2}{4a}-c=\frac{\mu^2/\sigma^4}{-2/\sigma^2}-\left(-\frac{\mu^2}{2\sigma^2}\right)=0\\
-&amp;\frac{b}{2a}
-=\frac{\mu/\sigma^2}{-1/\sigma^2}
-=-\mu
-\end{aligned}
-\]
+です．&lt;/p>
+&lt;h2 id="定積分2">
+ 定積分2
+ &lt;a class="anchor" href="#%e5%ae%9a%e7%a9%8d%e5%88%862">#&lt;/a>
+&lt;/h2>
+&lt;p>次に，&lt;span>
+ \(\int_{\alpha}^{\beta}\exp(ax+b)dx\ (a\not=0)\)
 &lt;/span>
-
-より，
-&lt;span>
- \[
-\begin{aligned}
-&amp;\int_{\alpha}^{\beta}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
-&amp;=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}}\\
-&amp;\quad\times\left(\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(\alpha-\mu)\right)-\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(\beta-\mu)\right)\right)
-\end{aligned}
-\]
-&lt;/span>
-
-となります．特に，&lt;span>
- \(\beta=x\)
-&lt;/span>
-, &lt;span>
- \(\alpha\to-\infty\)
-&lt;/span>
- のとき，
-&lt;span>
- \[
-\begin{aligned}
-&amp;\int_{-\infty}^x\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
-&amp;=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}}\left(2-\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(x-\mu)\right)\right)
-\end{aligned}
-\]
-&lt;/span>
-
-です．&lt;/p></description></item><item><title>行列積の計算時間のOpenMPによる高速化</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</guid><description>&lt;h1 id="行列積の計算時間のopenmpによる高速化">
+ を計算します． &lt;br>
+これには，&lt;a href="#cite:1">[1, 定理5.6]&lt;/a> を利用します．&lt;/p>
+&lt;blockquote class="book-hint info">
+&lt;p>&lt;b>Theorem 2&lt;/b>.
+関数 \(f,\phi\) が次の 1&amp;ndash;4 を満たすと仮定する．&lt;/p></description></item><item><title>行列積の計算時間のOpenMPによる高速化</title><link>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/cpp/mmul/openmp/</guid><description>&lt;h1 id="行列積の計算時間のopenmpによる高速化">
  行列積の計算時間のOpenMPによる高速化
  &lt;a class="anchor" href="#%e8%a1%8c%e5%88%97%e7%a9%8d%e3%81%ae%e8%a8%88%e7%ae%97%e6%99%82%e9%96%93%e3%81%aeopenmp%e3%81%ab%e3%82%88%e3%82%8b%e9%ab%98%e9%80%9f%e5%8c%96">#&lt;/a>
 &lt;/h1>
@@ -1832,7 +1806,125 @@ F_X(x)=\int_{-\infty}^xf_X(x)dx
 &lt;a id="cite:2">&lt;/a>
 [2] Hugo, &amp;ldquo;Host on GitHub | Hugo&amp;rdquo;, &lt;a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">https://gohugo.io/hosting-and-deployment/hosting-on-github/&lt;/a>, 2022/8/12 最終アクセス． &lt;br>
 &lt;a id="cite:3">&lt;/a>
-[3] Google, &amp;ldquo;Google Search Console へようこそ&amp;rdquo;, &lt;a href="https://search.google.com/search-console/welcome?hl=JA">https://search.google.com/search-console/welcome?hl=JA&lt;/a>, 2022/8/12最終アクセス．&lt;/p></description></item><item><title>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</title><link>https://htakeuchi0.github.io/docs/math/stat/lap/mle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/lap/mle/</guid><description>&lt;h1 id="特殊なラプラス分布や切断ラプラス分布のパラメータ推定">
+[3] Google, &amp;ldquo;Google Search Console へようこそ&amp;rdquo;, &lt;a href="https://search.google.com/search-console/welcome?hl=JA">https://search.google.com/search-console/welcome?hl=JA&lt;/a>, 2022/8/12最終アクセス．&lt;/p></description></item><item><title>指数関数の定積分：正規分布の累積分布関数の計算への応用</title><link>https://htakeuchi0.github.io/docs/math/exp_normal/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/exp_normal/</guid><description>&lt;h1 id="指数関数の定積分正規分布の累積分布関数の計算への応用">
+ 指数関数の定積分：正規分布の累積分布関数の計算への応用
+ &lt;a class="anchor" href="#%e6%8c%87%e6%95%b0%e9%96%a2%e6%95%b0%e3%81%ae%e5%ae%9a%e7%a9%8d%e5%88%86%e6%ad%a3%e8%a6%8f%e5%88%86%e5%b8%83%e3%81%ae%e7%b4%af%e7%a9%8d%e5%88%86%e5%b8%83%e9%96%a2%e6%95%b0%e3%81%ae%e8%a8%88%e7%ae%97%e3%81%b8%e3%81%ae%e5%bf%9c%e7%94%a8">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://htakeuchi0.github.io/docs/math/exp/">指数関数の定積分&lt;/a> のページでは，指数関数に関するいくつかの定積分の表示について説明しました．本ページでは，その応用として，正規分布の累積分布関数の計算への応用について説明します．&lt;/p>
+&lt;p>例えば，C++17 では，標準ライブラリに &lt;code>std::erfc&lt;/code> 関数（相補誤差関数）がありますが，正規分布の累積分布関数を直接計算する関数は提供されていません．&lt;/p>
+&lt;p>しかし，相補誤差関数と正規分布の累積分布関数はスケールが異なるだけなので，&lt;code>std::erfc&lt;/code> 関数があれば，正規分布の累積分布関数は計算できます．&lt;/p>
+&lt;p>そこで，本ページでは，&lt;a href="https://htakeuchi0.github.io/docs/math/exp/">指数関数の定積分&lt;/a> の結果を用いて，相補誤差関数と正規分布の累積分布関数の具体的な関係式を導出します．&lt;/p>
+&lt;h2 id="正規分布">
+ 正規分布
+ &lt;a class="anchor" href="#%e6%ad%a3%e8%a6%8f%e5%88%86%e5%b8%83">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;strong>正規分布&lt;/strong> とは，連続型確率変数のしたがう確率分布のひとつで，様々な場面で用いられます．&lt;/p>
+&lt;p>平均 &lt;span>
+ \(\mu\)
+&lt;/span>
+, 分散 &lt;span>
+ \(\sigma^2\)
+&lt;/span>
+ の正規分布の &lt;strong>確率密度関数&lt;/strong> は，
+&lt;span>
+ \[
+f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\]
+&lt;/span>
+
+と表されます．
+ここで，
+&lt;span>
+ \[
+F_X(x)=\int_{-\infty}^xf_X(x)dx
+\]
+&lt;/span>
+
+とおくと，&lt;span>
+ \(F_X(x)\)
+&lt;/span>
+ は，正規分布に従う確率変数 &lt;span>
+ \(X\)
+&lt;/span>
+ が &lt;span>
+ \(x\)
+&lt;/span>
+ 以下である確率を表します．
+一般に，確率密度関数 &lt;span>
+ \(f_X\)
+&lt;/span>
+を用いて上記の &lt;span>
+ \(F_X\)
+&lt;/span>
+ のように定義される関数を &lt;strong>累積分布関数&lt;/strong> と呼びます．&lt;/p>
+&lt;h2 id="正規分布の累積分布関数と誤差関数">
+ 正規分布の累積分布関数と誤差関数
+ &lt;a class="anchor" href="#%e6%ad%a3%e8%a6%8f%e5%88%86%e5%b8%83%e3%81%ae%e7%b4%af%e7%a9%8d%e5%88%86%e5%b8%83%e9%96%a2%e6%95%b0%e3%81%a8%e8%aa%a4%e5%b7%ae%e9%96%a2%e6%95%b0">#&lt;/a>
+&lt;/h2>
+&lt;p>いま，
+&lt;span>
+ \[
+-\frac{(x-\mu)^2}{2\sigma^2}=-\frac{1}{2\sigma^2}x^2+\frac{\mu}{\sigma^2}x-\frac{\mu^2}{2\sigma^2}
+\]
+&lt;/span>
+
+なので，
+&lt;span>
+ \[
+\begin{aligned}
+ &amp;a=-\frac{1}{2\sigma^2},\\
+ &amp;b=\frac{\mu}{\sigma^2},\\
+ &amp;c=-\frac{\mu^2}{2\sigma^2}
+\end{aligned}
+\]
+&lt;/span>
+
+として，&lt;a href="https://htakeuchi0.github.io/docs/math/exp/#定積分3">指数関数の定積分の定積分3&lt;/a>を適用すると，
+&lt;span>
+ \[
+\begin{aligned}
+&amp;\frac{\sqrt{\pi}}{2\sqrt{-a}}=\frac{\sqrt{\pi}}{2\sqrt{1/(2\sigma^2)}}
+=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}},\\
+&amp;\frac{b^2-4ac}{4a}=\frac{b^2}{4a}-c=\frac{\mu^2/\sigma^4}{-2/\sigma^2}-\left(-\frac{\mu^2}{2\sigma^2}\right)=0\\
+&amp;\frac{b}{2a}
+=\frac{\mu/\sigma^2}{-1/\sigma^2}
+=-\mu
+\end{aligned}
+\]
+&lt;/span>
+
+より，
+&lt;span>
+ \[
+\begin{aligned}
+&amp;\int_{\alpha}^{\beta}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
+&amp;=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}}\\
+&amp;\quad\times\left(\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(\alpha-\mu)\right)-\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(\beta-\mu)\right)\right)
+\end{aligned}
+\]
+&lt;/span>
+
+となります．特に，&lt;span>
+ \(\beta=x\)
+&lt;/span>
+, &lt;span>
+ \(\alpha\to-\infty\)
+&lt;/span>
+ のとき，
+&lt;span>
+ \[
+\begin{aligned}
+&amp;\int_{-\infty}^x\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)dx\\
+&amp;=\frac{\sqrt{\pi}\sqrt{\sigma^2}}{\sqrt{2}}\left(2-\mathrm{erfc}\left(\frac{1}{\sqrt{2\sigma^2}}(x-\mu)\right)\right)
+\end{aligned}
+\]
+&lt;/span>
+
+です．&lt;/p></description></item><item><title>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</title><link>https://htakeuchi0.github.io/docs/math/stat/lap/mle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/lap/mle/</guid><description>&lt;h1 id="特殊なラプラス分布や切断ラプラス分布のパラメータ推定">
  特殊なラプラス分布や切断ラプラス分布のパラメータ推定
  &lt;a class="anchor" href="#%e7%89%b9%e6%ae%8a%e3%81%aa%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%82%84%e5%88%87%e6%96%ad%e3%83%a9%e3%83%97%e3%83%a9%e3%82%b9%e5%88%86%e5%b8%83%e3%81%ae%e3%83%91%e3%83%a9%e3%83%a1%e3%83%bc%e3%82%bf%e6%8e%a8%e5%ae%9a">#&lt;/a>
 &lt;/h1>
@@ -2368,12 +2460,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\)
 &lt;/span>
  を具体的に構成します．&lt;/p>
-&lt;h3 id="hahahugoshortcode47s13hbhb-の構成">
+&lt;h3 id="hahahugoshortcode46s13hbhb-の構成">
  &lt;span>
  \(\Omega_\infty\)
 &lt;/span>
  の構成
- &lt;a class="anchor" href="#hahahugoshortcode47s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode46s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\)
@@ -2392,12 +2484,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \(\Omega_{\infty}=\Omega^{\mathbb{N}}\)
 &lt;/span>
  とします&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;sup>, &lt;/sup>&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>．&lt;/p>
-&lt;h3 id="hahahugoshortcode47s25hbhb-の構成">
+&lt;h3 id="hahahugoshortcode46s25hbhb-の構成">
  &lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)
 &lt;/span>
  の構成
- &lt;a class="anchor" href="#hahahugoshortcode47s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode46s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)
