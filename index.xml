@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sat, 22 Feb 2025 00:52:19 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sat, 01 Mar 2025 22:56:25 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
  2023 - 実装改良編
  &lt;a class="anchor" href="#2023---%e5%ae%9f%e8%a3%85%e6%94%b9%e8%89%af%e7%b7%a8">#&lt;/a>
 &lt;/h1>
@@ -1143,7 +1143,102 @@ x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)},\quad k=0,1,\dots
 なら，&lt;span>
  \(c_1\)
 &lt;/span>
- は，&lt;/p></description></item><item><title>差分プライバシの基本</title><link>https://htakeuchi0.github.io/docs/math/stat/dp/basic/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/dp/basic/</guid><description>&lt;h1 id="差分プライバシの基本">
+ は，&lt;/p></description></item><item><title>多変数連立代数方程式とグレブナー基底</title><link>https://htakeuchi0.github.io/docs/math/algebra/groebner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/algebra/groebner/</guid><description>&lt;h1 id="多変数連立代数方程式とグレブナー基底">
+ 多変数連立代数方程式とグレブナー基底
+ &lt;a class="anchor" href="#%e5%a4%9a%e5%a4%89%e6%95%b0%e9%80%a3%e7%ab%8b%e4%bb%a3%e6%95%b0%e6%96%b9%e7%a8%8b%e5%bc%8f%e3%81%a8%e3%82%b0%e3%83%ac%e3%83%96%e3%83%8a%e3%83%bc%e5%9f%ba%e5%ba%95">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>複数の多変数多項式を等号で結んで表される連立方程式
+
+&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
+&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \[
+ f_1(X_1,\dots,X_n)=\cdots=f_s(X_1,\dots,X_n)=0
+\]
+&lt;/span>
+
+を考えます．
+ここではこれを多変数連立代数方程式と呼ぶことにします．
+逆に，このページで単に連立方程式といえば，多変数連立代数方程式を指すこととします．&lt;/p>
+&lt;p>多変数連立代数方程式は，1次式であれば単なる線形方程式であり，1変数であれば4次までは解の公式が存在しますが，一般の場合の解の求め方は，それらに比べて明らかではありません．&lt;/p>
+&lt;p>&lt;a href="cite:1">[1]&lt;/a>, &lt;a href="cite:2">[2]&lt;/a> は，この解法を考える上で重要な概念である &lt;strong>グレブナー基底&lt;/strong> の有名な入門書です．
+本ページでは，この分野の概観を把握するため，&lt;a href="cite:1">[1]&lt;/a> (それとほとんど目を通せていないですが &lt;a href="cite:2">[2]&lt;/a> も) を読み流した際の記録として，多変数連立代数方程式とグレブナー基底についての概要をまとめます．&lt;/p>
+&lt;p>多変数連立代数方程式を解くという観点に絞り，この分野でどのような話題があるかを概観できるものとするため，証明や詳細な議論，重要であってもその周辺の話題の紹介は省略します．
+&lt;a href="cite:1">[1]&lt;/a>, &lt;a href="cite:2">[2]&lt;/a> をご参照ください．&lt;/p>
+&lt;h2 id="多項式イデアルアフィン多様体">
+ 多項式・イデアル・アフィン多様体
+ &lt;a class="anchor" href="#%e5%a4%9a%e9%a0%85%e5%bc%8f%e3%82%a4%e3%83%87%e3%82%a2%e3%83%ab%e3%82%a2%e3%83%95%e3%82%a3%e3%83%b3%e5%a4%9a%e6%a7%98%e4%bd%93">#&lt;/a>
+&lt;/h2>
+&lt;p>本節では主要な概念を定義します．&lt;/p>
+&lt;h3 id="多項式">
+ 多項式
+ &lt;a class="anchor" href="#%e5%a4%9a%e9%a0%85%e5%bc%8f">#&lt;/a>
+&lt;/h3>
+&lt;p>&lt;span>
+ \(k\)
+&lt;/span>
+ を体として，係数を体 &lt;span>
+ \(k\)
+&lt;/span>
+ にもつ多項式を考えます．&lt;/p>
+&lt;p>&lt;span>
+ \(\mathbb{N}\)
+&lt;/span>
+ を0以上の整数全体，つまり &lt;span>
+ \(\mathbb{N}=\{0,1,\dots\}\)
+&lt;/span>
+ とします．
+&lt;span>
+ \(\alpha\in\mathbb{N}^n\)
+&lt;/span>
+ について，&lt;span>
+ \(\alpha=(\alpha_i)_{i=1,2,\dots,n}\)
+&lt;/span>
+ と表すものとします．&lt;/p>
+&lt;p>有限個の &lt;span>
+ \(\alpha\in\mathbb{N}^n\)
+&lt;/span>
+ を除き &lt;span>
+ \(a_\alpha=0\)
+&lt;/span>
+ であるような &lt;span>
+ \((a_{\alpha})_{\alpha\in\mathbb{N}^n}\)
+&lt;/span>
+ (&lt;span>
+ \(\forall\alpha\in\mathbb{N}^n\,(a_\alpha\in k)\)
+&lt;/span>
+) が存在し，&lt;span>
+ \(n\)
+&lt;/span>
+ 個の &lt;strong>不定元&lt;/strong> &lt;span>
+ \(X_1,\dots,X_n\notin k\)
+&lt;/span>
+ を用いて &lt;span>
+ \(f\)
+&lt;/span>
+ が
+&lt;span>
+ \[
+ f=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}
+\]
+&lt;/span>
+
+と表せるとき，この &lt;span>
+ \(f\)
+&lt;/span>
+ を &lt;strong>多項式&lt;/strong> といいます．
+項に現れる不定元を明示して
+&lt;span>
+ \[
+ f(X_1,\dots,X_n)=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}
+\]
+&lt;/span>
+
+と書くこともあります．&lt;/p></description></item><item><title>差分プライバシの基本</title><link>https://htakeuchi0.github.io/docs/math/stat/dp/basic/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/stat/dp/basic/</guid><description>&lt;h1 id="差分プライバシの基本">
  差分プライバシの基本
  &lt;a class="anchor" href="#%e5%b7%ae%e5%88%86%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%81%ae%e5%9f%ba%e6%9c%ac">#&lt;/a>
 &lt;/h1>
@@ -2460,12 +2555,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\)
 &lt;/span>
  を具体的に構成します．&lt;/p>
-&lt;h3 id="hahahugoshortcode46s13hbhb-の構成">
+&lt;h3 id="hahahugoshortcode45s13hbhb-の構成">
  &lt;span>
  \(\Omega_\infty\)
 &lt;/span>
  の構成
- &lt;a class="anchor" href="#hahahugoshortcode46s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode45s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\)
@@ -2484,12 +2579,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \(\Omega_{\infty}=\Omega^{\mathbb{N}}\)
 &lt;/span>
  とします&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;sup>, &lt;/sup>&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>．&lt;/p>
-&lt;h3 id="hahahugoshortcode46s25hbhb-の構成">
+&lt;h3 id="hahahugoshortcode45s25hbhb-の構成">
  &lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)
 &lt;/span>
  の構成
- &lt;a class="anchor" href="#hahahugoshortcode46s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode45s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)

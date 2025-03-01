@@ -1,0 +1,747 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  多変数連立代数方程式とグレブナー基底
+  #
+
+
+  概要
+  #
+
+複数の多変数多項式を等号で結んで表される連立方程式
+
+
+
+
+  \[
+  f_1(X_1,\dots,X_n)=\cdots=f_s(X_1,\dots,X_n)=0
+\]
+
+
+を考えます．
+ここではこれを多変数連立代数方程式と呼ぶことにします．
+逆に，このページで単に連立方程式といえば，多変数連立代数方程式を指すこととします．
+多変数連立代数方程式は，1次式であれば単なる線形方程式であり，1変数であれば4次までは解の公式が存在しますが，一般の場合の解の求め方は，それらに比べて明らかではありません．
+[1], [2] は，この解法を考える上で重要な概念である グレブナー基底 の有名な入門書です．
+本ページでは，この分野の概観を把握するため，[1] (それとほとんど目を通せていないですが [2] も) を読み流した際の記録として，多変数連立代数方程式とグレブナー基底についての概要をまとめます．
+多変数連立代数方程式を解くという観点に絞り，この分野でどのような話題があるかを概観できるものとするため，証明や詳細な議論，重要であってもその周辺の話題の紹介は省略します．
+[1], [2] をご参照ください．
+
+  多項式・イデアル・アフィン多様体
+  #
+
+本節では主要な概念を定義します．
+
+  多項式
+  #
+
+
+  \(k\)
+
+ を体として，係数を体 
+  \(k\)
+
+ にもつ多項式を考えます．
+
+  \(\mathbb{N}\)
+
+ を0以上の整数全体，つまり 
+  \(\mathbb{N}=\{0,1,\dots\}\)
+
+ とします．
+
+  \(\alpha\in\mathbb{N}^n\)
+
+ について，
+  \(\alpha=(\alpha_i)_{i=1,2,\dots,n}\)
+
+ と表すものとします．
+有限個の 
+  \(\alpha\in\mathbb{N}^n\)
+
+ を除き 
+  \(a_\alpha=0\)
+
+ であるような 
+  \((a_{\alpha})_{\alpha\in\mathbb{N}^n}\)
+
+ (
+  \(\forall\alpha\in\mathbb{N}^n\,(a_\alpha\in k)\)
+
+) が存在し，
+  \(n\)
+
+ 個の 不定元 
+  \(X_1,\dots,X_n\notin k\)
+
+ を用いて 
+  \(f\)
+
+ が
+
+  \[
+  f=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}
+\]
+
+
+と表せるとき，この 
+  \(f\)
+
+ を 多項式 といいます．
+項に現れる不定元を明示して
+
+  \[
+  f(X_1,\dots,X_n)=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}
+\]
+
+
+と書くこともあります．"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/algebra/groebner/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="多変数連立代数方程式とグレブナー基底"><meta property="og:description" content="多変数連立代数方程式とグレブナー基底 # 概要 # 複数の多変数多項式を等号で結んで表される連立方程式 \[ f_1(X_1,\dots,X_n)=\cdots=f_s(X_1,\dots,X_n)=0 \] を考えます． ここではこれを多変数連立代数方程式と呼ぶことにします． 逆に，このページで単に連立方程式といえば，多変数連立代数方程式を指すこととします．
+多変数連立代数方程式は，1次式であれば単なる線形方程式であり，1変数であれば4次までは解の公式が存在しますが，一般の場合の解の求め方は，それらに比べて明らかではありません．
+[1], [2] は，この解法を考える上で重要な概念である グレブナー基底 の有名な入門書です． 本ページでは，この分野の概観を把握するため，[1] (それとほとんど目を通せていないですが [2] も) を読み流した際の記録として，多変数連立代数方程式とグレブナー基底についての概要をまとめます．
+多変数連立代数方程式を解くという観点に絞り，この分野でどのような話題があるかを概観できるものとするため，証明や詳細な議論，重要であってもその周辺の話題の紹介は省略します． [1], [2] をご参照ください．
+多項式・イデアル・アフィン多様体 # 本節では主要な概念を定義します．
+多項式 # \(k\) を体として，係数を体 \(k\) にもつ多項式を考えます．
+\(\mathbb{N}\) を0以上の整数全体，つまり \(\mathbb{N}=\{0,1,\dots\}\) とします． \(\alpha\in\mathbb{N}^n\) について， \(\alpha=(\alpha_i)_{i=1,2,\dots,n}\) と表すものとします．
+有限個の \(\alpha\in\mathbb{N}^n\) を除き \(a_\alpha=0\) であるような \((a_{\alpha})_{\alpha\in\mathbb{N}^n}\) ( \(\forall\alpha\in\mathbb{N}^n\,(a_\alpha\in k)\) ) が存在し， \(n\) 個の 不定元 \(X_1,\dots,X_n\notin k\) を用いて \(f\) が \[ f=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i} \] と表せるとき，この \(f\) を 多項式 といいます． 項に現れる不定元を明示して \[ f(X_1,\dots,X_n)=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i} \] と書くこともあります．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2025-03-01T22:56:25+09:00"><title>多変数連立代数方程式とグレブナー基底 | htakeuchi0 のノート</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://htakeuchi0.github.io/docs/math/algebra/groebner/><link rel=stylesheet href=/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css integrity="sha256-Q0A154hcf10SgYvZ8RHPGgklxvt4OCZnOBw9Xto/tPE=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/algebra/>代数</a><ul><li><a href=/docs/math/algebra/poly/>多項式</a></li><li><a href=/docs/math/algebra/groebner/ class=active>多変数連立代数方程式とグレブナー基底</a></li></ul></li><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/complex/>函数論</a><ul><li><a href=/docs/math/complex/picard/>Picard の定理</a></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li><li><a href=/docs/others/macroeconomics/>マクロ経済学</a><ul><li><a href=/docs/others/macroeconomics/jones-1/>ジョーンズ マクロ経済学Ⅰ</a></li></ul></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>多変数連立代数方程式とグレブナー基底</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#多項式イデアルアフィン多様体>多項式・イデアル・アフィン多様体</a><ul><li><a href=#多項式>多項式</a></li><li><a href=#単項式>単項式</a></li><li><a href=#全次数>全次数</a></li><li><a href=#イデアル>イデアル</a></li><li><a href=#アフィン多様体>アフィン多様体</a></li></ul></li><li><a href=#単項式順序>単項式順序</a><ul><li><a href=#順序>順序</a></li><li><a href=#単項式順序-1>単項式順序</a></li><li><a href=#単項式順序に関連する定義>単項式順序に関連する定義</a></li></ul></li><li><a href=#多変数多項式の割り算と余り>多変数多項式の割り算と余り</a></li><li><a href=#グレブナー基底>グレブナー基底</a></li><li><a href=#消去定理>消去定理</a></li><li><a href=#拡張定理>拡張定理</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=多変数連立代数方程式とグレブナー基底>多変数連立代数方程式とグレブナー基底
+<a class=anchor href=#%e5%a4%9a%e5%a4%89%e6%95%b0%e9%80%a3%e7%ab%8b%e4%bb%a3%e6%95%b0%e6%96%b9%e7%a8%8b%e5%bc%8f%e3%81%a8%e3%82%b0%e3%83%ac%e3%83%96%e3%83%8a%e3%83%bc%e5%9f%ba%e5%ba%95>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>複数の多変数多項式を等号で結んで表される連立方程式
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\[
+f_1(X_1,\dots,X_n)=\cdots=f_s(X_1,\dots,X_n)=0
+\]
+</span>を考えます．
+ここではこれを多変数連立代数方程式と呼ぶことにします．
+逆に，このページで単に連立方程式といえば，多変数連立代数方程式を指すこととします．</p><p>多変数連立代数方程式は，1次式であれば単なる線形方程式であり，1変数であれば4次までは解の公式が存在しますが，一般の場合の解の求め方は，それらに比べて明らかではありません．</p><p><a href=cite:1>[1]</a>, <a href=cite:2>[2]</a> は，この解法を考える上で重要な概念である <strong>グレブナー基底</strong> の有名な入門書です．
+本ページでは，この分野の概観を把握するため，<a href=cite:1>[1]</a> (それとほとんど目を通せていないですが <a href=cite:2>[2]</a> も) を読み流した際の記録として，多変数連立代数方程式とグレブナー基底についての概要をまとめます．</p><p>多変数連立代数方程式を解くという観点に絞り，この分野でどのような話題があるかを概観できるものとするため，証明や詳細な議論，重要であってもその周辺の話題の紹介は省略します．
+<a href=cite:1>[1]</a>, <a href=cite:2>[2]</a> をご参照ください．</p><h2 id=多項式イデアルアフィン多様体>多項式・イデアル・アフィン多様体
+<a class=anchor href=#%e5%a4%9a%e9%a0%85%e5%bc%8f%e3%82%a4%e3%83%87%e3%82%a2%e3%83%ab%e3%82%a2%e3%83%95%e3%82%a3%e3%83%b3%e5%a4%9a%e6%a7%98%e4%bd%93>#</a></h2><p>本節では主要な概念を定義します．</p><h3 id=多項式>多項式
+<a class=anchor href=#%e5%a4%9a%e9%a0%85%e5%bc%8f>#</a></h3><p><span>\(k\)
+</span>を体として，係数を体 <span>\(k\)
+</span>にもつ多項式を考えます．</p><p><span>\(\mathbb{N}\)
+</span>を0以上の整数全体，つまり <span>\(\mathbb{N}=\{0,1,\dots\}\)
+</span>とします．
+<span>\(\alpha\in\mathbb{N}^n\)
+</span>について，<span>
+\(\alpha=(\alpha_i)_{i=1,2,\dots,n}\)
+</span>と表すものとします．</p><p>有限個の <span>\(\alpha\in\mathbb{N}^n\)
+</span>を除き <span>\(a_\alpha=0\)
+</span>であるような <span>\((a_{\alpha})_{\alpha\in\mathbb{N}^n}\)
+</span>(<span>
+\(\forall\alpha\in\mathbb{N}^n\,(a_\alpha\in k)\)
+</span>) が存在し，<span>
+\(n\)
+</span>個の <strong>不定元</strong> <span>\(X_1,\dots,X_n\notin k\)
+</span>を用いて <span>\(f\)
+</span>が
+<span>\[
+f=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}
+\]
+</span>と表せるとき，この <span>\(f\)
+</span>を <strong>多項式</strong> といいます．
+項に現れる不定元を明示して
+<span>\[
+f(X_1,\dots,X_n)=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}
+\]
+</span>と書くこともあります．</p><p>後者の表記に関連し，例えば <span>\(g\in k[X_1,\dots,X_n]\)
+</span>について，<span>
+\(\alpha_1\neq0\)
+</span>ならば <span>\(a_{(\alpha_1,\dots,\alpha_n)}=0\)
+</span>であるとき，<span>
+\(X_1\)
+</span>は <span>\(g\)
+</span>の項に現れません．
+それを明示するために，<span>
+\(g\)
+</span>の代わりに <span>\(g(X_2,\dots,X_n)\)
+</span>と書くことがあります．
+付随して，このような多項式全体の集合を <span>\(k[X_2,\dots,X_n]\)
+</span>と書くこともあります．</p><p>不定元が <span>\(X_1,\dots,X_n\)
+</span>である多項式全体の集合を <span>\(k[X_1,\dots,X_n]\)
+</span>と表します．
+この <span>\(k[X_1,\dots,X_n]\)
+</span>は単位的可換環をなします．
+この事実から，<span>
+\(k[X_1,\dots,X_n]\)
+</span>は <strong>多項式環</strong> と呼ばれます．</p><p>詳細は <a href=https://htakeuchi0.github.io/docs/math/algebra/poly/>前ページ</a> をご参照ください．
+前ページの記号でいうと，<span>
+\(K\)
+</span>を有限集合として，<span>
+\(|K|=n\)
+</span>である場合を考えていることになります．
+また，<span>
+\(K\)
+</span>が有限集合なら，前ページで <span>\(\mathbb{N}^{(K)}\)
+</span>としていたところは <span>\(\mathbb{N}^n\)
+</span>とできます．</p><p>いくつか関連する用語を定義します．</p><h3 id=単項式>単項式
+<a class=anchor href=#%e5%8d%98%e9%a0%85%e5%bc%8f>#</a></h3><p><span>\(f[X_1,\dots,X_n]\)
+</span>において，<span>
+\((\alpha_i)_{i=1,2,\dots,n}\in\mathbb{N}^n\)
+</span>のとき，
+<span>\[
+\prod_{i=1}^nX_i^{\alpha_i}
+\]
+</span>を <strong>単項式</strong> といいます．</p><p><span>\(f\in k[X_1,\dots,X_n]\)
+</span>が，有限個の <span>\(\alpha\in\mathbb{N}^n\)
+</span>を除き <span>\(a_\alpha=0\)
+</span>であるような <span>\((a_{\alpha})_{\alpha\in\mathbb{N}^n}\)
+</span>によって
+<span>\[
+f=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}
+\]
+</span>と表されているとき，
+<span>\[
+\left.\left\{\prod_{i=1}^nX_i^{\alpha_i}\,\right|\,a_{(\alpha_1,\dots,\alpha_n)}\neq0\right\}
+\]
+</span>の元を <strong>多項式 <span>\(f\)
+</span>の単項式</strong> と呼ぶことがあります．</p><h3 id=全次数>全次数
+<a class=anchor href=#%e5%85%a8%e6%ac%a1%e6%95%b0>#</a></h3><p><span>\(\alpha\in\mathbb{N}^n\)
+</span>に対し，
+<span>\[
+|\alpha|=\sum_{i=1}^n\alpha_i
+\]
+</span>とします．</p><p><span>\(f\in k[X_1,\dots,X_n]\)
+</span>が，有限個の <span>\(\alpha\in\mathbb{N}^n\)
+</span>を除き，<span>
+\(a_\alpha=0\)
+</span>であるような <span>\((a_{\alpha})_{\alpha\in\mathbb{N}^n}\)
+</span>によって
+<span>\[
+f=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}
+\]
+</span>と表されているとします．
+<span>\(f\neq0\)
+</span>ならば，
+<span>\[
+\deg f=\max\{|\alpha|\mid\alpha\in\mathbb{N}^n\wedge a_\alpha\neq0\}
+\]
+</span>を <span>\(f\)
+</span>の <strong>全次数</strong> といいます．</p><h3 id=イデアル>イデアル
+<a class=anchor href=#%e3%82%a4%e3%83%87%e3%82%a2%e3%83%ab>#</a></h3><p><span>\(f[X_1,\dots,X_n]\)
+</span>の部分集合 <span>\(I\)
+</span>が，
+<span>\[
+\begin{aligned}
+&0\in I,\\
+  &\forall f,g\in I\,(f+g\in I),\\
+&\forall f\in I\,\forall h\in k[X_1,\dots,X_n]\,(hf\in I)
+\end{aligned}
+\]
+</span>であるとき，<span>
+\(I\)
+</span>は <strong>イデアル</strong> であるといいます．</p><p>イデアルは，多項式環以外でも定義される一般的な概念ですが，本ページでイデアルといえば，多項式環のイデアルを指すこととします．</p><p><span>\(k[X_1,\dots,X_n]\)
+</span>に対するイデアル <span>\(I\)
+</span>は，<span>
+\(\mathbb{Z}\)
+</span>に対する <span>\(n\mathbb{Z}=\{nx\mid x\in\mathbb{Z}\}\)
+</span>を想像しておけばよいです．</p><p><span>\(f_1,\dots,f_s\in k[X_1,X_2,\dots,X_n]\)
+</span>について，<span>
+\(\langle f_1,\dots,f_s\rangle\)
+</span>を，
+<span>\[
+\langle f_1,\dots,f_s\rangle=\left.\left\{\sum_{i=1}^sh_if_i\,\right|\,h_1,\dots,h_s\in k[X_1,\dots,X_n]\right\}
+\]
+</span>と定めると，<span>
+\(\langle f_1,\dots,f_s\rangle\)
+</span>はイデアルになります．
+この <span>\(\langle f_1,\dots,f_s\rangle\)
+</span>を <span>\(f_1,\dots,f_s\)
+</span>により <strong>生成されるイデアル</strong> といいます．</p><p>逆に，イデアル <span>\(I\)
+</span>に対して，<span>
+\(f_1,\dots,f_s\in k[X_1,\dots,X_n]\)
+</span>が存在し，<span>
+\(I=\langle f_1,\dots,f_s\rangle\)
+</span>となることが知られています（<strong>ヒルベルトの基底定理</strong>）．
+この <span>\(f_1,\dots,f_s\)
+</span>を <span>\(I\)
+</span>の <strong>基底</strong> といいます．</p><h3 id=アフィン多様体>アフィン多様体
+<a class=anchor href=#%e3%82%a2%e3%83%95%e3%82%a3%e3%83%b3%e5%a4%9a%e6%a7%98%e4%bd%93>#</a></h3><p><span>\(f_1,\dots,f_s\in k[X_1,\dots,X_n]\)
+</span>に対し，
+<span>\[
+\bm{V}(f_1,\dots,f_s)=\{a\in k^n\mid \forall i\in\{1,2,\dots,s\}\,(f_i(a)=0)\}
+\]
+</span>を <span>\(f_1,\dots,f_s\)
+</span>により定義される <strong>アフィン多様体</strong> といいます．
+ただし，<span>
+\(f_i(a)\,(i=1,2,\dots,s)\)
+</span>は，<span>
+\(f_i\)
+</span>に <span>\(a=(a_1,\dots,a_n)\in k^n\)
+</span>を代入したときの値を表します．
+<span>\(\bm{V}(f_1,\dots,f_s)\)
+</span>は連立方程式
+<span>\[
+f_i(a)=0,\quad i=1,2,\dots,s
+\]
+</span>の解全体の集合です．</p><p><span>\(I\subseteq k[X_1,\dots,X_n]\)
+</span>をイデアルとするとき，
+<span>\[
+\bm{V}(I)=\{a\in k^n\mid \forall f\in I\,(f(a)=0)\}
+\]
+</span>とします．
+これは，一般には無限個の方程式 <span>\(f=0\,(\forall f\in I)\)
+</span>の共通解全体の集合です．</p><p><span>\(I\subseteq k[X_1,\dots,X_n]\)
+</span>をイデアルとするとき，<span>
+\(I=\langle f_1,\dots,f_s\rangle\)
+</span>となる <span>\(f_1,\dots,f_s\in k[X_1,\dots,X_n]\)
+</span>が存在しますが，このとき
+<span>\[
+\bm{V}(\langle f_1,\dots,f_s\rangle)=\bm{V}(f_1,\dots,f_s)
+\]
+</span>であることが知られています．
+つまり，無限個の方程式の共通解が，有限個の方程式の共通解に一致するということです．</p><p>また，これは特に <span>\(\langle f_1,\dots,f_s\rangle=\langle g_1,\dots,g_t\rangle\)
+</span>ならば，
+<span>\[
+\bm{V}(f_1,\dots,f_s)=\bm{V}(g_1,\dots,g_t)
+\]
+</span>であることも示しています．</p><p>一般に，連立方程式 <span>\(f_1=0,\dots,f_s=0\)
+</span>が解きづらければ，それと等価な解きやすい方程式 <span>\(g_1=0,\dots,g_t=0\)
+</span>を解けばよいのですが，その方法として，<span>
+\(f_1,\dots,f_s\)
+</span>が生成するイデアル <span>\(I=\langle f_1,\dots,f_s\rangle\)
+</span>を考え，連立方程式が解きやすい <span>\(I\)
+</span>の基底 <span>\(g_1,\dots,g_t\)
+</span>を見つけてもよい，ということになります．</p><h2 id=単項式順序>単項式順序
+<a class=anchor href=#%e5%8d%98%e9%a0%85%e5%bc%8f%e9%a0%86%e5%ba%8f>#</a></h2><p>多項式の先頭項やアルゴリズムを述べるため，多項式の項の順序について考えます．</p><p>1変数の多項式 <span>\(a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0\)
+</span>や，1次の多変数多項式 <span>\(a_1X_1+a_2X_2+\cdots+a_nX_n\)
+</span>では，多項式の項の順序は（一意に決まらずとも）自然に考えられます．</p><p>つまり，前者であれば
+<span>\[
+X^n>X^{n-1}>\cdots>X>1
+\]
+</span>という順序を考え，後者であれば
+<span>\[
+X_1>X_2>\cdots>X_n
+\]
+</span>という順序を考え，この順に項を並べるのが自然と考えられます．</p><p>一方で，一般の <span>\(n\)
+</span>次の多変数多項式の場合，その順序は自然に決まりません．
+全次数をもとに並べることにしても，例えば，<span>
+\(X^2Y^2,X^3Y,XY^3\)
+</span>の序列は直感的に明らかではありません．</p><p>多項式の項の順序を考えるため，単項式のどのような順序が定義できるかを考えます．</p><p>単項式全体の集合は
+<span>\[
+\left.\left\{\prod_{i=1}^nX_i^{\alpha_i}\,\right|\,(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n\right\}
+\]
+</span>と書けますが，この順序を考えることは，<span>
+\(\mathbb{N}^n\)
+</span>上の順序を考えることと同じことになります．</p><h3 id=順序>順序
+<a class=anchor href=#%e9%a0%86%e5%ba%8f>#</a></h3><p>まず，一般の集合に対する <strong>順序</strong> の定義を説明します．</p><p>集合 <span>\(A\)
+</span>に対し，<span>
+\(R\subseteq A^2\)
+</span>を <strong>関係</strong> といいます．
+<span>\((a,b)\in R\)
+</span>であることを <span>\(aRb\)
+</span>と表すとき，
+<span>\[
+\begin{aligned}
+&\forall a\in A\,(aRa),\\
+  &\forall a,b,c\in A\,(aRb\wedge bRc\implies aRc),\\
+&\forall a,b\in A\,(aRb\wedge bRa\implies a=b),\\
+\end{aligned}
+\]
+</span>を満たすとき，<span>
+\(R\)
+</span>は <strong>半順序</strong> であるといい，
+<span>\[
+\begin{aligned}
+&\forall a\in A\,(aRa),\\
+  &\forall a,b,c\in A\,(aRb\wedge bRc\implies aRc),\\
+&\forall a,b\in A\,(aRb\wedge bRa\implies a=b),\\
+&\forall a,b\in A\,(aRb\vee bRa),\\
+\end{aligned}
+\]
+</span>を満たすとき，<span>
+\(R\)
+</span>は <strong>全順序</strong> であるといいます．
+このとき，<span>
+\(aRb\)
+</span>は <span>\(a\le b\)
+</span>と書くことがふつうです．
+また，<span>
+\(a\le b\wedge a\neq b\)
+</span>であることを <span>\(a< b\)
+</span>と表します．</p><p>順序とは半順序（または全順序）を表す言葉です．</p><p>任意の <span>\(S\subseteq A\)
+</span>に対し，<span>
+\(S\neq\emptyset\)
+</span>ならば，ある <span>\(\alpha\in S\)
+</span>が存在して任意の <span>\(\beta\in S\)
+</span>に対して <span>\(\alpha\le\beta\)
+</span>が成り立つとき，<span>
+\(\le\)
+</span>は <strong>整列順序</strong> であるといいます．</p><p>本ページでは，関係<span>
+\(< \)
+</span>に対して <span>\(a\le b\)
+</span>を <span>\(a< b\vee a=b\)
+</span>であることとして，<span>
+\(\le\)
+</span>が全順序ならば，<span>
+\(<\)
+</span>は全順序であるということにします．</p><h3 id=単項式順序-1>単項式順序
+<a class=anchor href=#%e5%8d%98%e9%a0%85%e5%bc%8f%e9%a0%86%e5%ba%8f-1>#</a></h3><p>単項式に対する順序を具体的に定義します．
+この順序は，<span>
+\(\mathbb{N}^n\)
+</span>の順序に多項式環の代数構造と両立するための性質を追加で要求したものです．</p><p><span>\(\mathbb{N}^n\)
+</span>上の順序 <span>\(>\)
+</span>が，</p><ol><li><span>\(>\)
+</span>は <span>\(\mathbb{N}^n\)
+</span>の全順序である．</li><li><span>\(\forall\alpha,\beta,\gamma\in\mathbb{N}^n\,(\alpha>\beta\implies \alpha+\gamma>\beta+\gamma)\)
+</span>.</li><li><span>\(>\)
+</span>は <span>\(\mathbb{N}^n\)
+</span>の整列順序である．</li></ol><p>を満たすとき，<span>
+\(>\)
+</span>は <strong>単項式順序</strong> であるといいます．</p><p>代表的な単項式順序に以下のものがあります．</p><ul><li><span>\(\alpha,\beta\in\mathbb{N}^n\)
+</span>に対し，<span>
+\(j=\min\{i\mid\alpha_i\neq\beta_i\}\)
+</span>において <span>\(\alpha_j>\beta_j\)
+</span>であるとき <span>\(\alpha>_{\mathrm{lex}}\beta\)
+</span>とする（<strong>辞書式順序</strong>，<strong>lex 順序</strong>）．</li><li><span>\(\alpha,\beta\in\mathbb{N}^n\)
+</span>に対し，<span>
+\(|\alpha|>|\beta|\)
+</span>または <span>\(|\alpha|=|\beta|\wedge\alpha>_{\mathrm{lex}}\beta\)
+</span>となるとき，<span>
+\(\alpha>_{\mathrm{grlex}}\beta\)
+</span>とする（<strong>次数付き辞書式順序</strong>，<strong>grlex 順序</strong>）．</li><li><span>\(\alpha,\beta\in\mathbb{N}^n\)
+</span>に対し，<span>
+\(|\alpha|>|\beta|\)
+</span>または <span>\(|\alpha|=|\beta|\wedge(j=\max\{i\mid \alpha_i\neq\beta_i\}\implies \alpha_j<\beta_j)\)
+</span>となるとき，<span>
+\(\alpha>_{\mathrm{grevlex}}\beta\)
+</span>とする（<strong>次数付き逆辞書式順序</strong>，<strong>grevlex 順序</strong>）．</li></ul><p>これら順序に優劣はなく，それぞれの性質から，目的にあわせて使い分けられています．</p><h3 id=単項式順序に関連する定義>単項式順序に関連する定義
+<a class=anchor href=#%e5%8d%98%e9%a0%85%e5%bc%8f%e9%a0%86%e5%ba%8f%e3%81%ab%e9%96%a2%e9%80%a3%e3%81%99%e3%82%8b%e5%ae%9a%e7%be%a9>#</a></h3><p>単項式順序 <span>\(>\)
+</span>を固定し，<span>
+\(\mathbb{N}^n\)
+</span>の部分集合上の <span>\(\max\)
+</span>はこの順序の意味でとることとします．
+つまり，<span>
+\(A\subseteq\mathbb{N}^n\)
+</span>について，固定した単項式順序 <span>\(> \)
+</span>に対して，<span>
+\(\alpha\ge \beta\)
+</span>を <span>\(\alpha>\beta\vee\alpha=\beta\)
+</span>と定め，<span>
+\(\gamma=\max A\)
+</span>であるとは，<span>
+\(\alpha\in A\,(\gamma\ge\alpha)\)
+</span>であることと定めます．</p><p><span>\(X=(X_1,\dots,X_n)\in k[X_1,\dots,X_n]^n\)
+</span>, <span>\(\alpha\in\mathbb{N}^n\)
+</span>に対し，
+<span>\[
+X^{\alpha}=\prod_{i=1}^nX_i^{\alpha_i}
+\]
+</span>と表すことにします．</p><p><span>\(f\in k[X_1,\dots,X_n]\)
+</span>が，有限個の <span>\(\alpha\in\mathbb{N}^n\)
+</span>を除き <span>\(a_\alpha=0\)
+</span>であるような <span>\((a_{\alpha})_{\alpha\in\mathbb{N}^n}\)
+</span>によって
+<span>\[
+f=\sum_{(\alpha_1,\dots,\alpha_n)\in\mathbb{N}^n}a_{(\alpha_1,\dots,\alpha_n)}\prod_{i=1}^nX_i^{\alpha_i}=\sum_{\alpha\in\mathbb{N}^n}a_{\alpha}X^{\alpha}
+\]
+</span>と表されているとします．
+このとき，
+<span>\[
+\begin{aligned}
+&\mathrm{multideg}\,f=\max\{\alpha\in\mathbb{N}^n\mid a_{\alpha}\neq0\},\\
+&\mathrm{LC}(f)=a_{\mathrm{multideg}\,f}\in k,\\
+&\mathrm{LM}(f)=X^{\mathrm{multideg}\,f}\in k[X_1,\dots,X_n],\\
+&\mathrm{LT}(f)=\mathrm{LC}(f)\mathrm{LM}(f)
+\end{aligned}
+\]
+</span>と定めます．</p><p>特に <span>\(\mathrm{multideg}\,f\)
+</span>を <span>\(f\)
+</span>の <strong>多重次数</strong>，<span>
+\(\mathrm{LT}(f)\)
+</span>を <span>\(f\)
+</span>の <strong>先頭項</strong> といいます．</p><p>これで，多変数多項式に対しても項の順序を考えることができ，先頭項という概念を導入できました．</p><h2 id=多変数多項式の割り算と余り>多変数多項式の割り算と余り
+<a class=anchor href=#%e5%a4%9a%e5%a4%89%e6%95%b0%e5%a4%9a%e9%a0%85%e5%bc%8f%e3%81%ae%e5%89%b2%e3%82%8a%e7%ae%97%e3%81%a8%e4%bd%99%e3%82%8a>#</a></h2><p><span>\(f\in k[X_1,\dots,X_n]\)
+</span>に対して，<span>
+\(f_1,\dots,f_s,h_1,\dots,h_s,r\in k[X_1,\dots,X_n]\)
+</span>を用いて <span>\(f=h_1f_1+\cdots+h_sf_s+r\)
+</span>と書けて，<span>
+\(r=0\)
+</span>であれば，<span>
+\(f\in\langle f_1,\dots,f_s\rangle\)
+</span>とわかります（正確にいえばこれは十分条件で必要条件ではありません）．</p><p>1変数多項式 <span>\(f\in k[X]\)
+</span>に対し，<span>
+\(g\in k[X]\)
+</span>を零でない多項式とすると，<span>
+\(f=qg+r\)
+</span>, <span>\(r=0\)
+</span>または <span>\(\deg r<\deg g\)
+</span>なる <span>\(q,r\in k[X]\)
+</span>が存在することが知られていて，<span>
+\(r\)
+</span>は，<span>
+\(f\)
+</span>を <span>\(h\)
+</span>で割った <strong>余り</strong> と呼ばれています．</p><p>それを拡張し，<span>
+\(f,f_1,\dots,f_s\in k[X_1,\dots,X_n]\)
+</span>に対し，<strong><span>
+\(f\)
+</span>を <span>\((f_1,\dots,f_s)\)
+</span>で割った余り</strong> という概念が作れないかを考えます．</p><p><span>\(k[X_1,\dots,X_n]\)
+</span>の単項式順序を固定します．
+<span>\(F=(f_1,\dots,f_s)\in k[X_1,\dots,X_n]^s\)
+</span>とします．
+このとき，<span>
+\(q_1,\dots,q_s,r\in k[X_1,\dots,X_n]\)
+</span>が存在し，以下が成り立つことが知られています．</p><ol><li><span>\(f=q_1f_1+\cdots+q_sf_s+r\)
+</span>.</li><li><span>\(r\)
+</span>は <span>\(r=0\)
+</span>であるか，そうでなければ
+<span>\[
+r=\sum_{\alpha\in\mathbb{N}^n}b_\alpha X^{\alpha}
+\]
+</span>のとき，<span>
+\(b_\alpha\not=0\)
+</span>なる <span>\(X^\alpha\)
+</span>は <span>\(\mathrm{LT}(f_1),\dots,\mathrm{LT}(f_s)\)
+</span>のいずれでも割り切れない．</li></ol><p>さらに，<span>
+\(i=1,2,\dots,s\)
+</span>について <span>\(q_if_i\neq0\)
+</span>ならば <span>\(\mathrm{multideg}\,f\ge\mathrm{multideg}\,q_if_i\)
+</span>が成り立つことも示せます．</p><p>この <span>\(r\)
+</span>は， <span>\(f\)
+</span>を <span>\(F\)
+</span>で割った <strong>余り</strong> と呼ばれ，<span>
+\(\bar{f}^F\)
+</span>と表されます．</p><p><span>\(F=(f_1,\dots,f_s)\)
+</span>の多項式の順番を入れ替えた多項式列を <span>\(F^\sigma=(f_{\sigma(1)},f_{\sigma(2)},\dots,f_{\sigma(s)})\)
+</span>と書くと，一般には，<span>
+\(\bar{f}^F\neq\bar{f}^{F^\sigma}\)
+</span>であることが知られています．
+<span>\(q_i\,(i=1,2,\dots,s)\)
+</span>に関しても同様です．</p><p><span>\(f\in k[X_1,\dots,X_n]\)
+</span>に対して，<span>
+\(f_1,\dots,f_s,h_1,\dots,h_s,r\in k[X_1,\dots,X_n]\)
+</span>を用いて <span>\(f=h_1f_1+\cdots+h_sf_s+r\)
+</span>と書けて <span>\(r\neq0\)
+</span>であったとしても，<span>
+\(f_1,\dots,f_s\)
+</span>の順番を入れ替えると，余りが0になる場合があるので，<span>
+\(r=\bar{f}^F=0\)
+</span>であることは <span>\(f\in\langle f_1,\dots,f_s\rangle\)
+</span>であることの十分条件であっても必要条件ではない，ということになります．</p><h2 id=グレブナー基底>グレブナー基底
+<a class=anchor href=#%e3%82%b0%e3%83%ac%e3%83%96%e3%83%8a%e3%83%bc%e5%9f%ba%e5%ba%95>#</a></h2><p><span>\(I\)
+</span>を <span>\(k[X_1,\dots,X_n]\)
+</span>の <span>\(\{0\}\)
+</span>でないイデアルとします．
+<span>\(k[X_1,\dots,X_n]\)
+</span>の単項式順序を固定します．
+ここで，イデアルに属する多項式の先頭項だけに注目したような概念として，
+<span>\[
+\begin{aligned}
+&\mathrm{LT}(I)=\{\mathrm{LT}(f)\mid f\in I-\{0\}\},\\
+&\langle \mathrm{LT}(I)\rangle=\langle f\mid f\in\mathrm{LT}(I)\rangle
+\end{aligned}
+\]
+</span>というものを定義します．</p><p><span>\(G=\{g_1,\dots,g_t\}\subseteq k[X_1,\dots,X_n]\)
+</span>が
+<span>\[
+\langle\mathrm{LT}(g_1),\dots,\mathrm{LT}(g_t)\rangle=\langle\mathrm{LT}(I)\rangle
+\]
+</span>を満たすとき，<span>
+\(G\)
+</span>は <span>\(I\)
+</span>の <strong>グレブナー基底</strong> といいます．
+また，<span>
+\(\langle\emptyset\rangle=\{0\}\)
+</span>として，<span>
+\(\emptyset\)
+</span>は <span>\(\{0\}\)
+</span>のグレブナー基底であるとします．
+これまでの <span>\(\langle f_1,\dots,f_s\rangle=I\)
+</span>に対し，先頭項だけに注目したような定義といえます．</p><p>すべてのイデアル <span>\(I\subseteq k[X_1,\dots,X_n]\)
+</span>はグレブナー基底をもちます．
+また，グレブナー基底は <span>\(I\)
+</span>の基底であり，<span>
+\(\bar{f}^G\)
+</span>は <span>\(G=(g_1,\dots,g_t)\)
+</span>の順序を入れ替えても変わりません（一方で <span>\(q_i\,(i=1,2,\dots,s)\)
+</span>は変わります）．
+一般の多項式列 <span>\(F=(f_1,\dots,f_s)\)
+</span>の場合は，多項式の順番を変えると余りが変わってしまいますが，グレブナー基底の場合は，余りに関しては順番を気にしなくてよい，ということです．
+また，これによって，<strong><span>
+\(G\)
+</span>が <span>\(I\)
+</span>のグレブナー基底ならば，<span>
+\(f\in I\)
+</span>であることと <span>\(\bar{f}^G=0\)
+</span>であることが同値になります</strong>．</p><p>次に，<span>
+\(G\subseteq k[X_1,\dots,X_n]\)
+</span>がイデアル <span>\(I\subseteq k[X_1,\dots,X_n]\)
+</span>のグレブナー基底であるかを判定する方法があることを説明します．</p><p><span>\(f,g\in k[X_1,\dots,X_n]\)
+</span>を零でない多項式とします．
+<span>\(\mathrm{multideg}\,f=\alpha,\mathrm{multideg}\,g=\beta\)
+</span>とし，<span>
+\(\gamma_i=\max\{\alpha_i,\beta_i\}\,(i=1,2,\dots,n),\gamma=(\gamma_1,\dots,\gamma_n)\)
+</span>とします．
+このとき，
+<span>\[
+S(f,g)=\frac{X^\gamma}{\mathrm{LT}(f)}\cdot f-\frac{X^\gamma}{\mathrm{LT}(g)}\cdot g
+\]
+</span>を，<span>
+\(f,g\)
+</span>の <strong><span>\(S\)
+</span>多項式</strong> といいます．
+この多項式は，<span>
+\(f,g\)
+</span>の先頭項を打ち消すように作られた多項式です．</p><p>イデアル <span>\(I\subseteq k[X_1,\dots,X_n]\)
+</span>の適当な基底 <span>\(f_1,\dots,f_s\)
+</span>はグレブナー基底になるとは限らないのですが，これはなぜかというと，<span>
+\(S\)
+</span>多項式のように先頭項を打ち消してつくった多項式の先頭項が <span>\(f_1,\dots,f_s\)
+</span>の先頭項たちの線形結合で作れない場合，<span>
+\(\langle\mathrm{LT}(f_1),\dots,\mathrm{LT}(f_s)\rangle\)
+</span>より <span>\(\langle\mathrm{LT}(I)\rangle\)
+</span>が大きくなってしまうことがあるためです．
+このため，<span>
+\(S\)
+</span>多項式というものを定義して，イデアル <span>\(I\subseteq k[X_1,\dots,X_n]\)
+</span>の基底がグレブナー基底であるかを解析しようということです．</p><p>実際，<span>
+\(S\)
+</span>多項式を使うと，<span>
+\(G\subseteq k[X_1,\dots,X_n]\)
+</span>がイデアル <span>\(I\subseteq k[X_1,\dots,X_n]\)
+</span>のグレブナー基底であるかが判定できます．
+具体的には，<span>
+\(G=\{g_1,\dots,g_t\}\)
+</span>のすべての <span>\(i\neq j\)
+</span>となる添字について，<span>
+\(\overline{S(g_i,g_j)}^G=0\)
+</span>であることと，<span>
+\(G\)
+</span>が <span>\(I\)
+</span>のグレブナー基底であることは同値です（<strong>ブッフバーガーの判定条件</strong>）．</p><p>さらに，多変数多項式の余りは有限回の手続きで求まり，ブッフバーガーの判定条件を用いると，与えられたイデアル <span>\(I=\langle f_1,\dots,f_s\rangle\subseteq k[X_1,\dots,X_n]\)
+</span>のグレブナー基底も有限回の手続きで求まることが知られています（<strong>ブッフバーガーのアルゴリズム</strong>）．</p><p>簡単にいうと，すべて <span>\(\overline{S(g_i,g_j)}^G=0\)
+</span>となればよいため，ひとまずは仮に <span>\(G=\{f_1,\dots,f_t\}\subseteq I\)
+</span>としてはじめて，<span>
+\(r=\overline{S(g_i,g_j)}^G\neq0\)
+</span>である <span>\(r\in I\)
+</span>が見つかったら，それをグレブナー基底候補 <span>\(G\)
+</span>に加えることを続けていく方法です．
+この操作でグレブナー基底が求まること，さらにその手続きが有限回で終わることが示せます．</p><p>さらに，イデアル <span>\(I\)
+</span>のグレブナー基底 <span>\(G\)
+</span>が
+<span>\[
+\forall p\in G\,(\mathrm{LC}(p)=1)
+\]
+</span>であり，すべての <span>\(p\in G\)
+</span>について，<span>
+\(p\)
+</span>のどの単項式も <span>\(\langle\mathrm{LT}(G-\{p\})\rangle\)
+</span>に含まれないとき，<span>
+\(G\)
+</span>は <strong>被約グレブナー基底</strong> と呼ばれ，<span>
+\(\{0\}\)
+</span>でないイデアル <span>\(I\)
+</span>は与えられた単項式順序に対して被約グレブナー基底をもち，ただひとつに定まることがいえます．
+被約グレブナー基底も，有限回の手続きで求めることができます．</p><h2 id=消去定理>消去定理
+<a class=anchor href=#%e6%b6%88%e5%8e%bb%e5%ae%9a%e7%90%86>#</a></h2><p><span>\(f_1,\dots,f_s\in k[X_1,\dots,X_n]\)
+</span>とします．
+イデアル <span>\(I=\langle f_1,\dots,f_s\rangle\)
+</span>に対して，<span>
+\(I_l=I\cap k[X_{l+1},\dots,X_n]\)
+</span>はイデアルであり，これを <span>\(l\)
+</span>次の <strong>消去イデアル</strong> といいます．</p><p>ただし，<span>
+\(k[X_{l+1},\dots,X_n]\subseteq k[X_1,\dots,X_n]\)
+</span>とは，
+<span>\(f\in k[X_1,\dots,X_n]\)
+</span>を
+有限個の <span>\(\alpha\in\mathbb{N}^n\)
+</span>を除き <span>\(a_\alpha=0\)
+</span>であるような <span>\((a_{\alpha})_{\alpha\in\mathbb{N}^n}\)
+</span>によって
+<span>\[
+f=\sum_{\alpha\in\mathbb{N}^n}a_\alpha X^\alpha
+\]
+</span>と表すとき，<span>
+\((\alpha_1,\dots,\alpha_l)\neq0\)
+</span>ならば <span>\(a_{(\alpha_1,\dots,\alpha_n)}=0\)
+</span>であるもの全体の集合とします．</p><p><span>\(l\)
+</span>次の消去イデアル <span>\(I_l\)
+</span>の元には <span>\(X_1,\dots,X_l\)
+</span>が現れません．
+このことより，連立方程式 <span>\(f_1=\cdots=f_s=0\)
+</span>から <span>\(X_1,\dots,X_l\)
+</span>を消去することは，<span>
+\(I\)
+</span>の <span>\(l\)
+</span>次の消去イデアル <span>\(I_l\)
+</span>の基底を求めることに相当するといえます．</p><p>では，消去イデアルとその基底をどのように求めればよいかですが，適切な単項式順序をとれば，グレブナー基底でただちに求まります．
+具体的には，<span>
+\(I\subseteq k[X_1,\dots,X_n]\)
+</span>をイデアルとして，<span>
+\(G\)
+</span>が <span>\(I\)
+</span>の lex 順序 <span>\(X_1>X_2>\cdots>X_n\)
+</span>に関するグレブナー基底ならば，<span>
+\(0\le l\le n\)
+</span>に対し，<span>
+\(G_l=G\cap k[X_{l+1},\dots,X_n]\)
+</span>は <span>\(l\)
+</span>次の消去イデアル <span>\(I_l\)
+</span>のグレブナー基底になることが知られています（<strong>消去定理</strong>）．</p><p>つまり，lex 順序に関するグレブナー基底を用いると，連立方程式から変数を消去して，変数の少ない方程式から順に解を求めることで，もとの連立方程式を解くことができると考えられます．</p><h2 id=拡張定理>拡張定理
+<a class=anchor href=#%e6%8b%a1%e5%bc%b5%e5%ae%9a%e7%90%86>#</a></h2><p>厳密にいえば，前節の方法で消去ができたとしても，その <strong>部分解</strong> が常にもとの解の一部になるとは限りません．
+それが実現できる条件を述べたのが <strong>拡張定理</strong> です．
+前節の消去定理とこの拡張定理を合わせると，グレブナー基底を用いて，<strong>消去法</strong> で多変数連立代数方程式が解ける仕組みや解けるための条件が理解できます．</p><p>例えば，1次の消去イデアルを考えて，<span>
+\((a_2,\dots,a_n)\in\bm{V}(I_1)\)
+</span>が求まったとします．
+この <strong>部分解</strong> をもとの方程式の完全な解に <strong>拡張</strong> するには，<span>
+\(I=\langle g_1,\dots,g_t\rangle\)
+</span>に対して，
+<span>\[
+\begin{aligned}
+&g_1(X_1,a_2,\dots,a_n)=0,\\
+  &g_2(X_1,a_2,\dots,a_n)=0,\\
+&\cdots\\
+  &g_t(X_1,a_2,\dots,a_n)=0
+\end{aligned}
+\]
+</span>を満たす <span>\(X_1=a_1\)
+</span>を求めればよいですが，<strong>この共通解が常に存在するとは限らない</strong> という点が問題になります．</p><p>どのようなときに，そのような共通解が取れるかを述べたのが <strong>拡張定理</strong> です．</p><p><span>\(k\)
+</span>を体とします．
+すべての定数でない多項式 <span>\(f\in k[X]\)
+</span>について <span>\(f(a)=0\)
+</span>を満たす <span>\(a\in k\)
+</span>が存在するとき，<span>
+\(k\)
+</span>は <strong>代数的閉体</strong> であるといいます．</p><p>拡張定理は次のとおりです．
+<span>\(k\)
+</span>を代数的閉体とします．
+イデアル <span>\(I=\langle f_1,\dots,f_s\rangle\subseteq k[X_1,\dots,X_n]\)
+</span>を考え，<span>
+\(I_1\)
+</span>を <span>\(I\)
+</span>の1次の消去イデアルとします．
+<span>\(i=1,2,\dots,s\)
+</span>に対して，
+<span>\[
+f_i=c_i(X_2,\dots,X_n)X_1^{N_i}+g_i(X_1,\dots,X_N)
+\]
+</span>と表します．
+ただし，<span>
+\(g_i\)
+</span>は <span>\(X_1\)
+</span>の次数が <span>\(N_i\)
+</span>未満であるような多項式です．
+ここで，<span>
+\(N_i\ge 0\)
+</span>で <span>\(c_i\in k[X_2,\dots,X_n]\)
+</span>は零でない多項式とします．
+部分解 <span>\((a_2,\dots,a_n)\in\bm{V}(I_1)\)
+</span>があると仮定します．
+このとき，<span>
+\((a_2,\dots,a_n)\notin\bm{V}(c_1,\dots,c_s)\)
+</span>ならば <span>\(a_1\in k\)
+</span>が存在して <span>\((a_1,\dots,a_n)\in\bm{V}(I)\)
+</span>となります（<strong>拡張定理</strong>）．</p><p>ここでポイントとなる条件は <span>\((a_2,\dots,a_n)\notin\bm{V}(c_1,\dots,c_s)\)
+</span>という部分です．
+<span>\((a_2,\dots,a_n)\in\bm{V}(c_1,\dots,c_s)\)
+</span>ならば，<span>
+\(i=1,2,\dots,s\)
+</span>について <span>\(c_i(a_2,\dots,a_n)=0\)
+</span>なので，これは <span>\((X_2,\dots,X_n)\)
+</span>を <span>\((a_2,\dots,a_n)\)
+</span>に置き換えて得られる <span>\(f_i(X_1,a_2,\dots,a_n)\in k[X_1]\,(i=1,2,\dots,s)\)
+</span>において，<strong>拡張しようとしたら先頭係数が同時に消えてしまう場合</strong> を意味します．</p><p>つまり，拡張定理は，<strong>拡張しようとしたら先頭係数が同時に消えてしまう場合に限っては，拡張がうまくいかないかもしれない</strong> ということを示しています．
+そうでない場合は部分解を拡張して，もとの方程式の解が得られるということになります．</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは，<a href=cite:1>[1]</a> (それとほとんど目を通せていませんが <a href=cite:2>[2]</a> も) を読み流した際の記録として，多変数連立代数方程式とグレブナー基底についての概要をまとめました．</p><p>本ページではブッフバーガーのアルゴリズムの内容は述べていませんが，オリジナルの方法に対して，効率的に計算する方法が研究されており，例えば <strong>F4アルゴリズム</strong>，<strong>F5アルゴリズム</strong> というものが知られています <a href=cite:2>[2]</a>．</p><p>また，多変数連立代数方程式を解くという点だけに着目しましたが，グレブナー基底にまつわる話題はこれだけではありません．
+詳細は <a href=cite:1>[1]</a>, <a href=cite:2>[2]</a> をご参照ください．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>[1] D. A. Cox, J. Little, D. O&rsquo;Shea（大杉英史，土屋昭善訳），グレブナー基底と代数多様体入門上 原書4版 イデアル・多様体・アルゴリズム，丸善出版，東京，2023.<br><a id=cite:2></a>[2] D. A. Cox, J. Little, D. O&rsquo;Shea（大杉英史，土屋昭善訳），グレブナー基底と代数多様体入門下 原書4版 イデアル・多様体・アルゴリズム，丸善出版，東京，2023.</p></article><hr><p xmlns:cc=http://creativecommons.org/ns#>This work is licensed under <a href=https://creativecommons.org/licenses/by/4.0/deed.ja target=_blank rel="license noopener noreferrer" style=display:inline-block>CC BY 4.0<img style=height:22px!important;margin-left:3px;vertical-align:text-bottom src=https://mirrors.creativecommons.org/presskit/icons/cc.svg alt><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom src=https://mirrors.creativecommons.org/presskit/icons/by.svg alt></a></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/fcd34e2d4c41d56501507320eb1e5c5dae8cb574 title='Last modified by htakeuchi0 | March 1, 2025' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>March 1, 2025</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#多項式イデアルアフィン多様体>多項式・イデアル・アフィン多様体</a><ul><li><a href=#多項式>多項式</a></li><li><a href=#単項式>単項式</a></li><li><a href=#全次数>全次数</a></li><li><a href=#イデアル>イデアル</a></li><li><a href=#アフィン多様体>アフィン多様体</a></li></ul></li><li><a href=#単項式順序>単項式順序</a><ul><li><a href=#順序>順序</a></li><li><a href=#単項式順序-1>単項式順序</a></li><li><a href=#単項式順序に関連する定義>単項式順序に関連する定義</a></li></ul></li><li><a href=#多変数多項式の割り算と余り>多変数多項式の割り算と余り</a></li><li><a href=#グレブナー基底>グレブナー基底</a></li><li><a href=#消去定理>消去定理</a></li><li><a href=#拡張定理>拡張定理</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>
