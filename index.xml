@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 02 Mar 2025 20:35:42 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>htakeuchi0 のノート</title><link>https://htakeuchi0.github.io/</link><description>Recent content on htakeuchi0 のノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 02 Mar 2025 21:06:34 +0900</lastBuildDate><atom:link href="https://htakeuchi0.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2023 - 実装改良編</title><link>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/year2023/year2023_2/</guid><description>&lt;h1 id="2023---実装改良編">
  2023 - 実装改良編
  &lt;a class="anchor" href="#2023---%e5%ae%9f%e8%a3%85%e6%94%b9%e8%89%af%e7%b7%a8">#&lt;/a>
 &lt;/h1>
@@ -1169,7 +1169,7 @@ x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)},\quad k=0,1,\dots
 本ページでは，この分野の概観を把握するため，&lt;a href="cite:1">[1]&lt;/a> (それとほとんど目を通せていないですが &lt;a href="cite:2">[2]&lt;/a> も) を読み流した際の記録として，多変数連立代数方程式とグレブナー基底についての概要をまとめます．&lt;/p>
 &lt;p>多変数連立代数方程式を解くという観点に絞り，この分野でどのような話題があるかを概観できるものとするため，証明や詳細な議論，重要であってもその周辺の話題の紹介は省略します．
 &lt;a href="cite:1">[1]&lt;/a>, &lt;a href="cite:2">[2]&lt;/a> をご参照ください．&lt;/p>
-&lt;p>※2025/3/1: あまりの説明が誤っていたため修正しました&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．&lt;/p>
+&lt;p>※2025/3/1: 余りの説明が誤っていたため修正しました&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．&lt;/p>
 &lt;h2 id="多項式イデアルアフィン多様体">
  多項式・イデアル・アフィン多様体
  &lt;a class="anchor" href="#%e5%a4%9a%e9%a0%85%e5%bc%8f%e3%82%a4%e3%83%87%e3%82%a2%e3%83%ab%e3%82%a2%e3%83%95%e3%82%a3%e3%83%b3%e5%a4%9a%e6%a7%98%e4%bd%93">#&lt;/a>
@@ -2556,12 +2556,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \((\Omega_{\infty},\mathfrak{F}_{\infty},P_{\infty})\)
 &lt;/span>
  を具体的に構成します．&lt;/p>
-&lt;h3 id="hahahugoshortcode51s13hbhb-の構成">
+&lt;h3 id="hahahugoshortcode48s13hbhb-の構成">
  &lt;span>
  \(\Omega_\infty\)
 &lt;/span>
  の構成
- &lt;a class="anchor" href="#hahahugoshortcode51s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode48s13hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\Omega_1=\{\omega_1,\omega_2,\dots,\omega_6\}\)
@@ -2580,12 +2580,12 @@ Ubutu 22.04.4 LTS の場合，以下のコマンドで確認ができます．&l
  \(\Omega_{\infty}=\Omega^{\mathbb{N}}\)
 &lt;/span>
  とします&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;sup>, &lt;/sup>&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>．&lt;/p>
-&lt;h3 id="hahahugoshortcode51s25hbhb-の構成">
+&lt;h3 id="hahahugoshortcode48s25hbhb-の構成">
  &lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)
 &lt;/span>
  の構成
- &lt;a class="anchor" href="#hahahugoshortcode51s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode48s25hbhb-%e3%81%ae%e6%a7%8b%e6%88%90">#&lt;/a>
 &lt;/h3>
 &lt;p>&lt;span>
  \(\mathfrak{F}_{\infty},P_{\infty}\)

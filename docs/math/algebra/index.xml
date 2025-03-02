@@ -116,7 +116,7 @@ a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0
 本ページでは，この分野の概観を把握するため，&lt;a href="cite:1">[1]&lt;/a> (それとほとんど目を通せていないですが &lt;a href="cite:2">[2]&lt;/a> も) を読み流した際の記録として，多変数連立代数方程式とグレブナー基底についての概要をまとめます．&lt;/p>
 &lt;p>多変数連立代数方程式を解くという観点に絞り，この分野でどのような話題があるかを概観できるものとするため，証明や詳細な議論，重要であってもその周辺の話題の紹介は省略します．
 &lt;a href="cite:1">[1]&lt;/a>, &lt;a href="cite:2">[2]&lt;/a> をご参照ください．&lt;/p>
-&lt;p>※2025/3/1: あまりの説明が誤っていたため修正しました&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．&lt;/p>
+&lt;p>※2025/3/1: 余りの説明が誤っていたため修正しました&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>．&lt;/p>
 &lt;h2 id="多項式イデアルアフィン多様体">
  多項式・イデアル・アフィン多様体
  &lt;a class="anchor" href="#%e5%a4%9a%e9%a0%85%e5%bc%8f%e3%82%a4%e3%83%87%e3%82%a2%e3%83%ab%e3%82%a2%e3%83%95%e3%82%a3%e3%83%b3%e5%a4%9a%e6%a7%98%e4%bd%93">#&lt;/a>
