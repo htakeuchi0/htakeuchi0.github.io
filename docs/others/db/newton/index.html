@@ -1,0 +1,416 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  MariaDB で Newton 法の計算をする方法
+  #
+
+
+  概要
+  #
+
+MariaDB [1]1 はデータベース管理システムのひとつで，MySQL と呼ばれる歴史あるデータベース管理システムの派生として開発されているものです．
+Newton 法 は非線形方程式の解を反復によって数値計算するための方法です．求める解の近くでは高速に解に収束する性質をもち，広く使われています．具体的にいえば，微分可能な関数 
+
+
+
+  \(f:\mathbb{R}\to\mathbb{R}\)
+
+ について，適当な初期値 
+  \(x^{(0)}\in\mathbb{R}\)
+
+ を与えて，
+  \(x^{(k+1)}=x^{(k)}-f(x^{(k)})/f'(x^{(k)})\)
+
+ 
+  \((k=0,1,\dots)\)
+
+ として解を更新する方法です．
+本ノートの作成者は，データベースの初心者です．データベース管理システムに慣れるため，MariaDB でこの Newton 法を動かしてみようと思います．
+まずは，MariaDB のドキュメントを参考に，SQL の主要なキーワードである SELECT や WITH で何ができるのかを確認します．次に，WITH RECURSIVE というキーワードで再帰処理ができることを確認します．最後にこれらを組み合わせて，方程式 
+  \(x^2-2=0\)
+
+ の正の解を Newton 法で計算することで 
+  \(\sqrt{2}\)
+
+ を求めます．
+
+  SQLの文法
+  #
+
+データベース管理システムにおいて，データの操作や定義を行うための言語を SQL といいます．
+統一標準規格が存在しますが，具体的な文法はデータベース管理システムごとに微妙な差があります．
+本節では，Newton 法を動かすために使う MariaDB の SQL の文法をまとめます．
+
+  SELECT
+  #
+
+MariaDB では加法の演算ができて，SELECT を使ってその結果が確認できます． 
+https://mariadb.com/kb/en/addition-operator/
+SELECT 3+5;
++-----+
+| 3+5 |
++-----+
+|   8 |
++-----+
+これは式 3 + 5 の評価結果が 8 ということなのだと思います．"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/others/db/newton/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="MariaDB で Newton 法の計算をする方法"><meta property="og:description" content="MariaDB で Newton 法の計算をする方法 # 概要 # MariaDB [1]1 はデータベース管理システムのひとつで，MySQL と呼ばれる歴史あるデータベース管理システムの派生として開発されているものです．
+Newton 法 は非線形方程式の解を反復によって数値計算するための方法です．求める解の近くでは高速に解に収束する性質をもち，広く使われています．具体的にいえば，微分可能な関数 \(f:\mathbb{R}\to\mathbb{R}\) について，適当な初期値 \(x^{(0)}\in\mathbb{R}\) を与えて， \(x^{(k+1)}=x^{(k)}-f(x^{(k)})/f'(x^{(k)})\) \((k=0,1,\dots)\) として解を更新する方法です．
+本ノートの作成者は，データベースの初心者です．データベース管理システムに慣れるため，MariaDB でこの Newton 法を動かしてみようと思います．
+まずは，MariaDB のドキュメントを参考に，SQL の主要なキーワードである SELECT や WITH で何ができるのかを確認します．次に，WITH RECURSIVE というキーワードで再帰処理ができることを確認します．最後にこれらを組み合わせて，方程式 \(x^2-2=0\) の正の解を Newton 法で計算することで \(\sqrt{2}\) を求めます．
+SQLの文法 # データベース管理システムにおいて，データの操作や定義を行うための言語を SQL といいます． 統一標準規格が存在しますが，具体的な文法はデータベース管理システムごとに微妙な差があります． 本節では，Newton 法を動かすために使う MariaDB の SQL の文法をまとめます．
+SELECT # MariaDB では加法の演算ができて，SELECT を使ってその結果が確認できます． https://mariadb.com/kb/en/addition-operator/
+SELECT 3+5; +-----+ | 3+5 | +-----+ | 8 | +-----+ これは式 3 + 5 の評価結果が 8 ということなのだと思います．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2025-03-24T00:25:50+09:00"><title>MariaDB で Newton 法の計算をする方法 | htakeuchi0 のノート</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://htakeuchi0.github.io/docs/others/db/newton/><link rel=stylesheet href=/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css integrity="sha256-Q0A154hcf10SgYvZ8RHPGgklxvt4OCZnOBw9Xto/tPE=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/algebra/>代数</a><ul><li><a href=/docs/math/algebra/poly/>多項式</a></li><li><a href=/docs/math/algebra/groebner/>多変数連立代数方程式とグレブナー基底</a></li></ul></li><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/complex/>函数論</a><ul><li><a href=/docs/math/complex/picard/>Picard の定理</a></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li><li><a href=/docs/others/macroeconomics/>マクロ経済学</a><ul><li><a href=/docs/others/macroeconomics/jones-1/>ジョーンズ マクロ経済学Ⅰ</a></li></ul></li><li><a href=/docs/others/db/>データベース</a><ul><li><a href=/docs/others/db/newton/ class=active>MariaDB で Newton 法の計算をする方法</a></li></ul></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>MariaDB で Newton 法の計算をする方法</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#sqlの文法>SQLの文法</a><ul><li><a href=#select>SELECT</a></li><li><a href=#with>WITH</a></li><li><a href=#union>UNION</a></li><li><a href=#with-recursive>WITH RECURSIVE</a></li></ul></li><li><a href=#newton-法の計算>Newton 法の計算</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=mariadb-で-newton-法の計算をする方法>MariaDB で Newton 法の計算をする方法
+<a class=anchor href=#mariadb-%e3%81%a7-newton-%e6%b3%95%e3%81%ae%e8%a8%88%e7%ae%97%e3%82%92%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p><strong>MariaDB</strong> <a href=#cite:1>[1]</a><sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> はデータベース管理システムのひとつで，MySQL と呼ばれる歴史あるデータベース管理システムの派生として開発されているものです．</p><p><strong>Newton 法</strong> は非線形方程式の解を反復によって数値計算するための方法です．求める解の近くでは高速に解に収束する性質をもち，広く使われています．具体的にいえば，微分可能な関数
+<link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\(f:\mathbb{R}\to\mathbb{R}\)
+</span>について，適当な初期値 <span>\(x^{(0)}\in\mathbb{R}\)
+</span>を与えて，<span>
+\(x^{(k+1)}=x^{(k)}-f(x^{(k)})/f'(x^{(k)})\)
+</span><span>\((k=0,1,\dots)\)
+</span>として解を更新する方法です．</p><p>本ノートの作成者は，データベースの初心者です．データベース管理システムに慣れるため，MariaDB でこの Newton 法を動かしてみようと思います．</p><p>まずは，MariaDB のドキュメントを参考に，SQL の主要なキーワードである <code>SELECT</code> や <code>WITH</code> で何ができるのかを確認します．次に，<code>WITH RECURSIVE</code> というキーワードで再帰処理ができることを確認します．最後にこれらを組み合わせて，方程式 <span>\(x^2-2=0\)
+</span>の正の解を Newton 法で計算することで <span>\(\sqrt{2}\)
+</span>を求めます．</p><h2 id=sqlの文法>SQLの文法
+<a class=anchor href=#sql%e3%81%ae%e6%96%87%e6%b3%95>#</a></h2><p>データベース管理システムにおいて，データの操作や定義を行うための言語を <strong>SQL</strong> といいます．
+統一標準規格が存在しますが，具体的な文法はデータベース管理システムごとに微妙な差があります．
+本節では，Newton 法を動かすために使う <strong>MariaDB の</strong> SQL の文法をまとめます．</p><h3 id=select>SELECT
+<a class=anchor href=#select>#</a></h3><p>MariaDB では加法の演算ができて，<code>SELECT</code> を使ってその結果が確認できます．<br><a href=https://mariadb.com/kb/en/addition-operator/>https://mariadb.com/kb/en/addition-operator/</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>+</span><span style=color:#ae81ff>5</span>;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>-----+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>+</span><span style=color:#ae81ff>5</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>-----+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span>   <span style=color:#ae81ff>8</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>-----+
+</span></span></span></code></pre></div><p>これは式 <code>3 + 5</code> の評価結果が <code>8</code> ということなのだと思います．</p><p>これをより単純化した例として， <code>SELECT 1;</code> を実行したところこうなりました．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span></code></pre></div><p>これは式 <code>1</code> の評価結果が <code>1</code> ということなのだと思います．</p><p>この仕様について，SELECT 文の説明ページでは明示的に述べられてはいませんでした．
+BNF記法による説明はありますが，<code>select_expr</code> の定義まで詳細に書かれていません．<br><a href=https://mariadb.com/kb/en/select/>https://mariadb.com/kb/en/select/</a></p><p>なお，<code>AS</code> で別名を付けられるので，こんなことができます．
+標準的ではありませんが，本ページではこれを <span>\(x=1\)
+</span>という式のSQLにおける表現と捉えておきます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> x;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span></code></pre></div><p>この表を <code>T</code> とおいて，表 <code>T</code> の列 <code>x</code> の値を選択するSQL文は <code>FROM</code> を使って以下のように書けます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> 
+</span></span><span style=display:flex><span>  x
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> x) <span style=color:#66d9ef>AS</span> T;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span></code></pre></div><p>表が2つあっても同様です．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> 
+</span></span><span style=display:flex><span>  x, y
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> x) <span style=color:#66d9ef>AS</span> T1,
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>2</span> <span style=color:#66d9ef>AS</span> y) <span style=color:#66d9ef>AS</span> T2;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span> y <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span></code></pre></div><h3 id=with>WITH
+<a class=anchor href=#with>#</a></h3><p><code>WITH</code> は以下の構文で使えます．<br><a href=https://mariadb.com/kb/en/with/>https://mariadb.com/kb/en/with/</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> [<span style=color:#66d9ef>RECURSIVE</span>] table_reference [(columns_list)] <span style=color:#66d9ef>AS</span>  (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span> ...
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>[<span style=color:#66d9ef>CYCLE</span> cycle_column_list <span style=color:#66d9ef>RESTRICT</span>]
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> ...
+</span></span></code></pre></div><p>前節の例は <code>WITH</code> を使って表現できます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> T <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> x
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> 
+</span></span><span style=display:flex><span>  x
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>  T;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+
+</span></span></span></code></pre></div><p>テーブルが2つの場合も同様に <code>WITH</code> を使って表現できます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> T1 <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> x
+</span></span><span style=display:flex><span>),
+</span></span><span style=display:flex><span>T2 <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>2</span> <span style=color:#66d9ef>AS</span> y
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>  x, y
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>  T1, T2;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span> y <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span></code></pre></div><p><code>columns_list</code> を使うとこう書けます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> T1 (x) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>),
+</span></span><span style=display:flex><span>T2 (y) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>  x, y
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>  T1, T2;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span> y <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span></code></pre></div><p><code>WITH</code> を使って作られる一時的なテーブルまたはそれに対するクエリを <strong>共通テーブル式</strong> (Common Table Expression, <strong>CTE</strong>) と呼ぶようです．<br><a href=https://mariadb.com/kb/en/with/>https://mariadb.com/kb/en/with/</a></p><h3 id=union>UNION
+<a class=anchor href=#union>#</a></h3><p>2つの表を結合するには <code>UNION</code> というキーワードを使います．<br><a href=https://mariadb.com/kb/en/union/>https://mariadb.com/kb/en/union/</a></p><p><code>UNION</code> を使って <code>(1, 1)</code>, <code>(1, 2)</code> というレコードをこの順に結合すると以下のようになります．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> x, <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> y
+</span></span><span style=display:flex><span><span style=color:#66d9ef>UNION</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span> y <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span></code></pre></div><p>2つの行が完全に一致すると追加されません．
+<code>UNION</code> は重複行を削除します．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> x, <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> y
+</span></span><span style=display:flex><span><span style=color:#66d9ef>UNION</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span> y <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span></code></pre></div><p><code>UNION</code> の代わりに <code>UNION ALL</code> を使うと削除されません．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> x, <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>AS</span> y
+</span></span><span style=display:flex><span><span style=color:#66d9ef>UNION</span> <span style=color:#66d9ef>ALL</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> x <span style=color:#f92672>|</span> y <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>---+---+
+</span></span></span></code></pre></div><h3 id=with-recursive>WITH RECURSIVE
+<a class=anchor href=#with-recursive>#</a></h3><p><code>WITH</code> で紹介した共通テーブル式 (CTE) ですが，<code>RECURSIVE</code> というキーワードを使うと，CTE を再帰的に参照することができるようです．<br><a href=https://mariadb.com/kb/en/recursive-common-table-expressions-overview/>https://mariadb.com/kb/en/recursive-common-table-expressions-overview/</a></p><p>このページの説明によると，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>with</span> <span style=color:#66d9ef>recursive</span> R <span style=color:#66d9ef>as</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>select</span> anchor_data
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>union</span> [<span style=color:#66d9ef>all</span>]
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>select</span> recursive_part
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>from</span> R, ...
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>select</span> ...
+</span></span></code></pre></div><p>とすると，以下のように処理されるようです．</p><ol><li><code>anchor_data</code> を計算する．</li><li>新しいデータを取得するために <code>recursive_part</code> を計算する．</li><li>新しいデータが空でなければ2に戻る．</li></ol><p>例えば，以下のように <code>WITH RECURSIVE</code> を使って <span>\(n=1,2,\dots,10\)
+</span>に対応するテーブルを生成できます．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> <span style=color:#66d9ef>RECURSIVE</span> T (n) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>UNION</span> <span style=color:#66d9ef>ALL</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    T
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>WHERE</span>
+</span></span><span style=display:flex><span>    n <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>  n
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>  T;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> n    <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>2</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>3</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>4</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>5</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>6</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>7</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>8</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>9</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>   <span style=color:#ae81ff>10</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+
+</span></span></span></code></pre></div><p>これを一般の等差数列に拡張します．
+つまり，<span>
+\(a_n=a+(n-1)d,\ n=1,2,\dots,n_{\mathrm{max}}\)
+</span>を計算します．
+<span>\(n\ge2\)
+</span>ならば <span>\(a_n=a_{n-1}+d\)
+</span>であることを使います．
+ここでわかりやすさのため，<span>
+\(a,d,n_{\mathrm{max}}\)
+</span>は設定値とみなして，これらをひとつの共通テーブル式 <code>Config</code> で表現することにします．</p><p>これらをふまえて <span>\(a=2,d=3,n_{\mathrm{max}}=8\)
+</span>の場合の SQL 文を考えると以下のようになります．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> <span style=color:#66d9ef>RECURSIVE</span> T (n, a_n) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>1</span>, a
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    Config
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>UNION</span> <span style=color:#66d9ef>ALL</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, a_n <span style=color:#f92672>+</span> d
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    T, Config
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>WHERE</span>
+</span></span><span style=display:flex><span>    n <span style=color:#f92672>&lt;</span> n_max
+</span></span><span style=display:flex><span>),
+</span></span><span style=display:flex><span>Config (a, d, n_max) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span> <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>8</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> n, a_n <span style=color:#66d9ef>FROM</span> T;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+------+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> n    <span style=color:#f92672>|</span> a_n  <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+------+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>    <span style=color:#ae81ff>2</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>2</span> <span style=color:#f92672>|</span>    <span style=color:#ae81ff>5</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>3</span> <span style=color:#f92672>|</span>    <span style=color:#ae81ff>8</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>4</span> <span style=color:#f92672>|</span>   <span style=color:#ae81ff>11</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>5</span> <span style=color:#f92672>|</span>   <span style=color:#ae81ff>14</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>6</span> <span style=color:#f92672>|</span>   <span style=color:#ae81ff>17</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>7</span> <span style=color:#f92672>|</span>   <span style=color:#ae81ff>20</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>8</span> <span style=color:#f92672>|</span>   <span style=color:#ae81ff>23</span> <span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+------+
+</span></span></span></code></pre></div><h2 id=newton-法の計算>Newton 法の計算
+<a class=anchor href=#newton-%e6%b3%95%e3%81%ae%e8%a8%88%e7%ae%97>#</a></h2><p>前節より，<code>WITH RECURSIVE</code> を利用すると再帰処理ができることがわかりました．
+そこで，本節では，<code>WITH RECURSIVE</code> を使って MariaDB で Newton 法を実行してみます．
+SQL 文は等差数列の場合と同様に作れます．</p><p>まず，Newton 法とは，
+<span>\[
+x^{(k+1)}=x^{(k)}-\frac{f(x^{(k)})}{f'(x^{(k)})},\quad k=0,1,\dots
+\]
+</span>の形で近似解を更新する計算法でした．
+このままでは計算が終わらないので，適当な基準で反復を停止する必要があります．
+そこで，<span>
+\(\theta>0,k_{\mathrm{max}}>0\)
+</span>に対して，収束判定条件を <span>\(k\ge1\)
+</span>のとき <span>\(|x^{(k)}-x^{(k-1)}|/|x^{(k-1)}|<\theta\)
+</span>として，最大反復回数を <span>\(k_{\mathrm{max}}\)
+</span>とします．
+これは，ほとんど解が更新されなくなったか最大反復回数に達したら反復を終了するということになります．
+ここで，<span>
+\(k\ge1\)
+</span>ならば，
+<span>\[
+\frac{|x^{(k)}-x^{(k-1)}|}{|x^{(k-1)}|}=\frac{|f(x^{(k-1)})/f'(x^{(k-1)})|}{|x^{(k-1)}|}
+\]
+</span>であることに注意してください．</p><p>収束したときの値が取得できる SQL 文を作るものとして，具体的な SQL 文を考えます．</p><p>まず， <code>Newton</code> という共通テーブル式を用意します．
+この <code>Newton</code> は列 <code>k, x, err, converged</code> をもつものとします．
+定義は以下のとおりです．</p><table><thead><tr><th>列</th><th>型</th><th>意味</th></tr></thead><tbody><tr><td>k</td><td>INT</td><td>反復回数を表すインデックス <span>\(k\)
+</span>.</td></tr><tr><td>x</td><td>DOUBLE</td><td>第 <span>\(k\)
+</span>近似解 <span>\(x^{(k)}\)
+</span>.</td></tr><tr><td>err</td><td>DOUBLE</td><td>第 <span>\(k\)
+</span>近似解における直前の近似解との相対誤差<span>
+\(|x^{(k)}-x^{(k-1)}|/|x^{(k-1)}|\)
+</span>, ただし <span>\(k=0\)
+</span>のとき <code>NULL</code>.</td></tr><tr><td>converged</td><td>BOOLEAN</td><td>第 <span>\(k\)
+</span>反復で収束判定条件を満たしたかどうか．</td></tr></tbody></table><p>次に，<code>Config</code> という共通テーブル式を用意します．
+この <code>Config</code> は列 <code>x0, theta, k_max</code> をもつものとします．
+定義は以下のとおりです．</p><table><thead><tr><th>列</th><th>型</th><th>意味</th></tr></thead><tbody><tr><td>x0</td><td>DOUBLE</td><td>初期値 <span>\(x^{(0)}\)
+</span>.</td></tr><tr><td>theta</td><td>DOUBLE</td><td>収束判定条件のしきい値 <span>\(\theta\)
+</span>.</td></tr><tr><td>k_max</td><td>INT</td><td>最大反復回数 <span>\(k_{\mathrm{max}}\)
+</span>.</td></tr></tbody></table><p>これらを用いて，方程式 <span>\(x^2-2=0\)
+</span>の正の解を Newton 法で計算することで <span>\(\sqrt{2}\)
+</span>を求めるための SQL 文を考えます．
+その SQL 文と実行結果は以下のようになります．
+ただし，意図通り動作するように，適宜 <code>CAST</code> で型を明示的に与えています．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> <span style=color:#66d9ef>RECURSIVE</span> Newton (k, x, err, converged) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>0</span>, <span style=color:#66d9ef>CAST</span>(x0 <span style=color:#66d9ef>AS</span> DOUBLE), <span style=color:#66d9ef>CAST</span>(<span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>AS</span> DOUBLE), <span style=color:#66d9ef>FALSE</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    Config
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>UNION</span> <span style=color:#66d9ef>ALL</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    k <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>-</span> (POWER(x, <span style=color:#ae81ff>2</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)<span style=color:#f92672>/</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x),
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>ABS</span>((POWER(x, <span style=color:#ae81ff>2</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)<span style=color:#f92672>/</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x)) <span style=color:#f92672>/</span> <span style=color:#66d9ef>ABS</span>(x),
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>ABS</span>((POWER(x, <span style=color:#ae81ff>2</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)<span style=color:#f92672>/</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x)) <span style=color:#f92672>/</span> <span style=color:#66d9ef>ABS</span>(x) <span style=color:#f92672>&lt;</span> theta
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    Newton, Config
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>WHERE</span>
+</span></span><span style=display:flex><span>    k <span style=color:#f92672>&lt;</span> k_max <span style=color:#66d9ef>AND</span> converged <span style=color:#f92672>=</span> <span style=color:#66d9ef>FALSE</span>
+</span></span><span style=display:flex><span>),
+</span></span><span style=display:flex><span>Config (x0, theta, k_max) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>0</span>e<span style=color:#f92672>-</span><span style=color:#ae81ff>15</span>, <span style=color:#ae81ff>100</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>  k, x, err
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>  Newton;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+--------------------+--------------------------------+                    
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> k    <span style=color:#f92672>|</span> x                  <span style=color:#f92672>|</span> err                            <span style=color:#f92672>|</span>                                  
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+--------------------+--------------------------------+                                 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>0</span> <span style=color:#f92672>|</span>                  <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>                           <span style=color:#66d9ef>NULL</span> <span style=color:#f92672>|</span>                                  
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span>                <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>5</span> <span style=color:#f92672>|</span>                            <span style=color:#ae81ff>0</span>.<span style=color:#ae81ff>5</span> <span style=color:#f92672>|</span>                                  
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>2</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>4166666666666667</span> <span style=color:#f92672>|</span>            <span style=color:#ae81ff>0</span>.<span style=color:#ae81ff>05555555555555555</span> <span style=color:#f92672>|</span>                                  
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>3</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>4142156862745099</span> <span style=color:#f92672>|</span>          <span style=color:#ae81ff>0</span>.<span style=color:#ae81ff>0017301038062284225</span> <span style=color:#f92672>|</span>                                  
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>4</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>4142135623746899</span> <span style=color:#f92672>|</span>       <span style=color:#ae81ff>0</span>.<span style=color:#ae81ff>0000015018217097673717</span> <span style=color:#f92672>|</span>                                  
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>5</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>4142135623730951</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>0</span>.<span style=color:#ae81ff>0000000000011276535261092282</span> <span style=color:#f92672>|</span>                                  
+</span></span><span style=display:flex><span><span style=color:#f92672>|</span>    <span style=color:#ae81ff>6</span> <span style=color:#f92672>|</span>  <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>414213562373095</span> <span style=color:#f92672>|</span>         <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>1102230246251564</span>e<span style=color:#f92672>-</span><span style=color:#ae81ff>16</span> <span style=color:#f92672>|</span>                                  
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>------+--------------------+--------------------------------+  
+</span></span></span></code></pre></div><p>第 <span>\(k=6\)
+</span>反復にて収束判定条件を満たし，<span>
+\(\sqrt{2}\)
+</span>の近似値 <span>\(1.414213562373095\)
+</span>が得られていることがわかります．</p><p>公式としてまとめると以下のようになります．</p><span>\[
+\begin{aligned}
+&\verb|WITH RECURSIVE Newton (k, x, err, converged) AS (|\\
+&\verb|  SELECT|\\
+&\verb|    0, CAST(x0 AS DOUBLE), CAST(NULL AS DOUBLE), FALSE|\\
+&\verb|  FROM|\\
+&\verb|    Config|\\
+&\verb|  UNION ALL|\\
+&\verb|  SELECT|\\
+&\hspace{20pt}\verb|k + 1|,\\
+&\hspace{20pt}\mathtt{x} - f(\mathtt{x})/f'(\mathtt{x}),\\
+&\hspace{20pt}|f(\mathtt{x})/f'(\mathtt{x})|/|\mathtt{x}|,\\
+&\hspace{20pt}|f(\mathtt{x})/f'(\mathtt{x})|/|\mathtt{x}|<\verb|theta|\\
+&\verb|  FROM|\\
+&\verb|    Newton, Config|\\
+&\verb|  WHERE|\\
+&\verb|    k < k_max AND converged = FALSE|\\
+&\verb|),|\\
+&\verb|Config (x0, theta, k_max) AS (|\\
+&\verb|  SELECT|\\
+&\verb|    |x_0, \theta, k_{\mathrm{max}}\\
+&\verb|)|\\
+&\verb|SELECT|\\
+&\ \ \verb| k, x, err|\\
+&\verb|FROM|\\
+&\verb|  Newton;|
+\end{aligned}
+\]</span><p>反復途中の値は不要で，結果だけ取得したい場合の SQL 文を考えます．
+収束した時点の <code>x</code> を <code>sqrt2</code> として取得する SQL 文とその実行結果は以下のとおりです．</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> <span style=color:#66d9ef>RECURSIVE</span> Newton (k, x, err, converged) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>0</span>, <span style=color:#66d9ef>CAST</span>(x0 <span style=color:#66d9ef>AS</span> DOUBLE), <span style=color:#66d9ef>CAST</span>(<span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>AS</span> DOUBLE), <span style=color:#66d9ef>FALSE</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    Config
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>UNION</span> <span style=color:#66d9ef>ALL</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    k <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>-</span> (POWER(x, <span style=color:#ae81ff>2</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)<span style=color:#f92672>/</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x),
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>ABS</span>((POWER(x, <span style=color:#ae81ff>2</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)<span style=color:#f92672>/</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x)) <span style=color:#f92672>/</span> <span style=color:#66d9ef>ABS</span>(x),
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>ABS</span>((POWER(x, <span style=color:#ae81ff>2</span>) <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)<span style=color:#f92672>/</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>x)) <span style=color:#f92672>/</span> <span style=color:#66d9ef>ABS</span>(x) <span style=color:#f92672>&lt;</span> theta
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    Newton, Config
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>WHERE</span>
+</span></span><span style=display:flex><span>    converged <span style=color:#f92672>=</span> <span style=color:#66d9ef>FALSE</span>
+</span></span><span style=display:flex><span>),
+</span></span><span style=display:flex><span>Config (x0, theta, k_max) <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>0</span>e<span style=color:#f92672>-</span><span style=color:#ae81ff>15</span>, <span style=color:#ae81ff>100</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>-- ここまでは同じ．
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>  x <span style=color:#66d9ef>AS</span> sqrt2
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>  Newton, Config
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span>
+</span></span><span style=display:flex><span>  err <span style=color:#f92672>&lt;</span> theta;
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>-------------------+
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> sqrt2             <span style=color:#f92672>|</span>                                                                           
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>-------------------+                                                                           
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>|</span> <span style=color:#ae81ff>1</span>.<span style=color:#ae81ff>414213562373095</span> <span style=color:#f92672>|</span>                                                                           
+</span></span><span style=display:flex><span><span style=color:#f92672>+</span><span style=color:#75715e>-------------------+
+</span></span></span></code></pre></div><p><span>\(\sqrt{2}\)
+</span>の近似値 <span>\(1.414213562373095\)
+</span>だけが得られました．</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページではまず，MariaDB のドキュメントを参考に，<code>SELECT</code> や <code>WITH</code> で何ができるのかを確認しました．次に，<code>WITH RECURSIVE</code> というキーワードで再帰処理ができることを確認しました．最後にこれらを組み合わせて，方程式 <span>\(x^2-2=0\)
+</span>の正の解を Newton 法で計算することで <span>\(\sqrt{2}\)
+</span>を求めました．</p><p>冒頭でお断りしたとおり，本ノートの作成者は，データベースの初心者です．
+より標準的な記法で実現する方法や，その他の数値計算を MariaDB で実行するための方法の検討は今後の課題とします．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>[1] MariaDB Foundation, &ldquo;MariaDB Foundation - MariaDB.org&rdquo;, <a href=https://mariadb.org/>https://mariadb.org/</a>, 2025/3/23 最終アクセス．</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>以下本ページのURLリンクは同リンク先のページを参照しています．&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><hr><p xmlns:cc=http://creativecommons.org/ns#>This work is licensed under <a href=https://creativecommons.org/licenses/by/4.0/deed.ja target=_blank rel="license noopener noreferrer" style=display:inline-block>CC BY 4.0<img style=height:22px!important;margin-left:3px;vertical-align:text-bottom src=https://mirrors.creativecommons.org/presskit/icons/cc.svg alt><img style=height:22px!important;margin-left:3px;vertical-align:text-bottom src=https://mirrors.creativecommons.org/presskit/icons/by.svg alt></a></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/3673c09bccd920fa53b262e483ffd327dad0f22c title='Last modified by htakeuchi0 | March 24, 2025' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>March 24, 2025</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#sqlの文法>SQLの文法</a><ul><li><a href=#select>SELECT</a></li><li><a href=#with>WITH</a></li><li><a href=#union>UNION</a></li><li><a href=#with-recursive>WITH RECURSIVE</a></li></ul></li><li><a href=#newton-法の計算>Newton 法の計算</a></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>
