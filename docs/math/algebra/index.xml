@@ -186,4 +186,102 @@ a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0
 \]
 &lt;/span>
 
-と書くこともあります．&lt;/p></description></item></channel></rss>
+と書くこともあります．&lt;/p></description></item><item><title>p進整数環と射影極限</title><link>https://htakeuchi0.github.io/docs/math/algebra/padicint/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/algebra/padicint/</guid><description>&lt;h1 id="hahahugoshortcode37s0hbhb進整数環と射影極限">
+ &lt;span>
+ \(p\)
+&lt;/span>
+進整数環と射影極限
+ &lt;a class="anchor" href="#hahahugoshortcode37s0hbhb%e9%80%b2%e6%95%b4%e6%95%b0%e7%92%b0%e3%81%a8%e5%b0%84%e5%bd%b1%e6%a5%b5%e9%99%90">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ホモロジー代数の教科書として，志甫 淳の『層とホモロジー代数』&lt;a href="#cite:1">[1]&lt;/a> があります．
+&lt;a href="#cite:1">[1]&lt;/a> は，基本的な集合論的知識以外の予備知識をほとんど仮定せずに，層やホモロジー代数が説明されている教科書だそうです &lt;a href="#cite:1">[1, まえがき]&lt;/a>．&lt;/p>
+&lt;p>さて，&lt;a href="#cite:1">[1, 例1.55, p.41]&lt;/a> では，&lt;strong>射影極限&lt;/strong> の例として &lt;strong>&lt;span>
+ \(p\)
+&lt;/span>
+進整数環&lt;/strong> が紹介されています．
+そこでは &lt;span>
+ \(p\)
+&lt;/span>
+進整数環 &lt;span>
+ \(\mathbb{Z}_p\)
+&lt;/span>
+ が整域であることを示すため，&lt;span>
+ \(a=(a_n)_n,b=(b_n)_n\in\mathbb{Z}_p\)
+&lt;/span>
+ について &lt;span>
+ \(a,b\neq0\)
+&lt;/span>
+ ならば &lt;span>
+ \(a_n,b_n\neq0\)
+&lt;/span>
+ なる &lt;span>
+ \(n\)
+&lt;/span>
+ がとれると書かれています．
+しかし，その詳細までは触れられていませんでした．
+本ページの作者は，射影極限にも &lt;span>
+ \(p\)
+&lt;/span>
+進整数環にも不慣れなので&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>，そこで述べられた主張をひとつひとつ確認しながら読み進めたいと思います．
+本ページはその軌跡を残したものです．&lt;/p>
+&lt;p>したがって本ページは，表題の内容に関する解説書ではなく，正確な理解を求めるには不向きです．
+正確な理解を求める場合は，原典 &lt;a href="#cite:1">[1]&lt;/a> またはその他資料をご確認ください．&lt;/p>
+&lt;h2 id="準備1-の議論の引用">
+ 準備：[1] の議論の引用
+ &lt;a class="anchor" href="#%e6%ba%96%e5%82%991-%e3%81%ae%e8%ad%b0%e8%ab%96%e3%81%ae%e5%bc%95%e7%94%a8">#&lt;/a>
+&lt;/h2>
+&lt;p>まず， &lt;strong>帰納極限&lt;/strong> の定義を述べます．
+すべての定義は書ききれないので，ここでは &lt;a href="#cite:1">[1, 定義1.49, pp.36, 37]&lt;/a> だけを引用します．
+そこに出てくる記号だけを簡単に補足すると，&lt;span>
+ \(I\)
+&lt;/span>
+ は有向グラフの頂点の集合，&lt;span>
+ \(J(i,i')\)
+&lt;/span>
+ は頂点 &lt;span>
+ \(i\)
+&lt;/span>
+ から頂点 &lt;span>
+ \(i'\)
+&lt;/span>
+ に向かう辺の集合，&lt;span>
+ \(\mathcal{I}^{\mathrm{op}}\)
+&lt;/span>
+ は &lt;span>
+ \(\mathcal{I}\)
+&lt;/span>
+ の辺の向きを反対にしたもの，&lt;span>
+ \(R\)
+&lt;/span>
+ は環，&lt;span>
+ \(M_i\)
+&lt;/span>
+ は左 &lt;span>
+ \(R\)
+&lt;/span>
+ 加群，&lt;span>
+ \(f_{\varphi}\)
+&lt;/span>
+ は準同型写像，&lt;span>
+ \(\prod\)
+&lt;/span>
+ は左 &lt;span>
+ \(R\)
+&lt;/span>
+ 加群としての直積，&lt;span>
+ \(\varphi\in J(i,i')\)
+&lt;/span>
+ に対して &lt;span>
+ \(\mathrm{s}(\varphi)=i,\mathrm{t}(\varphi)=i'\)
+&lt;/span>
+, &lt;span>
+ \(\mathrm{Ker}(f)\)
+&lt;/span>
+ は準同型写像 &lt;span>
+ \(f\)
+&lt;/span>
+ の核です．&lt;/p></description></item></channel></rss>

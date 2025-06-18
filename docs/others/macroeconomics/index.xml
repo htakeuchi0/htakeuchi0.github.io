@@ -35,10 +35,7 @@
 &lt;li>外生変数：モデルの外から与える変数（時間的変化を許す）&lt;/li>
 &lt;li>内生変数：未知数に相当する変数&lt;/li>
 &lt;/ul>
-&lt;p>以下，外から与えられるものを 
-&lt;link rel="stylesheet" href="https://htakeuchi0.github.io/katex/katex.min.css" />
-&lt;script defer src="https://htakeuchi0.github.io/katex/katex.min.js">&lt;/script>
-&lt;script defer src="https://htakeuchi0.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+&lt;p>以下，外から与えられるものを &lt;span>
  \(\bar{\cdot}\)
 &lt;/span>
  と上線を付けた記号で表します．&lt;/p>
@@ -55,4 +52,30 @@ Y=C+I+G+\mathit{NX}
 \]
 &lt;/span>
 
-&lt;p>記号の意味は以下のとおりです．&lt;/p></description></item></channel></rss>
+&lt;p>記号の意味は以下のとおりです．&lt;/p>
+&lt;ul>
+&lt;li>&lt;span>
+ \(Y\)
+&lt;/span>
+: GDP&lt;/li>
+&lt;li>&lt;span>
+ \(C\)
+&lt;/span>
+: 消費&lt;/li>
+&lt;li>&lt;span>
+ \(I\)
+&lt;/span>
+: 投資&lt;/li>
+&lt;li>&lt;span>
+ \(G\)
+&lt;/span>
+: 政府支出&lt;/li>
+&lt;li>&lt;span>
+ \(\mathit{NX}\)
+&lt;/span>
+: 純輸出&lt;/li>
+&lt;/ul>
+&lt;p>純輸出は &lt;strong>貿易・サービス収支&lt;/strong> のことで，&lt;span>
+ \(&lt;0\)
+&lt;/span>
+ のとき &lt;strong>貿易赤字&lt;/strong> と呼ばれるものです．&lt;/p></description></item></channel></rss>

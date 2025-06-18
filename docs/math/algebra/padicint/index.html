@@ -1,0 +1,763 @@
+<!doctype html><html lang=ja-jp dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  
+  \(p\)
+
+進整数環と射影極限
+  #
+
+
+  概要
+  #
+
+ホモロジー代数の教科書として，志甫 淳の『層とホモロジー代数』[1] があります．
+[1] は，基本的な集合論的知識以外の予備知識をほとんど仮定せずに，層やホモロジー代数が説明されている教科書だそうです [1, まえがき]．
+さて，[1, 例1.55, p.41] では，射影極限 の例として 
+  \(p\)
+
+進整数環 が紹介されています．
+そこでは 
+  \(p\)
+
+進整数環 
+  \(\mathbb{Z}_p\)
+
+ が整域であることを示すため，
+  \(a=(a_n)_n,b=(b_n)_n\in\mathbb{Z}_p\)
+
+ について 
+  \(a,b\neq0\)
+
+ ならば 
+  \(a_n,b_n\neq0\)
+
+ なる 
+  \(n\)
+
+ がとれると書かれています．
+しかし，その詳細までは触れられていませんでした．
+本ページの作者は，射影極限にも 
+  \(p\)
+
+進整数環にも不慣れなので1，そこで述べられた主張をひとつひとつ確認しながら読み進めたいと思います．
+本ページはその軌跡を残したものです．
+したがって本ページは，表題の内容に関する解説書ではなく，正確な理解を求めるには不向きです．
+正確な理解を求める場合は，原典 [1] またはその他資料をご確認ください．
+
+  準備：[1] の議論の引用
+  #
+
+まず， 帰納極限 の定義を述べます．
+すべての定義は書ききれないので，ここでは [1, 定義1.49, pp.36, 37] だけを引用します．
+そこに出てくる記号だけを簡単に補足すると，
+  \(I\)
+
+ は有向グラフの頂点の集合，
+  \(J(i,i')\)
+
+ は頂点 
+  \(i\)
+
+ から頂点 
+  \(i'\)
+
+ に向かう辺の集合，
+  \(\mathcal{I}^{\mathrm{op}}\)
+
+ は 
+  \(\mathcal{I}\)
+
+ の辺の向きを反対にしたもの，
+  \(R\)
+
+ は環，
+  \(M_i\)
+
+ は左 
+  \(R\)
+
+ 加群，
+  \(f_{\varphi}\)
+
+ は準同型写像，
+  \(\prod\)
+
+ は左 
+  \(R\)
+
+ 加群としての直積，
+  \(\varphi\in J(i,i')\)
+
+ に対して 
+  \(\mathrm{s}(\varphi)=i,\mathrm{t}(\varphi)=i'\)
+
+, 
+  \(\mathrm{Ker}(f)\)
+
+ は準同型写像 
+  \(f\)
+
+ の核です．"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://htakeuchi0.github.io/docs/math/algebra/padicint/"><meta property="og:site_name" content="htakeuchi0 のノート"><meta property="og:title" content="p進整数環と射影極限"><meta property="og:description" content="\(p\) 進整数環と射影極限 # 概要 # ホモロジー代数の教科書として，志甫 淳の『層とホモロジー代数』[1] があります． [1] は，基本的な集合論的知識以外の予備知識をほとんど仮定せずに，層やホモロジー代数が説明されている教科書だそうです [1, まえがき]．
+さて，[1, 例1.55, p.41] では，射影極限 の例として \(p\) 進整数環 が紹介されています． そこでは \(p\) 進整数環 \(\mathbb{Z}_p\) が整域であることを示すため， \(a=(a_n)_n,b=(b_n)_n\in\mathbb{Z}_p\) について \(a,b\neq0\) ならば \(a_n,b_n\neq0\) なる \(n\) がとれると書かれています． しかし，その詳細までは触れられていませんでした． 本ページの作者は，射影極限にも \(p\) 進整数環にも不慣れなので1，そこで述べられた主張をひとつひとつ確認しながら読み進めたいと思います． 本ページはその軌跡を残したものです．
+したがって本ページは，表題の内容に関する解説書ではなく，正確な理解を求めるには不向きです． 正確な理解を求める場合は，原典 [1] またはその他資料をご確認ください．
+準備：[1] の議論の引用 # まず， 帰納極限 の定義を述べます． すべての定義は書ききれないので，ここでは [1, 定義1.49, pp.36, 37] だけを引用します． そこに出てくる記号だけを簡単に補足すると， \(I\) は有向グラフの頂点の集合， \(J(i,i')\) は頂点 \(i\) から頂点 \(i'\) に向かう辺の集合， \(\mathcal{I}^{\mathrm{op}}\) は \(\mathcal{I}\) の辺の向きを反対にしたもの， \(R\) は環， \(M_i\) は左 \(R\) 加群， \(f_{\varphi}\) は準同型写像， \(\prod\) は左 \(R\) 加群としての直積， \(\varphi\in J(i,i')\) に対して \(\mathrm{s}(\varphi)=i,\mathrm{t}(\varphi)=i'\) , \(\mathrm{Ker}(f)\) は準同型写像 \(f\) の核です．"><meta property="og:locale" content="ja_jp"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2025-06-19T00:10:57+09:00"><title>p進整数環と射影極限 | htakeuchi0 のノート</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://htakeuchi0.github.io/docs/math/algebra/padicint/><link rel=stylesheet href=/book.min.f0351d5c25e0eea9082c331897093f7196a63e3b47c9191bec02c70e7740621c.css integrity="sha256-8DUdXCXg7qkILDMYlwk/cZamPjtHyRkb7ALHDndAYhw=" crossorigin=anonymous><script async src="https://www.googletagmanager.com/gtag/js?id=G-RXNBZFC7LX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-RXNBZFC7LX")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>htakeuchi0 のノート</span></a></h2><ul><li><a href=/docs/cpp/>C++</a><ul><li><a href=/docs/cpp/env/>開発環境</a><ul><li><a href=/docs/cpp/env/make/>Makefile プロジェクト</a></li><li><a href=/docs/cpp/env/autoconf/>autoconf プロジェクト (1)</a></li><li><a href=/docs/cpp/env/autoconf2/>autoconf プロジェクト (2)</a></li><li><a href=/docs/cpp/env/autoconf3/>autoconf プロジェクト (3)</a></li><li><a href=/docs/cpp/env/autoconf4/>autoconf プロジェクト (4)</a></li><li><a href=/docs/cpp/env/cmake/>CMake プロジェクト (1)</a></li><li><a href=/docs/cpp/env/cmake2/>CMake プロジェクト (2)</a></li></ul></li><li><a href=/docs/cpp/fp/>関数ポインタ</a><ul><li><a href=/docs/cpp/fp/fp/>関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/mfp/>メンバ関数ポインタとその周辺</a></li><li><a href=/docs/cpp/fp/stdfunc/>std::function とその周辺</a></li><li><a href=/docs/cpp/fp/fref/>関数への参照</a></li><li><a href=/docs/cpp/fp/retfp/>関数ポインタを返却する関数</a></li></ul></li><li><a href=/docs/cpp/arrp/>配列へのポインタ</a><ul><li><a href=/docs/cpp/arrp/arrp/>配列へのポインタとその周辺</a></li><li><a href=/docs/cpp/arrp/arr_ref/>配列への参照</a></li><li><a href=/docs/cpp/arrp/stdarray/>std::array について</a></li><li><a href=/docs/cpp/arrp/retarrref/>配列への参照を返却する関数</a></li></ul></li><li><a href=/docs/cpp/mmul/>行列積の計算時間</a><ul><li><a href=/docs/cpp/mmul/basic/>行列を表現するデータ構造と行列積の計算時間</a></li><li><a href=/docs/cpp/mmul/openmp/>行列積の計算時間のOpenMPによる高速化</a></li><li><a href=/docs/cpp/mmul/avx/>行列積の計算時間のCPU拡張命令による高速化</a></li></ul></li></ul></li><li><a href=/docs/math/>数学一般</a><ul><li><a href=/docs/math/algebra/>代数</a><ul><li><a href=/docs/math/algebra/poly/>多項式</a></li><li><a href=/docs/math/algebra/groebner/>多変数連立代数方程式とグレブナー基底</a></li><li><a href=/docs/math/algebra/padicint/ class=active>p進整数環と射影極限</a></li></ul></li><li><a href=/docs/math/exp/>指数関数の定積分</a></li><li><a href=/docs/math/exp_normal/>指数関数の定積分：正規分布の累積分布関数の計算への応用</a></li><li><a href=/docs/math/optim/>数理最適化</a><ul><li><a href=/docs/math/optim/manopt/>多様体上の数理最適化</a><ul></ul></li></ul></li><li><a href=/docs/math/complex/>函数論</a><ul><li><a href=/docs/math/complex/picard/>Picard の定理</a></li></ul></li><li><a href=/docs/math/stat/>数理統計</a><ul><li><a href=/docs/math/stat/dice/>サイコロの出目の確率</a><ul><li><a href=/docs/math/stat/dice/dice_basic/>サイコロを繰り返し投げる試行の確率モデル</a></li><li><a href=/docs/math/stat/dice/dice_ratio/>サイコロをN回投げたときちょうど6回に1回の割合で1の目が出る確率</a></li><li><a href=/docs/math/stat/dice/dice_approx_ratio/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確認</a></li><li><a href=/docs/math/stat/dice/dice_randval/>サイコロをN回投げたときおよそ6回に1回程度の割合で1の目が出ることの確率変数の導入による整理</a></li><li><a href=/docs/math/stat/dice/dice_inf/>サイコロを無限回投げる場合の確率モデル</a></li></ul></li><li><a href=/docs/math/stat/dp/>差分プライバシ</a><ul><li><a href=/docs/math/stat/dp/basic/>差分プライバシの基本</a></li></ul></li><li><a href=/docs/math/stat/lap/>ラプラス分布</a><ul><li><a href=/docs/math/stat/lap/trunclap/>ラプラス分布と切断ラプラス分布</a></li><li><a href=/docs/math/stat/lap/sampling/>ラプラス分布や切断ラプラス分布からのサンプリング</a></li><li><a href=/docs/math/stat/lap/mle/>特殊なラプラス分布や切断ラプラス分布のパラメータ推定</a></li></ul></li></ul></li><li><a href=/docs/math/year2023/>2023</a><ul><li><a href=/docs/math/year2023/year2023_2/>2023 - 実装改良編</a></li></ul></li><li><a href=/docs/math/plarail/>プラレールのある数学的定式化について</a><ul><li><a href=/docs/math/plarail/rail/>レール</a></li><li><a href=/docs/math/plarail/layout/>レイアウト</a></li><li><a href=/docs/math/plarail/plarail-problems/>プラレール問題</a></li></ul></li></ul></li><li><a href=/docs/hugo/>Hugo</a><ul><li><a href=/docs/hugo/base/>空のサイトの生成</a></li><li><a href=/docs/hugo/set_config/>ページの追加とサイトの設定</a></li><li><a href=/docs/hugo/genpages/>公開用ファイルの生成</a></li><li><a href=/docs/hugo/shortcode/>独自ショートコードの定義</a></li><li><a href=/docs/hugo/book_katex/>Book テーマの hint ショートコードブロック内に数式を表示する際の注意</a></li></ul></li><li><a href=/docs/others/>その他</a><ul><li><a href=/docs/others/pmbok/>プロジェクトマネジメント知識体系 (PMBOK) ガイドに関するノート</a></li><li><a href=/docs/others/macroeconomics/>マクロ経済学</a><ul><li><a href=/docs/others/macroeconomics/jones-1/>ジョーンズ マクロ経済学Ⅰ</a></li></ul></li><li><a href=/docs/others/db/>データベース</a><ul><li><a href=/docs/others/db/newton/>MariaDB で Newton 法の計算をする方法</a></li></ul></li></ul></li></ul><ul><li><a href=/#disclaimer target=_blank rel=noopener>免責事項</a></li><li><a href=/#privacy_policy target=_blank rel=noopener>プライバシーポリシー</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>p進整数環と射影極限</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#準備1-の議論の引用>準備：[1] の議論の引用</a></li><li><a href=#射影極限とp-進整数環>射影極限と\(p\) 進整数環</a><ul><li><a href=#左-mathbbz-加群-mathbbzpnmathbbz>左 \(\mathbb{Z}\) 加群 \(\mathbb{Z}/p^n\mathbb{Z}\)</a></li><li><a href=#左-mathbbz-加群-mathbbzpnmathbbz-上の準同型写像-f_nm>左 \(\mathbb{Z}\) 加群 \(\mathbb{Z}/p^n\mathbb{Z}\) 上の準同型写像 \(f_{nm}\)</a></li><li><a href=#準同型写像-f_nm-の性質>準同型写像 \(f_{nm}\) の性質</a></li><li><a href=#p-進整数環>\(p\) 進整数環</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=hahahugoshortcode37s0hbhb進整数環と射影極限><span>\(p\)
+</span>進整数環と射影極限
+<a class=anchor href=#hahahugoshortcode37s0hbhb%e9%80%b2%e6%95%b4%e6%95%b0%e7%92%b0%e3%81%a8%e5%b0%84%e5%bd%b1%e6%a5%b5%e9%99%90>#</a></h1><h2 id=概要>概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a></h2><p>ホモロジー代数の教科書として，志甫 淳の『層とホモロジー代数』<a href=#cite:1>[1]</a> があります．
+<a href=#cite:1>[1]</a> は，基本的な集合論的知識以外の予備知識をほとんど仮定せずに，層やホモロジー代数が説明されている教科書だそうです <a href=#cite:1>[1, まえがき]</a>．</p><p>さて，<a href=#cite:1>[1, 例1.55, p.41]</a> では，<strong>射影極限</strong> の例として <strong><span>\(p\)
+</span>進整数環</strong> が紹介されています．
+そこでは <span>\(p\)
+</span>進整数環 <span>\(\mathbb{Z}_p\)
+</span>が整域であることを示すため，<span>
+\(a=(a_n)_n,b=(b_n)_n\in\mathbb{Z}_p\)
+</span>について <span>\(a,b\neq0\)
+</span>ならば <span>\(a_n,b_n\neq0\)
+</span>なる <span>\(n\)
+</span>がとれると書かれています．
+しかし，その詳細までは触れられていませんでした．
+本ページの作者は，射影極限にも <span>\(p\)
+</span>進整数環にも不慣れなので<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>，そこで述べられた主張をひとつひとつ確認しながら読み進めたいと思います．
+本ページはその軌跡を残したものです．</p><p>したがって本ページは，表題の内容に関する解説書ではなく，正確な理解を求めるには不向きです．
+正確な理解を求める場合は，原典 <a href=#cite:1>[1]</a> またはその他資料をご確認ください．</p><h2 id=準備1-の議論の引用>準備：[1] の議論の引用
+<a class=anchor href=#%e6%ba%96%e5%82%991-%e3%81%ae%e8%ad%b0%e8%ab%96%e3%81%ae%e5%bc%95%e7%94%a8>#</a></h2><p>まず， <strong>帰納極限</strong> の定義を述べます．
+すべての定義は書ききれないので，ここでは <a href=#cite:1>[1, 定義1.49, pp.36, 37]</a> だけを引用します．
+そこに出てくる記号だけを簡単に補足すると，<span>
+\(I\)
+</span>は有向グラフの頂点の集合，<span>
+\(J(i,i')\)
+</span>は頂点 <span>\(i\)
+</span>から頂点 <span>\(i'\)
+</span>に向かう辺の集合，<span>
+\(\mathcal{I}^{\mathrm{op}}\)
+</span>は <span>\(\mathcal{I}\)
+</span>の辺の向きを反対にしたもの，<span>
+\(R\)
+</span>は環，<span>
+\(M_i\)
+</span>は左 <span>\(R\)
+</span>加群，<span>
+\(f_{\varphi}\)
+</span>は準同型写像，<span>
+\(\prod\)
+</span>は左 <span>\(R\)
+</span>加群としての直積，<span>
+\(\varphi\in J(i,i')\)
+</span>に対して <span>\(\mathrm{s}(\varphi)=i,\mathrm{t}(\varphi)=i'\)
+</span>, <span>\(\mathrm{Ker}(f)\)
+</span>は準同型写像 <span>\(f\)
+</span>の核です．</p><blockquote class="book-hint info"><p><b>Definition 1</b> (帰納極限 <a href=#cite:1>[1, 定義1.49, pp.36, 37]</a>).</p><link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/auto-render.min.js onload=renderMathInElement(document.body)></script><span>\(\mathcal{I}=(I,J(i,i'))_{i,i'\in I}\)
+</span>を圏とし，
+<span>\[
+\begin{align}
+((M_i)_{i\in I},(f_{\varphi}:M_{i'}\to M_i)_{i,i'\in I,\varphi\in J(i,i')})
+\end{align}
+\]</span><p>を \(\mathcal{I}^{\mathrm{op}}\) 上の左 \(R\) 加群の図式とする．
+そして，
+\[
+X=\prod_{i\in I}M_i,\quad Y=\prod_{\varphi\in\bigsqcup_{i,i&rsquo;\in I}J(i,i&rsquo;)}M_{\mathrm{s}(\varphi)}
+\]
+とおき，\(f_\mathrm{s}\), \(f_\mathrm{t}\) を
+\[
+f_{\mathrm{s}}((x_i)_i)=(x_{\mathrm{s}(\varphi)})_{\varphi},\quad f_{\mathrm{t}}((x_i)_i)=(f_{\varphi}(x_{\mathrm{t}(\varphi)}))_{\varphi}
+\]
+とおく．
+このとき，図式 (1) の射影極限 \(\varprojlim_{i\in I}M_i\) を
+\[
+\varprojlim_{i\in I}M_i=\mathrm{Ker}(f_{\mathrm{t}}-f_{\mathrm{s}})
+\]
+と定義する．</p></blockquote><p>続けて <a href=#cite:1>[1, 例1.55, p.41]</a> の内容を引用します．</p><p>空でない順序集合 <span>\((I,\le)\)
+</span>に対して，<span>
+\(J(i,i')\)
+</span>(<span>
+\(i,i'\in I\)
+</span>) を，<span>
+\(i\le i'\)
+</span>のとき <span>\(J(i,i')=\{*_{i,i'}\}\)
+</span>（一点集合），<span>
+\(i\le i'\)
+</span>でないとき <span>\(J(i,i')=\emptyset\)
+</span>とし，合成則
+<span>\[
+J(i',i'')\times J(i,i')\ni(*_{i',i''},*_{i,i'})\mapsto *_{i,i''}\in J(i,i'')
+\]
+</span>を定めれば <span>\(\mathcal{I}=(I,J(i,i'))_{i,i'\in I}\)
+</span>は圏となります．
+これを <span>\((I,\le)\)
+</span>に対応する圏といいます．
+また，<span>
+\(\mathcal{I}^{\mathrm{op}}\)
+</span>上の左 <span>\(R\)
+</span>加群の図式のことを <span>\((I,\le)^{\mathrm{op}}\)
+</span>上の左 <span>\(R\)
+</span>加群と呼びます．
+つまり，<span>
+\((I,\le)^{\mathrm{op}}\)
+</span>上の左 <span>\(R\)
+</span>加群の図式とは，</p><ul><li><span>\(i\in\mathbb{N}=\{0,1,\dots\}\)
+</span>について <span>\(M_i\)
+</span>は左 <span>\(R\)
+</span>加群</li><li><span>\( i\le i'\)
+</span>に対して <span>\(f_{i,i'}:M_{i'}\to M_i\)
+</span>は準同型写像</li></ul><p>であって，</p><ul><li><span>\(i\in\mathbb{N}=\{0,1,\dots\}\)
+</span>について <span>\(f_{i,i}=\mathrm{id}_{M_i}\)</span></li><li><span>\(i\le i'\le i''\)
+</span>に対して <span>\(f_{i,i'}\circ f_{i',i''}=f_{i,i''}\)</span></li></ul><p>を満たすものとなります．</p><h2 id=射影極限とp-進整数環>射影極限と\(p\) 進整数環
+<a class=anchor href=#%e5%b0%84%e5%bd%b1%e6%a5%b5%e9%99%90%e3%81%a8p-%e9%80%b2%e6%95%b4%e6%95%b0%e7%92%b0>#</a></h2><p>冒頭に述べたとおり，<a href=#cite:1>[1, 例1.55, p.41]</a> では基本的なことまで遡って書かれているわけではないので，復習も兼ねてその例の主張に到達するまでの主要な議論を書き下します．</p><h3 id=左-mathbbz-加群-mathbbzpnmathbbz>左 \(\mathbb{Z}\) 加群 \(\mathbb{Z}/p^n\mathbb{Z}\)
+<a class=anchor href=#%e5%b7%a6-mathbbz-%e5%8a%a0%e7%be%a4-mathbbzpnmathbbz>#</a></h3><p>まず，<span>
+\(\mathbb{Z}\)
+</span>を有理整数環とします．
+<span>\(\mathbb{Z}\)
+</span>は環なので自然に左 <span>\(\mathbb{Z}\)
+</span>加群とみなせます <a href=#cite:1>[1, 例1.17 (2), p.8]</a>．</p><p><span>\(n\in\mathbb{N}=\{0,1,\dots\}\)
+</span>として，<span>
+\(p\in\mathbb{N}\)
+</span>を素数とします．
+<span>\(p^n\mathbb{Z}\)
+</span>を <span>\(p^n\mathbb{Z}=\{p^nk\mid k\in\mathbb{Z}\}\)
+</span>で定めます．
+すると，<span>
+\(p^n\mathbb{Z}\)
+</span>は <span>\(\mathbb{Z}\)
+</span>の空でない部分集合になります．
+ここで <span>\(p^n\mathbb{Z}\)
+</span>が <span>\(\mathbb{Z}\)
+</span>の部分加群であることを確認します．</p><p><span>\(x,y\in p^n\mathbb{Z}\)
+</span>なら <span>\(x=x'p^n\)
+</span>, <span>\(y=y'p^n\)
+</span>なる <span>\(x',y'\in\mathbb{Z}\)
+</span>が存在します．
+<span>\(x+y=(x'+y')p^n\)
+</span>となりますが <span>\(x'+y'\in\mathbb{Z}\)
+</span>なので，<span>
+\(x+y\in p^n\mathbb{Z}\)
+</span>となります．
+次に，<span>
+\(x\in p^n\mathbb{Z}\)
+</span>なら <span>\(x=x'p^n\)
+</span>なる <span>\(x'\in\mathbb{Z}\)
+</span>が存在しますが，<span>
+\(-x'\in\mathbb{Z}\)
+</span>なので，<span>
+\(y=(-x')p^n\)
+</span>も <span>\(p^n\mathbb{Z}\)
+</span>に属します．
+ここで，<span>
+\(x+y=(x'+(-x'))p^n=0\)
+</span>, <span>\(y+x=((-x')+x')p^n=0\)
+</span>なので，<span>
+\(-x=y\in p^n\mathbb{Z}\)
+</span>となります．
+さらに，<span>
+\(x\in p^n\mathbb{Z}\)
+</span>に対し，<span>
+\(x=x'p^n\)
+</span>なる <span>\(x'\in\mathbb{Z}\)
+</span>が存在するので，任意の <span>\(a\in\mathbb{Z}\)
+</span>について <span>\(ax=(ax')p^n\)
+</span>と表せます．
+<span>\(ax'\in\mathbb{Z}\)
+</span>なので <span>\(ax\in p^n\mathbb{Z}\)
+</span>となります．
+よって，<a href=#cite:1>[1, p.8]</a> の議論より，<span>
+\(p^n\mathbb{Z}\)
+</span>は <span>\(\mathbb{Z}\)
+</span>の部分加群です．</p><p>ここで <span>\(\mathbb{Z}/p^n\mathbb{Z}\)
+</span>を <span>\(\mathbb{Z}/p^n\mathbb{Z}=\{x+p^n\mathbb{Z}\mid x\in\mathbb{Z}\}\)
+</span>で定めます．
+ただし，<span>
+\(x+p^n\mathbb{Z}=\{x+y\mid y\in p^n\mathbb{Z}\}\)
+</span>です．
+いま，<span>
+\(\mathbb{Z}/p^n\mathbb{Z}\)
+</span>における和と <span>\(\mathbb{Z}\)
+</span>の元による左乗法を</p><ul><li><span>\(x+p^n\mathbb{Z},y+p^n\mathbb{Z}\in \mathbb{Z}/p^n\mathbb{Z}\)
+</span>, <span>\(x,y\in\mathbb{Z}\)
+</span>に対して <span>\((x+p^n\mathbb{Z})+(y+p^n\mathbb{Z})=(x+y)+p^n\mathbb{Z}\)</span></li><li><span>\(a\in\mathbb{Z}, x+p^n\mathbb{Z}\in \mathbb{Z}/p^n\mathbb{Z}\)
+</span>, <span>\(x\in\mathbb{Z}\)
+</span>に対して <span>\(a(x+p^n\mathbb{Z})=ax+p^n\mathbb{Z}\)</span></li></ul><p>と定めることを考えます．
+一般に <span>\(x+p^n\mathbb{Z}=x'+p^n\mathbb{Z},x\neq x'\)
+</span>なる <span>\(x,x'\in\mathbb{Z}\)
+</span>が存在するので，<span>
+\(\mathbb{Z}/p^n\mathbb{Z}\)
+</span>の要素の “表現” によらずに演算結果が定まること（well-defined であること）を確認する必要があります．
+ここでは省略しますが，<a href=#cite:1>[1, 補題1.18, p.9]</a> よりこれは well-defined であることがわかります．</p><p>以上より，<span>
+\(n\in\mathbb{N}\)
+</span>について <span>\(\mathbb{Z}/p^n\mathbb{Z}\)
+</span>が左 <span>\(\mathbb{Z}\)
+</span>加群となることがわかりました．</p><h3 id=左-mathbbz-加群-mathbbzpnmathbbz-上の準同型写像-f_nm>左 \(\mathbb{Z}\) 加群 \(\mathbb{Z}/p^n\mathbb{Z}\) 上の準同型写像 \(f_{nm}\)
+<a class=anchor href=#%e5%b7%a6-mathbbz-%e5%8a%a0%e7%be%a4-mathbbzpnmathbbz-%e4%b8%8a%e3%81%ae%e6%ba%96%e5%90%8c%e5%9e%8b%e5%86%99%e5%83%8f-f_nm>#</a></h3><p><span>\(n,m\in\mathbb{N}\)
+</span>, <span>\(n\le m\)
+</span>に対して，
+<span>\[
+f_{nm}:\mathbb{Z}/p^m\mathbb{Z}\to\mathbb{Z}/p^n\mathbb{Z}
+\]
+</span>を，<span>
+\(x+p^m\mathbb{Z}\in \mathbb{Z}/p^m\mathbb{Z}\)
+</span>, <span>\(x\in\mathbb{Z}\)
+</span>に対して
+<span>\[
+\begin{align}
+f_{nm}(x+p^m\mathbb{Z})=x+p^n\mathbb{Z}
+\end{align}
+\]
+</span>で定めることを考えます．
+これも前節と同様に，well-defined であることを確認する必要があります．</p><p>いま，<span>
+\(x+p^m\mathbb{Z}=x'+p^m\mathbb{Z}\in\mathbb{Z}/p^m\mathbb{Z}\)
+</span>であるとします．
+このとき <span>\(x'=x+kp^m\)
+</span>なる <span>\(k\in\mathbb{Z}\)
+</span>が存在します．
+すると，
+<span>\[
+\begin{aligned}
+x'+p^n\mathbb{Z}&=(x+kp^m)+p^n\mathbb{Z}\\
+&=x+(kp^{m-n})p^n+p^n\mathbb{Z}
+\end{aligned}
+\]
+</span>と書けますが，<span>
+\(m\ge n\)
+</span>なので <span>\(m-n\ge0\)
+</span>となり <span>\(kp^{m-n}\in\mathbb{Z}\)
+</span>だから <span>\((kp^{m-n})p^n\in p^n\mathbb{Z}\)
+</span>となります．
+よって，
+<span>\[
+\begin{aligned}
+x'+p^n\mathbb{Z}&=x+(kp^{m-n})p^n+p^n\mathbb{Z}\\
+&=x+p^n\mathbb{Z}
+\end{aligned}
+\]
+</span>となります．
+したがって，<span>
+\(x+p^m\mathbb{Z}=x'+p^m\mathbb{Z}\in\mathbb{Z}/p^m\mathbb{Z}\)
+</span>ならば <span>\(f_{nm}(x'+p^m\mathbb{Z})=x'+p^n\mathbb{Z}=x+p^n\mathbb{Z}=f_{nm}(x+p^m\mathbb{Z})\)
+</span>となるので，<span>
+\(f_{nm}\)
+</span>の定義は well-defined です．</p><p>次に，<span>
+\(f_{nm}\)
+</span>が準同型写像であることを確認します．</p><p><span>\(x,y\in\mathbb{Z}/p^m\mathbb{Z}\)
+</span>とします．
+<span>\(f_{nm}(x+y)=f_{nm}(x)+f_{nm}(y)\)
+</span>であることを確認します．
+<span>\(x=x'+p^m\mathbb{Z},y=y'+p^m\mathbb{Z}\)
+</span>なる <span>\(x',y'\in\mathbb{Z}\)
+</span>が存在します．
+すると，
+<span>\[
+\begin{aligned}
+f_{nm}(x+y)&=f_{nm}((x'+p^m\mathbb{Z})+(y'+p^m\mathbb{Z}))\\
+&=f_{nm}((x'+y')+p^m\mathbb{Z})\\
+&=(x'+y')+p^n\mathbb{Z}\\
+&=(x'+p^n\mathbb{Z})+(y'+p^n\mathbb{Z})\\
+&=f_{nm}(x'+p^m\mathbb{Z})+f_{nm}(y'+p^m\mathbb{Z})\\
+&=f_{nm}(x)+f_{nm}(y)
+\end{aligned}
+\]
+</span>となります．</p><p>次に，<span>
+\(a\in\mathbb{Z}\)
+</span>, <span>\(x\in\mathbb{Z}/p^m\mathbb{Z}\)
+</span>とします．
+<span>\(f_{nm}(ax)=af_{nm}(x)\)
+</span>であることを確認します．
+<span>\(x=x'+p^m\mathbb{Z}\)
+</span>なる <span>\(x'\in\mathbb{Z}\)
+</span>が存在します．
+すると，
+<span>\[
+\begin{aligned}
+f_{nm}(ax)&=f_{nm}(a(x'+p^m\mathbb{Z}))\\
+&=f_{nm}(ax'+p^m\mathbb{Z})\\
+&=ax'+p^n\mathbb{Z}\\
+&=a(x'+p^n\mathbb{Z})\\
+&=af_{nm}(x'+p^m\mathbb{Z})\\
+&=af_{nm}(x)
+\end{aligned}
+\]
+</span>となります．</p><p>以上より，<span>
+\(f_{nm}\)
+</span>は準同型写像です．</p><h3 id=準同型写像-f_nm-の性質>準同型写像 \(f_{nm}\) の性質
+<a class=anchor href=#%e6%ba%96%e5%90%8c%e5%9e%8b%e5%86%99%e5%83%8f-f_nm-%e3%81%ae%e6%80%a7%e8%b3%aa>#</a></h3><p>以降の議論のために <span>\(f_{nm}\)
+</span>の性質をまとめておきます．
+<span>\(n\in\mathbb{N}=\{0,1,\dots\}\)
+</span>とします．
+<span>\(x+p^n\mathbb{Z}\in\mathbb{Z}/p^n\mathbb{Z}\)
+</span>, <span>\(x\in\mathbb{Z}\)
+</span>とします．
+このとき，<span>
+\(f_{nn}(x+p^n\mathbb{Z})=x+p^n\mathbb{Z}\)
+</span>となるので，<span>
+\(f_{nn}=\mathrm{id}_{\mathbb{Z}/p^n\mathbb{Z}}\)
+</span>です．</p><p>次に <span>\(n,n',n''\in\mathbb{N}\)
+</span>が <span>\(n\le n'\le n''\)
+</span>であるとします．
+<span>\(x''+p^{n''}\mathbb{Z}\in\mathbb{Z}/p^{n''}\mathbb{Z}\)
+</span>, <span>\(x''\in\mathbb{Z}\)
+</span>とします．
+このとき，
+<span>\[
+\begin{aligned}
+(f_{nn'}\circ f_{n'n''})(x''+p^{n''}\mathbb{Z})&=f_{nn'}(f_{n'n''}(x''+p^{n''}\mathbb{Z}))\\
+&=f_{nn'}(x''+p^{n'}\mathbb{Z})\\
+&=x''+p^n\mathbb{Z}\\
+&=f_{nn''}(x''+p^{n''}\mathbb{Z})
+\end{aligned}
+\]
+</span>なので，<span>
+\(f_{nn'}\circ f_{n'n''}=f_{nn''}\)
+</span>が成り立ちます．</p><h3 id=p-進整数環>\(p\) 進整数環
+<a class=anchor href=#p-%e9%80%b2%e6%95%b4%e6%95%b0%e7%92%b0>#</a></h3><p>前節の結果から，<span>
+\(n\in\mathbb{N}\)
+</span>について <span>\(M_n=\mathbb{Z}/p^n\mathbb{Z}\)
+</span>として，<span>
+\(n,m\in\mathbb{N}\)
+</span>, <span>\(n\le m\)
+</span>に対して前節の準同型写像 <span>\(f_{nm}:M_m\to M_n\)
+</span>を使うと
+<span>\[
+((M_n)_{n\in\mathbb{N}},(f_{nm})_{n,m\in\mathbb{N},n\le m})
+\]
+</span>は <span>\((\mathbb{N},\le)^{\mathrm{op}}\)
+</span>上の <span>\(\mathbb{Z}\)
+</span>加群の図式になります．</p><p>すると，この図式の射影極限 <span>\(\varprojlim_{n\in\mathbb{N}}M_n\)
+</span>が定義できて，これを <span>\(\mathbb{Z}_p\)
+</span>と表すことにします．
+つまり，
+<span>\[
+\mathbb{Z}_p=\varprojlim_{n\in\mathbb{N}}M_n=\varprojlim_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}
+\]
+</span>です．</p><p>さて，<a href=#cite:1>[1, 例1.55, p.41]</a> では特に言及はありませんが，射影極限の定義 (Def. 1) から，この <span>\(\mathbb{Z}_p\)
+</span>の具体的な構造を考えてみます．
+Def. 1において，
+<span>\[
+\begin{aligned}
+&X=\prod_{n\in\mathbb{N}}M_n=\prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z},\\
+&Y=\prod_{\varphi\in\bigsqcup_{n,m}J(n,m)}M_{\mathrm{s}(\varphi)}=\prod_{\begin{subarray}{c}n\le m,\\n,m\in\mathbb{N}\end{subarray}}M_n=\prod_{\begin{subarray}{c}n\le m,\\n,m\in\mathbb{N}\end{subarray}}\mathbb{Z}/p^n\mathbb{Z}
+\end{aligned}
+\]
+</span>となります．
+よって，
+<span>\[
+\begin{aligned}
+&f_{\mathrm{s}}((x_n)_n)=(x_{\mathrm{s}(\varphi)})_{\varphi}=(x_n)_{\begin{subarray}{c}n\le m\\n,m\in\mathbb{N}\end{subarray}},\\
+&f_{\mathrm{t}}((x_n)_n)=(f_{\varphi}(x_{\mathrm{t}(\varphi)}))_{\varphi}=(f_{nm}(x_m))_{\begin{subarray}{c}n\le m\\n,m\in\mathbb{N}\end{subarray}}
+\end{aligned}
+\]
+</span>となります．
+以上より，
+<span>\[
+\begin{aligned}
+&\varprojlim_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\\
+&=\mathrm{Ker}(f_{\mathrm{t}}-f_{\mathrm{s}})\\
+&=\left\{(x_n)_n\in \prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\,\bigg|\,\forall n,m\in\mathbb{N}\,(n\le m\implies x_n=f_{nm}(x_m))\right\}
+\end{aligned}
+\]
+</span>となります．</p><p>さらに，<span>
+\(n\in\mathbb{N}\)
+</span>について <span>\(x_n=x'_n+p^n\mathbb{Z}, x'_n\in\mathbb{Z}\)
+</span>と表しておくと，<span>
+\(x_n=f_{nm}(x_m)\)
+</span>の関係は <span>\(x'_n+p^n\mathbb{Z}=x'_m+p^n\mathbb{Z}\)
+</span>と表せるので，
+<span>\[
+\begin{aligned}
+&\varprojlim_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\\
+&=\mathrm{Ker}(f_{\mathrm{t}}-f_{\mathrm{s}})\\
+&=\left\{(x'_n+p^n\mathbb{Z})_n\in \prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\,\bigg|\,\forall n,m\in\mathbb{N}\,(n\le m\implies x'_n+p^n\mathbb{Z}=x'_m+p^n\mathbb{Z})\right\}\\
+&=\left\{(x'_n+p^n\mathbb{Z})_n\in \prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\,\bigg|\,\forall n,m\in\mathbb{N}\,(n\le m\implies x'_m-x'_n\in p^n\mathbb{Z})\right\}
+\end{aligned}
+\]
+</span>と書けることがわかります．</p><p>さて，<a href=#cite:1>[1, 例1.55, p.41]</a> では，<span>
+\((a_n)_n,(b_n)_n\in\mathbb{Z}_p\)
+</span>の和と積を <span>\((a_n)_n+(b_n)_n=(a_n+b_n)_n\)
+</span>, <span>\((a_n)_n(b_n)_n=(a_nb_n)_n\)
+</span>と定めることで，<span>
+\(\mathbb{Z}_p\)
+</span>は可換環となると説明されています ．
+これを確認します．</p><p><span>\((a_n)_n,(b_n)_n\in\mathbb{Z}_p\)
+</span>とします．
+このとき，<span>
+\(n\in\mathbb{N}\)
+</span>について <span>\(a_n=a_n'+p^n\mathbb{Z},b_n=b'_n+p^n\mathbb{Z},a'_n,b'_n\in\mathbb{Z}\)
+</span>と表せます．
+<span>\(n,m\in\mathbb{N}\)
+</span>を <span>\(n\le m\)
+</span>とします．
+このとき，
+<span>\[
+\begin{aligned}
+&a'_n+p^n\mathbb{Z}=a'_m+p^n\mathbb{Z},\\
+&b'_n+p^n\mathbb{Z}=b'_m+p^n\mathbb{Z}
+\end{aligned}
+\]
+</span>なので，各辺の和および積をとると，
+<span>\[
+\begin{aligned}
+&(a'_n+b'_n)+p^n\mathbb{Z}=(a'_m+b'_m)+p^n\mathbb{Z},\\
+&(a'_nb'_n)+p^n\mathbb{Z}=(a'_mb'_m)+p^n\mathbb{Z}
+\end{aligned}
+\]
+</span>が成り立ちます．
+これは，<span>
+\(a_n+b_n=f_{nm}(a_m+b_m),a_nb_n=f_{nm}(a_mb_m)\)
+</span>を意味するため，<span>
+\((a_n)_n,(b_n)_n\in\mathbb{Z}_p\)
+</span>ならば <span>\((a_n+b_n)_n\in\mathbb{Z}_p,(a_nb_n)_n\in\mathbb{Z}_p\)
+</span>です．
+したがって，<span>
+\(\mathbb{Z}_p\)
+</span>上の和と積を <span>\((a_n)_n+(b_n)_n=(a_n+b_n)_n\)
+</span>, <span>\((a_n)_n(b_n)_n=(a_nb_n)_n\)
+</span>と定めることができます．</p><p>いま，<span>
+\(x=(x_n)_n\in\prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\)
+</span>が <span>\(x'\in\mathbb{Z}\)
+</span>によって <span>\(x=(x'+p^n\mathbb{Z})_n\)
+</span>と表されているものとします．
+このとき，<span>
+\(n\le m\)
+</span>ならば <span>\(f_{nm}(x_m)=f_{nm}(x'+p^m\mathbb{Z})=x'+p^n\mathbb{Z}=x_n\)
+</span>なので <span>\(x\in\mathbb{Z}_p\)
+</span>です．
+特に，<span>
+\(x'=0\)
+</span>や <span>\(x'=1\)
+</span>とした <span>\((0+p^n\mathbb{Z})_n,(1+p^n\mathbb{Z})_n\)
+</span>も <span>\(\mathbb{Z}_p\)
+</span>に属します．</p><p><span>\(\prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\)
+</span>は左 <span>\(\mathbb{Z}\)
+</span>加群であることから特に <span>\(\prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\)
+</span>は可換群で，その零元は <span>\((0+p^n\mathbb{Z})_n\)
+</span>です．
+<span>\(\mathbb{Z}_p\subseteq\prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\)
+</span>で，<span>
+\(\mathbb{Z}_p\)
+</span>は加法によって閉じています．
+<span>\(x=(x'_n+p^n\mathbb{Z})_n\in\mathbb{Z}_p,x'_n\in\mathbb{Z}\)
+</span>に対し，<span>
+\(-x'_n\in\mathbb{Z}\)
+</span>なので，<span>
+\(y=((-x'_n)+p^n\mathbb{Z})_n\)
+</span>とおくと <span>\(y\in\prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\)
+</span>です．
+そして，<span>
+\(n\le m\)
+</span>において <span>\(x'_n+p^n\mathbb{Z}=x'_m+p^n\mathbb{Z}\)
+</span>より，両辺 <span>\((-1))\)
+</span>倍して <span>\((-x'_n)+p^n\mathbb{Z}=(-x'_m)+p^n\mathbb{Z}\)
+</span>なので <span>\(y\in\mathbb{Z}_p\)
+</span>です．
+さらに，<span>
+\(x+y=((x'_n+(-x'_n))+p^n\mathbb{Z})_n=(0+p^n\mathbb{Z})_n\)
+</span>, <span>\(y+x=(((-x'_n)+x'_n)+p^n\mathbb{Z})_n=(0+p^n\mathbb{Z})_n\)
+</span>なので，<span>
+\(-x=y\in\mathbb{Z}_p\)
+</span>となります．
+よって，<span>
+\(\mathbb{Z}_p\)
+</span>は可換群 <span>\(\prod_{n\in\mathbb{N}}\mathbb{Z}/p^n\mathbb{Z}\)
+</span>の部分群となり，<span>
+\(\mathbb{Z}_p\)
+</span>は可換群をなすことがわかります．</p><p><span>\(a=(a'_n+p^n\mathbb{Z})_n,b=(b'_n+p^n\mathbb{Z})_n,c=(c'_n+p^n\mathbb{Z})_n\in\mathbb{Z}_p,a'_n,b'_n,c'_n\in\mathbb{Z}\)
+</span>とすると，
+<span>\[
+\begin{aligned}
+&(ab)c\\
+&=((a'_n+p^n\mathbb{Z})(b'_n+p^n\mathbb{Z}))(c'_n+p^n\mathbb{Z})\\
+&=(a'_nb'_n+p^n\mathbb{Z})(c'_n+p^n\mathbb{Z})\\
+&=a'_nb'_nc'_n+p^n\mathbb{Z}\\
+&=(a'_n+p^n\mathbb{Z})(b'_nc'_n+p^n\mathbb{Z})\\
+&=(a'_n+p^n\mathbb{Z})((b'_n+p^n\mathbb{Z})(c'_n+p^n\mathbb{Z}))\\
+&=a(bc)
+\end{aligned}
+\]
+</span>が成り立ちます．
+また，
+<span>\[
+\begin{aligned}
+&a(b+c)\\
+&=(a'_n+p^n\mathbb{Z})((b'_n+p^n\mathbb{Z})+(c'_n+p^n\mathbb{Z}))\\
+&=(a'_n+p^n\mathbb{Z})((b'_n+c'_n)+p^n\mathbb{Z})\\
+&=(a'_n(b'_n+c'_n))+p^n\mathbb{Z}\\
+&=(a'_nb'_n+a'_nc'_n)+p^n\mathbb{Z}\\
+&=(a'_nb'_n+p^n\mathbb{Z})+(a'_nc'_n+p^n\mathbb{Z})\\
+&=(a'_n+p^n\mathbb{Z})(b'_n+p^n\mathbb{Z})+(a'_n+p^n\mathbb{Z})(c'_n+p^n\mathbb{Z})\\
+&=ab+ac
+\end{aligned}
+\]
+</span>や，
+<span>\[
+\begin{aligned}
+&(a+b)c\\
+&=((a'_n+p^n\mathbb{Z})+(b'_n+p^n\mathbb{Z}))(c'_n+p^n\mathbb{Z})\\
+&=((a'_n+b'_n)+p^n\mathbb{Z})(c'_n+p^n\mathbb{Z})\\
+&=((a'_n+b'_n)c'_n)+p^n\mathbb{Z}\\
+&=(a'_nc'_n+b'_nc'_n)+p^n\mathbb{Z}\\
+&=(a'_nc'_n+p^n\mathbb{Z})+(b'_nc'_n+p^n\mathbb{Z})\\
+&=(a'_n+p^n\mathbb{Z})(c'_n+p^n\mathbb{Z})+(b'_n+p^n\mathbb{Z})(c'_n+p^n\mathbb{Z})\\
+&=ac+bc
+\end{aligned}
+\]
+</span>も成り立ちます．</p><p>さらに，<span>
+\(e=(1+p^n\mathbb{Z})_n\)
+</span>とおくと，
+<span>\[
+\begin{aligned}
+ae&=(a'_n+p^n\mathbb{Z})(1+p^n\mathbb{Z})\\
+&=(a'_n\cdot 1+p^n\mathbb{Z})\\
+&=(a'_n+p^n\mathbb{Z})\\
+&=a,\\
+ea&=(1+p^n\mathbb{Z})(a'_n+p^n\mathbb{Z})\\
+&=(1\cdot a'_n+p^n\mathbb{Z})\\
+&=(a'_n+p^n\mathbb{Z})\\
+&=a
+\end{aligned}
+\]
+</span>なので <span>\(e\)
+</span>は乗法の単位元となり <span>\(\mathbb{Z}_p\)
+</span>は環をなします．
+以下，<span>
+\(0_{\mathbb{Z}_p}=(0+p^n\mathbb{Z})_n\)
+</span>, <span>\(1_{\mathbb{Z}_p}=(1+p^n\mathbb{Z})_n\)
+</span>と書くことにします．</p><p>さらに，
+<span>\[
+\begin{aligned}
+&ab\\
+&=(a'_n+p^n\mathbb{Z})(b'_n+p^n\mathbb{Z})\\
+&=(a'_nb'_n+p^n\mathbb{Z})\\
+&=(b'_na'_n+p^n\mathbb{Z})\\
+&=(b'_n+p^n\mathbb{Z})(a'_n+p^n\mathbb{Z})\\
+&=ba
+\end{aligned}
+\]
+</span>なので，<span>
+\(\mathbb{Z}_p\)
+</span>は可換環をなすことがわかります．
+この <span>\(\mathbb{Z}_p\)
+</span>を <strong><span>\(p\)
+</span>進整数環</strong> といいます．</p><p>これも冒頭で述べたとおり，<a href=#cite:1>[1, 例1.55, p.41]</a> では，<span>
+\(\mathbb{Z}_p\)
+</span>が整域であり，<span>
+\(\mathbb{Z}_p\)
+</span>において <span>\(p1_{\mathbb{Z}_p}=\underbrace{1_{\mathbb{Z}_p}+\cdots+1_{\mathbb{Z}_p}}_{p\text{\ times}}\neq0_{\mathbb{Z}_p}\)
+</span>であることが説明されています．
+その準備として，さらに <span>\(\mathbb{Z}_p\)
+</span>の元の性質を観察してみます．</p><p><span>\(x=(x_n)_n\in\mathbb{Z}_p\)
+</span>とします．
+<span>\(m\in\mathbb{N}\)
+</span>とし，<span>
+\(x_m=0+p^m\mathbb{Z}\)
+</span>とします．
+すると，<span>
+\(n\le m\)
+</span>ならば <span>\(x_n=f_{nm}(x_m)=f_{nm}(0+p^m\mathbb{Z})=0+p^n\mathbb{Z}\)
+</span>となります．
+したがって，ある <span>\(m\)
+</span>において <span>\(x_m=0+p^m\mathbb{Z}\)
+</span>のとき，<span>
+\(n\le m\)
+</span>ならば <span>\(x_n=0+p^n\mathbb{Z}\)
+</span>となります．</p><p>この観察から，<span>
+\(x\neq0_{\mathbb{Z}_p}\)
+</span>ならば，ある <span>\(N\in\mathbb{N}\)
+</span>が存在し，<span>
+\(n\ge N\)
+</span>ならば <span>\(x_n\neq0+p^n\mathbb{Z}\)
+</span>となることがわかります．
+なぜならば，そのような <span>\(N\in\mathbb{N}\)
+</span>が存在しなければ，任意の <span>\(n\in\mathbb{N}\)
+</span>について <span>\(n'\ge n\)
+</span>が存在し <span>\(x_{n'}=0+p^{n'}\mathbb{Z}\)
+</span>となりますが，<span>
+\(n'\ge n\)
+</span>より <span>\(x_n=0+p^n\mathbb{Z}\)
+</span>となり，これが任意の <span>\(n\in\mathbb{N}\)
+</span>について成り立つので <span>\(x=0_{\mathbb{Z}_p}\)
+</span>となり矛盾するためです．</p><p>さて，<a href=#cite:1>[1, 例1.55, p.41]</a> に戻り，まず <span>\(\mathbb{Z}_p\)
+</span>が整域であることを確認します．
+<span>\(a=(a_n)_n,b=(b_n)_n\in\mathbb{Z}_p\)
+</span>とします．
+<span>\(\mathbb{Z}_p\)
+</span>が整域であることを示すために，<span>
+\(a,b\neq0_{\mathbb{Z}_p}\)
+</span>ならば <span>\(ab\neq0_{\mathbb{Z}_p}\)
+</span>であることを示します．
+より具体的には，ある <span>\(N\in\mathbb{Z}\)
+</span>が存在し，<span>
+\(a_Nb_N\neq0+p^N\mathbb{Z}\)
+</span>であることを示します．</p><p><span>\(a=(a_n)_n,b=(b_n)_n\in\mathbb{Z}_p\)
+</span>が <span>\(a,b\neq0_{\mathbb{Z}_p}\)
+</span>であるとします．
+このとき，ある <span>\(N_1\)
+</span>が存在し <span>\(n\ge N_1\)
+</span>ならば <span>\(a_n\neq 0+p^n\mathbb{Z}\)
+</span>で，ある <span>\(N_2\)
+</span>が存在し <span>\(n\ge N_2\)
+</span>ならば <span>\(b_n\neq 0+p^n\mathbb{Z}\)
+</span>です．
+したがって， <span>\(N_3=\max\{N_1,N_2\}\)
+</span>とすると，<span>
+\(n\ge N_3\)
+</span>ならば <span>\(a_n,b_n\neq0+p^n\mathbb{Z}\)
+</span>です．
+よって，<span>
+\(n\in\mathbb{N}\)
+</span>を <span>\(n\ge N_3\)
+</span>ととれば，<a href=#cite:1>[1, 例1.55, p.41]</a> のように <span>\(a_n,b_n\neq0+p^n\mathbb{Z}\)
+</span>なる <span>\(n\in\mathbb{N}\)
+</span>がとれます．</p><p><a href=#cite:1>[1, 例1.55, p.41]</a> に従い，<span>
+\(a_{2n-1}=a'_{2n-1}+p^{2n-1}\mathbb{Z},b_{2n-1}=b'_{2n-1}+p^{2n-1}\mathbb{Z},a'_{2n-1},b'_{2n-1}\in\mathbb{Z}\)
+</span>とします．
+<span>\[
+\begin{aligned}
+a'_{2n-1}+p^n\mathbb{Z}&=f_{n,2n-1}(a'_{2n-1}+p^{2n-1}\mathbb{Z})\\
+&=f_{n,2n-1}(a_{2n-1})\\
+&=a_n\\
+&\neq0+p^n\mathbb{Z}
+\end{aligned}
+\]
+</span>であることから，<span>
+\(a'_{2n-1}\notin p^n\mathbb{Z}\)
+</span>であり，<span>
+\(a'_{2n-1}\)
+</span>は高々 <span>\(n-1\)
+</span>回しか <span>\(p\)
+</span>で割り切れません．
+<span>\(b'_{2n-1}\)
+</span>も同様に高々 <span>\(n-1\)
+</span>回しか <span>\(p\)
+</span>で割り切れません．
+したがって，<span>
+\(a'_{2n-1}b'_{2n-1}\)
+</span>は高々 <span>\(2(n-1)\)
+</span>回しか <span>\(p\)
+</span>で割り切れません．
+よって，<span>
+\(a'_{2n-1}b'_{2n-1}\notin p^{2n-1}\mathbb{Z}\)
+</span>となり，
+<span>\[
+a_{2n-1}b_{2n-1}\neq 0+p^{2n-1}\mathbb{Z}
+\]
+</span>となります．
+つまり，<span>
+\(N=2n-1\)
+</span>とすれば，<span>
+\(a_Nb_N\neq0+p^N\mathbb{Z}\)
+</span>となります．</p><p>以上より，<span>
+\(a,b\in\mathbb{Z}_p\)
+</span>が <span>\(a,b\neq0_{\mathbb{Z}_p}\)
+</span>ならば <span>\(ab\neq0_{\mathbb{Z}_p}\)
+</span>であることが示せました．</p><p>また，<span>
+\(p1_{\mathbb{Z}_p}=(p+p^n\mathbb{Z})_n\)
+</span>については，<span>
+\(p\notin p^2\mathbb{Z}\)
+</span>より，<span>
+\(p+p^2\mathbb{Z}\neq0+p^2\mathbb{Z}\)
+</span>となるので，<span>
+\(p1_{\mathbb{Z}_p}\neq0_{\mathbb{Z}_p}\)
+</span>であることもわかります．</p><p>以上より，<a href=#cite:1>[1, 例1.55, p.41]</a> の主張がすべて確認できました．</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p>本ページでは <a href=#cite:1>[1, 例1.55, p.41]</a> の主張をひとつひとつ確認しました．
+特に，<strong><span>
+\(p\)
+</span>進整数環</strong> について，細かく述べられていなかった主張を確認しました．
+もちろんこれだけでは <span>\(p\)
+</span>進整数環についてほとんど何もわかりませんでしたが，具体例について考えたことで，帰納極限やそれに関連する議論の練習に少しだけでもなったように思います．</p><h2 id=参考文献>参考文献
+<a class=anchor href=#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae>#</a></h2><p><a id=cite:1></a>[1] 志甫 淳，“層とホモロジー代数”， 共立出版，東京，2016.</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>そもそも代数に不慣れです．&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><hr><p xmlns:cc=http://creativecommons.org/ns#>This work is licensed under <a href=https://creativecommons.org/licenses/by/4.0/deed.ja target=_blank rel="license noopener noreferrer" style=display:inline-block>CC BY 4.0<img style="height:22px !important;margin-left:3px;vertical-align:text-bottom" src=https://mirrors.creativecommons.org/presskit/icons/cc.svg alt><img style="height:22px !important;margin-left:3px;vertical-align:text-bottom" src=https://mirrors.creativecommons.org/presskit/icons/by.svg alt></a></p><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/htakeuchi0/htakeuchi0.github.io-sources/commit/4e846159ac54fadbcb526542e0cbde073f223571 title='Last modified by htakeuchi0 | June 19, 2025' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>June 19, 2025</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#概要>概要</a></li><li><a href=#準備1-の議論の引用>準備：[1] の議論の引用</a></li><li><a href=#射影極限とp-進整数環>射影極限と\(p\) 進整数環</a><ul><li><a href=#左-mathbbz-加群-mathbbzpnmathbbz>左 \(\mathbb{Z}\) 加群 \(\mathbb{Z}/p^n\mathbb{Z}\)</a></li><li><a href=#左-mathbbz-加群-mathbbzpnmathbbz-上の準同型写像-f_nm>左 \(\mathbb{Z}\) 加群 \(\mathbb{Z}/p^n\mathbb{Z}\) 上の準同型写像 \(f_{nm}\)</a></li><li><a href=#準同型写像-f_nm-の性質>準同型写像 \(f_{nm}\) の性質</a></li><li><a href=#p-進整数環>\(p\) 進整数環</a></li></ul></li><li><a href=#まとめ>まとめ</a></li><li><a href=#参考文献>参考文献</a></li></ul></nav></div></aside></main></body></html>
