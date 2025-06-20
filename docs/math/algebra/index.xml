@@ -186,12 +186,12 @@ a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0
 \]
 &lt;/span>
 
-と書くこともあります．&lt;/p></description></item><item><title>p進整数環と射影極限</title><link>https://htakeuchi0.github.io/docs/math/algebra/padicint/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/algebra/padicint/</guid><description>&lt;h1 id="hahahugoshortcode37s0hbhb進整数環と射影極限">
+と書くこともあります．&lt;/p></description></item><item><title>p進整数環と射影極限</title><link>https://htakeuchi0.github.io/docs/math/algebra/padicint/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://htakeuchi0.github.io/docs/math/algebra/padicint/</guid><description>&lt;h1 id="hahahugoshortcode40s0hbhb進整数環と射影極限">
  &lt;span>
  \(p\)
 &lt;/span>
 進整数環と射影極限
- &lt;a class="anchor" href="#hahahugoshortcode37s0hbhb%e9%80%b2%e6%95%b4%e6%95%b0%e7%92%b0%e3%81%a8%e5%b0%84%e5%bd%b1%e6%a5%b5%e9%99%90">#&lt;/a>
+ &lt;a class="anchor" href="#hahahugoshortcode40s0hbhb%e9%80%b2%e6%95%b4%e6%95%b0%e7%92%b0%e3%81%a8%e5%b0%84%e5%bd%b1%e6%a5%b5%e9%99%90">#&lt;/a>
 &lt;/h1>
 &lt;h2 id="概要">
  概要
@@ -234,7 +234,7 @@ a_nX^n+a_{n-1}X^{n-1}+\cdots+a_1X+a_0
  準備：[1] の議論の引用
  &lt;a class="anchor" href="#%e6%ba%96%e5%82%991-%e3%81%ae%e8%ad%b0%e8%ab%96%e3%81%ae%e5%bc%95%e7%94%a8">#&lt;/a>
 &lt;/h2>
-&lt;p>まず， &lt;strong>帰納極限&lt;/strong> の定義を述べます．
+&lt;p>まず， &lt;strong>射影極限&lt;/strong> の定義を述べます．
 すべての定義は書ききれないので，ここでは &lt;a href="#cite:1">[1, 定義1.49, pp.36, 37]&lt;/a> だけを引用します．
 そこに出てくる記号だけを簡単に補足すると，&lt;span>
  \(I\)
